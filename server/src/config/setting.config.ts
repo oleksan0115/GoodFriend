@@ -1,0 +1,3 @@
+const EMAIL_VERIFICATION_TIME: number = 5 
+
+export {EMAIL_VERIFICATION_TIME}

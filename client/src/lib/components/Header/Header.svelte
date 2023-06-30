@@ -21,8 +21,6 @@
     }
   }
 
-  
-
 </script>
 
 <div class="topbar bg-color">
@@ -228,6 +226,7 @@
   </div>
 </div>
 
+
 <div class="login-box" class:open={$globalStore.loginModalOpen}>
   <div class="overlay" on:click={ () => globalStore.toggleItem("loginModalOpen", false) }></div>
   <div class="login">
@@ -279,14 +278,34 @@
             id="exampleInputPassword1"
           />
         </div>
-        <p class="forgot text-end"><a href="#">Forgot password?</a></p>
+        <p class="forgot text-end"><a href="#" on:click={() => {
+          globalStore.toggleItem(
+            "forgotModalOpen",
+            1
+          );
+
+          globalStore.toggleItem(
+            "loginModalOpen",
+            false
+          );
+        }}>Forgot password?</a></p>
         <button type="submit" class="btn btn-primary w-100 mt30">
           Submit
         </button>
       </form>
       <div class="text-center">
         <h6 class="signup_1">
-          Don’t have an account? <a href="#">Sign up</a>
+          Don’t have an account? <a href="#" on:click={() => {
+            globalStore.toggleItem(
+              "registerModalOpen",
+              !$globalStore.registerModalOpen
+            );
+
+            globalStore.toggleItem(
+              "loginModalOpen",
+              !$globalStore.loginModalOpen
+            );
+          }}>Sign up</a>
         </h6>
       </div>
       <div class="position-relative mt-40">
@@ -375,7 +394,17 @@
       </form>
       <div class="text-center">
         <h6 class="signup_1">
-          Don’t have an account? <a href="#">Sign up</a>
+          Already have an account? <a href="#" on:click={() => {
+            globalStore.toggleItem(
+              "registerModalOpen",
+              !$globalStore.registerModalOpen
+            );
+
+            globalStore.toggleItem(
+              "loginModalOpen",
+              !$globalStore.loginModalOpen
+            );
+          }}>Sign in</a>
         </h6>
       </div>
       <div class="position-relative mt-40">
@@ -389,6 +418,99 @@
           <li><img src="/img/facebook.svg" /></li>
         </ul>
       </div>
+    </div>
+  </div>
+</div>
+<div class="forgot-box" class:open={$globalStore.forgotModalOpen}>
+  <div class="overlay" on:click={ () => globalStore.toggleItem("forgotModalOpen", 0) }></div>
+  <div class="forgot">
+    <div class="forgot-banner">
+      <img src="/img/Logo-white.svg" />
+      <div class="p-4 mt-4">
+        <h2>Made for professional Gamblers</h2>
+        <p class="mb-1">
+          Lorem ipsum dolor sit amet consectetur. eget tortor egestas.
+        </p>
+        <img src="/img/Frame-37252.svg" />
+      </div>
+    </div>
+    <div class="forgot_box">
+      <div class="row border-bottom_m pb-40">
+        <div class="col-10">
+          <img class="desknone" src="/img/logo.svg" />
+        </div>
+        <div class="col-2">
+          <img
+            id="closed"
+            src="/img/close.svg"
+            on:click={() => {
+              globalStore.toggleItem("forgotModalOpen", 0);
+            }}
+          />
+        </div>
+      </div>
+
+      <h2 class="mt_30">Forgot password</h2>
+      <p class="mb-4">Enter your email address to reset your password</p>
+      <form>
+
+        {#if $globalStore.forgotModalOpen == 1}
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"
+            >Email address</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+          />
+        </div>
+        {:else if $globalStore.forgotModalOpen == 2}
+        <div class="mb-3">
+          <label for="exampleInputCode1" class="form-label">5 Verification Code</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputCode1"
+            minlength="5"
+            maxlength="5"
+          />
+        </div>
+        {:else if $globalStore.forgotModalOpen == 3}
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+          />
+        </div>
+
+        {:else}
+        <div class="mb-3 row">
+          <label class="form-label col-6">Successfully Changed</label>
+          <a class="col-6" href="#" on:click={() => {
+            globalStore.toggleItem(
+              "forgotModalOpen",
+              0
+            );
+
+            globalStore.toggleItem(
+              "loginModalOpen",
+              !$globalStore.loginModalOpen
+            );
+          }}>Sign in</a>
+        </div>
+        {/if}
+        <button type="submit" class="btn btn-primary w-100 mt30" on:click={() => {
+          let val = $globalStore.forgotModalOpen;
+          globalStore.toggleItem("forgotModalOpen", val+=1);
+        }}>
+          {$globalStore.forgotModalOpen == 1 ? 'Send' : $globalStore.forgotModalOpen == 2 ? 'Verify': 'Submit'}
+        </button>
+      </form>
+      
     </div>
   </div>
 </div>

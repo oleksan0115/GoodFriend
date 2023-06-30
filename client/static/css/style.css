@@ -1931,6 +1931,7 @@ margin-top: -8px;
 }
 
 .login-box .overlay,
+.forgot-box .overlay,
 .sign-box .overlay {
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
@@ -1943,6 +1944,7 @@ margin-top: -8px;
 }
 
 .login,
+.forgot-box .forgot,
 .signup {
   left: 24.5%;
   right: 24.5%;
@@ -1954,6 +1956,7 @@ margin-top: -8px;
 }
 
 .login-banner,
+.forgot-banner,
 .signup-banner {
   background-image: url(../img/login.svg);
   background-repeat: no-repeat;
@@ -1967,6 +1970,7 @@ margin-top: -8px;
 }
 
 .login-banner h2,
+.forgot-banner h2,
 .signup-banner h2 {
   font-weight: 500;
   font-size: 20px;
@@ -1975,6 +1979,7 @@ margin-top: -8px;
 }
 
 .login-banner p,
+.forgot-banner p,
 .signup-banner p {
   font-weight: 500;
   font-size: 14px;
@@ -1983,6 +1988,7 @@ margin-top: -8px;
 }
 
 .login_box,
+.forgot_box,
 .signup-box {
   float: right;
   height: 670px;
@@ -1996,6 +2002,7 @@ margin-top: -8px;
 }
 
 .login_box h2,
+.forgot_box h2,
 .signup-box h2 {
   font-weight: 500;
   font-size: 30px;
@@ -2010,7 +2017,18 @@ margin-top: -8px;
   color: #666f7a;
 }
 
+.forgot_box p {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #666f7a;
+}
+
 .login-box {
+  display: none;
+}
+
+.forgot-box {
   display: none;
 }
 
@@ -2021,6 +2039,7 @@ margin-top: -8px;
 }
 
 .login_box label,
+.forgot_box label,
 .signup-box label {
   font-weight: 500;
   font-size: 13px;
@@ -2029,6 +2048,7 @@ margin-top: -8px;
 }
 
 .login_box .form-control,
+.forgot_box .form-control,
 .signup-box .form-control {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.16);
@@ -2046,6 +2066,7 @@ margin-top: -8px;
 }
 
 .login_box .btn-primary,
+.forgot_box .btn-primary,
 .signup-box .btn-primary {
   background: radial-gradient(50% 50% at 50% 50%,
           rgba(0, 0, 0, 0.2) 0%,
@@ -2076,6 +2097,7 @@ margin-top: -8px;
 }
 
 .login_box h5,
+.forgot_box h5,
 .signup-box h5 {
   background: #111320;
   position: absolute;
@@ -2096,6 +2118,7 @@ margin-top: -8px;
 }
 
 .login_box ul li,
+.forgot_box ul li,
 .signup-box ul li {
   display: inline-block;
   margin: 25px 20px 0 0;
@@ -4432,12 +4455,17 @@ body.light-mode .provably-fair .text-box .select img {
   display: block;
 }
 
+.forgot-box.open {
+  display: block;
+}
+
 body.light-mode .login_box,
+body.light-mode .forgot_box,
 body.light-mode .signup-box {
   background: #FFFFFF;
 }
 
-body.light-mode .login_box h2,
+body.light-mode .login_box h2, .forgot_box h2,
 .signup-box h2 {
   color: #3C3841;
 }
@@ -4447,18 +4475,26 @@ body.light-mode .login_box p {
   color: #AAAAAA;
 }
 
+body.light-mode .forgot_box p {
+
+  color: #AAAAAA;
+}
+
 body.light-mode .login_box label,
+body.light-mode .forgot_box label,
 body.light-mode .signup-box label {
   color: #3C3841;
 }
 
 body.light-mode .login_box .form-control,
+body.light-mode .forgot_box .form-control,
 body.light-mode .signup-box .form-control {
   background: #F5F5F8;
   border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 body.light-mode .login_box .form-control,
+body.light-mode .forgot_box .form-control,
 body.light-mode .signup-box .form-control {
   background: #F5F5F8;
   border: 1px solid rgba(255, 255, 255, 0.16);
@@ -4466,11 +4502,13 @@ body.light-mode .signup-box .form-control {
 }
 
 body.light-mode .login_box .form-control::placeholder,
+body.light-mode .forgot_box .form-control::placeholder,
 body.light-mode .signup-box .form-control::placeholder {
   color: #AAAAAA;
 }
 
 body.light-mode .login_box h5,
+body.light-mode .forgot_box h5,
 body.light-mode .signup-box h5 {
   background-color: #fff;
 }
@@ -4480,6 +4518,10 @@ body.light-mode .btn-back {
 }
 
 body.light-mode .login_box #closed {
+  filter: brightness(0.3);
+}
+
+body.light-mode .forgot_box #closed {
   filter: brightness(0.3);
 }
 

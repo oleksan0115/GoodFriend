@@ -1,10 +1,14 @@
 <script>
   import BetSlip from "$lib/components/BetSlip.svelte";
 
-  let isLoggedIn = true;
+  let isLoggedIn = false;
   import globalStore from "../../stores/globalStore";
   import { page } from "$app/stores";
   import DarkModeButtons from "./DarkModeButtons.svelte";
+  
+  import LoginHeader from "./HeaderLogin.svelte";
+  import LoggedinHeader from "./HeaderLoggedin.svelte";
+
   $: path = $page.url.pathname;
 
   const toggleChat = () => {
@@ -58,99 +62,9 @@
     </div>
 
     {#if isLoggedIn}
-      <div class="col-md-7 col-10 float_right">
-        <div class="display-flex">
-          <!-- <button class="btn mobilenone">
-            <div class="nav-notifications menu-item-notifications">
-              <span class="notification-dot"
-                ><svg><use href="/img/symbols.svg?lang.svg#icon_Bell" /></svg
-                ></span
-              >
-            </div>
-          </button> -->
-          <button
-            id="slip"
-            class="btn btn-color color-text me-3 pb-2 mobilenone"
-            on:click={() => {
-              globalStore.toggleItem("betSlipOpen", !$globalStore.betSlipOpen);
-            }}
-          >
-            Bet Slip
-          </button>
-          <div class="nav-balance" style="align-self:center;"><img src="/img/coin-1.svg" alt="" >
-              <span class="nav-balance-amount">$ 750</span>
-              <span class="nav-balance-plus"><img src="/img/add.svg" alt=""></span>
-          </div>
-          <button
-            id="mslip"
-            class="btn btn-color color-text me-1 desknone"
-            on:click={() => {
-              globalStore.toggleItem("betSlipOpen", !$globalStore.betSlipOpen);
-            }}
-          >
-            BS
-          </button>
-
-          <button
-            id="deskchat"
-            class="btn btn-color mobilenone" on:click={toggleChat} on:click={() => {
-              globalStore.toggleItem("chatOpen", !$globalStore.chatOpen);
-            }}>
-            <img src="/img/Chat.svg" />
-
-          </button>
-
-          <!-- svelte-ignore a11y-click-events-have-key-events -->
-          <div class="row user" on:click={() => {
-            globalStore.toggleItem("profileModalOpen", true);
-          }}>
-            <div class="col-md-4">
-              <div class="mobileuser">
-                <img width="40px" height="40px" src="/img/user.svg" />
-                <img class="desknone icon_" src="/img/Group-1583.svg" />
-              </div>
-            </div>
-            <div class="col-md-8 mobilenone">
-              <h6 class="text-white mb-0">Stacey Miller</h6>
-              <p class="mb-0 mt-0">
-                <img style="margin-bottom: 6px;" src="/img/Group-1583.svg" /> level 31
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <LoggedinHeader></LoggedinHeader>
     {:else}
-      <div class="col-md-7 col-10 float-end">
-        <div class="display-flex">
-          <button
-            id="signin"
-            class="btn signin active me-4"
-            on:click={() => {
-              globalStore.toggleItem(
-                "loginModalOpen",
-                !$globalStore.loginModalOpen
-              );
-            }}
-          >
-            Sign in
-          </button>
-          <button
-            id="signup"
-            class="btn signin me-4 mr-0"
-            on:click={() => {
-              globalStore.toggleItem(
-                "registerModalOpen",
-                !$globalStore.registerModalOpen
-              );
-            }}>Sign Up</button
-          >
-          <button id="deskchat" class="btn btn-color me-5 mobilenone"  on:click={toggleChat} on:click={() => {
-            globalStore.toggleItem("chatOpen", !$globalStore.chatOpen);
-          }}>
-            <img src="/img/Chat.svg" />
-          </button>
-        </div>
-      </div>
+      <LoginHeader></LoginHeader>
     {/if}
   </div>
   <div class="usershow" class:open={$globalStore.profileModalOpen}>

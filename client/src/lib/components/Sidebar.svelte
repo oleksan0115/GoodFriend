@@ -19,7 +19,6 @@ import globalStore from "../../stores/globalStore";
 
 export let pageSidebar;
 
-
 $: isSportsPage = pageSidebar.includes("/sports", 0);
 
 import SidebarItem from './SidebarItem.svelte'

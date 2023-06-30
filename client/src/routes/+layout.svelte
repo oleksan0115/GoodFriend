@@ -124,13 +124,13 @@ export let showOnPx = 150;
 
   <div class="body-part {path}" class:affiliate={path === '/affiliate'} class:provably-fair={path.includes("/help-center", 0)}>
 
-  <slot></slot>
+    <slot></slot>
 
-  <Footer/>
+    <Footer/>
 
-  <div  class="back-to-top" on:click={goTop} class:hidden>
-      <img src="/img/page-up.svg" />                
-  </div>    
+    <div  class="back-to-top" on:click={goTop} class:hidden>
+        <img src="/img/page-up.svg" />                
+    </div>    
   </div>
 </div>
         

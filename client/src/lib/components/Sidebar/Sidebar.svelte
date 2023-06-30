@@ -15,7 +15,7 @@ function toggleSidebar() {
 import Select from 'svelte-select';
 const languages = ['English', 'Korean'];
 
-import globalStore from "../../stores/globalStore";
+import globalStore from "../../../stores/globalStore";
 
 export let pageSidebar;
 

@@ -2,20 +2,13 @@
     import { onMount, beforeUpdate } from "svelte";
     import { navigating } from '$app/stores';
 
-    import Header from "$lib/components/Header.svelte";
-    import Sidebar from "$lib/components/Sidebar.svelte";
+    import Header from "$lib/components/Header/Header.svelte";
+    import Sidebar from "$lib/components/Sidebar/Sidebar.svelte";
     import Chat from "$lib/components/Chat.svelte";
     import Footer from "$lib/components/Footer.svelte";
     import globalStore from "../stores/globalStore";
 
     import { page } from '$app/stores'
-
- 
-
-
-
-
-
 
     $: path = $page.url.pathname;
 

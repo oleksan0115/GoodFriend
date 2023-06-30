@@ -2,9 +2,9 @@
   import BetSlip from "$lib/components/BetSlip.svelte";
 
   let isLoggedIn = false;
-  import globalStore from "../../stores/globalStore";
+  import globalStore from "../../../stores/globalStore";
   import { page } from "$app/stores";
-  import DarkModeButtons from "./DarkModeButtons.svelte";
+  import DarkModeButtons from "../DarkModeButtons.svelte";
   
   import LoginHeader from "./HeaderLogin.svelte";
   import LoggedinHeader from "./HeaderLoggedin.svelte";
@@ -62,9 +62,9 @@
     </div>
 
     {#if isLoggedIn}
-      <LoggedinHeader></LoggedinHeader>
+      <LoggedinHeader/>
     {:else}
-      <LoginHeader></LoginHeader>
+      <LoginHeader/>
     {/if}
   </div>
   <div class="usershow" class:open={$globalStore.profileModalOpen}>

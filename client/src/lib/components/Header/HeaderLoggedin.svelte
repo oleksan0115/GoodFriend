@@ -1,5 +1,5 @@
 <script>
-  import globalStore from "../../stores/globalStore";
+  import globalStore from "../../../stores/globalStore";
 
   const toggleChat = () => {
     if(window.document.body.classList.contains('chat-closed')) {

@@ -9,6 +9,7 @@ const globalStore = writable({
   betSlipOpen: false,
   loginModalOpen: false,
   registerModalOpen: false,
+  forgotModalOpen: 0,
   mobileMenuOpen: false,
   cart: false,
   alert: false,

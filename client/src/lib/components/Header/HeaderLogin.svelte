@@ -24,7 +24,6 @@
           "loginModalOpen",
           !$globalStore.loginModalOpen
         );
-        btnStatus = false;
       }}
     >
       Sign in
@@ -38,7 +37,6 @@
           "registerModalOpen",
           !$globalStore.registerModalOpen
         );
-        btnStatus = true;
       }}>Sign Up</button
     >
     <button id="deskchat" class="btn btn-color me-5 mobilenone"  on:click={toggleChat} on:click={() => {

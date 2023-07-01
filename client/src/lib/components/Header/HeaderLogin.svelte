@@ -10,13 +10,15 @@
         window.document.body.classList.remove('chat-opened');
     }
   }
+
 </script>
 
 <div class="col-md-7 col-10 float-end">
   <div class="display-flex">
     <button
       id="signin"
-      class="btn signin active me-4"
+      class="btn signin me-4"
+      class:active={$globalStore.loginModalOpen}
       on:click={() => {
         globalStore.toggleItem(
           "loginModalOpen",
@@ -29,6 +31,7 @@
     <button
       id="signup"
       class="btn signin me-4 mr-0"
+      class:active={$globalStore.registerModalOpen}
       on:click={() => {
         globalStore.toggleItem(
           "registerModalOpen",

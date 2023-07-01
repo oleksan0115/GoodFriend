@@ -19,11 +19,12 @@ export const sendEmail = async (req:Request, res: Response) => {
 }
 
 export const signUp = async (req: Request, res: Response): Promise<any> => {
-    const {email, password} = req.body
+    const {email, password, authCode} = req.body
     const affiliateCode: any|undefined = req.headers["gf-affiliate-code"];
     
-    const nick:string = `user${utils.generateRandomNumber(6)}`
+    const nick:string = `user${utils.generateRandomNumber(10)}`
     await models.signUpInsert(dataAccess, affiliateCode, email, utils.hashWithSHA256(password), nick)
-
+    await models.authCodeUpdate(dataAccess, authCode)
+    
     res.json(response.signUpComplete)
 }

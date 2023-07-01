@@ -29,7 +29,7 @@ export const promoCodeCheck = async (dataAccess: any, promoCode: string): Promis
 }
 
 export const authCodeCheck = async (dataAccess: any, authCode: string): Promise<boolean> => {
-    const sql: string = `SELECT gac.auth_code FROM gf_auth_code gac WHERE gac.auth_code = ? AND gac.reg_date >= DATE_ADD(NOW(), INTERVAL -${setting.EMAIL_VERIFICATION_TIME} MINUTE)`
+    const sql: string = `SELECT gac.auth_code FROM gf_auth_code gac WHERE gac.auth_code = ? AND gac.reg_date >= DATE_ADD(NOW(), INTERVAL -${setting.EMAIL_VERIFICATION_TIME} MINUTE) AND is_used = 0`
     const values:string[] = [authCode]   
 
     const data:types.AuthCodeCheckResult = await dataAccess.selectOne(sql, values)
@@ -51,6 +51,8 @@ export const authCodeInsert = async (dataAccess: any, authCode: string): Promise
     return dataAccess.insert(sql, values)
 }
 
+
+
 export const signUpInsert = async (dataAccess:any, affiliateCode:string, email:string, password:string, nick:string): Promise<any> => {
     let sql:string = `
         INSERT INTO gf_member
@@ -66,3 +68,12 @@ export const signUpInsert = async (dataAccess:any, affiliateCode:string, email:s
 }
 
 
+export const authCodeUpdate = async (dataAccess: any, authCode: string): Promise<any> => {
+    const sql: string = `
+        UPDATE gf_auth_code SET
+            is_used = 1
+            WHERE auth_code = ?`
+    const values: string[] = [authCode]
+
+    return dataAccess.update(sql, values)
+}

@@ -30,7 +30,7 @@ export const promoCodeCheck = async (req: Request, res: Response, next: NextFunc
     const {promoCode} = req.body
     const check:boolean = await models.promoCodeCheck(dataAccess, promoCode)
 
-    if(check) {
+    if(promoCode === undefined || promoCode === "" || promoCode === null || check) {
         next()
     } else {
         res.json(response.promoCodeValidationError)

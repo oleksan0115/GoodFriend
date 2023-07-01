@@ -2057,7 +2057,8 @@ margin-top: -8px;
   color: #fff;
 }
 
-.login_box p.forgot a {
+.login_box p.forgot a, 
+.forgot_box p.signin a {
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
@@ -5002,4 +5003,14 @@ body:not(.chat-open) .back-to-top {
       linear-gradient(112.14deg, #7e2cff 35.54%, #596bf7 90.78%);
   backdrop-filter: blur(1.89394px);
   color: #ffffff;
+}
+
+.toast-container {
+  z-index: 9999 !important;
+  top: 90px !important;
+}
+
+.toast-container .toast {
+  max-width: unset !important;
+  text-overflow: unset;
 }

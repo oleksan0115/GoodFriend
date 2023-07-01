@@ -69,9 +69,9 @@
     }
 
     .right-bar {
-        display: none;
+        /* display: none; */
         z-index: 333;
-        position: absolute;
+        position: fixed;
     }
 
     .sports .sports_img.sports-exapanded .text-content img {

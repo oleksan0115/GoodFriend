@@ -1,19 +1,31 @@
 <script>
-    /*
-    import { onMount } from "svelte";
+    
+		import { onMount } from "svelte";
+		import Cookies from 'js-cookie';
 
     onMount(() => {
-        window.document.body.classList.add('light-mode')
-    });*/
+			if(Cookies.get('Mode') == undefined) {
+				window.document.body.classList.remove('light-mode')
+			}
+			else if(Cookies.get('Mode') == 'Light') {
+				window.document.body.classList.add('light-mode')
+			}
+			else if(Cookies.get('Mode') == 'Dark') {
+				window.document.body.classList.remove('light-mode')
+			}
+    });
+
 
     function enableLightMode() {
+			Cookies.set('Mode', 'Light');
 	    window.document.body.classList.add('light-mode')
     }
     function disableLightMode() {
+			Cookies.set('Mode', 'Dark');
 	    window.document.body.classList.remove('light-mode')
     }      
-    let lightMode;
-    lightMode='Dark';
+		
+    let lightMode = Cookies.get('Mode') == undefined ? 'Dark' : Cookies.get('Mode');
 
 </script>
 <div class="row">

@@ -20,7 +20,7 @@
   const SEVER_URL = import.meta.env.VITE_SEVER_URL;
   const SEVER_PORT = import.meta.env.VITE_SEVER_PORT;
 
-  let isLoggedIn = false;
+  let isLoggedIn = true;
   $: path = $page.url.pathname;
   let signUpUserData = {
     'email': '',

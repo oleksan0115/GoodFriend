@@ -1,4 +1,4 @@
-import { Result, ResultEmailSendComplete } from "../types/Response"
+import { Result, ResultEmailSendComplete } from "../types/response"
 import { EMAIL_VERIFICATION_TIME } from "./setting.config"
 
 //complete
@@ -9,7 +9,7 @@ export const signUpComplete: Result = {
 
 export const emailSendComplete: ResultEmailSendComplete = {
     code: 1001,
-    message: "sent a verification code to your email.",
+    message: "sent a auth code to your email.",
     timeout: EMAIL_VERIFICATION_TIME
 } 
 

@@ -1,20 +1,38 @@
 import { Request, Response, NextFunction } from 'express';
-import { EmailVerification } from '../models/account.models';
-import { emailDuplicateError } from '../config/error.config';
+import * as response from '../config/response';
+import * as models from '../models/account.models'
+import * as dataAccess from "../utils/dataAccess.utils"
 
-
-const emailCheck = async (req:Request, res: Response, next: NextFunction): Promise<void> => {
+export const emailCheck = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const {email} = req.body
-    const emailVerification = new EmailVerification(email)    
-
-    const duplicate = await emailVerification.emailCheck()
-
-    if(duplicate === true) { 
-        next()    
+    const check:boolean = await models.emailCheck(dataAccess, email)
+    
+    if(check) {
+        next()
     } else {
-        res.json(emailDuplicateError)
+        res.json(response.emailDuplicateError)
     }
 }
 
 
-export {emailCheck}
+export const authCodeCheck = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    const {authCode} = req.body
+    const check:boolean = await models.authCodeCheck(dataAccess, authCode)
+    
+    if(check) {
+        next()
+    } else {
+        res.json(response.authCodeValidationError)
+    }
+}
+
+export const promoCodeCheck = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    const {promoCode} = req.body
+    const check:boolean = await models.promoCodeCheck(dataAccess, promoCode)
+
+    if(promoCode === undefined || promoCode === "" || promoCode === null || check) {
+        next()
+    } else {
+        res.json(response.promoCodeValidationError)
+    }
+}

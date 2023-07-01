@@ -10,10 +10,15 @@ import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 
+
 const app: Application = express()
 app.use(bodyParser.json());
 app.use(cors());
 
+
+import * as middlewares from './middlewares/validation.middlewares';
+
+app.use("/api/*", middlewares.checkHeaders)
 
 // account
 import accountRouter from "./routes/account.routes";

@@ -2,7 +2,7 @@
 ### Required headers
 HTTP Headers
 1. 'GF-API-KEY': 'abcedef'
-2.'GF-AFFILIATE-CODE': 'abcde'
+2. 'GF-AFFILIATE-CODE': 'abcde'
 
 This is the value the client needs to communicate with the server.
 The value for each client is different.

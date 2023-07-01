@@ -486,12 +486,28 @@
             id="exampleInputPassword1"
           />
         </div>
+
+        {:else}
+        <div class="mb-3 row">
+          <label class="form-label col-6">Successfully Changed</label>
+          <a class="col-6" href="#" on:click={() => {
+            globalStore.toggleItem(
+              "forgotModalOpen",
+              0
+            );
+
+            globalStore.toggleItem(
+              "loginModalOpen",
+              !$globalStore.loginModalOpen
+            );
+          }}>Sign in</a>
+        </div>
         {/if}
         <button type="submit" class="btn btn-primary w-100 mt30" on:click={() => {
           let val = $globalStore.forgotModalOpen;
           globalStore.toggleItem("forgotModalOpen", val+=1);
         }}>
-          Submit
+          {$globalStore.forgotModalOpen == 1 ? 'Send' : $globalStore.forgotModalOpen == 2 ? 'Verify': 'Submit'}
         </button>
       </form>
       

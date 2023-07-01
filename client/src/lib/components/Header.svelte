@@ -459,7 +459,7 @@
       </form>
       <div class="text-center">
         <h6 class="signup_1">
-          Don’t have an account? <a href="#">Sign up</a>
+          Already have an account? <a href="#">Sign in</a>
         </h6>
       </div>
       <div class="position-relative mt-40">

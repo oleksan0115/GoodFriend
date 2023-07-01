@@ -7,7 +7,7 @@ HTTP Headers
 
 This is the value the client needs to communicate with the server.
 The value for each client is different.
-Please manage your affiliate code and API key through SVELTEkit's env.
+Please manage your affiliate code and API key through Sveltekit's env.
 
 ### Add the sign-up API
 > Send a auth code by email

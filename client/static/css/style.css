@@ -2057,7 +2057,8 @@ margin-top: -8px;
   color: #fff;
 }
 
-.login_box p.forgot a {
+.login_box p.forgot a, 
+.forgot_box p.signin a {
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;

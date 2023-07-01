@@ -286,7 +286,17 @@
       </form>
       <div class="text-center">
         <h6 class="signup_1">
-          Don’t have an account? <a href="#">Sign up</a>
+          Don’t have an account? <a href="#" on:click={() => {
+            globalStore.toggleItem(
+              "registerModalOpen",
+              !$globalStore.registerModalOpen
+            );
+
+            globalStore.toggleItem(
+              "loginModalOpen",
+              !$globalStore.loginModalOpen
+            );
+          }}>Sign up</a>
         </h6>
       </div>
       <div class="position-relative mt-40">
@@ -375,7 +385,17 @@
       </form>
       <div class="text-center">
         <h6 class="signup_1">
-          Don’t have an account? <a href="#">Sign up</a>
+          Already have an account? <a href="#" on:click={() => {
+            globalStore.toggleItem(
+              "registerModalOpen",
+              !$globalStore.registerModalOpen
+            );
+
+            globalStore.toggleItem(
+              "loginModalOpen",
+              !$globalStore.loginModalOpen
+            );
+          }}>Sign in</a>
         </h6>
       </div>
       <div class="position-relative mt-40">

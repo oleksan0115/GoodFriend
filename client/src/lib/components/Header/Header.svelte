@@ -1,7 +1,7 @@
 <script>
-  import BetSlip from "$lib/components/BetSlip.svelte";
+  import BetSlip from "$lib/components/BetSlip/BetSlip.svelte";
 
-  let isLoggedIn = false;
+  let isLoggedIn = true;
   import globalStore from "../../../stores/globalStore";
   import { page } from "$app/stores";
   import DarkModeButtons from "../DarkModeButtons.svelte";

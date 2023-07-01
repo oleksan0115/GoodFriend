@@ -56,17 +56,17 @@ export const emailDuplicateError: Result = {
 }
 
 // validation //
-export const headersValidationError: Result = {
+ {
     code: 2000,
     message: "Invalid header information. "
 }
 
-export const authCodeValidationError: Result = {
+{
     code: 2200,
     message: "Invalid authentication code."
 }
 
-export const promoCodeValidationError: Result = {
+{
     code: 2201,
     message: "Invalid promo code."
 }

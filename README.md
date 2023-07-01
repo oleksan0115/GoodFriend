@@ -49,8 +49,7 @@ Please manage your affiliate code and API key through Sveltekit's env.
 }
 
 // error
-
-export const emailDuplicateError: Result = {
+{
     code: 2100,
     message: "The email is a duplicate."
 }

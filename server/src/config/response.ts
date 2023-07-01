@@ -40,5 +40,5 @@ export const promoCodeValidationError: Result = {
 // failed
 export const emailFailedSend: Result = {
     code: 3000,
-    message: "Email delivery failed, please try again."
+    message: "Email sending failed, please try again."
 }

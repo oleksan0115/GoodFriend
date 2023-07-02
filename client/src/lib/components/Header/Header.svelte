@@ -1,15 +1,22 @@
 <script>
   import BetSlip from "$lib/components/BetSlip/BetSlip.svelte";
-
-  let isLoggedIn = true;
   import globalStore from "../../../stores/globalStore";
   import { page } from "$app/stores";
   import DarkModeButtons from "../DarkModeButtons.svelte";
-  
   import LoginHeader from "./HeaderLogin.svelte";
   import LoggedinHeader from "./HeaderLoggedin.svelte";
+  import axios from 'axios';
 
+  const GF_API_KEY = import.meta.env.VITE_GF_API_KEY;
+  const GF_AFFILIATE_CODE = import.meta.env.VITE_GF_AFFILIATE_CODE;
+  const SEVER_URL = import.meta.env.VITE_SEVER_URL;
+  const SEVER_PORT = import.meta.env.VITE_SEVER_PORT;
+
+  let isLoggedIn = false;
   $: path = $page.url.pathname;
+  let signUpUserData = {
+    'email': ''
+  }
 
   const toggleChat = () => {
     if(window.document.body.classList.contains('chat-closed')) {
@@ -19,6 +26,19 @@
         window.document.body.classList.add('chat-closed');
         window.document.body.classList.remove('chat-opened');
     }
+  }
+
+  function handleSignUp(event) {
+    event.preventDefault();
+    axios.post(SEVER_URL + ':' + SEVER_PORT, {
+      email: 'dreambig.zac@gmail.com'
+    }, {
+      'GF-API-KEY': GF_API_KEY,
+      'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
+      'Content-Type': 'application/json'
+    }).then(res => {
+      console.log(res);
+    }).catch(err => console.log(err))
   }
 
 </script>
@@ -298,12 +318,12 @@
           Don’t have an account? <a href="#" on:click={() => {
             globalStore.toggleItem(
               "registerModalOpen",
-              !$globalStore.registerModalOpen
+              1
             );
 
             globalStore.toggleItem(
               "loginModalOpen",
-              !$globalStore.loginModalOpen
+              false
             );
           }}>Sign up</a>
         </h6>
@@ -323,7 +343,7 @@
   </div>
 </div>
 <div class="sign-box"  class:open={$globalStore.registerModalOpen}>
-  <div class="overlay" on:click={ () => globalStore.toggleItem("registerModalOpen", false) }></div>
+  <div class="overlay" on:click={ () => globalStore.toggleItem("registerModalOpen", 0) }></div>
   <div class="signup">
     <div class="signup-banner">
       <img src="/img/Logo-white.svg" />
@@ -341,11 +361,12 @@
           <img class="desknone" src="/img/logo.svg" />
         </div>
         <div class="col-2"><img id="closeds" src="/img/close.svg" on:click={() => {
-          globalStore.toggleItem("registerModalOpen", false);
+          globalStore.toggleItem("registerModalOpen", 0);
         }} /></div>
       </div>
       <h2 class="mt_30">Hey, hello 👋</h2>
-      <form>
+      <form on:submit="{handleSignUp}">
+        {#if $globalStore.registerModalOpen == 1}
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label"
             >Email address</label
@@ -353,10 +374,12 @@
           <input
             type="email"
             class="form-control"
-            id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            name="email"
+            bind:value="{signUpUserData.email}"
           />
         </div>
+        {:else if $globalStore.registerModalOpen == 2}
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label"
             >Auth code</label
@@ -364,7 +387,6 @@
           <input
             type="text"
             class="form-control"
-            id="exampleInputEmail1"
             aria-describedby="emailHelp"
             maxlength="5"
           />
@@ -384,12 +406,12 @@
           <input
             type="email"
             class="form-control"
-            id="exampleInputEmail1"
             aria-describedby="emailHelp"
           />
         </div>
+        {/if}
         <button type="submit" class="btn btn-primary w-100 mt30">
-          Submit
+          {$globalStore.registerModalOpen == 1 ? 'Send' : $globalStore.registerModalOpen == 2 ? 'Submit': ''}
         </button>
       </form>
       <div class="text-center">

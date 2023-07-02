@@ -47,7 +47,7 @@
       }).catch(err => toast.error('Invalid Request'))
     }
     else if($globalStore.registerModalOpen == 2) {
-      axios.post(SEVER_URL + ':' + SEVER_PORT + '/api/account/email', {
+      axios.post(SEVER_URL + ':' + SEVER_PORT + '/api/account/sign-up', {
         email: signUpUserData.email,
         authCode: signUpUserData.authCode,
         promoCode: signUpUserData.promoCode,

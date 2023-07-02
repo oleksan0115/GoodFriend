@@ -17,7 +17,7 @@ const app: Application = express()
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: ["http://localhost:10010", "https://api.goodfriendsgaming.com", "https://demo.goodfriendsgaming.com"],
+    origin: ["http://localhost:10010", "https://demo.goodfriendsgaming.com"],
     methods: ["GET", "POST"],
     credentials: true 
 }));
@@ -30,6 +30,6 @@ app.use("/api/*", middlewares.checkHeaders);
 import accountRouter from "./routes/account.routes";
 app.use("/api/account", accountRouter);
 
-app.listen(10001, () => {
+app.listen(9001, () => {
     console.log(`App is listening on port 10001`);
 });

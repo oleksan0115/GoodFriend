@@ -6,7 +6,7 @@ app.use(express.static('public'));
 
 app.use(handler);
 
-const port = 10002;
+const port = 9002;
 app.listen(port, () => { 
    console.log(`server is on running on port ${port}`);
 })

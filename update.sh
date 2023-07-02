@@ -1,4 +1,3 @@
-git pull origin main
 cd /home/user
 git pull origin main
 
@@ -13,4 +12,4 @@ npm install
 npm run build
 
 # pm2 restart 
-pm2 restart ecosystems.config.js
+pm2 restart ecosystem.config.js

@@ -35,7 +35,7 @@
       on:click={() => {
         globalStore.toggleItem(
           "registerModalOpen",
-          !$globalStore.registerModalOpen
+          1
         );
       }}>Sign Up</button
     >

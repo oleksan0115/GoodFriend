@@ -15,7 +15,10 @@
   let isLoggedIn = false;
   $: path = $page.url.pathname;
   let signUpUserData = {
-    'email': ''
+    'email': '',
+    'authCode': '',
+    'promoCode': '',
+    'password': '',
   }
 
   const toggleChat = () => {
@@ -30,15 +33,38 @@
 
   function handleSignUp(event) {
     event.preventDefault();
-    axios.post(SEVER_URL + ':' + SEVER_PORT, {
-      email: 'dreambig.zac@gmail.com'
-    }, {
-      'GF-API-KEY': GF_API_KEY,
-      'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
-      'Content-Type': 'application/json'
-    }).then(res => {
-      console.log(res);
-    }).catch(err => console.log(err))
+    if($globalStore.registerModalOpen == 1) {
+      axios.post('http://localhost:10001/api/account/email', {
+        email: signUpUserData.email
+      }, {
+        headers: {
+          'GF-API-KEY': GF_API_KEY,
+          'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
+          'Content-Type': 'application/json'
+        }
+      }).then(res => {
+        globalStore.toggleItem("registerModalOpen", 2)
+      }).catch(err => console.log(err))
+    }
+    else if($globalStore.registerModalOpen == 2) {
+      axios.post('http://localhost:10001/api/account/email', {
+        email: signUpUserData.email,
+        authCode: signUpUserData.authCode,
+        promoCode: signUpUserData.promoCode,
+        password: signUpUserData.password
+      }, {
+        headers: {
+          'GF-API-KEY': GF_API_KEY,
+          'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
+          'Content-Type': 'application/json'
+        }
+      }).then(res => {
+        globalStore.toggleItem("registerModalOpen", 3)
+      }).catch(err => console.log(err))
+    }
+    else {
+      globalStore.toggleItem("registerModalOpen", 0)
+    }
   }
 
 </script>
@@ -389,6 +415,7 @@
             class="form-control"
             aria-describedby="emailHelp"
             maxlength="5"
+            bind:value="{signUpUserData.authCode}"
           />
         </div>
         <div class="mb-3">
@@ -396,7 +423,7 @@
           <input
             type="password"
             class="form-control"
-            id="exampleInputPassword1"
+            bind:value="{signUpUserData.password}"
           />
         </div>
         <div class="mb-3">
@@ -407,27 +434,43 @@
             type="email"
             class="form-control"
             aria-describedby="emailHelp"
+            bind:value="{signUpUserData.promoCode}"
           />
         </div>
+        {:else}
+        <p class="signin">Successfully Changed! <a href="#" on:click={() => {
+          globalStore.toggleItem(
+            "registerModalOpen",
+            0
+          );
+
+          globalStore.toggleItem(
+            "loginModalOpen",
+            true
+          );
+        }}>Sign in</a></p>
+        
         {/if}
         <button type="submit" class="btn btn-primary w-100 mt30">
-          {$globalStore.registerModalOpen == 1 ? 'Send' : $globalStore.registerModalOpen == 2 ? 'Submit': ''}
+          {$globalStore.registerModalOpen == 1 ? 'Send' : $globalStore.registerModalOpen == 2 ? 'Verify': 'Submit'}
         </button>
       </form>
       <div class="text-center">
+        {#if $globalStore.registerModalOpen == 1}
         <h6 class="signup_1">
           Already have an account? <a href="#" on:click={() => {
             globalStore.toggleItem(
               "registerModalOpen",
-              !$globalStore.registerModalOpen
+              0
             );
 
             globalStore.toggleItem(
               "loginModalOpen",
-              !$globalStore.loginModalOpen
+              true
             );
           }}>Sign in</a>
         </h6>
+        {/if}
       </div>
       <div class="position-relative mt-40">
         <div class="border" />
@@ -499,7 +542,7 @@
             maxlength="5"
           />
         </div>
-        {:else if $globalStore.forgotModalOpen == 3}
+
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Password</label>
           <input

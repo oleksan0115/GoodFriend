@@ -5,15 +5,15 @@ module.exports = {
       env: {
         NODE_ENV: 'production'
       }
-    }],
-    apps : [{
+    },
+    {
       name: 'user.client',
       script: './client/server.js',
       env: {
         NODE_ENV: 'production'
       }
-    }]
-
+    }
+  ]
 }
 
 // NODE_ENV: 'development'

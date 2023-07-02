@@ -2,6 +2,7 @@ import * as types from "../types/check.types"
 import * as setting from "../config/setting.config"
 import * as dataAccess from "../utils/dataAccess.utils"
 
+// sign-up
 export const emailCheck = async (dataAccess: any, email: string) : Promise<boolean> => {
     const sql:string = `SELECT gm.email FROM gf_member gm WHERE gm.email = ?`
     const values:string[] = [email]
@@ -51,8 +52,6 @@ export const authCodeInsert = async (dataAccess: any, authCode: string): Promise
     return dataAccess.insert(sql, values)
 }
 
-
-
 export const signUpInsert = async (dataAccess:any, affiliateCode:string, email:string, password:string, nick:string): Promise<any> => {
     let sql:string = `
         INSERT INTO gf_member
@@ -67,7 +66,6 @@ export const signUpInsert = async (dataAccess:any, affiliateCode:string, email:s
     return dataAccess.insert(sql, values)
 }
 
-
 export const authCodeUpdate = async (dataAccess: any, authCode: string): Promise<any> => {
     const sql: string = `
         UPDATE gf_auth_code SET
@@ -76,4 +74,21 @@ export const authCodeUpdate = async (dataAccess: any, authCode: string): Promise
     const values: string[] = [authCode]
 
     return dataAccess.update(sql, values)
+}
+
+// sign-in
+export const userCheck = async (dataAccess: any, email: string, password: string): Promise<any> => {
+    const sql:string = `
+        SELECT * FROM gf_member gm 
+            WHERE gm.email = ?
+            AND gm.password = ?`
+    const values:string[] = [email, password]
+
+    const data:types.memberResult = await dataAccess.selectOne(sql, values)
+
+    if(data) {
+        return data
+    } else {
+        return false
+    }
 }

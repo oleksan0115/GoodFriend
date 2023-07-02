@@ -3,6 +3,7 @@ import * as response from '../config/response';
 import * as models from '../models/account.models'
 import * as dataAccess from "../utils/dataAccess.utils"
 
+// sign-up
 export const emailCheck = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const {email} = req.body
     const check:boolean = await models.emailCheck(dataAccess, email)
@@ -35,4 +36,16 @@ export const promoCodeCheck = async (req: Request, res: Response, next: NextFunc
     } else {
         res.json(response.promoCodeValidationError)
     }
+}
+
+// sign-in
+const userCheck = ( req: Request, res: Response ) => {
+}
+
+const accessToken = ( req: Request, res: Response ) => {
+    
+}
+
+const refreshToken = (req: Request, res: Response ) => {
+    
 }

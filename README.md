@@ -49,24 +49,23 @@ Please manage your affiliate code and API key through Sveltekit's env.
 }
 
 // error
-
-export const emailDuplicateError: Result = {
+{
     code: 2100,
     message: "The email is a duplicate."
 }
 
 // validation //
-export const headersValidationError: Result = {
+ {
     code: 2000,
     message: "Invalid header information. "
 }
 
-export const authCodeValidationError: Result = {
+{
     code: 2200,
     message: "Invalid authentication code."
 }
 
-export const promoCodeValidationError: Result = {
+{
     code: 2201,
     message: "Invalid promo code."
 }

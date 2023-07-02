@@ -3,8 +3,14 @@ export interface Result {
     message: string;
 }
 
-export interface ResultEmailSendComplete {
+export interface ResultEmailSendSuccess {
     code: number;
     message: string;
     timeout: number;
+}
+
+export interface ResultAccessTokenExpired {
+    name: string;
+    message: string;
+    expiredAt: string;
 }

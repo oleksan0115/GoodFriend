@@ -29,6 +29,25 @@
     'password': '',
   }
 
+  $: {
+    if($globalStore.registerModalOpen == 0)
+      signUpUserData = {
+        'email': '',
+        'authCode': '',
+        'promoCode': '',
+        'password': '',
+      };
+  }
+
+  if($globalStore.registerModalOpen == 0) {
+    signUpUserData = {
+      'email': '',
+      'authCode': '',
+      'promoCode': '',
+      'password': '',
+    };
+  }
+
   function handleSignUp(event) {
     event.preventDefault();
     if($globalStore.registerModalOpen == 1) {
@@ -44,7 +63,7 @@
         if(res.data.code == 1001) 
           globalStore.toggleItem("registerModalOpen", 2);
         else toast.error(res.data.message)
-      }).catch(err => toast.error('Invalid Request'))
+      }).catch(err => toast.error('Bad Network Connection'))
     }
     else if($globalStore.registerModalOpen == 2) {
       axios.post(SEVER_URL + ':' + SEVER_PORT + '/api/account/sign-up', {
@@ -63,7 +82,7 @@
           globalStore.toggleItem("registerModalOpen", 3)
         else
           toast.error(res.data.message)
-      }).catch(err => console.log(err))
+      }).catch(err => toast.error('Bad Network Connection'))
     }
     else {
       globalStore.toggleItem("registerModalOpen", 0)

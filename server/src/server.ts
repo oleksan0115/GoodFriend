@@ -31,5 +31,7 @@ import accountRouter from "./routes/account.routes";
 app.use("/api/account", accountRouter);
 
 app.listen(9001, () => {
-    console.log(`App is listening on port 10001`);
+
+    console.log(`env ${process.env.DB_USER}`)
+    console.log(`App is listening on port 9001`);
 });

@@ -9,7 +9,7 @@
   import Toast from 'svelte-toast'
 
   const toastOptions = {
-    duration: 50000,
+    duration: 1500,
     position: 'top-right',
     dismissible: true,
   };

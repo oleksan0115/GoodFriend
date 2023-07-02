@@ -1,14 +1,14 @@
 module.exports = {
     apps : [{
       name: 'user.api',
-      script: './server/dist/server.js',
+      script: '/home/user/server/dist/server.js',
       env: {
         NODE_ENV: 'production'
       }
     },
     {
       name: 'user.client',
-      script: './client/server.js',
+      script: '/home/user/client/server.js',
       env: {
         NODE_ENV: 'production'
       }

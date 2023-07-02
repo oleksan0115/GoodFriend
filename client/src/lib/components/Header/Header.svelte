@@ -32,7 +32,7 @@
   function handleSignUp(event) {
     event.preventDefault();
     if($globalStore.registerModalOpen == 1) {
-      axios.post('http://localhost:10001/api/account/email', {
+      axios.post(SEVER_URL + ':' + SEVER_PORT + '/api/account/email', {
         email: signUpUserData.email
       }, {
         headers: {
@@ -47,7 +47,7 @@
       }).catch(err => toast.error('Invalid Request'))
     }
     else if($globalStore.registerModalOpen == 2) {
-      axios.post('http://localhost:10001/api/account/email', {
+      axios.post(SEVER_URL + ':' + SEVER_PORT + '/api/account/email', {
         email: signUpUserData.email,
         authCode: signUpUserData.authCode,
         promoCode: signUpUserData.promoCode,

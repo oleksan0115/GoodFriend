@@ -5004,3 +5004,11 @@ body:not(.chat-open) .back-to-top {
   backdrop-filter: blur(1.89394px);
   color: #ffffff;
 }
+
+.toast-container {
+  z-index: 9999 !important;
+}
+
+.toast-container.top {
+  top: 90px !important;
+}

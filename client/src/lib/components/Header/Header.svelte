@@ -6,6 +6,14 @@
   import LoginHeader from "./HeaderLogin.svelte";
   import LoggedinHeader from "./HeaderLoggedin.svelte";
   import axios from 'axios';
+  import Toast from 'svelte-toast'
+
+  const toastOptions = {
+    duration: 1500,
+    position: 'top-right',
+    dismissible: true,
+  };
+  const toast = new Toast(toastOptions);
 
   const GF_API_KEY = import.meta.env.VITE_GF_API_KEY;
   const GF_AFFILIATE_CODE = import.meta.env.VITE_GF_AFFILIATE_CODE;
@@ -21,16 +29,6 @@
     'password': '',
   }
 
-  const toggleChat = () => {
-    if(window.document.body.classList.contains('chat-closed')) {
-        window.document.body.classList.remove('chat-closed');
-        window.document.body.classList.add('chat-opened');
-    } else {
-        window.document.body.classList.add('chat-closed');
-        window.document.body.classList.remove('chat-opened');
-    }
-  }
-
   function handleSignUp(event) {
     event.preventDefault();
     if($globalStore.registerModalOpen == 1) {
@@ -43,8 +41,10 @@
           'Content-Type': 'application/json'
         }
       }).then(res => {
-        globalStore.toggleItem("registerModalOpen", 2)
-      }).catch(err => console.log(err))
+        if(res.data.code == 1001) 
+          globalStore.toggleItem("registerModalOpen", 2);
+        else toast.error(res.data.message)
+      }).catch(err => toast.error('Invalid Request'))
     }
     else if($globalStore.registerModalOpen == 2) {
       axios.post('http://localhost:10001/api/account/email', {
@@ -59,7 +59,10 @@
           'Content-Type': 'application/json'
         }
       }).then(res => {
-        globalStore.toggleItem("registerModalOpen", 3)
+        if(res.data.code == 1000) 
+          globalStore.toggleItem("registerModalOpen", 3)
+        else
+          toast.error(res.data.message)
       }).catch(err => console.log(err))
     }
     else {
@@ -403,6 +406,7 @@
             aria-describedby="emailHelp"
             name="email"
             bind:value="{signUpUserData.email}"
+            required
           />
         </div>
         {:else if $globalStore.registerModalOpen == 2}
@@ -416,6 +420,7 @@
             aria-describedby="emailHelp"
             maxlength="5"
             bind:value="{signUpUserData.authCode}"
+            required
           />
         </div>
         <div class="mb-3">
@@ -431,7 +436,7 @@
             >Promotion code (optional)</label
           >
           <input
-            type="email"
+            type="text"
             class="form-control"
             aria-describedby="emailHelp"
             bind:value="{signUpUserData.promoCode}"

@@ -5007,8 +5007,10 @@ body:not(.chat-open) .back-to-top {
 
 .toast-container {
   z-index: 9999 !important;
+  top: 90px !important;
 }
 
-.toast-container.top {
-  top: 90px !important;
+.toast-container .toast {
+  max-width: unset !important;
+  text-overflow: unset;
 }

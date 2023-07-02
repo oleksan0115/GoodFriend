@@ -1,8 +1,10 @@
 import dotenv from 'dotenv';
 
 if(process.env.NODE_ENV === "production") {
+    console.log("start production mode")
     dotenv.config({ path: '.env.production' });
 } else {
+    console.log("start development mode")
     dotenv.config({ path: '.env.development' });
 }
 

@@ -15,7 +15,7 @@ const app: Application = express()
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: ["http://localhost:10010", "https://server.goodfriendsgaming.com"],
+    origin: ["http://localhost:10010", "https://api.goodfriendsgaming.com", "https://demo.goodfriendsgaming.com"],
     methods: ["GET", "POST"],
     credentials: true 
 }));

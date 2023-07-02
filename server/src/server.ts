@@ -1,11 +1,12 @@
 import dotenv from 'dotenv';
+import path from "path"
 
 if(process.env.NODE_ENV === "production") {
     console.log("start production mode")
-    dotenv.config({ path: '.env.production' });
+    dotenv.config({ path: path.resolve(__dirname, '../.env.development')});
 } else {
     console.log("start development mode")
-    dotenv.config({ path: '.env.development' });
+    dotenv.config({ path: path.resolve(__dirname, '../.env.development')});
 }
 
 import express, { Application, Request, Response } from 'express';

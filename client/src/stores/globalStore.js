@@ -8,7 +8,7 @@ const globalStore = writable({
   userModalOpen: false,
   betSlipOpen: false,
   loginModalOpen: false,
-  registerModalOpen: false,
+  registerModalOpen: 0,
   forgotModalOpen: 0,
   mobileMenuOpen: false,
   cart: false,

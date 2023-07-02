@@ -29,7 +29,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+										<tr>
                         <th width="15%"><img on:click={openUserModal} src="/img/user1.svg" /></th>
                         <td colspan="2">
                             <p class="mb-2">

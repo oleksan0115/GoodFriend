@@ -9,7 +9,7 @@
 
         }
 </script>
-<div>
+<div class="position-relative">
     <div class="right-bar chat">
         <div class="chattable table-black">
             <table class="table table-borderless">

@@ -104,7 +104,7 @@ export const signInSuccess = async ( req: Request, res: Response ) => {
             res.json(response.memberValidationError)
         }
     } catch (error) {
-
+        console.log(error)
     }
 }
 

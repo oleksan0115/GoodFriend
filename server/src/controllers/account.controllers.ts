@@ -39,7 +39,7 @@ export const signIn = async ( req: Request, res: Response ) => {
     console.log(data)
     if(data) {
         const accessToken = jwt.sign(data, String(process.env.ACCESS_SECRET), {expiresIn: "1m", issuer: data.email})
-        const refreshToken = jwt.sign(data, String(process.env.REFRESH_SECRET), {expiresIn: "24h", issuer: data.email})
+        const refreshToken = jwt.sign(data, String(process.env.REFRESH_SECRET), {expiresIn: "1h", issuer: data.email})
 
         res.cookie('accessToken', accessToken, {
             secure: process.env.NODE_ENV === "production" ? true : false,
@@ -72,7 +72,7 @@ export const accessToken = async ( req: Request, res: Response ) => {
             res.json(response.memberValidationError)
         }
     } catch (error) {
-        res.json(error)
+        res.json(response.tokenVerificationFailed)
     }
 }
 
@@ -83,7 +83,7 @@ export const refreshToken = async (req: Request, res: Response ) => {
         const userData: any = await models.userCheck(dataAccess, data.email, data.password)
         res.json(userData)
     } catch (error) {
-        res.json(error)
+        res.json(response.tokenVerificationFailed)
     }
 }
 
@@ -93,18 +93,12 @@ export const signInSuccess = async ( req: Request, res: Response ) => {
         const data = jwt.verify(token, String(process.env.ACCESS_SECRET)) as JwtPayload
         const userData: any = await models.userCheck(dataAccess, data.email, data.password)
         if(userData) {
-            const accessToken = jwt.sign(userData, String(process.env.ACCESS_SECRET), {expiresIn: "1m", noTimestamp: true })
-            res.cookie('accessToken', accessToken, {
-                secure: process.env.NODE_ENV === "production" ? true : false,
-                httpOnly: process.env.NODE_ENV === "production" ? true : false,
-                sameSite: process.env.NODE_ENV === "production" ? 'strict' : 'lax'
-            })
             res.json(userData)
         } else{
             res.json(response.memberValidationError)
         }
     } catch (error) {
-        console.log(error)
+        console.log(response.tokenVerificationFailed)
     }
 }
 

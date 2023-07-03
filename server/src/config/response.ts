@@ -61,7 +61,7 @@ export const emailFailedSend: Result = {
     message: "Email sending failed, please try again."
 }
 
-export const AccessTokenVerificationFailed: Result = {
+export const tokenVerificationFailed: Result = {
     code: 4001,
-    message: ""
+    message: "The token has expired."
 }

@@ -69,7 +69,7 @@ Please manage your affiliate code and API key through Sveltekit's env.
 
 ## Sign in API
 > Sign in
-- endpoint: /api/sign-in
+- endpoint: /api/account/sign-in
 - method: post
 - data: email(string), password(string)
 - cookie name: accesstoken, refreshtoken
@@ -89,50 +89,9 @@ Please manage your affiliate code and API key through Sveltekit's env.
     message: "The email or password is incorrect."
 } 
 ````
-> acceetoken
-- endpoint: /api/accesstoken
-- method: post
-- cookie name: accesstoken
-- credentials:"include" (fetch), withCredentials: true (axios)
-- expiration time : 1m
-- description: The AccessToken is used to authenticate the user's session. This token can contain information such as the user's username, email, role, and permissions.
 
-#### response
-````
-// error
-{
-    code: 3005,
-    message: "The email or password is incorrect."
-}
-{
-    code: 4001,
-    message: "The token has expired."
-}
-````
-
-> refreshtoken
-- endpoint: /api/accesstoken
-- method: post
-- cookie name: refreshtoken
-- credentials:"include" (fetch), withCredentials: true (axios)
-- expiration time : 1h
-- description: The Refresh Token is used to allow users to continue logging into the system after their AccessToken has expired.
-
-#### response
-````
-// error
-{
-    code: 3005,
-    message: "The email or password is incorrect."
-}
-{
-    code: 4001,
-    message: "The token has expired."
-}
-````
-
->Sign in success
-- endpoint: /api/sign-in/success
+> Sign in success
+- endpoint: /api/account/sign-in/success
 - method: post
 - credentials:"include" (fetch), withCredentials: true (axios)
 - description: Gets information about the accesstoken.
@@ -141,17 +100,36 @@ Please manage your affiliate code and API key through Sveltekit's env.
 ````
 // error
 {
-    code: 3005,
-    message: "The email or password is incorrect."
-}
-{
     code: 4001,
-    message: "Used when a user first connects."
+    message: "The token has expired."
 }
 ````
 
+> Sign in success
+- endpoint: /api/account/sign-in/refresh
+- method: post
+- credentials:"include" (fetch), withCredentials: true (axios)
+- description: Reissue the access and refresh tokens. If the refreshtoken has expired, it will raise an error.
+
+#### response
+````
+// success
+{
+    code: 1003,
+    message: "Token Recreate"
+}
+
+// error
+{
+    code: 4001,
+    message: "The token has expired."
+}
+````
+
+## Sign out API
+
 >sign out
-- endpoint: /api/sign-out
+- endpoint: /api/account/sign-out
 - method: post
 - credentials:"include" (fetch), withCredentials: true (axios)
 - description: Initialiseer het accesstoken.

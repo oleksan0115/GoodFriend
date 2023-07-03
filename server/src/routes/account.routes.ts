@@ -9,11 +9,11 @@ router.post("/sign-up", middlewares.emailCheck, middlewares.authCodeCheck, middl
 router.post("/email", middlewares.emailCheck, controllers.sendEmail);
 
 // sign-in
-router.post('/signin', controllers.signIn)
+router.post('/sign-in', controllers.signIn)
 router.post('/accesstoken', controllers.accessToken)
 router.post('/refreshtoken', controllers.refreshToken)
-router.post('/signin/success', controllers.signInSuccess)
-router.post('/signout', controllers.signout)
+router.post('/sign-in/success', controllers.signInSuccess)
+router.post('/sign-out', controllers.signout)
 
 
 // forgot-password

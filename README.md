@@ -168,7 +168,7 @@ Please manage your affiliate code and API key through Sveltekit's env.
 > Change password
 - endpoint: /api/account/forgot-password/change
 - method: post
-- data: email (string), passoword(string), authCode(string)
+- data: email (string), password(string), authCode(string)
 
 #### response
 ````

@@ -4,16 +4,19 @@ import * as controllers from "../controllers/account.controllers";
 
 const router: Router = express.Router();
 
+// send auth email
+router.post("/email", middlewares.emailCheck, controllers.sendEmail);
+
 // sign-up
 router.post("/sign-up", middlewares.emailCheck, middlewares.authCodeCheck, middlewares.promoCodeCheck, controllers.signUp);
-router.post("/email", middlewares.emailCheck, controllers.sendEmail);
 
 // sign-in
 router.post('/sign-in', controllers.signIn)
-router.post('/accesstoken', controllers.accessToken)
-router.post('/refreshtoken', controllers.refreshToken)
 router.post('/sign-in/success', controllers.signInSuccess)
-router.post('/sign-out', controllers.signout)
+router.post('/sign-in/refresh', controllers.refresh)  
+
+//sign-out
+router.post('/sign-out', controllers.signOut)
 
 
 // forgot-password

@@ -18,9 +18,9 @@ export const signInSuccess: Result = {
     message: "Sign in successfully 🎉"
 }
 
-export const accessTokenRecreate: Result = {
+export const tokenRecreate: Result = {
     code: 1003,
-    message: "Access Token Recreate"
+    message: "Token Recreate"
 }
 
 export const signOutSuccess: Result = {

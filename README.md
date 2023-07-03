@@ -1,5 +1,5 @@
 # Gaming Solution Server APi.
-### Required headers
+## Required headers
 HTTP Headers
 1. 'GF-API-KEY': 'abcedef'
 2. 'GF-AFFILIATE-CODE': 'abcde'
@@ -8,7 +8,7 @@ This is the value the client needs to communicate with the server.
 The value for each client is different.
 Please manage your affiliate code and API key through Sveltekit's env.
 
-### sign-up API
+## sign-up API
 > Send a auth code by email
 - endpoint: /api/account/email
 - method: post
@@ -67,7 +67,7 @@ Please manage your affiliate code and API key through Sveltekit's env.
 }
 ````
 
-### sign-in API
+## Sign in API
 > Sign in
 - endpoint: /api/sign-in
 - method: post

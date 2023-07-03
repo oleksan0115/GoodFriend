@@ -23,7 +23,6 @@ app.use(cors({
     credentials: true 
 }));
 
-
 import * as middlewares from './middlewares/validation.middlewares';
 app.use("/api/*", middlewares.checkHeaders);
 
@@ -34,7 +33,5 @@ app.use("/api/account", accountRouter);
 const port:number = 9001
 
 app.listen(port, () => {
-
-    console.log(`env ${process.env.DB_USER}`)
     console.log(`App is listening on port ${port}`);
 });

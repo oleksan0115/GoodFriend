@@ -35,16 +35,21 @@ export const signIn = async ( req: Request, res: Response ) => {
     const {email, password} = req.body
 
     const data = await models.userCheck(dataAccess, email, utils.hashWithSHA256(password))
+
+    console.log(data)
     if(data) {
         const accessToken = jwt.sign(data, String(process.env.ACCESS_SECRET), {expiresIn: "1m", issuer: data.email})
         const refreshToken = jwt.sign(data, String(process.env.REFRESH_SECRET), {expiresIn: "24h", issuer: data.email})
+
         res.cookie('accessToken', accessToken, {
-            secure: false,
-            httpOnly: true
+            secure: process.env.NODE_ENV === "production" ? true : false,
+            httpOnly: process.env.NODE_ENV === "production" ? true : false,
+            sameSite: process.env.NODE_ENV === "production" ? 'strict' : 'lax'
         })
         res.cookie('refreshToken', refreshToken, {
-            secure: false,
-            httpOnly: true
+            secure: process.env.NODE_ENV === "production" ? true : false,
+            httpOnly: process.env.NODE_ENV === "production" ? true : false,
+            sameSite: process.env.NODE_ENV === "production" ? 'strict' : 'lax'
         })
 
         res.json(response.signInSuccess)
@@ -76,24 +81,31 @@ export const refreshToken = async (req: Request, res: Response ) => {
         const token: any = req.cookies.refreshToken;
         const data = jwt.verify(token, String(process.env.REFRESH_SECRET)) as JwtPayload;            
         const userData: any = await models.userCheck(dataAccess, data.email, data.password)
-
-        if(userData) {
-            const accessToken = jwt.sign(userData, String(process.env.ACCESS_SECRET), {expiresIn: "1m", noTimestamp: true })
-            res.cookie('accessToken', accessToken, {
-                secure: false,
-                httpOnly: true
-            })
-            res.json(response.accessTokenRecreate)
-        } else{
-            res.json(response.memberValidationError)
-        }
+        res.json(userData)
     } catch (error) {
         res.json(error)
     }
 }
 
-export const signInSuccess = ( req: Request, res: Response ) => {
+export const signInSuccess = async ( req: Request, res: Response ) => {
+    try {
+        const token: any = req.cookies.accessToken
+        const data = jwt.verify(token, String(process.env.ACCESS_SECRET)) as JwtPayload
+        const userData: any = await models.userCheck(dataAccess, data.email, data.password)
+        if(userData) {
+            const accessToken = jwt.sign(userData, String(process.env.ACCESS_SECRET), {expiresIn: "1m", noTimestamp: true })
+            res.cookie('accessToken', accessToken, {
+                secure: process.env.NODE_ENV === "production" ? true : false,
+                httpOnly: process.env.NODE_ENV === "production" ? true : false,
+                sameSite: process.env.NODE_ENV === "production" ? 'strict' : 'lax'
+            })
+            res.json(userData)
+        } else{
+            res.json(response.memberValidationError)
+        }
+    } catch (error) {
 
+    }
 }
 
 export const signout = ( req: Request, res: Response) => {

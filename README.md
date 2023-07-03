@@ -136,7 +136,7 @@ Please manage your affiliate code and API key through Sveltekit's env.
 
 #### response
 ````
-// error
+// success
 {
     code: 1004,
     message: "Sign out successfully"

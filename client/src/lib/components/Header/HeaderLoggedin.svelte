@@ -39,7 +39,7 @@
 
     <button
       id="deskchat"
-      class="btn btn-color mobilenone" on:click={toggleChat} on:click={() => {
+      class="btn btn-color" on:click={toggleChat} on:click={() => {
         globalStore.toggleItem("chatOpen", !$globalStore.chatOpen);
       }}>
       <img src="/img/Chat.svg" />

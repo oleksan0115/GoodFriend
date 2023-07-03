@@ -623,13 +623,14 @@
 
     .chattable {
         width: 360px;
-        height: 80vh;
+        /* height: 80vh; */
         z-index: 3;
         top: 88px;
+        bottom: 70px;
     }
 
     .right-bar .message {
-        bottom: 70px;
+        bottom: 0px;
         width: 360px;
         right: 0;
         z-index: 3;
@@ -975,8 +976,8 @@
         width: 42px;
     }
     .topbar {
-        padding-top: 9px;
-        padding-bottom: 9px;
+        padding-top: 15px;
+        padding-bottom: 15px;
         }  
     .topbar::after {
         display: none;
@@ -2016,6 +2017,10 @@
     .logo a {
         position: relative;
         display: flex;
+    }
+
+    #deskchat {
+        display: none;
     }
 
 }

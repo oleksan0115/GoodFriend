@@ -7,6 +7,7 @@
   import LoggedinHeader from "./HeaderLoggedin.svelte";
   import axios from 'axios';
   import Toast from 'svelte-toast'
+  import { onMount } from 'svelte';
 
   const toastOptions = {
     duration: 1500,
@@ -18,14 +19,28 @@
   const GF_API_KEY = import.meta.env.VITE_GF_API_KEY;
   const GF_AFFILIATE_CODE = import.meta.env.VITE_GF_AFFILIATE_CODE;
   const SEVER_URL = import.meta.env.VITE_SEVER_URL;
-  const SEVER_PORT = import.meta.env.VITE_SEVER_PORT;
 
-  let isLoggedIn = true;
+  $: isLoggedIn = $globalStore.userDetail;
   $: path = $page.url.pathname;
   let signUpUserData = {
     'email': '',
     'authCode': '',
     'promoCode': '',
+    'password': '',
+  }
+
+  onMount(() => {
+    handleTokens();
+  });
+
+  let forgotUserData = {
+    'email': '',
+    'authCode': '',
+    'password': '',
+  }
+
+  let signInUserData = {
+    'email': '',
     'password': '',
   }
 
@@ -37,21 +52,77 @@
         'promoCode': '',
         'password': '',
       };
+
+    else if($globalStore.forgotModalOpen == 0)
+      forgotUserData = {
+        'email': '',
+        'authCode': '',
+        'password': '',
+      };
+
+    if($globalStore.loginModalOpen == false) {
+      signInUserData = {
+        'email': '',
+        'password': '',
+      };
+    }
   }
 
-  if($globalStore.registerModalOpen == 0) {
-    signUpUserData = {
-      'email': '',
-      'authCode': '',
-      'promoCode': '',
-      'password': '',
-    };
+  function getAccessToken() {
+    axios.post(SEVER_URL + '/api/account/sign-in/success', {}, {
+        headers: {
+          'GF-API-KEY': GF_API_KEY,
+          'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
+          'Content-Type': 'application/json'
+        },
+        withCredentials: true
+      }).then(res => {
+        if(res.status == 200) {
+          globalStore.toggleItem("userDetail", res.data);
+        }
+      }).catch(err => toast.error('Bad Network Connection'))
   }
 
+  function handleTokens() {
+    axios.post(SEVER_URL + '/api/account/sign-in/success', {
+      }, {
+        headers: {
+          'GF-API-KEY': GF_API_KEY,
+          'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
+          'Content-Type': 'application/json'
+        },
+        withCredentials: true
+      }).then(res => {
+        if(res.status == 200) {
+          globalStore.toggleItem("userDetail", res.data);
+        }
+      }).catch(err => {
+        if(err.code != "ERR_BAD_REQUEST")
+          toast.error('Bad Network Connection')
+        else {
+          if(err.response.data.code == 4001) {
+              axios.post(SEVER_URL + '/api/account/sign-in/refresh', {
+              }, {
+                headers: {
+                  'GF-API-KEY': GF_API_KEY,
+                  'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
+                  'Content-Type': 'application/json'
+                },
+                withCredentials: true
+              }).then(res => {
+                if(res.status == 200) {
+                  getAccessToken();
+                }
+              }).catch(err => globalStore.toggleItem("userDetail", null))
+          }
+        }
+      })
+  }
+  
   function handleSignUp(event) {
     event.preventDefault();
     if($globalStore.registerModalOpen == 1) {
-      axios.post(SEVER_URL + ':' + SEVER_PORT + '/api/account/email', {
+      axios.post(SEVER_URL + '/api/account/sign-up/email', {
         email: signUpUserData.email
       }, {
         headers: {
@@ -60,13 +131,18 @@
           'Content-Type': 'application/json'
         }
       }).then(res => {
-        if(res.data.code == 1001) 
+        if(res.status == 200) {
+          toast.success('Sent a verification code to your email.');
           globalStore.toggleItem("registerModalOpen", 2);
-        else toast.error(res.data.message)
-      }).catch(err => toast.error('Bad Network Connection'))
+        }
+      }).catch(err => {
+        if(err.code == "ERR_BAD_REQUEST")
+          toast.error(err.response.data.message)
+        else toast.error('Bad Network Connection')
+      })
     }
     else if($globalStore.registerModalOpen == 2) {
-      axios.post(SEVER_URL + ':' + SEVER_PORT + '/api/account/sign-up', {
+      axios.post(SEVER_URL + '/api/account/sign-up', {
         email: signUpUserData.email,
         authCode: signUpUserData.authCode,
         promoCode: signUpUserData.promoCode,
@@ -78,17 +154,113 @@
           'Content-Type': 'application/json'
         }
       }).then(res => {
-        if(res.data.code == 1000) 
+        if(res.status == 200) {
+          toast.success('Sign up successfully 🎉');
           globalStore.toggleItem("registerModalOpen", 3)
-        else
-          toast.error(res.data.message)
-      }).catch(err => toast.error('Bad Network Connection'))
+        }
+      }).catch(err => {
+        if(err.code == "ERR_BAD_REQUEST")
+          toast.error(err.response.data.message)
+        else toast.error('Bad Network Connection')
+      })
     }
     else {
       globalStore.toggleItem("registerModalOpen", 0)
     }
   }
 
+  function handleSignOut() {
+    axios.post(SEVER_URL + '/api/account/sign-out', {}, 
+    {
+      headers: {
+        'GF-API-KEY': GF_API_KEY,
+        'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true,
+    }).then(res => {
+      if(res.data.code == 1004) {
+        toast.success('Sign out successfully 🎉');
+        globalStore.toggleItem('userDetail', null);
+        globalStore.toggleItem('profileModalOpen', false);
+      }
+      else
+        toast.error(res.data.message)
+    }).catch(err => toast.error('Bad Network Connection'))
+  }
+
+  function handleForgotPassword(event) {
+    event.preventDefault();
+    if($globalStore.forgotModalOpen == 1) {
+      axios.post(SEVER_URL + '/api/account/forgot-password/email', {
+        email: forgotUserData.email
+      }, {
+        headers: {
+          'GF-API-KEY': GF_API_KEY,
+          'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
+          'Content-Type': 'application/json'
+        }
+      }).then(res => {
+        if(res.status == 200) {
+          toast.success('Sent a verification code to your email.');
+          globalStore.toggleItem("forgotModalOpen", 2);
+        }
+      }).catch(err => {
+        if(err.code == "ERR_BAD_REQUEST")
+          toast.error(err.response.data.message)
+        else toast.error('Bad Network Connection')
+      })
+    }
+    else if($globalStore.forgotModalOpen == 2) {
+      axios.post(SEVER_URL + '/api/account/forgot-password/change', {
+        email: forgotUserData.email,
+        authCode: forgotUserData.authCode,
+        password: forgotUserData.password
+      }, {
+        headers: {
+          'GF-API-KEY': GF_API_KEY,
+          'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
+          'Content-Type': 'application/json'
+        }
+      }).then(res => {
+        if(res.status == 200) {
+          toast.success('Password change successfully');
+          globalStore.toggleItem("forgotModalOpen", 3)
+        }
+      }).catch(err => {
+        if(err.code == "ERR_BAD_REQUEST") 
+          toast.error(err.response.data.message)
+        else toast.error('Bad Network Connection')
+      })
+    }
+    else {
+      globalStore.toggleItem("forgotModalOpen", 0)
+    }
+  }
+
+  function handleSignIn(event) {
+    axios.post(SEVER_URL + '/api/account/sign-in', {
+      email: signInUserData.email,
+      password: signInUserData.password
+    }, {
+      headers: {
+        'GF-API-KEY': GF_API_KEY,
+        'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
+        'Content-Type': 'application/json'
+      },
+      withCredentials: true
+    }).then(res => {
+      if(res.status == 200) {
+        toast.success('Sign in successfully 🎉');
+        globalStore.toggleItem("loginModalOpen", false);
+        getAccessToken();
+      }
+    }).catch(err => {
+      if(err.code == "ERR_BAD_REQUEST")
+        toast.error(err.response.data.message)
+      else toast.error('Bad Network Connection')
+    })
+  }
 </script>
 
 <div class="topbar bg-color">
@@ -134,72 +306,74 @@
     {/if}
   </div>
   <div class="usershow" class:open={$globalStore.profileModalOpen}>
+
     <div class="overlay" on:click={ () => globalStore.toggleItem("profileModalOpen", false) }></div>
-    <div class="userprofile">
-      <div class="row">
-        <div class="col-md-3 col-3">
-          <img class="user-image" src="/img/user.svg" />
-        </div>
-        <div class="col-md-7 col-7 pe-0 ps-0">
-          <h6 class="text-white mb-0">Stacey Miller</h6>
-          <p class="mb-0 mt-0">
-            <img style="margin-bottom: 4px;"  src="/img/Group-1583.svg" /> level 31
-          </p>
-        </div>
-        <div class="col-md-2 col-2">
-          <div
-            class="closed float-end"
-            on:click={() => {
-              globalStore.toggleItem("profileModalOpen", false);
-            }}
-          >
-            <img class="cancel-light" src="/img/Cancel-1.svg" />
-            <img
-              class="cancel-dark"
-              style="display:none"
-              src="/img/cancel-dark.svg"
-            />
+      <div class="userprofile">
+        <div class="row">
+          <div class="col-md-3 col-3">
+            <img class="user-image" src="/img/user.svg" />
+          </div>
+          <div class="col-md-7 col-7 pe-0 ps-0">
+            <h6 class="text-white mb-0">{$globalStore.userDetail ? $globalStore.userDetail.nick : ''}</h6>
+            <p class="mb-0 mt-0">
+              <img style="margin-bottom: 4px;"  src="/img/Group-1583.svg" /> level {$globalStore.userDetail ? $globalStore.userDetail.level: '0'}
+            </p>
+          </div>
+          <div class="col-md-2 col-2">
+            <div
+              class="closed float-end"
+              on:click={() => {
+                globalStore.toggleItem("profileModalOpen", false);
+              }}
+            >
+              <img class="cancel-light" src="/img/Cancel-1.svg" />
+              <img
+                class="cancel-dark"
+                style="display:none"
+                src="/img/cancel-dark.svg"
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <h4 class="mt-4">Theme</h4>
-      <div class="theme-button">
-        <DarkModeButtons />
-      </div>
-      <div class="border mt-3 mb-4" />
-      <h4>My Account</h4>
-      <ul class="menu">
-        <li class="active">
-          <a id="setting" href="#">
-            <svg
-              ><use href="/img/symbols.svg?lang.svg#icon_modal_settings" /></svg
+        <h4 class="mt-4">Theme</h4>
+        <div class="theme-button">
+          <DarkModeButtons />
+        </div>
+        <div class="border mt-3 mb-4" />
+        <h4>My Account</h4>
+        <ul class="menu">
+          <li class="active">
+            <a id="setting" href="#">
+              <svg
+                ><use href="/img/symbols.svg?lang.svg#icon_modal_settings" /></svg
+              >
+              Settings</a
             >
-            Settings</a
-          >
-        </li>
-        <li>
-          <a href="#"
-            ><svg
-              ><use href="/img/symbols.svg?lang.svg#icon_modal_deposit" /></svg
-            > Deposit</a
-          >
-        </li>
-        <li>
-          <a href="#"
-            ><svg
-              ><use href="/img/symbols.svg?lang.svg#icon_modal_withdraw" /></svg
-            > Withdraw</a
-          >
-        </li>
-      </ul>
-      <div class="border mb-3 mt-3" />
-      <ul class="menu">
-        <li class="logout">
-          <a href="#"><img class="me-3" src="/img/logout.svg" /> Logout</a>
-        </li>
-      </ul>
+          </li>
+          <li>
+            <a href="#"
+              ><svg
+                ><use href="/img/symbols.svg?lang.svg#icon_modal_deposit" /></svg
+              > Deposit</a
+            >
+          </li>
+          <li>
+            <a href="#"
+              ><svg
+                ><use href="/img/symbols.svg?lang.svg#icon_modal_withdraw" /></svg
+              > Withdraw</a
+            >
+          </li>
+        </ul>
+        <div class="border mb-3 mt-3" />
+        <ul class="menu">
+          <li class="logout" on:click={handleSignOut}>
+            <a href="#"><img class="me-3" src="/img/logout.svg" /> Logout</a>
+          </li>
+        </ul>
+      </div>
+
     </div>
-  </div>
 </div>
 
 <BetSlip />
@@ -326,7 +500,7 @@
 
       <h2 class="mt_30">Log in</h2>
       <p class="mb-4">Welcome back. Please enter your details</p>
-      <form>
+      <form on:submit="{handleSignIn}">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label"
             >Email address</label
@@ -334,8 +508,9 @@
           <input
             type="email"
             class="form-control"
-            id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            bind:value="{signInUserData.email}"
+            required
           />
         </div>
         <div class="mb-3">
@@ -343,7 +518,8 @@
           <input
             type="password"
             class="form-control"
-            id="exampleInputPassword1"
+            bind:value="{signInUserData.password}"
+            required
           />
         </div>
         <p class="forgot text-end"><a href="#" on:click={() => {
@@ -541,7 +717,7 @@
 
       <h2 class="mt_30">Forgot password</h2>
       <p class="mb-4">Enter your email address to reset your password</p>
-      <form>
+      <form on:submit="{handleForgotPassword}">
 
         {#if $globalStore.forgotModalOpen == 1}
         <div class="mb-3">
@@ -591,10 +767,7 @@
         }}>Sign in</a></p>
 
         {/if}
-        <button type="submit" class="btn btn-primary w-100 mt30" on:click={() => {
-          let val = $globalStore.forgotModalOpen;
-          globalStore.toggleItem("forgotModalOpen", val+=1);
-        }}>
+        <button type="submit" class="btn btn-primary w-100 mt30">
           {$globalStore.forgotModalOpen == 1 ? 'Send' : $globalStore.forgotModalOpen == 2 ? 'Verify': 'Submit'}
         </button>
       </form>

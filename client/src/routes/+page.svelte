@@ -87,71 +87,162 @@
             <div class="col-md-6 text-end" />
         </div>
     </div>
-    <div class="boxsecond boxforth navnone">
-        <div class="fourcolumn">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>All Categories</h2>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="item">
-                    <div class="box1 sbox text-center">
-                        <img src="/img/casino-category.png" />
-                        <div class="title-wrapper">
-                            <h2 class="category-title">Casino</h2>
-                        </div>
-                    </div>
-                </div>
+		<!-- /////////////////////////////////////////////////////////// -->
+		<div class="boxsecond boxforth">
+			<div class="row">
+					<div class="col-md-12 categories-swiper-top swiper-top">
+							<h2 class="title">All Categories</h2>
+							<div class="swiper-navigation">
+									<button class="swiper-prev-btn categories_oc1-prev">
+											<svg
+													style="transform:rotate(180deg)"
+													width="8"
+													height="14"
+													viewBox="0 0 8 14"
+													fill="none"
+													xmlns="http://www.w3.org/2000/svg"
+													><path
+															fill-rule="evenodd"
+															clip-rule="evenodd"
+															d="M0.46967 0.46967C0.762563 0.176777 1.23744 0.176777 1.53033 0.46967L7.53033 6.46967C7.82322 6.76256 7.82322 7.23744 7.53033 7.53033L1.53033 13.5303C1.23744 13.8232 0.762563 13.8232 0.46967 13.5303C0.176777 13.2374 0.176777 12.7626 0.46967 12.4697L5.93934 7L0.46967 1.53033C0.176777 1.23744 0.176777 0.762563 0.46967 0.46967Z"
+															fill="url(#paint0_linear_615_16097)"
+													/><defs
+															><linearGradient
+																	id="paint0_linear_615_16097"
+																	x1="1.66667"
+																	y1="-2.3"
+																	x2="8.01308"
+																	y2="-1.50789"
+																	gradientUnits="userSpaceOnUse"
+																	><stop stop-color="#C6A3FF" /><stop
+																			offset="1"
+																			stop-color="#7E8BED"
+																	/></linearGradient
+															></defs
+													></svg
+											>
+									</button>
+									<button class="swiper-next-btn categories_oc1-next">
+											<svg
+													width="8"
+													height="14"
+													viewBox="0 0 8 14"
+													fill="none"
+													xmlns="http://www.w3.org/2000/svg"
+													><path
+															fill-rule="evenodd"
+															clip-rule="evenodd"
+															d="M0.46967 0.46967C0.762563 0.176777 1.23744 0.176777 1.53033 0.46967L7.53033 6.46967C7.82322 6.76256 7.82322 7.23744 7.53033 7.53033L1.53033 13.5303C1.23744 13.8232 0.762563 13.8232 0.46967 13.5303C0.176777 13.2374 0.176777 12.7626 0.46967 12.4697L5.93934 7L0.46967 1.53033C0.176777 1.23744 0.176777 0.762563 0.46967 0.46967Z"
+															fill="url(#paint0_linear_615_16097)"
+													/><defs
+															><linearGradient
+																	id="paint0_linear_615_16097"
+																	x1="1.66667"
+																	y1="-2.3"
+																	x2="8.01308"
+																	y2="-1.50789"
+																	gradientUnits="userSpaceOnUse"
+																	><stop stop-color="#C6A3FF" /><stop
+																			offset="1"
+																			stop-color="#7E8BED"
+																	/></linearGradient
+															></defs
+													></svg
+											>
+									</button>
+							</div>
+					</div>
+			</div>
+			<div class="oc1">
+					<Swiper
+							spaceBetween={15}
+							slidesPerView={2}
+							modules={[Pagination]}
+							breakpoints={{
+									0: {
+											slidesPerView: 2,
+									},
+									768: {
+											slidesPerView: 4,
+									},
+									1024: {
+											slidesPerView: 4,
+									},
+									1400: {
+											slidesPerView: 6,
+									},
+							}}
+					>
+							<SwiperSlide>
+									<div class="item cursor-pointer">
+										<div class="box1 sbox text-center">
+											<img src="/img/casino-category.png" />
+											<div class="title-wrapper">
+													<h2 class="category-title">Casino</h2>
+											</div>
+										</div>
+									</div>
+							</SwiperSlide>
 
-                <div class="item">
-                    <div class="box2 sbox text-center">
-                        <img src="/img/slot-category.png" />
-                        <div class="title-wrapper">
-                            <h2 class="category-title">Slot</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="box3 sbox text-center">
-                        <img src="/img/sports-category.png" />
-                        <div class="title-wrapper">
-                            <h2 class="category-title">Sports</h2>
-                        </div>
-                    </div>
-                </div>
+							<SwiperSlide>
+								<div class="item cursor-pointer">
+									<div class="box2 sbox text-center">
+											<img src="/img/slot-category.png" />
+											<div class="title-wrapper">
+													<h2 class="category-title">Slot</h2>
+											</div>
+									</div>
+								</div>
+							</SwiperSlide>
 
-                <div class="item">
-                    <div class="box4 sbox text-center">
-                        <img src="/img/v-game-category.png" />
-                        <div class="title-wrapper">
-                            <h2 class="category-title">V-Game</h2>
-                        </div>
-                    </div>
-                </div>
+							<SwiperSlide>
+								<div class="item cursor-pointer">
+										<div class="box3 sbox text-center">
+												<img src="/img/sports-category.png" />
+												<div class="title-wrapper">
+														<h2 class="category-title">Sports</h2>
+												</div>
+										</div>
+								</div>
+							</SwiperSlide>
 
-                <div class="item">
-                    <div class="box5 sbox text-center">
-                        <img src="/img/minigames-category.png" />
-                        <div class="title-wrapper">
-                            <h2 class="category-title">Mini Games</h2>
-                        </div>
-                    </div>
-                </div>
+							<SwiperSlide>
+								<div class="item cursor-pointer">
+									<div class="box4 sbox text-center">
+											<img src="/img/v-game-category.png" />
+											<div class="title-wrapper">
+													<h2 class="category-title">V-Game</h2>
+											</div>
+									</div>
+								</div>
+							</SwiperSlide>
 
-                <div class="item">
-                    <div class="box6 sbox text-center">
-                        <img src="/img/live-sports-category.png" />
-                        <div class="title-wrapper">
-                            <h2 class="category-title">Live Sports</h2>
-                        </div>
-                    </div>
-                </div>                
-                
-            </div>
-        </div>
-    </div>
+							<SwiperSlide>
+								<div class="item cursor-pointer">
+									<div class="box5 sbox text-center">
+											<img src="/img/minigames-category.png" />
+											<div class="title-wrapper">
+													<h2 class="category-title">Mini Games</h2>
+											</div>
+									</div>
+								</div>
+							</SwiperSlide>
+							
+							<SwiperSlide>
+								<div class="item cursor-pointer">
+									<div class="box6 sbox text-center">
+											<img src="/img/live-sports-category.png" />
+											<div class="title-wrapper">
+													<h2 class="category-title">Live Sports</h2>
+											</div>
+									</div>
+								</div>    
+							</SwiperSlide>
+					</Swiper>
+			</div>
+		</div>
+		<!-- ////////////////////////////////////////////////////////// -->
     <div class="boxthird">
         <div class="row">
             <div class="col-md-12">

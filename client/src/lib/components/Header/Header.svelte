@@ -20,7 +20,6 @@
   const SEVER_URL = import.meta.env.VITE_SEVER_URL;
 
   $: isLoggedIn = $globalStore.userDetail;
-  console.log($globalStore.userDetail)
   $: path = $page.url.pathname;
   let signUpUserData = {
     'email': '',

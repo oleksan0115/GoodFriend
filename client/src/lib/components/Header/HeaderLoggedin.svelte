@@ -24,7 +24,7 @@
       Bet Slip
     </button>
     <div class="nav-balance" style="align-self:center;"><img src="/img/coin-1.svg" alt="" >
-        <span class="nav-balance-amount">$ {$globalStore.userDetail.moeny}</span>
+        <span class="nav-balance-amount">$ {$globalStore.userDetail.game_money}</span>
         <span class="nav-balance-plus"><img src="/img/add.svg" alt=""></span>
     </div>
     <button

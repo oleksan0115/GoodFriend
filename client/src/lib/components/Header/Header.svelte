@@ -19,7 +19,7 @@
   const GF_AFFILIATE_CODE = import.meta.env.VITE_GF_AFFILIATE_CODE;
   const SEVER_URL = import.meta.env.VITE_SEVER_URL;
 
-  let isLoggedIn = $globalStore.userDetail;
+  $: isLoggedIn = $globalStore.userDetail;
   console.log($globalStore.userDetail)
   $: path = $page.url.pathname;
   let signUpUserData = {
@@ -86,8 +86,7 @@
           'GF-API-KEY': GF_API_KEY,
           'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
           'Content-Type': 'application/json'
-        }
-      }, {
+        },
         withCredentials: true
       }).then(res => {
         if(res.data.code != 4001) {
@@ -100,8 +99,7 @@
               'GF-API-KEY': GF_API_KEY,
               'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
               'Content-Type': 'application/json'
-            }
-          }, {
+            },
             withCredentials: true
           }).then(res => {
             if(res.data.code == 1003) {
@@ -169,12 +167,13 @@
         'GF-API-KEY': GF_API_KEY,
         'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
         'Content-Type': 'application/json',
-      }
-    }, {
+      },
       withCredentials: true,
     }).then(res => {
       if(res.data.code == 1004) {
         toast.success('Sign out successfully 🎉');
+        globalStore.toggleItem('userDetail', null);
+        globalStore.toggleItem('profileModalOpen', false);
       }
       else
         toast.error(res.data.message)
@@ -290,72 +289,74 @@
     {/if}
   </div>
   <div class="usershow" class:open={$globalStore.profileModalOpen}>
+
     <div class="overlay" on:click={ () => globalStore.toggleItem("profileModalOpen", false) }></div>
-    <div class="userprofile">
-      <div class="row">
-        <div class="col-md-3 col-3">
-          <img class="user-image" src="/img/user.svg" />
-        </div>
-        <div class="col-md-7 col-7 pe-0 ps-0">
-          <h6 class="text-white mb-0">Stacey Miller</h6>
-          <p class="mb-0 mt-0">
-            <img style="margin-bottom: 4px;"  src="/img/Group-1583.svg" /> level 31
-          </p>
-        </div>
-        <div class="col-md-2 col-2">
-          <div
-            class="closed float-end"
-            on:click={() => {
-              globalStore.toggleItem("profileModalOpen", false);
-            }}
-          >
-            <img class="cancel-light" src="/img/Cancel-1.svg" />
-            <img
-              class="cancel-dark"
-              style="display:none"
-              src="/img/cancel-dark.svg"
-            />
+      <div class="userprofile">
+        <div class="row">
+          <div class="col-md-3 col-3">
+            <img class="user-image" src="/img/user.svg" />
+          </div>
+          <div class="col-md-7 col-7 pe-0 ps-0">
+            <h6 class="text-white mb-0">{$globalStore.userDetail ? $globalStore.userDetail.nick : ''}</h6>
+            <p class="mb-0 mt-0">
+              <img style="margin-bottom: 4px;"  src="/img/Group-1583.svg" /> level {$globalStore.userDetail ? $globalStore.userDetail.level: '0'}
+            </p>
+          </div>
+          <div class="col-md-2 col-2">
+            <div
+              class="closed float-end"
+              on:click={() => {
+                globalStore.toggleItem("profileModalOpen", false);
+              }}
+            >
+              <img class="cancel-light" src="/img/Cancel-1.svg" />
+              <img
+                class="cancel-dark"
+                style="display:none"
+                src="/img/cancel-dark.svg"
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <h4 class="mt-4">Theme</h4>
-      <div class="theme-button">
-        <DarkModeButtons />
-      </div>
-      <div class="border mt-3 mb-4" />
-      <h4>My Account</h4>
-      <ul class="menu">
-        <li class="active">
-          <a id="setting" href="#">
-            <svg
-              ><use href="/img/symbols.svg?lang.svg#icon_modal_settings" /></svg
+        <h4 class="mt-4">Theme</h4>
+        <div class="theme-button">
+          <DarkModeButtons />
+        </div>
+        <div class="border mt-3 mb-4" />
+        <h4>My Account</h4>
+        <ul class="menu">
+          <li class="active">
+            <a id="setting" href="#">
+              <svg
+                ><use href="/img/symbols.svg?lang.svg#icon_modal_settings" /></svg
+              >
+              Settings</a
             >
-            Settings</a
-          >
-        </li>
-        <li>
-          <a href="#"
-            ><svg
-              ><use href="/img/symbols.svg?lang.svg#icon_modal_deposit" /></svg
-            > Deposit</a
-          >
-        </li>
-        <li>
-          <a href="#"
-            ><svg
-              ><use href="/img/symbols.svg?lang.svg#icon_modal_withdraw" /></svg
-            > Withdraw</a
-          >
-        </li>
-      </ul>
-      <div class="border mb-3 mt-3" />
-      <ul class="menu">
-        <li class="logout" on:click={handleSignOut}>
-          <a href="#"><img class="me-3" src="/img/logout.svg" /> Logout</a>
-        </li>
-      </ul>
+          </li>
+          <li>
+            <a href="#"
+              ><svg
+                ><use href="/img/symbols.svg?lang.svg#icon_modal_deposit" /></svg
+              > Deposit</a
+            >
+          </li>
+          <li>
+            <a href="#"
+              ><svg
+                ><use href="/img/symbols.svg?lang.svg#icon_modal_withdraw" /></svg
+              > Withdraw</a
+            >
+          </li>
+        </ul>
+        <div class="border mb-3 mt-3" />
+        <ul class="menu">
+          <li class="logout" on:click={handleSignOut}>
+            <a href="#"><img class="me-3" src="/img/logout.svg" /> Logout</a>
+          </li>
+        </ul>
+      </div>
+
     </div>
-  </div>
 </div>
 
 <BetSlip />

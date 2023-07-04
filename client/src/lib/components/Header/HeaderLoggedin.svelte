@@ -24,7 +24,7 @@
       Bet Slip
     </button>
     <div class="nav-balance" style="align-self:center;"><img src="/img/coin-1.svg" alt="" >
-        <span class="nav-balance-amount">$ 750</span>
+        <span class="nav-balance-amount">$ {$globalStore.userDetail.moeny}</span>
         <span class="nav-balance-plus"><img src="/img/add.svg" alt=""></span>
     </div>
     <button
@@ -57,9 +57,9 @@
         </div>
       </div>
       <div class="col-md-8 mobilenone">
-        <h6 class="text-white mb-0">Stacey Miller</h6>
+        <h6 class="text-white mb-0">{$globalStore.userDetail.nick}</h6>
         <p class="mb-0 mt-0">
-          <img style="margin-bottom: 6px;" src="/img/Group-1583.svg" /> level 31
+          <img style="margin-bottom: 6px;" src="/img/Group-1583.svg" /> level {$globalStore.userDetail.level}
         </p>
       </div>
     </div>

@@ -6,7 +6,8 @@ import * as models from "../models/account.models"
 import * as dataAccess from "../utils/dataAccess.utils"
 import jwt, {JwtPayload} from "jsonwebtoken"
 
-// sign-up 
+
+// common
 export const sendEmail = async (req:Request, res: Response) => {
     const {email} = req.body
     const authCode:string = utils.generateRandomCode(5)    
@@ -19,6 +20,7 @@ export const sendEmail = async (req:Request, res: Response) => {
     }
 }
 
+// sign-up 
 export const signUp = async (req: Request, res: Response) => {
     const {email, password, authCode} = req.body
     const affiliateCode: any|undefined = req.headers["gf-affiliate-code"];
@@ -95,6 +97,7 @@ export const signInSuccess = async ( req: Request, res: Response ) => {
     }
 }
 
+// sign-out
 export const signOut = ( req: Request, res: Response) => {
     try {
         res.cookie("accessToken", "");
@@ -102,4 +105,14 @@ export const signOut = ( req: Request, res: Response) => {
     } catch (error) {
         res.json(error)
     }
+}
+
+// sign-up 
+export const changePassword = async (req: Request, res: Response) => {
+    const {email, password, authCode} = req.body
+    
+    await models.changePassword(dataAccess, email, utils.hashWithSHA256(password))
+    await models.authCodeUpdate(dataAccess, authCode)
+
+    res.json(response.passwordChangeSuccess)
 }

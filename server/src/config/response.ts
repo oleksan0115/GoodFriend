@@ -28,6 +28,11 @@ export const signOutSuccess: Result = {
     message: "Sign out successfully"
 }
 
+export const passwordChangeSuccess: Result = {
+    code: 1005,
+    message: "password change successfully"
+}
+
 // Duplicate //
 export const emailDuplicateError: Result = {
     code: 2001,

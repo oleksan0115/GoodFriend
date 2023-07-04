@@ -11,6 +11,6 @@ export const checkHeaders = async (req: Request, res: Response, next:NextFunctio
     if(check) {
         next()    
     } else {
-        res.json(response.headersValidationError)
+        res.status(400).json(response.headersValidationError)
     }
 }

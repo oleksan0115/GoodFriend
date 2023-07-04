@@ -3037,11 +3037,11 @@ ul.dropdown-menu li a.dropdown-item::after {
 .bet-slip {
   display: none;
   position: fixed;
-  right: 12px;
-  top: 118px;
+  right: 0px;
+  top: 85px;
   background: #221F30;
   backdrop-filter: blur(28px);
-  z-index: 2;
+  z-index: 999;
   filter: drop-shadow(-10px 30px 61px rgba(0, 0, 0, 0.25));
   border-radius: 7px;
   color: #fff;

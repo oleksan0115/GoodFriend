@@ -92,3 +92,14 @@ export const userCheck = async (dataAccess: any, email: string, password: string
         return false
     }
 }
+
+// forgot-passowrd
+export const changePassword = async(dataAccess: any, email: string, password: string): Promise<any> => {
+    const sql: string = `
+        UPDATE gf_member SET
+            password = ?
+            WHERE email = ?`
+    const values:string[] = [password, email]
+
+    return dataAccess.update(sql, values)
+}

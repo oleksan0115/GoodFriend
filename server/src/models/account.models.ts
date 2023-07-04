@@ -103,3 +103,5 @@ export const changePassword = async(dataAccess: any, email: string, password: st
 
     return dataAccess.update(sql, values)
 }
+
+export const updateProfileImage = async (dataAccess:any, ) 

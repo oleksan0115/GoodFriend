@@ -14,9 +14,9 @@ export const sendEmail = async (req:Request, res: Response) => {
     try {
         await models.authCodeInsert(dataAccess, authCode)
         await nodemailer.sendEmail(email, authCode)    
-        res.json(response.emailSendSuccess)
+        res.status(200).json(response.emailSendSuccess)
     } catch (error) {
-        res.json(response.emailFailedSend)
+        res.status(400).json(response.emailFailedSend)
     }
 }
 
@@ -29,7 +29,7 @@ export const signUp = async (req: Request, res: Response) => {
     await models.signUpInsert(dataAccess, affiliateCode, email, utils.hashWithSHA256(password), nick)
     await models.authCodeUpdate(dataAccess, authCode)
     
-    res.json(response.signUpSuccess)
+    res.status(200).json(response.signUpSuccess)
 }
 
 // sign-in
@@ -52,9 +52,9 @@ export const signIn = async ( req: Request, res: Response ) => {
             sameSite: process.env.NODE_ENV === "production" ? 'strict' : 'lax'
         })
 
-        res.json(response.signInSuccess)
+        res.status(200).json(response.signInSuccess)
     } else {
-        res.json(response.memberValidationError)
+        res.status(400).json(response.memberValidationError)
     }
 }
 
@@ -77,10 +77,10 @@ export const refresh = async (req: Request, res: Response ) => {
             httpOnly: process.env.NODE_ENV === "production" ? true : false,
             sameSite: process.env.NODE_ENV === "production" ? 'strict' : 'lax'
         })
-        res.json(response.tokenRecreate)
+        res.status(200).json(response.tokenRecreate)
         
     } catch (error) {
-        res.json(response.tokenVerificationFailed)
+        res.status(400).json(response.tokenVerificationFailed)
     }
 }
 
@@ -90,10 +90,10 @@ export const signInSuccess = async ( req: Request, res: Response ) => {
         const data = jwt.verify(token, String(process.env.ACCESS_SECRET)) as JwtPayload
         const userData: any = await models.userCheck(dataAccess, data.email, data.password)
         const {password, is_delete, reg_date, login_date, ...others} = userData
-        res.json(others)
+        res.status(200).json(others)
         
     } catch (error) {
-        res.json(response.tokenVerificationFailed)
+        res.status(400).json(response.tokenVerificationFailed)
     }
 }
 
@@ -102,9 +102,9 @@ export const signOut = ( req: Request, res: Response) => {
     try {
         res.cookie("accessToken", "");
         res.cookie("refreshToken", "");
-        res.json(response.signOutSuccess)
+        res.status(200).json(response.signOutSuccess)
     } catch (error) {
-        res.json(error)
+        res.status(400).json(error)
     }
 }
 
@@ -115,5 +115,20 @@ export const changePassword = async (req: Request, res: Response) => {
     await models.changePassword(dataAccess, email, utils.hashWithSHA256(password))
     await models.authCodeUpdate(dataAccess, authCode)
 
-    res.json(response.passwordChangeSuccess)
+    res.status(200).json(response.passwordChangeSuccess)
+}
+
+// profile
+export const changeProfileImage = async (req: Request, res: Response) => {
+    const {memberIdx, profileImage} = req.body
+    await models.updateProfileImage(dataAccess, memberIdx, profileImage);
+
+    res.status(200).json(response.profileImageChangeSuccess)
+}
+
+export const changeNick = async (req: Request, res: Response) => {
+    const {memberIdx, nick} = req.body
+    await models.updateNick(dataAccess, memberIdx, nick)
+
+    res.status(200).json(response.nickChangeSuccess)
 }

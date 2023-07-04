@@ -178,3 +178,32 @@ Please manage your affiliate code and API key through Sveltekit's env.
     message: "password change successfully"
 }
 ````
+
+## Profile API
+> Change the profile image.
+- endpoint: /api/account/profile/image
+- method: post
+- data: memberIdx(number), profileImage(string)
+
+#### response
+````
+//success
+{
+    code: 1006,
+    message: "Profile image change successfully"
+}
+````
+
+> Change the nick.
+- endpoint: /api/account/profile/image
+- method: post
+- data: memberIdx(number), nick(string)
+
+#### response
+````
+//success
+{
+    code: 1006,
+    message: "Nick change successfully"
+}
+````

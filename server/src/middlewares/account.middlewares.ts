@@ -11,10 +11,9 @@ export const emailCheck = async (req: Request, res: Response, next: NextFunction
     if(check) {
         next()
     } else {
-        res.json(response.emailDuplicateError)
+        res.status(400).json(response.emailDuplicateError)
     }
 }
-
 
 export const authCodeCheck = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const {authCode} = req.body
@@ -23,7 +22,7 @@ export const authCodeCheck = async (req: Request, res: Response, next: NextFunct
     if(check) {
         next()
     } else {
-        res.json(response.authCodeValidationError)
+        res.status(400).json(response.authCodeValidationError)
     }
 }
 
@@ -34,18 +33,6 @@ export const promoCodeCheck = async (req: Request, res: Response, next: NextFunc
     if(promoCode === undefined || promoCode === "" || promoCode === null || check) {
         next()
     } else {
-        res.json(response.promoCodeValidationError)
+        res.status(400).json(response.promoCodeValidationError)
     }
-}
-
-// sign-in
-const userCheck = ( req: Request, res: Response ) => {
-}
-
-const accessToken = ( req: Request, res: Response ) => {
-    
-}
-
-const refreshToken = (req: Request, res: Response ) => {
-    
 }

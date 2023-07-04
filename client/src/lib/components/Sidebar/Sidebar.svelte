@@ -8,7 +8,6 @@ function toggleSidebar() {
     } else {
         window.document.body.classList.remove('sidebar-tight');
         window.document.body.classList.add('sidebar-wide')
-
     }
 }
 
@@ -57,11 +56,11 @@ let mobileOptions=false;
 </script>
 <!--Sidebar Large-->
 
-<div class="sidebar-lg left-side-bar bg-color {pageSidebar}" class:open={$globalStore.mobileMenuOpen}>
+<div class="sidebar-lg left-side-bar bg-color {pageSidebar}">
     <button id="lefbutton" class="btn btn-color text-white toggle-sidebar-btn" on:click={toggleSidebar}>
         <svg id="smoll_menu"><use href="/img/symbols.svg?lang.svg#icon_arrow_left"/>
         </svg>
-        <img on:click={() => {globalStore.toggleItem("mobileMenuOpen", false);}}  id="closed_menu" src="/img/close.svg" />
+        <img id="closed_menu" src="/img/close.svg" />
        
     </button>
     <div class="pe-4 pt-3 ps-4">
@@ -170,10 +169,9 @@ let mobileOptions=false;
 
 <div class="sidebar-sm left-side-bar bg-color {pageSidebar}">
     <button id="lefbutton" class="toggle-sidebar-btn btn btn-color text-white" on:click={toggleSidebar}>
-        <svg id="smoll_menu" class="mobilenone"><use href="/img/symbols.svg?lang.svg#icon_arrow_left"/>
+        <svg id="smoll_menu" class="mobilenone"><use href="/img/symbols.svg?lang.svg#icon_arrow_right"/>
         </svg>
-        <img id="closed_menu" src="/img/close.svg" 
-        on:click={() => {globalStore.toggleItem("mobileMenuOpen", false);}} />
+        <img id="closed_menu" src="/img/close.svg"/>
     </button>
     <div class="pe-4 pt-3 ps-4">
         <div class="logo">

@@ -163,11 +163,6 @@
         font-size: 15px;
     }
 
-    .right-bar .chattable,
-    .right-bar .message {
-        width: 250px;
-    }
-
     .boxthird .btn {
         margin-right: 8px;
     }
@@ -623,13 +618,14 @@
 
     .chattable {
         width: 360px;
-        height: 80vh;
+        /* height: 80vh; */
         z-index: 3;
         top: 88px;
+        bottom: 70px;
     }
 
     .right-bar .message {
-        bottom: 70px;
+        bottom: 0px;
         width: 360px;
         right: 0;
         z-index: 3;
@@ -975,8 +971,8 @@
         width: 42px;
     }
     .topbar {
-        padding-top: 9px;
-        padding-bottom: 9px;
+        padding-top: 15px;
+        padding-bottom: 15px;
         }  
     .topbar::after {
         display: none;
@@ -2018,6 +2014,10 @@
         display: flex;
     }
 
+    #deskchat {
+        display: none;
+    }
+
 }
 
 @media only screen and (min-width: 300px) and (max-width: 767px) {
@@ -2342,7 +2342,7 @@
     .bet-slip {
         right: 3px;
         top: unset;
-        bottom: 75px;
+        bottom: 70px;
     }
 
     .mobile-footer p {

@@ -283,7 +283,7 @@ body.light-mode #cancel:hover .whiteicon {
 .chattable {
   position: fixed;
   right: 0px;
-  top: 86px;
+  top: 85px;
   bottom: 70px;
   width: 297px;
   overflow: auto;
@@ -3037,14 +3037,15 @@ ul.dropdown-menu li a.dropdown-item::after {
 .bet-slip {
   display: none;
   position: fixed;
-  right: 12px;
-  top: 118px;
+  right: 0px;
+  top: 85px;
   background: #221F30;
   backdrop-filter: blur(28px);
-  z-index: 2;
+  z-index: 999;
   filter: drop-shadow(-10px 30px 61px rgba(0, 0, 0, 0.25));
   border-radius: 7px;
   color: #fff;
+  bottom: 0px;
 }
 
 .bet-slip-header {
@@ -5013,4 +5014,8 @@ body:not(.chat-open) .back-to-top {
 .toast-container .toast {
   max-width: unset !important;
   text-overflow: unset;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

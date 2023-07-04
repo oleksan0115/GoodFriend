@@ -21,4 +21,8 @@ router.post('/sign-out', controllers.signOut)
 router.post("/forgot-password/email", controllers.sendEmail)
 router.post("/forgot-password/change", middlewares.authCodeCheck, controllers.changePassword)
 
+// profile
+router.post("/profile/image", controllers.changeProfileImage)
+router.post("/profile/nick", controllers.changeNick)
+
 export default router;

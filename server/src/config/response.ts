@@ -9,7 +9,7 @@ export const signUpSuccess: Result = {
 
 export const emailSendSuccess: ResultEmailSendSuccess = {
     code: 1001,
-    message: "sent a auth code to your email.",
+    message: "Sent a auth code to your email.",
     timeout: EMAIL_VERIFICATION_TIME
 }
 
@@ -30,7 +30,17 @@ export const signOutSuccess: Result = {
 
 export const passwordChangeSuccess: Result = {
     code: 1005,
-    message: "password change successfully"
+    message: "Password change successfully"
+}
+
+export const profileImageChangeSuccess: Result ={
+    code: 1006,
+    message: "Profile image change successfully"
+}
+
+export const nickChangeSuccess: Result ={
+    code: 1007,
+    message: "Nick change successfully"
 }
 
 // Duplicate //

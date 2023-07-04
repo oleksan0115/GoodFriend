@@ -65,14 +65,12 @@
   }
 
   function getAccessToken() {
-    axios.post(SEVER_URL + '/api/account/sign-in/success', {
-      }, {
+    axios.post(SEVER_URL + '/api/account/sign-in/success', {}, {
         headers: {
           'GF-API-KEY': GF_API_KEY,
           'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
           'Content-Type': 'application/json'
-        }
-      }, {
+        },
         withCredentials: true
       }).then(res => {
         if(res.data.code != 4001) {
@@ -236,8 +234,7 @@
         'GF-API-KEY': GF_API_KEY,
         'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
         'Content-Type': 'application/json'
-      }
-    }, {
+      },
       withCredentials: true
     }).then(res => {
       if(res.data.code == 1002) {

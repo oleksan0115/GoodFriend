@@ -283,7 +283,7 @@ body.light-mode #cancel:hover .whiteicon {
 .chattable {
   position: fixed;
   right: 0px;
-  top: 86px;
+  top: 85px;
   bottom: 70px;
   width: 297px;
   overflow: auto;
@@ -3045,6 +3045,7 @@ ul.dropdown-menu li a.dropdown-item::after {
   filter: drop-shadow(-10px 30px 61px rgba(0, 0, 0, 0.25));
   border-radius: 7px;
   color: #fff;
+  bottom: 0px;
 }
 
 .bet-slip-header {

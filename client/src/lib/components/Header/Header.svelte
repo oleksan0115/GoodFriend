@@ -51,7 +51,7 @@
   function handleSignUp(event) {
     event.preventDefault();
     if($globalStore.registerModalOpen == 1) {
-      axios.post(SEVER_URL + ':' + SEVER_PORT + '/api/account/email', {
+      axios.post(SEVER_URL + ':' + SEVER_PORT + '/api/account/sign-up/email', {
         email: signUpUserData.email
       }, {
         headers: {

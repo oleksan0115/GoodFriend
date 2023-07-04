@@ -104,4 +104,23 @@ export const changePassword = async(dataAccess: any, email: string, password: st
     return dataAccess.update(sql, values)
 }
 
-export const updateProfileImage = async (dataAccess:any, ) 
+// profile
+export const updateProfileImage = async (dataAccess:any, memberIdx: number, profileImage: string) => {
+    const sql: string = `
+        UPDATE gf_member SET
+            profile_image = ?
+            WHERE member_idx = ?`
+    const values: (string|number)[] = [profileImage, memberIdx]
+
+    return dataAccess.update(sql, values)
+}
+
+export const updateNick = async (dataAccess:any, memberIdx: number, nick: string) => {
+    const sql: string = `
+        UPDATE gf_member SET
+            nick = ?
+            WHERE member_idx = ?`
+    const values: (string|number)[] = [nick, memberIdx]
+
+    return dataAccess.update(sql, values)
+}

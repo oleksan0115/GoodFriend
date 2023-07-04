@@ -117,3 +117,18 @@ export const changePassword = async (req: Request, res: Response) => {
 
     res.json(response.passwordChangeSuccess)
 }
+
+// profile
+export const changeProfileImage = async (req: Request, res: Response) => {
+    const {memberIdx, profileImage} = req.body
+    await models.updateProfileImage(dataAccess, memberIdx, profileImage);
+
+    res.json(response.profileImageChangeSuccess)
+}
+
+export const changeNick = async (req: Request, res: Response) => {
+    const {memberIdx, nick} = req.body
+    await models.updateNick(dataAccess, memberIdx, nick)
+
+    res.json(response.nickChangeSuccess)
+}

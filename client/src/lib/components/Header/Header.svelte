@@ -18,7 +18,6 @@
   const GF_API_KEY = import.meta.env.VITE_GF_API_KEY;
   const GF_AFFILIATE_CODE = import.meta.env.VITE_GF_AFFILIATE_CODE;
   const SEVER_URL = import.meta.env.VITE_SEVER_URL;
-  const SEVER_PORT = import.meta.env.VITE_SEVER_PORT;
 
   let isLoggedIn = false;
   $: path = $page.url.pathname;
@@ -26,6 +25,12 @@
     'email': '',
     'authCode': '',
     'promoCode': '',
+    'password': '',
+  }
+
+  let forgotUserData = {
+    'email': '',
+    'authCode': '',
     'password': '',
   }
 
@@ -43,6 +48,13 @@
         'password': '',
       };
 
+    else if($globalStore.forgotModalOpen == 0)
+      forgotUserData = {
+        'email': '',
+        'authCode': '',
+        'password': '',
+      };
+
     if($globalStore.loginModalOpen == false) {
       signInUserData = {
         'email': '',
@@ -51,11 +63,10 @@
     }
   }
 
-
   function handleSignUp(event) {
     event.preventDefault();
     if($globalStore.registerModalOpen == 1) {
-      axios.post(SEVER_URL + ':' + SEVER_PORT + '/api/account/sign-up/email', {
+      axios.post(SEVER_URL + '/api/account/sign-up/email', {
         email: signUpUserData.email
       }, {
         headers: {
@@ -70,7 +81,7 @@
       }).catch(err => toast.error('Bad Network Connection'))
     }
     else if($globalStore.registerModalOpen == 2) {
-      axios.post(SEVER_URL + ':' + SEVER_PORT + '/api/account/sign-up', {
+      axios.post(SEVER_URL + '/api/account/sign-up', {
         email: signUpUserData.email,
         authCode: signUpUserData.authCode,
         promoCode: signUpUserData.promoCode,
@@ -82,8 +93,10 @@
           'Content-Type': 'application/json'
         }
       }).then(res => {
-        if(res.data.code == 1000) 
+        if(res.data.code == 1000) {
+          toast.success('Sign up successfully 🎉');
           globalStore.toggleItem("registerModalOpen", 3)
+        }
         else
           toast.error(res.data.message)
       }).catch(err => toast.error('Bad Network Connection'))
@@ -93,8 +106,69 @@
     }
   }
 
+  function handleSignOut() {
+    axios.post(SEVER_URL + '/api/account/sign-out', {}, 
+    {
+      headers: {
+        'GF-API-KEY': GF_API_KEY,
+        'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
+        'Content-Type': 'application/json'
+      }
+    }, {
+      withCredentials: true,
+    }).then(res => {
+      if(res.data.code == 1004) {
+        toast.success('Sign out successfully 🎉');
+      }
+      else
+        toast.error(res.data.message)
+    }).catch(err => toast.error('Bad Network Connection'))
+  }
+
+  function handleForgotPassword(event) {
+    event.preventDefault();
+    if($globalStore.forgotModalOpen == 1) {
+      axios.post(SEVER_URL + '/api/account/forgot-password/email', {
+        email: forgotUserData.email
+      }, {
+        headers: {
+          'GF-API-KEY': GF_API_KEY,
+          'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
+          'Content-Type': 'application/json'
+        }
+      }).then(res => {
+        if(res.data.code == 1001) 
+          globalStore.toggleItem("forgotModalOpen", 2);
+        else toast.error(res.data.message)
+      }).catch(err => toast.error('Bad Network Connection'))
+    }
+    else if($globalStore.forgotModalOpen == 2) {
+      axios.post(SEVER_URL + '/api/account/forgot-password/change', {
+        email: forgotUserData.email,
+        authCode: forgotUserData.authCode,
+        password: forgotUserData.password
+      }, {
+        headers: {
+          'GF-API-KEY': GF_API_KEY,
+          'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
+          'Content-Type': 'application/json'
+        }
+      }).then(res => {
+        if(res.data.code == 1005) {
+          toast.success('Password change successfully');
+          globalStore.toggleItem("forgotModalOpen", 3)
+        }
+        else
+          toast.error(res.data.message)
+      }).catch(err => toast.error('Bad Network Connection'))
+    }
+    else {
+      globalStore.toggleItem("forgotModalOpen", 0)
+    }
+  }
+
   function handleSignIn(event) {
-    axios.post(SEVER_URL + ':' + SEVER_PORT + '/api/account/sign-in', {
+    axios.post(SEVER_URL + '/api/account/sign-in', {
       email: signInUserData.email,
       password: signInUserData.password
     }, {
@@ -218,7 +292,7 @@
       </ul>
       <div class="border mb-3 mt-3" />
       <ul class="menu">
-        <li class="logout">
+        <li class="logout" on:click={handleSignOut}>
           <a href="#"><img class="me-3" src="/img/logout.svg" /> Logout</a>
         </li>
       </ul>
@@ -350,7 +424,7 @@
 
       <h2 class="mt_30">Log in</h2>
       <p class="mb-4">Welcome back. Please enter your details</p>
-      <form>
+      <form on:submit="{handleSignIn}">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label"
             >Email address</label
@@ -360,6 +434,7 @@
             class="form-control"
             aria-describedby="emailHelp"
             bind:value="{signInUserData.email}"
+            required
           />
         </div>
         <div class="mb-3">
@@ -368,6 +443,7 @@
             type="password"
             class="form-control"
             bind:value="{signInUserData.password}"
+            required
           />
         </div>
         <p class="forgot text-end"><a href="#" on:click={() => {
@@ -565,7 +641,7 @@
 
       <h2 class="mt_30">Forgot password</h2>
       <p class="mb-4">Enter your email address to reset your password</p>
-      <form>
+      <form on:submit="{handleForgotPassword}">
 
         {#if $globalStore.forgotModalOpen == 1}
         <div class="mb-3">
@@ -615,10 +691,7 @@
         }}>Sign in</a></p>
 
         {/if}
-        <button type="submit" class="btn btn-primary w-100 mt30" on:click={() => {
-          let val = $globalStore.forgotModalOpen;
-          globalStore.toggleItem("forgotModalOpen", val+=1);
-        }}>
+        <button type="submit" class="btn btn-primary w-100 mt30">
           {$globalStore.forgotModalOpen == 1 ? 'Send' : $globalStore.forgotModalOpen == 2 ? 'Verify': 'Submit'}
         </button>
       </form>

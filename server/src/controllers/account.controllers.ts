@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import * as nodemailer from "../services/nodemailer"
+import * as nodemailer from "../utils/nodemailer"
 import * as utils from "../utils/common.utils"
 import * as response from "../config/response"
 import * as models from "../models/account.models"
@@ -101,6 +101,7 @@ export const signInSuccess = async ( req: Request, res: Response ) => {
 export const signOut = ( req: Request, res: Response) => {
     try {
         res.cookie("accessToken", "");
+        res.cookie("refreshToken", "");
         res.json(response.signOutSuccess)
     } catch (error) {
         res.json(error)

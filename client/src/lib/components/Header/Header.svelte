@@ -20,12 +20,17 @@
   const SEVER_URL = import.meta.env.VITE_SEVER_URL;
   const SEVER_PORT = import.meta.env.VITE_SEVER_PORT;
 
-  let isLoggedIn = true;
+  let isLoggedIn = false;
   $: path = $page.url.pathname;
   let signUpUserData = {
     'email': '',
     'authCode': '',
     'promoCode': '',
+    'password': '',
+  }
+
+  let signInUserData = {
+    'email': '',
     'password': '',
   }
 
@@ -37,16 +42,15 @@
         'promoCode': '',
         'password': '',
       };
+
+    if($globalStore.loginModalOpen == false) {
+      signInUserData = {
+        'email': '',
+        'password': '',
+      };
+    }
   }
 
-  if($globalStore.registerModalOpen == 0) {
-    signUpUserData = {
-      'email': '',
-      'authCode': '',
-      'promoCode': '',
-      'password': '',
-    };
-  }
 
   function handleSignUp(event) {
     event.preventDefault();
@@ -89,6 +93,26 @@
     }
   }
 
+  function handleSignIn(event) {
+    axios.post(SEVER_URL + ':' + SEVER_PORT + '/api/account/sign-in', {
+      email: signInUserData.email,
+      password: signInUserData.password
+    }, {
+      headers: {
+        'GF-API-KEY': GF_API_KEY,
+        'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
+        'Content-Type': 'application/json'
+      }
+    }, {
+      withCredentials: true
+    }).then(res => {
+      if(res.data.code == 1002) {
+        toast.success('Sign in successfully 🎉');
+        globalStore.toggleItem("loginModalOpen", false);
+      }
+      else toast.error(res.data.message)
+    }).catch(err => toast.error('Bad Network Connection'))
+  }
 </script>
 
 <div class="topbar bg-color">
@@ -334,8 +358,8 @@
           <input
             type="email"
             class="form-control"
-            id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            bind:value="{signInUserData.email}"
           />
         </div>
         <div class="mb-3">
@@ -343,7 +367,7 @@
           <input
             type="password"
             class="form-control"
-            id="exampleInputPassword1"
+            bind:value="{signInUserData.password}"
           />
         </div>
         <p class="forgot text-end"><a href="#" on:click={() => {

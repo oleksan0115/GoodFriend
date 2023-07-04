@@ -14,7 +14,8 @@ const globalStore = writable({
   cart: false,
   alert: false,
   alertText: "default alert",
-  alertDanger: false
+  alertDanger: false,
+  userDetail: null,
 });
 
 const store = {

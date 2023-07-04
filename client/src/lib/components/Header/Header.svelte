@@ -19,7 +19,8 @@
   const GF_AFFILIATE_CODE = import.meta.env.VITE_GF_AFFILIATE_CODE;
   const SEVER_URL = import.meta.env.VITE_SEVER_URL;
 
-  let isLoggedIn = false;
+  let isLoggedIn = $globalStore.userDetail;
+  console.log($globalStore.userDetail)
   $: path = $page.url.pathname;
   let signUpUserData = {
     'email': '',
@@ -63,6 +64,61 @@
     }
   }
 
+  function getAccessToken() {
+    axios.post(SEVER_URL + '/api/account/sign-in/success', {
+      }, {
+        headers: {
+          'GF-API-KEY': GF_API_KEY,
+          'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
+          'Content-Type': 'application/json'
+        }
+      }, {
+        withCredentials: true
+      }).then(res => {
+        if(res.data.code != 4001) {
+          globalStore.toggleItem("userDetail", res.data);
+        }
+      }).catch(err => toast.error('Bad Network Connection'))
+  }
+
+  function handleTokens() {
+    axios.post(SEVER_URL + '/api/account/sign-in/success', {
+      }, {
+        headers: {
+          'GF-API-KEY': GF_API_KEY,
+          'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
+          'Content-Type': 'application/json'
+        }
+      }, {
+        withCredentials: true
+      }).then(res => {
+        if(res.data.code != 4001) {
+          globalStore.toggleItem("userDetail", res.data);
+        }
+        else {
+          axios.post(SEVER_URL + '/api/account/sign-in/refresh', {
+          }, {
+            headers: {
+              'GF-API-KEY': GF_API_KEY,
+              'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
+              'Content-Type': 'application/json'
+            }
+          }, {
+            withCredentials: true
+          }).then(res => {
+            if(res.data.code == 1003) {
+              getAccessToken();
+            }
+            else {
+              globalStore.toggleItem("userDetail", null);
+            }
+          }).catch(err => toast.error('Bad Network Connection'))
+        }
+      }).catch(err => toast.error('Bad Network Connection'))
+  }
+  
+  handleTokens();
+
   function handleSignUp(event) {
     event.preventDefault();
     if($globalStore.registerModalOpen == 1) {
@@ -75,8 +131,10 @@
           'Content-Type': 'application/json'
         }
       }).then(res => {
-        if(res.data.code == 1001) 
+        if(res.data.code == 1001) {
+          toast.success('Sent a verification code to your email.');
           globalStore.toggleItem("registerModalOpen", 2);
+        }
         else toast.error(res.data.message)
       }).catch(err => toast.error('Bad Network Connection'))
     }
@@ -112,7 +170,7 @@
       headers: {
         'GF-API-KEY': GF_API_KEY,
         'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       }
     }, {
       withCredentials: true,
@@ -137,8 +195,10 @@
           'Content-Type': 'application/json'
         }
       }).then(res => {
-        if(res.data.code == 1001) 
+        if(res.data.code == 1001) {
+          toast.success('Sent a verification code to your email.');
           globalStore.toggleItem("forgotModalOpen", 2);
+        }
         else toast.error(res.data.message)
       }).catch(err => toast.error('Bad Network Connection'))
     }
@@ -183,6 +243,7 @@
       if(res.data.code == 1002) {
         toast.success('Sign in successfully 🎉');
         globalStore.toggleItem("loginModalOpen", false);
+        getAccessToken();
       }
       else toast.error(res.data.message)
     }).catch(err => toast.error('Bad Network Connection'))

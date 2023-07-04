@@ -10,7 +10,7 @@ Please manage your affiliate code and API key through Sveltekit's env.
 
 ## sign-up API
 > Send a auth code by email
-- endpoint: /api/account/sign-up/email
+- endpoint: /api/account/email
 - method: post
 - data: email (string)
 
@@ -127,6 +127,7 @@ Please manage your affiliate code and API key through Sveltekit's env.
 ````
 
 ## Sign out API
+
 >sign out
 - endpoint: /api/account/sign-out
 - method: post
@@ -142,39 +143,3 @@ Please manage your affiliate code and API key through Sveltekit's env.
 }
 ````
 
-## Forgot password API
-
-> Send a auth code by email
-- endpoint: /api/account/forgot-password/email
-- method: post
-- data: email (string)
-
-#### response
-````
-//success
-{
-    code: 1001,
-    message: "sent a verification code to your email.",
-    timeout: EMAIL_VERIFICATION_TIME // <-- The auth code expiration time.
-}
-
-// error
-{
-    code: 3000,
-    message: "Email delivery failed, please try again."
-}
-````
-
-> Change password
-- endpoint: /api/account/forgot-password/change
-- method: post
-- data: email (string), password(string), authCode(string)
-
-#### response
-````
-//success
-{
-    code: 1005,
-    message: "password change successfully"
-}
-````

@@ -180,7 +180,7 @@
       },
       withCredentials: true,
     }).then(res => {
-      if(res.status == 1004) {
+      if(res.status == 200) {
         toast.success('Sign out successfully 🎉');
         globalStore.toggleItem('userDetail', null);
         globalStore.toggleItem('profileModalOpen', false);

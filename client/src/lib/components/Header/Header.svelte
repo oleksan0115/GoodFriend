@@ -730,8 +730,8 @@
           <input
             type="email"
             class="form-control"
-            id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            bind:value="{forgotUserData.email}"
           />
         </div>
         {:else if $globalStore.forgotModalOpen == 2}
@@ -740,9 +740,9 @@
           <input
             type="text"
             class="form-control"
-            id="exampleInputCode1"
             minlength="5"
             maxlength="5"
+            bind:value="{forgotUserData.authCode}"
           />
         </div>
 
@@ -751,7 +751,7 @@
           <input
             type="password"
             class="form-control"
-            id="exampleInputPassword1"
+            bind:value="{forgotUserData.password}"
           />
         </div>
 

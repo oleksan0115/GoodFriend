@@ -53,7 +53,7 @@
         'password': '',
       };
 
-    else if($globalStore.forgotModalOpen == 0)
+    if($globalStore.forgotModalOpen == 0)
       forgotUserData = {
         'email': '',
         'authCode': '',

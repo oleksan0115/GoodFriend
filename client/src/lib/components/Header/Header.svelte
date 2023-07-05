@@ -80,7 +80,11 @@
         if(res.status == 200) {
           globalStore.toggleItem("userDetail", res.data);
         }
-      }).catch(err => toast.error('Bad Network Connection'))
+      }).catch(err => {
+        if(err.response && err.response.request.status == 400) 
+          toast.error(err.response.data.message)
+        else toast.error('Bad Network Connection')
+      })
   }
 
   function handleTokens() {
@@ -97,25 +101,22 @@
           globalStore.toggleItem("userDetail", res.data);
         }
       }).catch(err => {
-        if(err.code != "ERR_BAD_REQUEST")
-          toast.error('Bad Network Connection')
-        else {
-          if(err.response.data.code == 4001) {
-              axios.post(SEVER_URL + '/api/account/sign-in/refresh', {
-              }, {
-                headers: {
-                  'GF-API-KEY': GF_API_KEY,
-                  'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
-                  'Content-Type': 'application/json'
-                },
-                withCredentials: true
-              }).then(res => {
-                if(res.status == 200) {
-                  getAccessToken();
-                }
-              }).catch(err => globalStore.toggleItem("userDetail", null))
-          }
+        if(err.response && err.response.data.code == 4001) {
+          axios.post(SEVER_URL + '/api/account/sign-in/refresh', {
+          }, {
+            headers: {
+              'GF-API-KEY': GF_API_KEY,
+              'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
+              'Content-Type': 'application/json'
+            },
+            withCredentials: true
+          }).then(res => {
+            if(res.status == 200) {
+              getAccessToken();
+            }
+          }).catch(err => globalStore.toggleItem("userDetail", null))
         }
+        else toast.error('Bad Network Connection')
       })
   }
   
@@ -136,7 +137,7 @@
           globalStore.toggleItem("registerModalOpen", 2);
         }
       }).catch(err => {
-        if(err.code == "ERR_BAD_REQUEST")
+        if(err.response && err.response.request.status == 400)
           toast.error(err.response.data.message)
         else toast.error('Bad Network Connection')
       })
@@ -159,7 +160,7 @@
           globalStore.toggleItem("registerModalOpen", 3)
         }
       }).catch(err => {
-        if(err.code == "ERR_BAD_REQUEST")
+        if(err.response && err.response.request.status == 400)
           toast.error(err.response.data.message)
         else toast.error('Bad Network Connection')
       })
@@ -179,14 +180,16 @@
       },
       withCredentials: true,
     }).then(res => {
-      if(res.data.code == 1004) {
+      if(res.status == 1004) {
         toast.success('Sign out successfully 🎉');
         globalStore.toggleItem('userDetail', null);
         globalStore.toggleItem('profileModalOpen', false);
       }
-      else
-        toast.error(res.data.message)
-    }).catch(err => toast.error('Bad Network Connection'))
+    }).catch(err => {
+      if(err.response && err.response.request.status == 400) 
+        toast.error(err.response.data.message)
+      else toast.error('Bad Network Connection')
+    })
   }
 
   function handleForgotPassword(event) {
@@ -206,7 +209,7 @@
           globalStore.toggleItem("forgotModalOpen", 2);
         }
       }).catch(err => {
-        if(err.code == "ERR_BAD_REQUEST")
+        if(err.response && err.response.request.status == 400)
           toast.error(err.response.data.message)
         else toast.error('Bad Network Connection')
       })
@@ -228,7 +231,7 @@
           globalStore.toggleItem("forgotModalOpen", 3)
         }
       }).catch(err => {
-        if(err.code == "ERR_BAD_REQUEST") 
+        if(err.response && err.response.request.status == 400) 
           toast.error(err.response.data.message)
         else toast.error('Bad Network Connection')
       })
@@ -256,7 +259,7 @@
         getAccessToken();
       }
     }).catch(err => {
-      if(err.code == "ERR_BAD_REQUEST")
+      if(err.response && err.response.request.status == 400)
         toast.error(err.response.data.message)
       else toast.error('Bad Network Connection')
     })

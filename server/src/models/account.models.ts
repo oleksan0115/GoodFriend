@@ -124,3 +124,13 @@ export const updateNick = async (dataAccess:any, memberIdx: number, nick: string
 
     return dataAccess.update(sql, values)
 }
+
+export const profileHideSetting = async (dataAccess:any, isProfileHide: number, memberIdx: number) => {
+    const sql: string = `
+        UPDATE gf_member SET
+            is_profile_hide = ?
+            WHERE member_idx = ?`
+    const values: number[] = [isProfileHide, memberIdx ]
+
+    return dataAccess.update(sql, values)
+}

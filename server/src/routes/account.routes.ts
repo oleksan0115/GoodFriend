@@ -24,5 +24,6 @@ router.post("/forgot-password/change", middlewares.authCodeCheck, controllers.ch
 // profile
 router.post("/profile/image", controllers.changeProfileImage)
 router.post("/profile/nick", controllers.changeNick)
+router.post("/profile/hide", controllers.profileHideSetting)
 
 export default router;

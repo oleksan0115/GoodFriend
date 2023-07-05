@@ -39,10 +39,10 @@
         );
       }}>Sign Up</button
     >
-    <button id="deskchat" class="btn btn-color me-5 mobilenone"  on:click={toggleChat} on:click={() => {
+    <!-- <button id="deskchat" class="btn btn-color me-5 mobilenone"  on:click={toggleChat} on:click={() => {
       globalStore.toggleItem("chatOpen", !$globalStore.chatOpen);
     }}>
       <img src="/img/Chat.svg" />
-    </button>
+    </button> -->
   </div>
 </div>

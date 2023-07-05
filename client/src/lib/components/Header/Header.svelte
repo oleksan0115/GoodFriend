@@ -7,6 +7,7 @@
   import LoggedinHeader from "./HeaderLoggedin.svelte";
   import axios from 'axios';
   import Toast from 'svelte-toast'
+  import { onMount } from 'svelte';
 
   const toastOptions = {
     duration: 1500,
@@ -27,6 +28,10 @@
     'promoCode': '',
     'password': '',
   }
+
+  onMount(() => {
+    handleTokens();
+  });
 
   let forgotUserData = {
     'email': '',
@@ -72,7 +77,7 @@
         },
         withCredentials: true
       }).then(res => {
-        if(res.data.code != 4001) {
+        if(res.status == 200) {
           globalStore.toggleItem("userDetail", res.data);
         }
       }).catch(err => toast.error('Bad Network Connection'))
@@ -88,32 +93,32 @@
         },
         withCredentials: true
       }).then(res => {
-        if(res.data.code != 4001) {
+        if(res.status == 200) {
           globalStore.toggleItem("userDetail", res.data);
         }
+      }).catch(err => {
+        if(err.code != "ERR_BAD_REQUEST")
+          toast.error('Bad Network Connection')
         else {
-          axios.post(SEVER_URL + '/api/account/sign-in/refresh', {
-          }, {
-            headers: {
-              'GF-API-KEY': GF_API_KEY,
-              'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
-              'Content-Type': 'application/json'
-            },
-            withCredentials: true
-          }).then(res => {
-            if(res.data.code == 1003) {
-              getAccessToken();
-            }
-            else {
-              globalStore.toggleItem("userDetail", null);
-            }
-          }).catch(err => toast.error('Bad Network Connection'))
+          if(err.response.data.code == 4001) {
+              axios.post(SEVER_URL + '/api/account/sign-in/refresh', {
+              }, {
+                headers: {
+                  'GF-API-KEY': GF_API_KEY,
+                  'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
+                  'Content-Type': 'application/json'
+                },
+                withCredentials: true
+              }).then(res => {
+                if(res.status == 200) {
+                  getAccessToken();
+                }
+              }).catch(err => globalStore.toggleItem("userDetail", null))
+          }
         }
-      }).catch(err => toast.error('Bad Network Connection'))
+      })
   }
   
-  handleTokens();
-
   function handleSignUp(event) {
     event.preventDefault();
     if($globalStore.registerModalOpen == 1) {
@@ -126,12 +131,15 @@
           'Content-Type': 'application/json'
         }
       }).then(res => {
-        if(res.data.code == 1001) {
+        if(res.status == 200) {
           toast.success('Sent a verification code to your email.');
           globalStore.toggleItem("registerModalOpen", 2);
         }
-        else toast.error(res.data.message)
-      }).catch(err => toast.error('Bad Network Connection'))
+      }).catch(err => {
+        if(err.code == "ERR_BAD_REQUEST")
+          toast.error(err.response.data.message)
+        else toast.error('Bad Network Connection')
+      })
     }
     else if($globalStore.registerModalOpen == 2) {
       axios.post(SEVER_URL + '/api/account/sign-up', {
@@ -146,13 +154,15 @@
           'Content-Type': 'application/json'
         }
       }).then(res => {
-        if(res.data.code == 1000) {
+        if(res.status == 200) {
           toast.success('Sign up successfully 🎉');
           globalStore.toggleItem("registerModalOpen", 3)
         }
-        else
-          toast.error(res.data.message)
-      }).catch(err => toast.error('Bad Network Connection'))
+      }).catch(err => {
+        if(err.code == "ERR_BAD_REQUEST")
+          toast.error(err.response.data.message)
+        else toast.error('Bad Network Connection')
+      })
     }
     else {
       globalStore.toggleItem("registerModalOpen", 0)
@@ -191,12 +201,15 @@
           'Content-Type': 'application/json'
         }
       }).then(res => {
-        if(res.data.code == 1001) {
+        if(res.status == 200) {
           toast.success('Sent a verification code to your email.');
           globalStore.toggleItem("forgotModalOpen", 2);
         }
-        else toast.error(res.data.message)
-      }).catch(err => toast.error('Bad Network Connection'))
+      }).catch(err => {
+        if(err.code == "ERR_BAD_REQUEST")
+          toast.error(err.response.data.message)
+        else toast.error('Bad Network Connection')
+      })
     }
     else if($globalStore.forgotModalOpen == 2) {
       axios.post(SEVER_URL + '/api/account/forgot-password/change', {
@@ -210,13 +223,15 @@
           'Content-Type': 'application/json'
         }
       }).then(res => {
-        if(res.data.code == 1005) {
+        if(res.status == 200) {
           toast.success('Password change successfully');
           globalStore.toggleItem("forgotModalOpen", 3)
         }
-        else
-          toast.error(res.data.message)
-      }).catch(err => toast.error('Bad Network Connection'))
+      }).catch(err => {
+        if(err.code == "ERR_BAD_REQUEST") 
+          toast.error(err.response.data.message)
+        else toast.error('Bad Network Connection')
+      })
     }
     else {
       globalStore.toggleItem("forgotModalOpen", 0)
@@ -235,13 +250,16 @@
       },
       withCredentials: true
     }).then(res => {
-      if(res.data.code == 1002) {
+      if(res.status == 200) {
         toast.success('Sign in successfully 🎉');
         globalStore.toggleItem("loginModalOpen", false);
         getAccessToken();
       }
-      else toast.error(res.data.message)
-    }).catch(err => toast.error('Bad Network Connection'))
+    }).catch(err => {
+      if(err.code == "ERR_BAD_REQUEST")
+        toast.error(err.response.data.message)
+      else toast.error('Bad Network Connection')
+    })
   }
 </script>
 

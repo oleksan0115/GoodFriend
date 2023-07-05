@@ -132,3 +132,10 @@ export const changeNick = async (req: Request, res: Response) => {
 
     res.status(200).json(response.nickChangeSuccess)
 }
+
+export const profileHideSetting = async (req: Request, res: Response) => {
+    const {memberIdx, nick} = req.body
+    await models.profileHideSetting(dataAccess, memberIdx, nick)
+
+    res.status(200).json(response.nickChangeSuccess)
+}

@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 
 const sendEmail = async (email:string, code:string) => {
-  
+  try {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: { 
@@ -16,6 +16,9 @@ const sendEmail = async (email:string, code:string) => {
       html: `Please enter your verification code. ${code}`,
     }
     await transporter.sendMail(mailOptions)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 export {sendEmail}

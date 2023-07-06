@@ -617,10 +617,10 @@
 
 
     .chattable {
-        width: 360px;
+        width: 297px;
         /* height: 80vh; */
         z-index: 3;
-        top: 88px;
+        top: 84px;
         bottom: 70px;
     }
 

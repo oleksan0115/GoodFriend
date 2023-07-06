@@ -168,8 +168,8 @@ let mobileOptions=false;
 <!--Sidebar Minified-->
 
 <div class="sidebar-sm left-side-bar bg-color {pageSidebar}">
-    <button id="lefbutton" class="toggle-sidebar-btn btn btn-color text-white" on:click={toggleSidebar}>
-        <svg id="smoll_menu" class="mobilenone"><use href="/img/symbols.svg?lang.svg#icon_arrow_right"/>
+    <button id="lefbutton" class="toggle-sidebar-btn btn btn-color text-white" on:click={toggleSidebar} style="transform: rotate(180deg);">
+        <svg id="smoll_menu" class="mobilenone"><use href="/img/symbols.svg?lang.svg#icon_arrow_left"/>
         </svg>
         <img id="closed_menu" src="/img/close.svg"/>
     </button>

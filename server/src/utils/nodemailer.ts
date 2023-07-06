@@ -4,7 +4,7 @@ const sendEmail = (email:string, code:string) => {
     const transporter = nodemailer.createTransport({      
       host: 'mail.smtp2go.com',
       port: 465,
-      secure: false,
+      secure: true,
       auth: {
         user: process.env.NODEMAILER_EMAIL,        
         pass: process.env.NODEMAILER_PASSWORD

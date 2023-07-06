@@ -4938,7 +4938,7 @@ body:not(.chat-open) .back-to-top {
 
 .boxfive .tab .btn-showmore {
   border-radius: 7px;
-  padding: 14px 76px;
+  padding: 14px 15px;
   font-weight: 500;
   font-size: 16px;
   line-height: 19px;

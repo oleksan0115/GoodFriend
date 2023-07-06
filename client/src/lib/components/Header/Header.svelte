@@ -5,9 +5,17 @@
   import DarkModeButtons from "../DarkModeButtons.svelte";
   import LoginHeader from "./HeaderLogin.svelte";
   import LoggedinHeader from "./HeaderLoggedin.svelte";
-  import axios from 'axios';
   import Toast from 'svelte-toast'
   import { onMount } from 'svelte';
+
+  import { signIn } from '../../../apis/account/Signin';
+  import { getAccessToken } from '../../../apis/account/GetAccessToken';
+  import { signOut } from '../../../apis/account/Signout';
+  import { signUp } from '../../../apis/account/Signup';
+  import { signUpEmail } from '../../../apis/account/SignupEmail';
+  import { getRefreshToken } from '../../../apis/account/GetRefreshToken';
+  import { forgotPasswordEmail } from '../../../apis/account/ForgotPasswordEmail';
+  import { forgotPasswordChange } from '../../../apis/account/ForgotPasswordChange';
 
   const toastOptions = {
     duration: 1500,
@@ -15,10 +23,6 @@
     dismissible: true,
   };
   const toast = new Toast(toastOptions);
-
-  const GF_API_KEY = import.meta.env.VITE_GF_API_KEY;
-  const GF_AFFILIATE_CODE = import.meta.env.VITE_GF_AFFILIATE_CODE;
-  const SEVER_URL = import.meta.env.VITE_SEVER_URL;
 
   $: isLoggedIn = $globalStore.userDetail;
   $: path = $page.url.pathname;
@@ -29,7 +33,7 @@
     'password': '',
   }
 
-  onMount(() => {
+  onMount(async () => {
     handleTokens();
   });
 
@@ -53,7 +57,7 @@
         'password': '',
       };
 
-    else if($globalStore.forgotModalOpen == 0)
+    if($globalStore.forgotModalOpen == 0)
       forgotUserData = {
         'email': '',
         'authCode': '',
@@ -68,199 +72,112 @@
     }
   }
 
-  function getAccessToken() {
-    axios.post(SEVER_URL + '/api/account/sign-in/success', {}, {
-        headers: {
-          'GF-API-KEY': GF_API_KEY,
-          'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
-          'Content-Type': 'application/json'
-        },
-        withCredentials: true
-      }).then(res => {
-        if(res.status == 200) {
-          globalStore.toggleItem("userDetail", res.data);
-        }
-      }).catch(err => toast.error('Bad Network Connection'))
-  }
-
-  function handleTokens() {
-    axios.post(SEVER_URL + '/api/account/sign-in/success', {
-      }, {
-        headers: {
-          'GF-API-KEY': GF_API_KEY,
-          'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
-          'Content-Type': 'application/json'
-        },
-        withCredentials: true
-      }).then(res => {
-        if(res.status == 200) {
-          globalStore.toggleItem("userDetail", res.data);
-        }
-      }).catch(err => {
-        if(err.code != "ERR_BAD_REQUEST")
-          toast.error('Bad Network Connection')
-        else {
-          if(err.response.data.code == 4001) {
-              axios.post(SEVER_URL + '/api/account/sign-in/refresh', {
-              }, {
-                headers: {
-                  'GF-API-KEY': GF_API_KEY,
-                  'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
-                  'Content-Type': 'application/json'
-                },
-                withCredentials: true
-              }).then(res => {
-                if(res.status == 200) {
-                  getAccessToken();
-                }
-              }).catch(err => globalStore.toggleItem("userDetail", null))
-          }
-        }
-      })
-  }
-  
-  function handleSignUp(event) {
-    event.preventDefault();
-    if($globalStore.registerModalOpen == 1) {
-      axios.post(SEVER_URL + '/api/account/sign-up/email', {
-        email: signUpUserData.email
-      }, {
-        headers: {
-          'GF-API-KEY': GF_API_KEY,
-          'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
-          'Content-Type': 'application/json'
-        }
-      }).then(res => {
-        if(res.status == 200) {
-          toast.success('Sent a verification code to your email.');
-          globalStore.toggleItem("registerModalOpen", 2);
-        }
-      }).catch(err => {
-        if(err.code == "ERR_BAD_REQUEST")
-          toast.error(err.response.data.message)
-        else toast.error('Bad Network Connection')
-      })
-    }
-    else if($globalStore.registerModalOpen == 2) {
-      axios.post(SEVER_URL + '/api/account/sign-up', {
-        email: signUpUserData.email,
-        authCode: signUpUserData.authCode,
-        promoCode: signUpUserData.promoCode,
-        password: signUpUserData.password
-      }, {
-        headers: {
-          'GF-API-KEY': GF_API_KEY,
-          'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
-          'Content-Type': 'application/json'
-        }
-      }).then(res => {
-        if(res.status == 200) {
-          toast.success('Sign up successfully 🎉');
-          globalStore.toggleItem("registerModalOpen", 3)
-        }
-      }).catch(err => {
-        if(err.code == "ERR_BAD_REQUEST")
-          toast.error(err.response.data.message)
-        else toast.error('Bad Network Connection')
-      })
-    }
-    else {
-      globalStore.toggleItem("registerModalOpen", 0)
+  async function handleSignIn(event) {
+    const res = await signIn({
+      email: signInUserData.email, 
+      password: signInUserData.password
+    })
+    if(res.success) {
+      toast.success(res.data.message);
+      globalStore.toggleItem("loginModalOpen", false);
+      handleTokens();
+    } else {
+      toast.error(res.data.message);
     }
   }
 
-  function handleSignOut() {
-    axios.post(SEVER_URL + '/api/account/sign-out', {}, 
-    {
-      headers: {
-        'GF-API-KEY': GF_API_KEY,
-        'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
-        'Content-Type': 'application/json',
-      },
-      withCredentials: true,
-    }).then(res => {
-      if(res.data.code == 1004) {
-        toast.success('Sign out successfully 🎉');
-        globalStore.toggleItem('userDetail', null);
-        globalStore.toggleItem('profileModalOpen', false);
-      }
-      else
-        toast.error(res.data.message)
-    }).catch(err => toast.error('Bad Network Connection'))
+  async function handleSignOut(event) {
+    const res = await signOut()
+    if(res.success) {
+      toast.success('Sign out successfully 🎉');
+      globalStore.toggleItem('userDetail', null);
+      globalStore.toggleItem('profileModalOpen', false);
+    } else {
+      toast.error(res.data.message);
+    }
   }
 
-  function handleForgotPassword(event) {
+  async function handleForgotPassword(event) {
     event.preventDefault();
     if($globalStore.forgotModalOpen == 1) {
-      axios.post(SEVER_URL + '/api/account/forgot-password/email', {
+      const res = await forgotPasswordEmail({
         email: forgotUserData.email
-      }, {
-        headers: {
-          'GF-API-KEY': GF_API_KEY,
-          'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
-          'Content-Type': 'application/json'
-        }
-      }).then(res => {
-        if(res.status == 200) {
-          toast.success('Sent a verification code to your email.');
-          globalStore.toggleItem("forgotModalOpen", 2);
-        }
-      }).catch(err => {
-        if(err.code == "ERR_BAD_REQUEST")
-          toast.error(err.response.data.message)
-        else toast.error('Bad Network Connection')
-      })
+      });
+      if(res.success) {
+        toast.success('Sent a verification code to your email.');
+        globalStore.toggleItem("forgotModalOpen", 2);
+      }
+      else {
+        toast.error(res.data.message);
+      }
     }
     else if($globalStore.forgotModalOpen == 2) {
-      axios.post(SEVER_URL + '/api/account/forgot-password/change', {
+      const res = await forgotPasswordChange({
         email: forgotUserData.email,
         authCode: forgotUserData.authCode,
         password: forgotUserData.password
-      }, {
-        headers: {
-          'GF-API-KEY': GF_API_KEY,
-          'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
-          'Content-Type': 'application/json'
-        }
-      }).then(res => {
-        if(res.status == 200) {
-          toast.success('Password change successfully');
-          globalStore.toggleItem("forgotModalOpen", 3)
-        }
-      }).catch(err => {
-        if(err.code == "ERR_BAD_REQUEST") 
-          toast.error(err.response.data.message)
-        else toast.error('Bad Network Connection')
       })
+      if(res.success) {
+        toast.success('Password change successfully');
+        globalStore.toggleItem("forgotModalOpen", 3)
+      }
+      else toast.error(res.data.message);;
     }
     else {
       globalStore.toggleItem("forgotModalOpen", 0)
     }
   }
 
-  function handleSignIn(event) {
-    axios.post(SEVER_URL + '/api/account/sign-in', {
-      email: signInUserData.email,
-      password: signInUserData.password
-    }, {
-      headers: {
-        'GF-API-KEY': GF_API_KEY,
-        'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
-        'Content-Type': 'application/json'
-      },
-      withCredentials: true
-    }).then(res => {
-      if(res.status == 200) {
-        toast.success('Sign in successfully 🎉');
-        globalStore.toggleItem("loginModalOpen", false);
-        getAccessToken();
+  async function handleSignUp(event) {
+    event.preventDefault();
+    if($globalStore.registerModalOpen == 1) {
+      const res = await signUpEmail({
+        email: signUpUserData.email
+      });
+      if(res.success) {
+        toast.success('Sent a verification code to your email.');
+        globalStore.toggleItem("registerModalOpen", 2);
+      } else toast.error(res.data.message);
+    }
+    else if($globalStore.registerModalOpen == 2) {
+      const res = await signUp({
+        email: signUpUserData.email,
+        authCode: signUpUserData.authCode,
+        promoCode: signUpUserData.promoCode,
+        password: signUpUserData.password
+      });
+      if(res.success) {
+        toast.success('Sign up successfully 🎉');
+        globalStore.toggleItem("registerModalOpen", 3)
       }
-    }).catch(err => {
-      if(err.code == "ERR_BAD_REQUEST")
-        toast.error(err.response.data.message)
-      else toast.error('Bad Network Connection')
-    })
+      else toast.error(res.data.message);
+    }
+    else {
+      globalStore.toggleItem("registerModalOpen", 0)
+    }
   }
+
+  async function handleTokens() {
+    const res = await getAccessToken();
+    if(res.success) {
+      globalStore.toggleItem("userDetail", res.data);
+    }
+    else if(4001) {
+      const res1 = await getRefreshToken();
+      if(res1.success) {
+        const res2 = await getAccessToken();
+        if(res2.success) 
+          globalStore.toggleItem("userDetail", res2.data);
+      } else {
+        globalStore.toggleItem("userDetail", null);
+      }
+    }
+    else {
+      globalStore.toggleItem("userDetail", null);
+      toast.error('Bad Network Connection')
+    }
+  }
+
 </script>
 
 <div class="topbar bg-color">
@@ -727,8 +644,8 @@
           <input
             type="email"
             class="form-control"
-            id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            bind:value="{forgotUserData.email}"
           />
         </div>
         {:else if $globalStore.forgotModalOpen == 2}
@@ -737,9 +654,9 @@
           <input
             type="text"
             class="form-control"
-            id="exampleInputCode1"
             minlength="5"
             maxlength="5"
+            bind:value="{forgotUserData.authCode}"
           />
         </div>
 
@@ -748,7 +665,7 @@
           <input
             type="password"
             class="form-control"
-            id="exampleInputPassword1"
+            bind:value="{forgotUserData.password}"
           />
         </div>
 

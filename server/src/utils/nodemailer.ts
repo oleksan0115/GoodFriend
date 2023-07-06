@@ -4,11 +4,14 @@ const sendEmail = (email:string, code:string) => {
     const transporter = nodemailer.createTransport({      
       host: 'mail.smtp2go.com',
       port: 2525,
-      secure: true,
+      secure: false,
       auth: {
         user: process.env.NODEMAILER_EMAIL,        
         pass: process.env.NODEMAILER_PASSWORD
-      }    
+      },
+      tls: { 
+        ciphers:'SSLv3' 
+    }    
     });
     const mailOptions = {
       to: email,      
@@ -22,7 +25,7 @@ const sendEmail = (email:string, code:string) => {
               console.log('Server is ready for taking our messages'); 
         } 
     });
-    
+
     return transporter.sendMail(mailOptions)  
   } catch (error) {
     console.log(error)  

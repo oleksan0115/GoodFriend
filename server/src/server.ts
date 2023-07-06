@@ -31,7 +31,6 @@ import accountRouter from "./routes/account.routes";
 app.use("/api/account", accountRouter);
 
 const port:number = 9001
-
 app.listen(port, () => {
     console.log(`App is listening on port ${port}`);
 });

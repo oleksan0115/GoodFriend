@@ -1,28 +1,10 @@
 import * as types from "../types/check.types"
 import * as setting from "../config/setting.config"
-import * as dataAccess from "../utils/dataAccess.utils"
 
 // sign-up
 export const emailCheck = async (dataAccess: any, email: string) : Promise<boolean> => {
-    const sql:string = `SELECT gm.email FROM gf_member gm WHERE gm.email = ?`
-    const values:string[] = [email]
-
-    const data:types.EmailCheckResult = await dataAccess.selectOne(sql, values)
-
-    if(!data) {
-        return true
-    } else {
-        return false
-    }
-}
-
-export const promoCodeCheck = async (dataAccess: any, promoCode: string): Promise<boolean> => {
-    const sql: string = `SELECT ga.promo_code FROM gf_admin ga WHERE ga.promo_code = ?`
-    const values:string[] = [promoCode]   
-
-    const data:types.PromoCodeCheckResult = await dataAccess.selectOne(sql, values)
-
-    if(data) {
+    const check:boolean = await dataAccess.check(dataAccess, `gf_member`, `email`, {column: "email", condition: "=", data: email})
+    if(!check) {
         return true
     } else {
         return false
@@ -30,12 +12,21 @@ export const promoCodeCheck = async (dataAccess: any, promoCode: string): Promis
 }
 
 export const authCodeCheck = async (dataAccess: any, authCode: string): Promise<boolean> => {
-    const sql: string = `SELECT gac.auth_code FROM gf_auth_code gac WHERE gac.auth_code = ? AND gac.reg_date >= DATE_ADD(NOW(), INTERVAL -${setting.EMAIL_VERIFICATION_TIME} MINUTE) AND is_used = 0`
-    const values:string[] = [authCode]   
+    const check:boolean = await dataAccess.check(dataAccess, 
+        "gf_auth_code", 
+        "auth_code", 
+        {column: "auth_code", condition: "=", data: authCode},
+        {column: "reg_date", condition: ">=", data: `DATE_ADD(NOW(), INTERVAL -${setting.EMAIL_VERIFICATION_TIME} MINUTE) AND is_used = 0`})
+    if(check) {
+        return true
+    } else {
+        return false
+    }
+}
 
-    const data:types.AuthCodeCheckResult = await dataAccess.selectOne(sql, values)
-
-    if(data) {
+export const promoCodeCheck = async (dataAccess: any, promoCode: string): Promise<boolean> => {
+    const check:boolean = await dataAccess.check(dataAccess,"gf_admin","promo_code", {column: "promo_code", condition: "=", data: promoCode})
+    if(check) {
         return true
     } else {
         return false
@@ -85,7 +76,6 @@ export const userCheck = async (dataAccess: any, email: string, password: string
     const values:string[] = [email, password]
 
     const data:types.memberResult = await dataAccess.selectOne(sql, values)
-
     if(data) {
         return data
     } else {

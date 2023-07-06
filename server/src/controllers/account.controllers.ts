@@ -32,6 +32,16 @@ export const signUp = async (req: Request, res: Response) => {
     res.status(200).json(response.signUpSuccess)
 }
 
+export const socialSignUp = async (req: Request, res: Response) => {
+    const {email, password} = req.body
+    const affiliateCode: any|undefined = req.headers["gf-affiliate-code"];
+    
+    const nick:string = `user${utils.generateRandomNumber(10)}`
+    await models.signUpInsert(dataAccess, affiliateCode, email, utils.hashWithSHA256(password), nick)
+
+    res.status(200).json(response.signUpSuccess)
+}
+
 // sign-in
 export const signIn = async ( req: Request, res: Response ) => {
     const {email, password} = req.body

@@ -67,6 +67,29 @@ Please manage your affiliate code and API key through Sveltekit's env.
 }
 ````
 
+> Social sign-up
+- endpoint: /api/account/social/sign-up/
+- method: post
+- data: email(string), password(string)/ Create a password by combining the data provided by the API, loginType/google, facebook etc..
+
+````
+// success   
+{
+    code: 1000, 
+    message: "Sign up successfully 🎉"
+}
+
+// error
+{
+    code: 2001,
+    message: "The email is a duplicate."
+}
+
+logic
+success -> sign-up -> sign-in
+error -> sign-in
+````
+
 ## Sign in API
 > Sign in
 - endpoint: /api/account/sign-in

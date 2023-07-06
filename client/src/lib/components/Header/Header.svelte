@@ -277,8 +277,9 @@
     if(res.success) {
       toast.success(res.data.message);
       globalStore.toggleItem("loginModalOpen", false);
+      handleTokens();
     } else {
-      toast.error(res.data);
+      toast.error(res.data.message);
     }
   }
 
@@ -289,7 +290,7 @@
       globalStore.toggleItem('userDetail', null);
       globalStore.toggleItem('profileModalOpen', false);
     } else {
-      toast.error(res.data);
+      toast.error(res.data.message);
     }
   }
 
@@ -304,7 +305,7 @@
         globalStore.toggleItem("forgotModalOpen", 2);
       }
       else {
-        toast.error(res.data)
+        toast.error(res.data.message);
       }
     }
     else if($globalStore.forgotModalOpen == 2) {
@@ -317,7 +318,7 @@
         toast.success('Password change successfully');
         globalStore.toggleItem("forgotModalOpen", 3)
       }
-      else toast.error(res.data);
+      else toast.error(res.data.message);;
     }
     else {
       globalStore.toggleItem("forgotModalOpen", 0)
@@ -333,7 +334,7 @@
       if(res.success) {
         toast.success('Sent a verification code to your email.');
         globalStore.toggleItem("registerModalOpen", 2);
-      } else toast.error(res.data)
+      } else toast.error(res.data.message);
     }
     else if($globalStore.registerModalOpen == 2) {
       const res = await signUp({
@@ -346,7 +347,7 @@
         toast.success('Sign up successfully 🎉');
         globalStore.toggleItem("registerModalOpen", 3)
       }
-      else toast.error(res.data)
+      else toast.error(res.data.message);
     }
     else {
       globalStore.toggleItem("registerModalOpen", 0)

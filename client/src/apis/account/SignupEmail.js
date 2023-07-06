@@ -21,16 +21,21 @@ export async function signUpEmail({email}) {
         data: res.data
       }
     }
-    /// add more case here.
     return {
       success: false,
       data: "Sign in Failed"
     }
   } catch(err) {
-    console.log('catch', err)
+    if(err.response && err.response.request.status == 400)
+      return {
+        success: false,
+        data: err.response.data
+      }
     return {
       success: false,
-      data: "Bad Network Connection"
+      data: {
+        'message': "Bad Internet Connection"
+      }
     }
   }
 }

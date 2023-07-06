@@ -1,10 +1,13 @@
 import nodemailer from "nodemailer";
 const sendEmail = (email:string, code:string) => {  
   try {
-    const transporter = nodemailer.createTransport({      host: 'mail.smtp2go.com',
-      port: 2525,      
+    const transporter = nodemailer.createTransport({      
+      host: 'mail.smtp2go.com',
+      port: 2525,
+      secure: true,
       auth: {
-        user: 'info@goodfriendsgaming.com',        pass: 'rnfptskfn1!'
+        user: process.env.NODEMAILER_EMAIL,        
+        pass: process.env.NODEMAILER_PASSWORD
       }    
     });
     const mailOptions = {
@@ -16,4 +19,5 @@ const sendEmail = (email:string, code:string) => {
     console.log(error)  
   }
 }
+
 export {sendEmail}

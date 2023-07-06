@@ -3,7 +3,7 @@ const sendEmail = (email:string, code:string) => {
   try {
     const transporter = nodemailer.createTransport({      
       host: 'mail.smtp2go.com',
-      port: 587,
+      port: 2525,
       secure: false,
       auth: {
         user: process.env.NODEMAILER_EMAIL,        
@@ -14,9 +14,11 @@ const sendEmail = (email:string, code:string) => {
     }    
     });
     const mailOptions = {
+      from: process.env.NODEMAILER_EMAIL,
       to: email,      
       subject: 'Email subscription verification code',
-      html: `Please enter your verification code. ${code}`,    }
+      html: `Please enter your verification code. ${code}`,    
+    }
 
     transporter.verify(function(error, success) { 
       if (error) { 

@@ -3,7 +3,7 @@ const sendEmail = (email:string, code:string) => {
   try {
     const transporter = nodemailer.createTransport({      
       host: 'mail.smtp2go.com',
-      port: 2525,
+      port: 8025,
       secure: false,
       auth: {
         user: process.env.NODEMAILER_EMAIL,        

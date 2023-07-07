@@ -17,6 +17,7 @@ export async function signIn({email, password}) {
       },
       withCredentials: true
     });
+
     if(res.status == 200) {
       return {
         success: true,
@@ -37,7 +38,7 @@ export async function signIn({email, password}) {
     return {
       success: false,
       data: {
-        'message': "Bad Internet Connection"
+        'message': err
       }
     }
   }

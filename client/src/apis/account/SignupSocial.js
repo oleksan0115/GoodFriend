@@ -26,7 +26,7 @@ export async function signUpSocial({email, password, loginType}) {
       data: "Sign in Failed"
     }
   } catch(err) {
-    if(err.response && err.response.request.status == 400)
+    if(err.response && err.response.status == 400)
       return {
         success: false,
         data: err.response.data

@@ -1,6 +1,8 @@
 import { redirect } from "@sveltejs/kit";
 import { OAuth2Client } from "google-auth-library";
 import { signUpSocial } from "../../apis/account/SignupSocial.js";
+import { getAccessToken } from "../../apis/account/getAccessToken.js";
+import { signIn } from '../../apis/account/Signin.js';
 
 const SECRET_CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
 const SECRET_CLIENT_SECRET = import.meta.env.VITE_CLIENT_SECRET;
@@ -34,14 +36,15 @@ export const GET = async ({ url }) => {
       password: data.sub,
       loginType: 'google'
     });
-    console.log('@@@', res)
-    if(res.success) {
+    // if(res.success) {
       const res1 = await signIn({
         email: data.email,
         password: data.sub,
-      })
+      });
 
-    }
+      await getAccessToken();
+
+    // }
     
   } catch (err) {
     console.log("Error logging in with OAuth2 user", err);

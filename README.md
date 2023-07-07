@@ -218,7 +218,7 @@ error -> sign-in
 ````
 
 > Change the nick.
-- endpoint: /api/account/profile/image
+- endpoint: /api/account/profile/nick
 - method: post
 - data: memberIdx(number), nick(string)
 

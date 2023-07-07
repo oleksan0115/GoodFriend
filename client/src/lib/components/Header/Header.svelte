@@ -5,21 +5,21 @@
   import DarkModeButtons from "../DarkModeButtons.svelte";
   import LoginHeader from "./HeaderLogin.svelte";
   import LoggedinHeader from "./HeaderLoggedin.svelte";
-  import Toast from 'svelte-toast'
-  import { onMount } from 'svelte';
+  import Toast from "svelte-toast";
+  import { onMount } from "svelte";
 
-  import { signIn } from '../../../apis/account/Signin';
-  import { getAccessToken } from '../../../apis/account/GetAccessToken';
-  import { signOut } from '../../../apis/account/Signout';
-  import { signUp } from '../../../apis/account/Signup';
-  import { signUpEmail } from '../../../apis/account/SignupEmail';
-  import { getRefreshToken } from '../../../apis/account/GetRefreshToken';
-  import { forgotPasswordEmail } from '../../../apis/account/ForgotPasswordEmail';
-  import { forgotPasswordChange } from '../../../apis/account/ForgotPasswordChange';
+  import { signIn } from "../../../apis/account/Signin";
+  import { getAccessToken } from "../../../apis/account/GetAccessToken";
+  import { signOut } from "../../../apis/account/Signout";
+  import { signUp } from "../../../apis/account/Signup";
+  import { signUpEmail } from "../../../apis/account/SignupEmail";
+  import { getRefreshToken } from "../../../apis/account/GetRefreshToken";
+  import { forgotPasswordEmail } from "../../../apis/account/ForgotPasswordEmail";
+  import { forgotPasswordChange } from "../../../apis/account/ForgotPasswordChange";
 
   const toastOptions = {
     duration: 1500,
-    position: 'top-right',
+    position: "top-right",
     dismissible: true,
   };
   const toast = new Toast(toastOptions);
@@ -27,57 +27,57 @@
   $: isLoggedIn = $globalStore.userDetail;
   $: path = $page.url.pathname;
   let signUpUserData = {
-    'email': '',
-    'authCode': '',
-    'promoCode': '',
-    'password': '',
-  }
+    email: "",
+    authCode: "",
+    promoCode: "",
+    password: "",
+  };
 
   onMount(async () => {
     handleTokens();
   });
 
   let forgotUserData = {
-    'email': '',
-    'authCode': '',
-    'password': '',
-  }
+    email: "",
+    authCode: "",
+    password: "",
+  };
 
   let signInUserData = {
-    'email': '',
-    'password': '',
-  }
+    email: "",
+    password: "",
+  };
 
   $: {
-    if($globalStore.registerModalOpen == 0)
+    if ($globalStore.registerModalOpen == 0)
       signUpUserData = {
-        'email': '',
-        'authCode': '',
-        'promoCode': '',
-        'password': '',
+        email: "",
+        authCode: "",
+        promoCode: "",
+        password: "",
       };
 
-    if($globalStore.forgotModalOpen == 0)
+    if ($globalStore.forgotModalOpen == 0)
       forgotUserData = {
-        'email': '',
-        'authCode': '',
-        'password': '',
+        email: "",
+        authCode: "",
+        password: "",
       };
 
-    if($globalStore.loginModalOpen == false) {
+    if ($globalStore.loginModalOpen == false) {
       signInUserData = {
-        'email': '',
-        'password': '',
+        email: "",
+        password: "",
       };
     }
   }
 
   async function handleSignIn(event) {
     const res = await signIn({
-      email: signInUserData.email, 
-      password: signInUserData.password
-    })
-    if(res.success) {
+      email: signInUserData.email,
+      password: signInUserData.password,
+    });
+    if (res.success) {
       toast.success(res.data.message);
       globalStore.toggleItem("loginModalOpen", false);
       handleTokens();
@@ -87,11 +87,11 @@
   }
 
   async function handleSignOut(event) {
-    const res = await signOut()
-    if(res.success) {
-      toast.success('Sign out successfully 🎉');
-      globalStore.toggleItem('userDetail', null);
-      globalStore.toggleItem('profileModalOpen', false);
+    const res = await signOut();
+    if (res.success) {
+      toast.success("Sign out successfully 🎉");
+      globalStore.toggleItem("userDetail", null);
+      globalStore.toggleItem("profileModalOpen", false);
     } else {
       toast.error(res.data.message);
     }
@@ -99,85 +99,74 @@
 
   async function handleForgotPassword(event) {
     event.preventDefault();
-    if($globalStore.forgotModalOpen == 1) {
+    if ($globalStore.forgotModalOpen == 1) {
       const res = await forgotPasswordEmail({
-        email: forgotUserData.email
+        email: forgotUserData.email,
       });
-      if(res.success) {
-        toast.success('Sent a verification code to your email.');
+      if (res.success) {
+        toast.success("Sent a verification code to your email.");
         globalStore.toggleItem("forgotModalOpen", 2);
-      }
-      else {
+      } else {
         toast.error(res.data.message);
       }
-    }
-    else if($globalStore.forgotModalOpen == 2) {
+    } else if ($globalStore.forgotModalOpen == 2) {
       const res = await forgotPasswordChange({
         email: forgotUserData.email,
         authCode: forgotUserData.authCode,
-        password: forgotUserData.password
-      })
-      if(res.success) {
-        toast.success('Password change successfully');
-        globalStore.toggleItem("forgotModalOpen", 3)
-      }
-      else toast.error(res.data.message);;
-    }
-    else {
-      globalStore.toggleItem("forgotModalOpen", 0)
+        password: forgotUserData.password,
+      });
+      if (res.success) {
+        toast.success("Password change successfully");
+        globalStore.toggleItem("forgotModalOpen", 3);
+      } else toast.error(res.data.message);
+    } else {
+      globalStore.toggleItem("forgotModalOpen", 0);
     }
   }
 
   async function handleSignUp(event) {
     event.preventDefault();
-    if($globalStore.registerModalOpen == 1) {
+    if ($globalStore.registerModalOpen == 1) {
       const res = await signUpEmail({
-        email: signUpUserData.email
+        email: signUpUserData.email,
       });
-      if(res.success) {
-        toast.success('Sent a verification code to your email.');
+      if (res.success) {
+        toast.success("Sent a verification code to your email.");
         globalStore.toggleItem("registerModalOpen", 2);
       } else toast.error(res.data.message);
-    }
-    else if($globalStore.registerModalOpen == 2) {
+    } else if ($globalStore.registerModalOpen == 2) {
       const res = await signUp({
         email: signUpUserData.email,
         authCode: signUpUserData.authCode,
         promoCode: signUpUserData.promoCode,
-        password: signUpUserData.password
+        password: signUpUserData.password,
       });
-      if(res.success) {
-        toast.success('Sign up successfully 🎉');
-        globalStore.toggleItem("registerModalOpen", 3)
-      }
-      else toast.error(res.data.message);
-    }
-    else {
-      globalStore.toggleItem("registerModalOpen", 0)
+      if (res.success) {
+        toast.success("Sign up successfully 🎉");
+        globalStore.toggleItem("registerModalOpen", 3);
+      } else toast.error(res.data.message);
+    } else {
+      globalStore.toggleItem("registerModalOpen", 0);
     }
   }
 
   async function handleTokens() {
     const res = await getAccessToken();
-    if(res.success) {
+    if (res.success) {
       globalStore.toggleItem("userDetail", res.data);
-    }
-    else if(4001) {
+    } else if (4001) {
       const res1 = await getRefreshToken();
-      if(res1.success) {
+      if (res1.success) {
         const res2 = await getAccessToken();
-        if(res2.success) 
-          globalStore.toggleItem("userDetail", res2.data);
+        if (res2.success) globalStore.toggleItem("userDetail", res2.data);
       } else {
         globalStore.toggleItem("userDetail", null);
       }
-    }
-    else {
+    } else {
       globalStore.toggleItem("userDetail", null);
-      toast.error('Bad Network Connection')
+      toast.error("Bad Network Connection");
     }
   }
-
 </script>
 
 <div class="topbar bg-color">
@@ -190,9 +179,13 @@
             class:active={path === "/casino"}
           >
             <a href="/casino">
-                <svg class="active-menu-icon"><use href="/img/symbols.svg?lang.svg#icon_Casino" /></svg>
+              <svg class="active-menu-icon"
+                ><use href="/img/symbols.svg?lang.svg#icon_Casino" /></svg
+              >
 
-                <svg><use href="/img/symbols.svg?lang.svg#icon_Casino_Dark"/></svg>
+              <svg
+                ><use href="/img/symbols.svg?lang.svg#icon_Casino_Dark" /></svg
+              >
 
               <span>Casino</span>
             </a>
@@ -202,10 +195,13 @@
             class:active={path === "/sports"}
           >
             <a href="/sports">
+              <svg class="active-menu-icon"
+                ><use href="/img/symbols.svg?lang.svg#icon_Sports" /></svg
+              >
 
-                <svg class="active-menu-icon"><use href="/img/symbols.svg?lang.svg#icon_Sports" /></svg>
-
-                <svg><use href="/img/symbols.svg?lang.svg#icon_Sports_Dark"/></svg>
+              <svg
+                ><use href="/img/symbols.svg?lang.svg#icon_Sports_Dark" /></svg
+              >
 
               <span>Sports</span>
             </a>
@@ -217,86 +213,94 @@
     </div>
 
     {#if isLoggedIn}
-      <LoggedinHeader/>
+      <LoggedinHeader />
     {:else}
-      <LoginHeader/>
+      <LoginHeader />
     {/if}
   </div>
   <div class="usershow" class:open={$globalStore.profileModalOpen}>
-
-    <div class="overlay" on:click={ () => globalStore.toggleItem("profileModalOpen", false) }></div>
-      <div class="userprofile">
-        <div class="row">
-          <div class="col-md-3 col-3">
-            <img class="user-image" src="/img/user.svg" />
-          </div>
-          <div class="col-md-7 col-7 pe-0 ps-0">
-            <h6 class="text-white mb-0">{$globalStore.userDetail ? $globalStore.userDetail.nick : ''}</h6>
-            <p class="mb-0 mt-0">
-              <img style="margin-bottom: 4px;"  src="/img/Group-1583.svg" /> level {$globalStore.userDetail ? $globalStore.userDetail.level: '0'}
-            </p>
-          </div>
-          <div class="col-md-2 col-2">
-            <div
-              class="closed float-end"
-              on:click={() => {
-                globalStore.toggleItem("profileModalOpen", false);
-              }}
-            >
-              <img class="cancel-light" src="/img/Cancel-1.svg" />
-              <img
-                class="cancel-dark"
-                style="display:none"
-                src="/img/cancel-dark.svg"
-              />
-            </div>
+    <div
+      class="overlay"
+      on:click={() => globalStore.toggleItem("profileModalOpen", false)}
+    />
+    <div class="userprofile">
+      <div class="row">
+        <div class="col-md-3 col-3">
+          <img class="user-image" src="/img/user.svg" />
+        </div>
+        <div class="col-md-7 col-7 pe-0 ps-0">
+          <h6 class="text-white mb-0">
+            {$globalStore.userDetail ? $globalStore.userDetail.nick : ""}
+          </h6>
+          <p class="mb-0 mt-0">
+            <img style="margin-bottom: 4px;" src="/img/Group-1583.svg" /> level {$globalStore.userDetail
+              ? $globalStore.userDetail.level
+              : "0"}
+          </p>
+        </div>
+        <div class="col-md-2 col-2">
+          <div
+            class="closed float-end"
+            on:click={() => {
+              globalStore.toggleItem("profileModalOpen", false);
+            }}
+          >
+            <img class="cancel-light" src="/img/Cancel-1.svg" />
+            <img
+              class="cancel-dark"
+              style="display:none"
+              src="/img/cancel-dark.svg"
+            />
           </div>
         </div>
-        <h4 class="mt-4">Theme</h4>
-        <div class="theme-button">
-          <DarkModeButtons />
-        </div>
-        <div class="border mt-3 mb-4" />
-        <h4>My Account</h4>
-        <ul class="menu">
-          <li class="active">
-            <a id="setting" href="#">
-              <svg
-                ><use href="/img/symbols.svg?lang.svg#icon_modal_settings" /></svg
-              >
-              Settings</a
-            >
-          </li>
-          <li>
-            <a href="#"
-              ><svg
-                ><use href="/img/symbols.svg?lang.svg#icon_modal_deposit" /></svg
-              > Deposit</a
-            >
-          </li>
-          <li>
-            <a href="#"
-              ><svg
-                ><use href="/img/symbols.svg?lang.svg#icon_modal_withdraw" /></svg
-              > Withdraw</a
-            >
-          </li>
-        </ul>
-        <div class="border mb-3 mt-3" />
-        <ul class="menu">
-          <li class="logout" on:click={handleSignOut}>
-            <a href="#"><img class="me-3" src="/img/logout.svg" /> Logout</a>
-          </li>
-        </ul>
       </div>
-
+      <h4 class="mt-4">Theme</h4>
+      <div class="theme-button">
+        <DarkModeButtons />
+      </div>
+      <div class="border mt-3 mb-4" />
+      <h4>My Account</h4>
+      <ul class="menu">
+        <li class="active">
+          <a id="setting" href="#">
+            <svg
+              ><use href="/img/symbols.svg?lang.svg#icon_modal_settings" /></svg
+            >
+            Settings</a
+          >
+        </li>
+        <li>
+          <a href="#"
+            ><svg
+              ><use href="/img/symbols.svg?lang.svg#icon_modal_deposit" /></svg
+            > Deposit</a
+          >
+        </li>
+        <li>
+          <a href="#"
+            ><svg
+              ><use href="/img/symbols.svg?lang.svg#icon_modal_withdraw" /></svg
+            > Withdraw</a
+          >
+        </li>
+      </ul>
+      <div class="border mb-3 mt-3" />
+      <ul class="menu">
+        <li class="logout" on:click={handleSignOut}>
+          <a href="#"><img class="me-3" src="/img/logout.svg" /> Logout</a>
+        </li>
+      </ul>
     </div>
+  </div>
 </div>
 
 <BetSlip />
 
 <div class="user-information" class:open={$globalStore.userModalOpen}>
-  <div class="overlay" on:click={ () => globalStore.toggleItem("userModalOpen", false) } ></div>
+  <div
+    class="overlay"
+    on:click={() => globalStore.toggleItem("userModalOpen", false)}
+  />
   <div class="userinformation">
     <div class="row">
       <div class="col-md-8 col-7 align-self-center">
@@ -385,9 +389,11 @@
   </div>
 </div>
 
-
 <div class="login-box" class:open={$globalStore.loginModalOpen}>
-  <div class="overlay" on:click={ () => globalStore.toggleItem("loginModalOpen", false) }></div>
+  <div
+    class="overlay"
+    on:click={() => globalStore.toggleItem("loginModalOpen", false)}
+  />
   <div class="login">
     <div class="login-banner">
       <img src="/img/Logo-white.svg" />
@@ -417,7 +423,7 @@
 
       <h2 class="mt_30">Log in</h2>
       <p class="mb-4">Welcome back. Please enter your details</p>
-      <form on:submit="{handleSignIn}">
+      <form on:submit={handleSignIn}>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label"
             >Email address</label
@@ -426,7 +432,7 @@
             type="email"
             class="form-control"
             aria-describedby="emailHelp"
-            bind:value="{signInUserData.email}"
+            bind:value={signInUserData.email}
             required
           />
         </div>
@@ -435,38 +441,34 @@
           <input
             type="password"
             class="form-control"
-            bind:value="{signInUserData.password}"
+            bind:value={signInUserData.password}
             required
           />
         </div>
-        <p class="forgot text-end"><a href="#" on:click={() => {
-          globalStore.toggleItem(
-            "forgotModalOpen",
-            1
-          );
+        <p class="forgot text-end">
+          <a
+            href="#"
+            on:click={() => {
+              globalStore.toggleItem("forgotModalOpen", 1);
 
-          globalStore.toggleItem(
-            "loginModalOpen",
-            false
-          );
-        }}>Forgot password?</a></p>
+              globalStore.toggleItem("loginModalOpen", false);
+            }}>Forgot password?</a
+          >
+        </p>
         <button type="submit" class="btn btn-primary w-100 mt30">
           Submit
         </button>
       </form>
       <div class="text-center">
         <h6 class="signup_1">
-          Don’t have an account? <a href="#" on:click={() => {
-            globalStore.toggleItem(
-              "registerModalOpen",
-              1
-            );
+          Don’t have an account? <a
+            href="#"
+            on:click={() => {
+              globalStore.toggleItem("registerModalOpen", 1);
 
-            globalStore.toggleItem(
-              "loginModalOpen",
-              false
-            );
-          }}>Sign up</a>
+              globalStore.toggleItem("loginModalOpen", false);
+            }}>Sign up</a
+          >
         </h6>
       </div>
       <div class="position-relative mt-40">
@@ -475,7 +477,12 @@
       </div>
       <div class="text-center">
         <ul class="login-socials">
-          <li><img src="/img/google-plus.svg" /></li>
+          <li>
+            <form method="POST" action="?/OAuth2">
+              <button><img src="/img/google-plus.svg" /></button>
+            </form>
+          </li>
+
           <li><img src="/img/apple.svg" /></li>
           <li><img src="/img/facebook.svg" /></li>
         </ul>
@@ -483,8 +490,11 @@
     </div>
   </div>
 </div>
-<div class="sign-box"  class:open={$globalStore.registerModalOpen}>
-  <div class="overlay" on:click={ () => globalStore.toggleItem("registerModalOpen", 0) }></div>
+<div class="sign-box" class:open={$globalStore.registerModalOpen}>
+  <div
+    class="overlay"
+    on:click={() => globalStore.toggleItem("registerModalOpen", 0)}
+  />
   <div class="signup">
     <div class="signup-banner">
       <img src="/img/Logo-white.svg" />
@@ -501,92 +511,97 @@
         <div class="col-10">
           <img class="desknone" src="/img/logo.svg" />
         </div>
-        <div class="col-2"><img id="closeds" src="/img/close.svg" on:click={() => {
-          globalStore.toggleItem("registerModalOpen", 0);
-        }} /></div>
+        <div class="col-2">
+          <img
+            id="closeds"
+            src="/img/close.svg"
+            on:click={() => {
+              globalStore.toggleItem("registerModalOpen", 0);
+            }}
+          />
+        </div>
       </div>
       <h2 class="mt_30">Hey, hello 👋</h2>
-      <form on:submit="{handleSignUp}">
+      <form on:submit={handleSignUp}>
         {#if $globalStore.registerModalOpen == 1}
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label"
-            >Email address</label
-          >
-          <input
-            type="email"
-            class="form-control"
-            aria-describedby="emailHelp"
-            name="email"
-            bind:value="{signUpUserData.email}"
-            required
-          />
-        </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"
+              >Email address</label
+            >
+            <input
+              type="email"
+              class="form-control"
+              aria-describedby="emailHelp"
+              name="email"
+              bind:value={signUpUserData.email}
+              required
+            />
+          </div>
         {:else if $globalStore.registerModalOpen == 2}
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label"
-            >Auth code</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            aria-describedby="emailHelp"
-            maxlength="5"
-            bind:value="{signUpUserData.authCode}"
-            required
-          />
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            bind:value="{signUpUserData.password}"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label"
-            >Promotion code (optional)</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            aria-describedby="emailHelp"
-            bind:value="{signUpUserData.promoCode}"
-          />
-        </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Auth code</label>
+            <input
+              type="text"
+              class="form-control"
+              aria-describedby="emailHelp"
+              maxlength="5"
+              bind:value={signUpUserData.authCode}
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"
+              >Password</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              bind:value={signUpUserData.password}
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"
+              >Promotion code (optional)</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              aria-describedby="emailHelp"
+              bind:value={signUpUserData.promoCode}
+            />
+          </div>
         {:else}
-        <p class="signin">Successfully Changed! <a href="#" on:click={() => {
-          globalStore.toggleItem(
-            "registerModalOpen",
-            0
-          );
+          <p class="signin">
+            Successfully Changed! <a
+              href="#"
+              on:click={() => {
+                globalStore.toggleItem("registerModalOpen", 0);
 
-          globalStore.toggleItem(
-            "loginModalOpen",
-            true
-          );
-        }}>Sign in</a></p>
-        
+                globalStore.toggleItem("loginModalOpen", true);
+              }}>Sign in</a
+            >
+          </p>
         {/if}
         <button type="submit" class="btn btn-primary w-100 mt30">
-          {$globalStore.registerModalOpen == 1 ? 'Send' : $globalStore.registerModalOpen == 2 ? 'Verify': 'Submit'}
+          {$globalStore.registerModalOpen == 1
+            ? "Send"
+            : $globalStore.registerModalOpen == 2
+            ? "Verify"
+            : "Submit"}
         </button>
       </form>
       <div class="text-center">
         {#if $globalStore.registerModalOpen == 1}
-        <h6 class="signup_1">
-          Already have an account? <a href="#" on:click={() => {
-            globalStore.toggleItem(
-              "registerModalOpen",
-              0
-            );
+          <h6 class="signup_1">
+            Already have an account? <a
+              href="#"
+              on:click={() => {
+                globalStore.toggleItem("registerModalOpen", 0);
 
-            globalStore.toggleItem(
-              "loginModalOpen",
-              true
-            );
-          }}>Sign in</a>
-        </h6>
+                globalStore.toggleItem("loginModalOpen", true);
+              }}>Sign in</a
+            >
+          </h6>
         {/if}
       </div>
       <div class="position-relative mt-40">
@@ -604,7 +619,10 @@
   </div>
 </div>
 <div class="forgot-box" class:open={$globalStore.forgotModalOpen}>
-  <div class="overlay" on:click={ () => globalStore.toggleItem("forgotModalOpen", 0) }></div>
+  <div
+    class="overlay"
+    on:click={() => globalStore.toggleItem("forgotModalOpen", 0)}
+  />
   <div class="forgot">
     <div class="forgot-banner">
       <img src="/img/Logo-white.svg" />
@@ -634,61 +652,63 @@
 
       <h2 class="mt_30">Forgot password</h2>
       <p class="mb-4">Enter your email address to reset your password</p>
-      <form on:submit="{handleForgotPassword}">
-
+      <form on:submit={handleForgotPassword}>
         {#if $globalStore.forgotModalOpen == 1}
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label"
-            >Email address</label
-          >
-          <input
-            type="email"
-            class="form-control"
-            aria-describedby="emailHelp"
-            bind:value="{forgotUserData.email}"
-          />
-        </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"
+              >Email address</label
+            >
+            <input
+              type="email"
+              class="form-control"
+              aria-describedby="emailHelp"
+              bind:value={forgotUserData.email}
+            />
+          </div>
         {:else if $globalStore.forgotModalOpen == 2}
-        <div class="mb-3">
-          <label for="exampleInputCode1" class="form-label">5 Verification Code</label>
-          <input
-            type="text"
-            class="form-control"
-            minlength="5"
-            maxlength="5"
-            bind:value="{forgotUserData.authCode}"
-          />
-        </div>
+          <div class="mb-3">
+            <label for="exampleInputCode1" class="form-label"
+              >5 Verification Code</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              minlength="5"
+              maxlength="5"
+              bind:value={forgotUserData.authCode}
+            />
+          </div>
 
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            bind:value="{forgotUserData.password}"
-          />
-        </div>
-
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"
+              >Password</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              bind:value={forgotUserData.password}
+            />
+          </div>
         {:else}
+          <p class="signin">
+            Successfully Changed! <a
+              href="#"
+              on:click={() => {
+                globalStore.toggleItem("forgotModalOpen", 0);
 
-        <p class="signin">Successfully Changed! <a href="#" on:click={() => {
-          globalStore.toggleItem(
-            "forgotModalOpen",
-            0
-          );
-
-          globalStore.toggleItem(
-            "loginModalOpen",
-            true
-          );
-        }}>Sign in</a></p>
-
+                globalStore.toggleItem("loginModalOpen", true);
+              }}>Sign in</a
+            >
+          </p>
         {/if}
         <button type="submit" class="btn btn-primary w-100 mt30">
-          {$globalStore.forgotModalOpen == 1 ? 'Send' : $globalStore.forgotModalOpen == 2 ? 'Verify': 'Submit'}
+          {$globalStore.forgotModalOpen == 1
+            ? "Send"
+            : $globalStore.forgotModalOpen == 2
+            ? "Verify"
+            : "Submit"}
         </button>
       </form>
-      
     </div>
   </div>
 </div>

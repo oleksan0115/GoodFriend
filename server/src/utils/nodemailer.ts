@@ -1,21 +1,32 @@
 import nodemailer from "nodemailer";
-
-const sendEmail = async (email:string, code:string) => {
-  
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: { 
-          user: process.env.NODEMAILER_EMAIL, 
-          pass: process.env.NODEMAILER_PASSWORD
-      }
-    })
-
+const sendEmail = (email:string, code:string) => {  
+  try {
+    const transporter = nodemailer.createTransport({      
+      host: 'mail.smtp2go.com',
+      port: 2525,
+      secure: true,
+      auth: {
+        user: process.env.NODEMAILER_EMAIL,        
+        pass: process.env.NODEMAILER_PASSWORD
+      }    
+    });
     const mailOptions = {
-      to: email,
+      to: email,      
       subject: 'Email subscription verification code',
-      html: `Please enter your verification code. ${code}`,
-    }
-    await transporter.sendMail(mailOptions)
+      html: `Please enter your verification code. ${code}`,    }
+
+    transporter.verify(function(error, success) { 
+      if (error) { 
+              console.log(error); 
+        } else { 
+              console.log('Server is ready for taking our messages'); 
+        } 
+    });
+    
+    return transporter.sendMail(mailOptions)  
+  } catch (error) {
+    console.log(error)  
+  }
 }
 
 export {sendEmail}

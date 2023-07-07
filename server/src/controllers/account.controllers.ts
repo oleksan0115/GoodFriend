@@ -62,6 +62,7 @@ export const signIn = async ( req: Request, res: Response ) => {
             sameSite: process.env.NODE_ENV === "production" ? 'strict' : 'lax'
         })
 
+        await models.loginDateUpdate(dataAccess, email);
         res.status(200).json(response.signInSuccess)
     } else {
         res.status(400).json(response.memberValidationError)

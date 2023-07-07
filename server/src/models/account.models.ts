@@ -84,6 +84,17 @@ export const userCheck = async (dataAccess: any, email: string, password: string
     }
 }
 
+// sign-in
+export const loginDateUpdate = async (dataAccess: any, email: string) => {
+    const sql:string = `
+        UPDATE gf_member
+            SET login_date = NOW()
+            WHERE email = ?`
+    const values:string[] = [email]
+
+    return dataAccess.update(sql, values)
+}
+
 // forgot-passowrd
 export const changePassword = async(dataAccess: any, email: string, password: string): Promise<any> => {
     const sql: string = `

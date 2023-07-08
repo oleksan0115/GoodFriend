@@ -1,6 +1,6 @@
 import { redirect } from "@sveltejs/kit";
 import { OAuth2Client } from "google-auth-library";
-import { signUpSocial } from "../../apis/account/SignupSocial.js";
+import { signUpSocial } from "../../apis/account/SigninFacebook.js";
 import { getAccessToken } from "../../apis/account/getAccessToken.js";
 import { signIn } from '../../apis/account/Signin.js';
 

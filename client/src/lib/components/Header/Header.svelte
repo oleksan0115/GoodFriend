@@ -106,9 +106,11 @@
   async function handleForgotPassword(event) {
     event.preventDefault();
     if ($globalStore.forgotModalOpen == 1) {
+      document.getElementById('submit_forgot').disabled = true
       const res = await forgotPasswordEmail({
         email: forgotUserData.email,
       });
+      document.getElementById('submit_forgot').disabled = false
       if (res.success) {
         toast.success("Sent a verification code to your email.");
         globalStore.toggleItem("forgotModalOpen", 2);
@@ -133,9 +135,11 @@
   async function handleSignUp(event) {
     event.preventDefault();
     if ($globalStore.registerModalOpen == 1) {
+      document.getElementById('submit_signup').disabled = true
       const res = await signUpEmail({
         email: signUpUserData.email,
       });
+      document.getElementById('submit_signup').disabled = false
       if (res.success) {
         toast.success("Sent a verification code to your email.");
         globalStore.toggleItem("registerModalOpen", 2);
@@ -196,7 +200,7 @@
         });
         if (res2.success) {
           toast.success(res.data.message);
-          // globalStore.toggleItem("loginModalOpen", false);
+          globalStore.toggleItem("loginModalOpen", false);
           handleTokens();
         } else {
           toast.error(res.data.message);
@@ -530,9 +534,7 @@
               redirectUri="http://localhost:10010/"
               let:onLogin
             >
-              <button on:click={onLogin}>
-                <img src="/img/facebook.svg" onClick="" />
-              </button>
+              <img src="/img/facebook.svg" onClick="" on:click={onLogin} style="cursor: pointer"/>
             </FacebookLogin>
           </li>
         </ul>
@@ -607,6 +609,7 @@
               type="password"
               class="form-control"
               bind:value={signUpUserData.password}
+              required
             />
           </div>
           <div class="mb-3">
@@ -632,7 +635,7 @@
             >
           </p>
         {/if}
-        <button type="submit" class="btn btn-primary w-100 mt30">
+        <button type="submit" class="btn btn-primary w-100 mt30" id="submit_signup">
           {$globalStore.registerModalOpen == 1
             ? "Send"
             : $globalStore.registerModalOpen == 2
@@ -713,6 +716,7 @@
               class="form-control"
               aria-describedby="emailHelp"
               bind:value={forgotUserData.email}
+              required
             />
           </div>
         {:else if $globalStore.forgotModalOpen == 2}
@@ -726,6 +730,7 @@
               minlength="5"
               maxlength="5"
               bind:value={forgotUserData.authCode}
+              required
             />
           </div>
 
@@ -737,6 +742,7 @@
               type="password"
               class="form-control"
               bind:value={forgotUserData.password}
+              required
             />
           </div>
         {:else}
@@ -751,7 +757,7 @@
             >
           </p>
         {/if}
-        <button type="submit" class="btn btn-primary w-100 mt30">
+        <button type="submit" class="btn btn-primary w-100 mt30" id="submit_forgot">
           {$globalStore.forgotModalOpen == 1
             ? "Send"
             : $globalStore.forgotModalOpen == 2
@@ -762,3 +768,10 @@
     </div>
   </div>
 </div>
+
+<style>
+  button:disabled {
+    background: unset;
+    background-color: darkgray;
+  }
+</style>

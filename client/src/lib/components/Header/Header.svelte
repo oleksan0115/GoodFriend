@@ -160,7 +160,7 @@
     }
   }
 
-  async function handleTokens() {
+  export async function handleTokens() {
     const res = await getAccessToken();
     if (res.success) {
       globalStore.toggleItem("userDetail", res.data);

@@ -181,9 +181,8 @@
   async function fbData(params) {
     
     if(params.detail.code) {
-      // get access token based on code
       const res = await getInfoFacebook({
-        code: params.detail_code
+        code: params.detail.code
       });
       
       if(res.success) {
@@ -195,15 +194,16 @@
         })
         
         const res2 = await signIn({
-          email: signInUserData.email,
-          password: signInUserData.password,
+          email: userInfo.email,
+          password: userInfo.id,
         });
+
         if (res2.success) {
-          toast.success(res.data.message);
+          toast.success(res2.data.message);
           globalStore.toggleItem("loginModalOpen", false);
           handleTokens();
         } else {
-          toast.error(res.data.message);
+          toast.error(res2.data.message);
         }
       }
     }
@@ -530,7 +530,7 @@
               clientId={CLIENT_ID}
               state="1"
               on:success={fbData}
-              on:error={error => console.log(error)}
+              on:error={fbData}
               redirectUri="http://localhost:10010/"
               let:onLogin
             >

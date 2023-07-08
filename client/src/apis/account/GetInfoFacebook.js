@@ -1,10 +1,7 @@
-import axios from 'axios';
-import { signIn } from './Signin';
-import { getAccessToken } from './getAccessToken';
 
-const GF_API_KEY = import.meta.env.VITE_GF_API_KEY;
-const GF_AFFILIATE_CODE = import.meta.env.VITE_GF_AFFILIATE_CODE;
-const SEVER_URL = import.meta.env.VITE_SEVER_URL;
+const CLIENT_ID = import.meta.env.VITE_FB_CLIENT_ID;
+const CLIENT_SECRET_KEY = import.meta.env.VITE_FB_CLIENT_SECRET_KEY;
+const REDIRECT_URL = import.meta.env.VITE_FB_REDIRECT_URL;
 
 export async function getInfoFacebook({code}) {
   try {
@@ -13,8 +10,6 @@ export async function getInfoFacebook({code}) {
     );
     const data = await response.json();
 
-    // console.log(data['access_token']);
-    
     if (data["access_token"]) {
       const user_data = await fetch(
         `https://graph.facebook.com/v17.0/me?fields=id,name,email,first_name,last_name,picture&access_token=${data["access_token"]}`

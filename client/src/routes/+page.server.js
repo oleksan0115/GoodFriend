@@ -17,6 +17,7 @@ export const actions = {
     // Generate the url that will be used for the consent dialog.
     const authorizeUrl = oAuth2Client.generateAuthUrl({
       access_type: "offline",
+      ux_mode: 'popup',
       scope: "https://www.googleapis.com/auth/userinfo.profile  openid email",
       prompt: "consent",
     });

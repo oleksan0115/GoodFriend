@@ -7,7 +7,7 @@
   import LoggedinHeader from "./HeaderLoggedin.svelte";
   import Toast from "svelte-toast";
   import { onMount } from "svelte";
-
+  import FacebookLogin from "svelte-facebook-login";
   import { signIn } from "../../../apis/account/Signin";
   import { getAccessToken } from "../../../apis/account/GetAccessToken";
   import { signOut } from "../../../apis/account/Signout";
@@ -16,6 +16,11 @@
   import { getRefreshToken } from "../../../apis/account/GetRefreshToken";
   import { forgotPasswordEmail } from "../../../apis/account/ForgotPasswordEmail";
   import { forgotPasswordChange } from "../../../apis/account/ForgotPasswordChange";
+  // import { socialSignUp } from "../../apis/account/SocialSignup"
+
+  const CLIENT_ID = import.meta.env.VITE_FB_CLIENT_ID;
+  const CLIENT_SECRET_KEY = import.meta.env.VITE_FB_CLIENT_SECRET_KEY;
+  const REDIRECT_URL = import.meta.env.VITE_FB_REDIRECT_URL;
 
   const toastOptions = {
     duration: 1500,
@@ -100,11 +105,9 @@
   async function handleForgotPassword(event) {
     event.preventDefault();
     if ($globalStore.forgotModalOpen == 1) {
-      document.getElementById('forgotEmail').disabled = true;
       const res = await forgotPasswordEmail({
         email: forgotUserData.email,
       });
-      document.getElementById('forgotEmail').disabled = false;
       if (res.success) {
         toast.success("Sent a verification code to your email.");
         globalStore.toggleItem("forgotModalOpen", 2);
@@ -129,11 +132,9 @@
   async function handleSignUp(event) {
     event.preventDefault();
     if ($globalStore.registerModalOpen == 1) {
-      document.getElementById('signupEmail').disabled = true;
       const res = await signUpEmail({
         email: signUpUserData.email,
       });
-      document.getElementById('signupEmail').disabled = false;
       if (res.success) {
         toast.success("Sent a verification code to your email.");
         globalStore.toggleItem("registerModalOpen", 2);
@@ -169,6 +170,37 @@
     } else {
       globalStore.toggleItem("userDetail", null);
       toast.error("Bad Network Connection");
+    }
+  }
+
+  async function fbData(params) {
+    
+    if(params.detail.code) {
+      // get access token based on code
+      const response = await fetch(
+        `https://graph.facebook.com/oauth/access_token?code=${params.detail.code}&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URL}&client_secret=${CLIENT_SECRET_KEY}`
+      );
+      const data = await response.json();
+
+      console.log(data['access_token']);
+  
+      // if no error then get user info based on access token
+      if (data["access_token"]) {
+        const user_data = await fetch(
+          `https://graph.facebook.com/v17.0/me?fields=id,name,email,first_name,last_name,picture&access_token=${data["access_token"]}`
+        );
+        const userinfo = await user_data.json();
+        console.log("data", userinfo);
+  
+
+        // call backend API
+        // const res = await socialSignUp({
+        //   email: userinfo.email,
+        //   password: userinfo.id,
+        //   loginType: "facebook"
+        // });
+        // console.log("res", res);
+      }
     }
   }
 </script>
@@ -483,12 +515,25 @@
         <ul class="login-socials">
           <li>
             <form method="POST" action="?/OAuth2">
-              <button><img src="/img/google-plus.svg" /></button>
+              <button><img src="/img/google-plus.svg" onClick=""/></button>
             </form>
           </li>
-
+          
           <li><img src="/img/apple.svg" /></li>
-          <li><img src="/img/facebook.svg" /></li>
+          <li>
+            <FacebookLogin
+              clientId={CLIENT_ID}
+              state="1"
+              on:success={fbData}
+              on:error={error => console.log(error)}
+              redirectUri="http://localhost:10010/"
+              let:onLogin
+            >
+              <button on:click={onLogin}>
+                <img src="/img/facebook.svg" onClick="" />
+              </button>
+            </FacebookLogin>
+          </li>
         </ul>
       </div>
     </div>
@@ -561,7 +606,6 @@
               type="password"
               class="form-control"
               bind:value={signUpUserData.password}
-              required
             />
           </div>
           <div class="mb-3">
@@ -586,8 +630,8 @@
               }}>Sign in</a
             >
           </p>
-          {/if}
-        <button type="submit" class="btn btn-primary w-100 mt30" id="signupEmail">
+        {/if}
+        <button type="submit" class="btn btn-primary w-100 mt30">
           {$globalStore.registerModalOpen == 1
             ? "Send"
             : $globalStore.registerModalOpen == 2
@@ -668,7 +712,6 @@
               class="form-control"
               aria-describedby="emailHelp"
               bind:value={forgotUserData.email}
-              required
             />
           </div>
         {:else if $globalStore.forgotModalOpen == 2}
@@ -682,7 +725,6 @@
               minlength="5"
               maxlength="5"
               bind:value={forgotUserData.authCode}
-              required
             />
           </div>
 
@@ -694,7 +736,6 @@
               type="password"
               class="form-control"
               bind:value={forgotUserData.password}
-              required
             />
           </div>
         {:else}
@@ -709,7 +750,7 @@
             >
           </p>
         {/if}
-        <button type="submit" class="btn btn-primary w-100 mt30" id="forgotEmail">
+        <button type="submit" class="btn btn-primary w-100 mt30">
           {$globalStore.forgotModalOpen == 1
             ? "Send"
             : $globalStore.forgotModalOpen == 2
@@ -720,10 +761,3 @@
     </div>
   </div>
 </div>
-
-<style>
-  button:disabled {
-    background: unset;
-    background-color: darkgrey !important;
-  }
-</style>

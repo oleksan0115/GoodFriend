@@ -4,7 +4,7 @@ const GF_API_KEY = import.meta.env.VITE_GF_API_KEY;
 const GF_AFFILIATE_CODE = import.meta.env.VITE_GF_AFFILIATE_CODE;
 const SEVER_URL = import.meta.env.VITE_SEVER_URL;
 
-export async function signUpSocial({email, password, loginType}) {
+export async function socialSignUp({email, password, loginType}) {
   try {
     const res = await axios.post(SEVER_URL + '/api/account/social/sign-up', {
       email, password, loginType
@@ -26,7 +26,7 @@ export async function signUpSocial({email, password, loginType}) {
       data: "Sign in Failed"
     }
   } catch(err) {
-    if(err.response && err.response.status == 400)
+    if(err.response && err.response.request.status == 400)
       return {
         success: false,
         data: err.response.data

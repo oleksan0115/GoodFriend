@@ -4,7 +4,7 @@ const GF_API_KEY = import.meta.env.VITE_GF_API_KEY;
 const GF_AFFILIATE_CODE = import.meta.env.VITE_GF_AFFILIATE_CODE;
 const SEVER_URL = import.meta.env.VITE_SEVER_URL;
 
-export async function socialSignUp({email, password, loginType}) {
+export async function signupSocial({email, password, loginType}) {
   try {
     const res = await axios.post(SEVER_URL + '/api/account/social/sign-up', {
       email, password, loginType

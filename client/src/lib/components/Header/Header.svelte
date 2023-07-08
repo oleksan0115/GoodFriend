@@ -16,7 +16,8 @@
   import { getRefreshToken } from "../../../apis/account/GetRefreshToken";
   import { forgotPasswordEmail } from "../../../apis/account/ForgotPasswordEmail";
   import { forgotPasswordChange } from "../../../apis/account/ForgotPasswordChange";
-  // import { socialSignUp } from "../../apis/account/SocialSignup"
+  import { getInfoFacebook } from "../../../apis/account/GetInfoFacebook";
+  import { signupSocial } from "../../../apis/account/SignupSocial";
 
   const CLIENT_ID = import.meta.env.VITE_FB_CLIENT_ID;
   const CLIENT_SECRET_KEY = import.meta.env.VITE_FB_CLIENT_SECRET_KEY;
@@ -177,29 +178,29 @@
     
     if(params.detail.code) {
       // get access token based on code
-      const response = await fetch(
-        `https://graph.facebook.com/oauth/access_token?code=${params.detail.code}&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URL}&client_secret=${CLIENT_SECRET_KEY}`
-      );
-      const data = await response.json();
-
-      console.log(data['access_token']);
-  
-      // if no error then get user info based on access token
-      if (data["access_token"]) {
-        const user_data = await fetch(
-          `https://graph.facebook.com/v17.0/me?fields=id,name,email,first_name,last_name,picture&access_token=${data["access_token"]}`
-        );
-        const userinfo = await user_data.json();
-        console.log("data", userinfo);
-  
-
-        // call backend API
-        // const res = await socialSignUp({
-        //   email: userinfo.email,
-        //   password: userinfo.id,
-        //   loginType: "facebook"
-        // });
-        // console.log("res", res);
+      const res = await getInfoFacebook({
+        code: params.detail_code
+      });
+      
+      if(res.success) {
+        const userInfo = res.data;
+        const res1 = await signupSocial({
+          email: userInfo.email,
+          password: userInfo.id,
+          loginType: 'facebook'
+        })
+        
+        const res2 = await signIn({
+          email: signInUserData.email,
+          password: signInUserData.password,
+        });
+        if (res2.success) {
+          toast.success(res.data.message);
+          // globalStore.toggleItem("loginModalOpen", false);
+          handleTokens();
+        } else {
+          toast.error(res.data.message);
+        }
       }
     }
   }

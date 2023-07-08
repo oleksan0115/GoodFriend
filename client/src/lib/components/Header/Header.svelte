@@ -100,9 +100,11 @@
   async function handleForgotPassword(event) {
     event.preventDefault();
     if ($globalStore.forgotModalOpen == 1) {
+      document.getElementById('forgotEmail').disabled = true;
       const res = await forgotPasswordEmail({
         email: forgotUserData.email,
       });
+      document.getElementById('forgotEmail').disabled = false;
       if (res.success) {
         toast.success("Sent a verification code to your email.");
         globalStore.toggleItem("forgotModalOpen", 2);
@@ -127,9 +129,11 @@
   async function handleSignUp(event) {
     event.preventDefault();
     if ($globalStore.registerModalOpen == 1) {
+      document.getElementById('signupEmail').disabled = true;
       const res = await signUpEmail({
         email: signUpUserData.email,
       });
+      document.getElementById('signupEmail').disabled = false;
       if (res.success) {
         toast.success("Sent a verification code to your email.");
         globalStore.toggleItem("registerModalOpen", 2);
@@ -557,6 +561,7 @@
               type="password"
               class="form-control"
               bind:value={signUpUserData.password}
+              required
             />
           </div>
           <div class="mb-3">
@@ -581,8 +586,8 @@
               }}>Sign in</a
             >
           </p>
-        {/if}
-        <button type="submit" class="btn btn-primary w-100 mt30">
+          {/if}
+        <button type="submit" class="btn btn-primary w-100 mt30" id="signupEmail">
           {$globalStore.registerModalOpen == 1
             ? "Send"
             : $globalStore.registerModalOpen == 2
@@ -663,6 +668,7 @@
               class="form-control"
               aria-describedby="emailHelp"
               bind:value={forgotUserData.email}
+              required
             />
           </div>
         {:else if $globalStore.forgotModalOpen == 2}
@@ -676,6 +682,7 @@
               minlength="5"
               maxlength="5"
               bind:value={forgotUserData.authCode}
+              required
             />
           </div>
 
@@ -687,6 +694,7 @@
               type="password"
               class="form-control"
               bind:value={forgotUserData.password}
+              required
             />
           </div>
         {:else}
@@ -701,7 +709,7 @@
             >
           </p>
         {/if}
-        <button type="submit" class="btn btn-primary w-100 mt30">
+        <button type="submit" class="btn btn-primary w-100 mt30" id="forgotEmail">
           {$globalStore.forgotModalOpen == 1
             ? "Send"
             : $globalStore.forgotModalOpen == 2
@@ -712,3 +720,10 @@
     </div>
   </div>
 </div>
+
+<style>
+  button:disabled {
+    background: unset;
+    background-color: darkgrey !important;
+  }
+</style>

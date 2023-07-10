@@ -210,7 +210,7 @@
     const res = await signupSocial({
       email: userInfo.email,
       password: userInfo.id,
-      loginType: 'google'
+      loginType: 'facebook'
     })
     try {
       const res1 = await signIn({

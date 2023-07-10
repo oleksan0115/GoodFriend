@@ -4,25 +4,6 @@
       const handleClick = () => open = !open
   </script>
   
-<!--   <div class="accordion">
-      <div class="header">
-          <div class="text">
-              <slot name="head"></slot>	
-          </div>
-          
-          <button on:click={handleClick} >
-              +/-
-          </button>
-      </div>
-      
-      {#if open}
-      <div class="details" transition:slide>
-          <slot name="details">
-          </slot>
-      </div>
-      {/if}
-  </div> -->
-  
   <div class="faq-item show" class:show="{open}">
     <div class="faq-question">
         <slot name="head"></slot>

@@ -16,6 +16,7 @@
   import { getRefreshToken } from "../../../apis/account/GetRefreshToken";
   import { forgotPasswordEmail } from "../../../apis/account/ForgotPasswordEmail";
   import { forgotPasswordChange } from "../../../apis/account/ForgotPasswordChange";
+  import { signupSocial } from "../../../apis/account/SignupSocial";
   import firebase from '../../../apis/account/FirebaseConfig';
   import { OAuthProvider } from "firebase/auth";
 
@@ -176,10 +177,27 @@
 
   async function signInWithGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
-    try {
+    
       const data = await firebase.auth().signInWithPopup(provider);
-      console.log(data.additionalUserInfo.profile);
-      // User signed in successfully
+      const userInfo = data.additionalUserInfo.profile;
+      const res = await signupSocial({
+        email: userInfo.email,
+        password: userInfo.id,
+        loginType: 'google'
+      })
+    try {
+      const res1 = await signIn({
+        email: userInfo.email,
+        password: userInfo.id,
+      });
+
+      if (res1.success) {
+        toast.success(res1.data.message);
+        globalStore.toggleItem("loginModalOpen", false);
+        handleTokens();
+      } else {
+        toast.error(res1.data.message);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -187,10 +205,26 @@
 
   async function signInWithFacebook() {
     const provider = new firebase.auth.FacebookAuthProvider();
+    const data = await firebase.auth().signInWithPopup(provider);
+    const userInfo = data.additionalUserInfo.profile;
+    const res = await signupSocial({
+      email: userInfo.email,
+      password: userInfo.id,
+      loginType: 'google'
+    })
     try {
-      const data = await firebase.auth().signInWithPopup(provider);
-      console.log(data.additionalUserInfo.profile);
-      // User signed in successfully
+      const res1 = await signIn({
+        email: userInfo.email,
+        password: userInfo.id,
+      });
+
+      if (res1.success) {
+        toast.success(res1.data.message);
+        globalStore.toggleItem("loginModalOpen", false);
+        handleTokens();
+      } else {
+        toast.error(res1.data.message);
+      }
     } catch (error) {
       console.error(error);
     }

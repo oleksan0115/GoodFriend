@@ -23,9 +23,7 @@ const sendEmail = (email:string, code:string) => {
     transporter.verify(function(error, success) { 
       if (error) { 
               console.log(error); 
-        } else { 
-              console.log('Server is ready for taking our messages'); 
-        } 
+        }
     });
 
     return transporter.sendMail(mailOptions)  

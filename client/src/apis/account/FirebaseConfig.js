@@ -1,16 +1,6 @@
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth';
 
-// const firebaseConfig = {
-// 	apiKey: "AIzaSyCltJHu0dg9ynSWyyXkJdt4TDbnUMXvXy0",
-// 	authDomain: "dev-whitelabel-app.firebaseapp.com",
-// 	projectId: "dev-whitelabel-app",
-// 	storageBucket: "dev-whitelabel-app.appspot.com",
-// 	messagingSenderId: "994635593718",
-// 	appId: "1:994635593718:web:50c5c80ab5bbf5fae239d7",
-// 	measurementId: "G-YPRGD4K5GW"
-// };
-
 const firebaseConfig = { 
   apiKey : "AIzaSyA1lgDuKCJ9f0IzxjfzNlVM-RABJG0AXrI" , 
   authDomain : "goodfriends-d24d6.firebaseapp.com" , 

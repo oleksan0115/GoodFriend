@@ -16,12 +16,8 @@
   import { getRefreshToken } from "../../../apis/account/GetRefreshToken";
   import { forgotPasswordEmail } from "../../../apis/account/ForgotPasswordEmail";
   import { forgotPasswordChange } from "../../../apis/account/ForgotPasswordChange";
-  import { getInfoFacebook } from "../../../apis/account/GetInfoFacebook";
-  import { signupSocial } from "../../../apis/account/SignupSocial";
-
-  const CLIENT_ID = import.meta.env.VITE_FB_CLIENT_ID;
-  const CLIENT_SECRET_KEY = import.meta.env.VITE_FB_CLIENT_SECRET_KEY;
-  const REDIRECT_URL = import.meta.env.VITE_FB_REDIRECT_URL;
+  import firebase from '../../../apis/account/FirebaseConfig';
+  import { OAuthProvider } from "firebase/auth";
 
   const toastOptions = {
     duration: 1500,
@@ -178,34 +174,36 @@
     }
   }
 
-  async function fbData(params) {
-    
-    if(params.detail.code) {
-      const res = await getInfoFacebook({
-        code: params.detail.code
-      });
-      
-      if(res.success) {
-        const userInfo = res.data;
-        const res1 = await signupSocial({
-          email: userInfo.email,
-          password: userInfo.id,
-          loginType: 'facebook'
-        })
-        
-        const res2 = await signIn({
-          email: userInfo.email,
-          password: userInfo.id,
-        });
+  async function signInWithGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    try {
+      const data = await firebase.auth().signInWithPopup(provider);
+      console.log(data.additionalUserInfo.profile);
+      // User signed in successfully
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-        if (res2.success) {
-          toast.success(res2.data.message);
-          globalStore.toggleItem("loginModalOpen", false);
-          handleTokens();
-        } else {
-          toast.error(res2.data.message);
-        }
-      }
+  async function signInWithFacebook() {
+    const provider = new firebase.auth.FacebookAuthProvider();
+    try {
+      const data = await firebase.auth().signInWithPopup(provider);
+      console.log(data.additionalUserInfo.profile);
+      // User signed in successfully
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function signInWithApple() {
+    const provider = new OAuthProvider('apple.com');;
+    try {
+      const data = await firebase.auth().signInWithPopup(provider);
+      console.log(data.additionalUserInfo.profile);
+      // User signed in successfully
+    } catch (error) {
+      console.error(error);
     }
   }
 </script>
@@ -519,23 +517,11 @@
       <div class="text-center">
         <ul class="login-socials">
           <li>
-            <form method="POST" action="?/OAuth2">
-              <button><img src="/img/google-plus.svg" onClick=""/></button>
-            </form>
+            <img src="/img/google-plus.svg" on:click="{signInWithGoogle}" style="cursor: pointer"/>
           </li>
-          
-          <li><img src="/img/apple.svg" /></li>
+          <li><img src="/img/apple.svg" style="cursor: pointer"/></li>
           <li>
-            <FacebookLogin
-              clientId={CLIENT_ID}
-              state="1"
-              on:success={fbData}
-              on:error={fbData}
-              redirectUri="http://localhost:10010/"
-              let:onLogin
-            >
-              <img src="/img/facebook.svg" onClick="" on:click={onLogin} style="cursor: pointer"/>
-            </FacebookLogin>
+            <img src="/img/facebook.svg" on:click="{signInWithFacebook}" style="cursor: pointer"/>
           </li>
         </ul>
       </div>

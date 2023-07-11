@@ -7,7 +7,6 @@
   import LoggedinHeader from "./HeaderLoggedin.svelte";
   import Toast from "svelte-toast";
   import { onMount } from "svelte";
-  import FacebookLogin from "svelte-facebook-login";
   import { signIn } from "../../../apis/account/Signin";
   import { getAccessToken } from "../../../apis/account/GetAccessToken";
   import { signOut } from "../../../apis/account/Signout";

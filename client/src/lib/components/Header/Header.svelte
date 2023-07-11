@@ -177,14 +177,14 @@
 
   async function signInWithGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
-    
-      const data = await firebase.auth().signInWithPopup(provider);
-      const userInfo = data.additionalUserInfo.profile;
-      const res = await signupSocial({
-        email: 'g_' + userInfo.id,
-        password: userInfo.id,
-        loginType: 'google'
-      })
+    await provider.addScope("email");
+    const data = await firebase.auth().signInWithPopup(provider);
+    const userInfo = data.additionalUserInfo.profile;
+    const res = await signupSocial({
+      email: 'g_' + userInfo.id,
+      password: userInfo.id,
+      loginType: 'google'
+    })
     try {
       const res1 = await signIn({
         email: 'g_' + userInfo.id,
@@ -205,6 +205,7 @@
 
   async function signInWithFacebook() {
     const provider = new firebase.auth.FacebookAuthProvider();
+    await provider.addScope("email");
     const data = await firebase.auth().signInWithPopup(provider);
     const userInfo = data.additionalUserInfo.profile;
     const res = await signupSocial({

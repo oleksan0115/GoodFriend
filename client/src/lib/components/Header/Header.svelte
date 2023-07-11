@@ -181,13 +181,13 @@
       const data = await firebase.auth().signInWithPopup(provider);
       const userInfo = data.additionalUserInfo.profile;
       const res = await signupSocial({
-        email: userInfo.email,
+        email: 'g_' + userInfo.id,
         password: userInfo.id,
         loginType: 'google'
       })
     try {
       const res1 = await signIn({
-        email: userInfo.email,
+        email: 'g_' + userInfo.id,
         password: userInfo.id,
       });
 
@@ -208,13 +208,13 @@
     const data = await firebase.auth().signInWithPopup(provider);
     const userInfo = data.additionalUserInfo.profile;
     const res = await signupSocial({
-      email: userInfo.email,
+      email: 'f_' + userInfo.id,
       password: userInfo.id,
       loginType: 'facebook'
     })
     try {
       const res1 = await signIn({
-        email: userInfo.email,
+        email: 'f_' + userInfo.id,
         password: userInfo.id,
       });
 
@@ -231,7 +231,7 @@
   }
 
   async function signInWithApple() {
-    const provider = new OAuthProvider('apple.com');;
+    const provider = new OAuthProvider('apple.com');
     try {
       const data = await firebase.auth().signInWithPopup(provider);
       console.log(data.additionalUserInfo.profile);

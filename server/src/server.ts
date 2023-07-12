@@ -24,18 +24,19 @@ app.use(cors({
 }));
 
 import * as middlewares from './middlewares/validation.middlewares';
-app.use("/api/account", middlewares.checkHeaders);
+app.use("/api/*", middlewares.checkHeaders);
 
 // account
 import accountRouter from "./routes/account.routes";
 app.use("/api/account", accountRouter);
 
-app.get("/api/casino/balance", (req, res) => {
-    console.log(req.query.username)
-    res.status(200).json({
-        "balance": 0
-    })
-})
+// casino
+import casinoRouter from "./routes/casino.routes"
+app.use("/api/casino", casinoRouter)
+
+// callback url
+import callbackRouter from "./routes/callback.routes"
+app.use("/callback", callbackRouter)
 
 const port:number = 9001
 app.listen(port, () => {

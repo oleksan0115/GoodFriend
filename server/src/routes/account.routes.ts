@@ -4,7 +4,6 @@ import * as controllers from "../controllers/account.controllers";
 
 const router: Router = express.Router();
 
-
 // sign-up
 router.post("/sign-up", middlewares.emailCheck, middlewares.authCodeCheck, middlewares.promoCodeCheck, controllers.signUp);
 router.post("/sign-up/email", middlewares.emailCheck, controllers.sendEmail);
@@ -16,7 +15,6 @@ router.post("/social/sign-up", middlewares.emailCheck, controllers.socialSignUp)
 router.post('/sign-in', controllers.signIn)
 router.post('/sign-in/success', controllers.signInSuccess)
 router.post('/sign-in/refresh', controllers.refresh)  
-
 
 //sign-out
 router.post('/sign-out', controllers.signOut)

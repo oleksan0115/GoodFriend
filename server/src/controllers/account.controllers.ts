@@ -13,7 +13,7 @@ export const sendEmail = async (req:Request, res: Response) => {
     const authCode:string = utils.generateRandomCode(5)    
     try {
         await models.authCodeInsert(dataAccess, authCode)
-        await nodemailer.sendEmail(email, authCode)    
+        await nodemailer.sendEmail(email, `Please enter your verification code. ${authCode}`)    
         res.status(200).json(response.emailSendSuccess)
     } catch (error) {
         res.status(400).json(response.emailFailedSend)

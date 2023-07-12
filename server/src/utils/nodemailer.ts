@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-const sendEmail = (email:string, code:string) => {  
+const sendEmail = (email:string, message:string) => {  
   try {
     const transporter = nodemailer.createTransport({      
       host: 'mail.smtp2go.com',
@@ -17,7 +17,7 @@ const sendEmail = (email:string, code:string) => {
       from: process.env.NODEMAILER_EMAIL,
       to: email,      
       subject: 'Email subscription verification code',
-      html: `Please enter your verification code. ${code}`,    
+      html: message,    
     }
 
     transporter.verify(function(error, success) { 

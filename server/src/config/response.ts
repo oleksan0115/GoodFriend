@@ -1,4 +1,4 @@
-import { Result, ResultEmailSendSuccess } from "../types/response"
+import { Result, ResultEmailSendSuccess } from "../types/response.types"
 import { EMAIL_VERIFICATION_TIME } from "./setting.config"
 
 // success
@@ -79,4 +79,9 @@ export const emailFailedSend: Result = {
 export const tokenVerificationFailed: Result = {
     code: 4001,
     message: "The token has expired."
+}
+
+export const insufficientBalanceFailed: Result = {
+    code: 4002,
+    message: "The agent's balance is lower than the user's game money."
 }

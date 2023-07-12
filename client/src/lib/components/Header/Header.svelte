@@ -571,8 +571,24 @@
           <li>
             <img src="/img/facebook.svg" on:click="{signInWithFacebook}" style="cursor: pointer"/>
           </li>
+          <li id="telegram-login">
+            <svg 
+              role="img" 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="1000mm"
+              height="1000mm"
+              viewBox="0 0 1000 1000"
+              style="max-width:1.6em; height: auto;">
+              
+              <path 
+                  id="path" 
+                  style="opacity:1;vector-effect:none;fill:#FFFFFF;fill-opacity:1;"
+                  d="M 500 0C 224 0 0 224 0 500C 0 776 224 1000 500 1000C 776 1000 1000 776 1000 500C 1000 224 776 0 500 0C 500 0 500 0 500 0 M 185 525C 185 525 185 525 185 525C 244 492 309 465 370 438C 476 394 581 350 688 309C 709 302 746 296 750 326C 748 370 740 413 734 457C 720 552 703 647 687 742C 681 774 642 790 616 770C 555 729 494 688 434 646C 414 626 432 597 450 583C 500 533 553 491 601 439C 614 408 576 434 563 442C 495 490 428 540 355 581C 318 602 275 584 238 573C 205 559 156 546 185 525C 185 525 185 525 185 525">
+              </path>    
+            </svg>
+          </li>
 
-          <div id="telegram-login"></div>
+          <!-- <div id="telegram-login"></div> -->
         </ul>
       </div>
     </div>

@@ -24,7 +24,7 @@ app.use(cors({
 }));
 
 import * as middlewares from './middlewares/validation.middlewares';
-app.use("/api/*", middlewares.checkHeaders);
+app.use("/api/account", middlewares.checkHeaders);
 
 // account
 import accountRouter from "./routes/account.routes";
@@ -32,7 +32,6 @@ app.use("/api/account", accountRouter);
 
 app.get("/api/balance", (req, res) => {
     console.log(req.query, 1111)
-
 })
 
 const port:number = 9001

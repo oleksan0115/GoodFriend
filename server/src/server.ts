@@ -31,8 +31,8 @@ import accountRouter from "./routes/account.routes";
 app.use("/api/account", accountRouter);
 
 app.get("/api/balance", (req, res) => {
-    console.log(req.query)
-    
+    console.log(req.query, 1111)
+
 })
 
 const port:number = 9001

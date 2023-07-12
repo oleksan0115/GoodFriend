@@ -32,7 +32,9 @@ app.use("/api/account", accountRouter);
 
 app.get("/api/casino/balance", (req, res) => {
     console.log(req.query.username)
-    res.status(200).json({balance: 0})
+    res.status(200).json({
+        "balance": 0
+    })
 })
 
 const port:number = 9001

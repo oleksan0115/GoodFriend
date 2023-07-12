@@ -19,6 +19,18 @@
   import firebase from '../../../apis/account/FirebaseConfig';
   import { OAuthProvider } from "firebase/auth";
 
+  const BOT_NAME = import.meta.env.VITE_TELEGRAM_BOT_NAME;
+  const REDIRECT_URL = import.meta.env.VITE_TELEGRAM_REDIRECT_URL;
+
+  function handleTelegram() {
+    const script = document.createElement('script');
+    script.src = 'https://telegram.org/js/telegram-widget.js?14';
+    script.setAttribute('data-telegram-login', BOT_NAME);
+    script.setAttribute('data-size', 'large');
+    script.setAttribute('data-auth-url', REDIRECT_URL);
+    document.getElementById('telegram-login').appendChild(script);
+  }
+
   const toastOptions = {
     duration: 1500,
     position: "top-right",
@@ -37,6 +49,7 @@
 
   onMount(async () => {
     handleTokens();
+    handleTelegram();
   });
 
   let forgotUserData = {
@@ -244,6 +257,7 @@
 
 <div class="topbar bg-color">
   <div class="row">
+    <div class="telegram-login-widget"></div>
     <div class="col-md-5 col-2 align-self-center">
       <div class="main-menu">
         <ul>
@@ -557,6 +571,8 @@
           <li>
             <img src="/img/facebook.svg" on:click="{signInWithFacebook}" style="cursor: pointer"/>
           </li>
+
+          <div id="telegram-login"></div>
         </ul>
       </div>
     </div>

@@ -30,8 +30,9 @@ app.use("/api/account", middlewares.checkHeaders);
 import accountRouter from "./routes/account.routes";
 app.use("/api/account", accountRouter);
 
-app.get("/api/balance", (req, res) => {
-    console.log(req.query, 1111)
+app.get("/api/casino/balance", (req, res) => {
+    console.log(req.query.username)
+    res.status(200).json({balance: 0})
 })
 
 const port:number = 9001

@@ -20,7 +20,7 @@ export const casinoHistoryInsert = async (dataAccess: any, affiliateCode: string
 
 export const memberGameMoneyChange = async (dataAccess: any, memberIdx: number, amount: number) => {
     const sql: string = `
-        INSERT INTO gf_member
+        UPDATE gf_member
             SET amount = amount + ?,
             WHERE member_idx = ?`
     const values: number[] = [memberIdx, amount]

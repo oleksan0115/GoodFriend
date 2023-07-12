@@ -29,9 +29,9 @@ export const changeBalance = async (req: Request, res: Response) => {
         "gf_member",
         "*",
         { column: "nick", condition: "=", data: username })
-        
-    await models.casinoHistoryInsert(dataAccess, member.affiliate_code, member.member_idx, member.nick, transaction.id, transaction.type, transaction.referer_id, transaction.amount, transaction.details.game.id, transaction.details.game.title, transaction.details.game.type, transaction.details.game.vendor)
-    await models.memberGameMoneyChange(dataAccess, member.member_idx, transaction.amount)
+    
+    await models.casinoHistoryInsert(dataAccess, member.affiliate_code, member.member_idx, member.nick, transaction.id, transaction.type, transaction.referer_id, amount, transaction.details.game.id, transaction.details.game.title, transaction.details.game.type, transaction.details.game.vendor)
+    await models.memberGameMoneyChange(dataAccess, member.member_idx, amount)
 
     res.status(200)
 }

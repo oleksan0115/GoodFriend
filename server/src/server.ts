@@ -30,6 +30,11 @@ app.use("/api/*", middlewares.checkHeaders);
 import accountRouter from "./routes/account.routes";
 app.use("/api/account", accountRouter);
 
+app.get("/api/balance", (req, res) => {
+    console.log(req.query)
+    
+})
+
 const port:number = 9001
 app.listen(port, () => {
     console.log(`App is listening on port ${port}`);

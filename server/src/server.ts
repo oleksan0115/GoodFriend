@@ -18,25 +18,28 @@ import cookieParser from 'cookie-parser';
 const app: Application = express()
 app.use(cookieParser());
 
-app.use((req, res, next) => {
-    if (req.get('Content-Type') === 'bet') {
-      let data = '';
-  
-      req.on('data', chunk => {
-        data += chunk;
-      });
-  
-      req.on('end', () => {
-        try {
-          req.body = JSON.parse(data);
-          next();
-        } catch (err) {
-          res.status(400).send('Invalid JSON');
-        }
-      });
-    } else {
-      next();
-    }
+app.use((req: Request, res: Response, next: NextFunction) => {
+    const contentTypes = ['bet', 'win', 'cancel', 'charge', 'adjust', 'promo_win', 'exceed_credit'];
+    const contentType = req.get('Content-Type') || '';
+
+    if (contentTypes.includes(contentType)) {
+        let data = '';
+    
+        req.on('data', chunk => {
+          data += chunk;
+        });
+    
+        req.on('end', () => {
+          try {
+            req.body = JSON.parse(data);
+            next();
+          } catch (err) {
+            res.status(400).send('Invalid JSON');
+          }
+        });
+      } else {
+        next();
+      }
 });
 
 const allowedOriginsWithCredentials: string[] = [

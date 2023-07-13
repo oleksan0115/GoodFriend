@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import path from "path"
+import rawBodyBuffer from 'raw-body';
 
 if(process.env.NODE_ENV === "production") {
     console.log("start production mode")
@@ -30,16 +31,31 @@ const specificDomain: string[] = [
 const customContentTypes: string[] = ['bet', 'win', 'cancel', 'charge', 'adjust', 'promo_win', 'exeed_credit'];
 
 app.use((req: Request, res: Response, next: NextFunction) => {
-    const origin: string|undefined = req.header('Origin');
-    const contentType: string|undefined = req.headers['content-type'];
+    const origin: string | undefined = req.header('Origin');
+    const contentType: string | undefined = req.headers['content-type'];
+
+    console.log(contentType)
 
     if (origin && contentType && specificDomain.includes(origin) && customContentTypes.includes(contentType)) {
-        bodyParser.json()(req, res, next); // body-parser 미들웨어를 사용하여 JSON으로 파싱
+        bodyParser.text()(req, res, (err) => {
+            if (err) {
+                return next(err);
+            }
+
+            // console.log(req.body);
+            console.log(11)
+
+            try {
+                req.body = JSON.parse(req.body);
+                next();
+            } catch (error) {
+                return next(error);
+            }
+        });
     } else {
-        bodyParser.json()(req, res, next); // 이 경우에도 JSON 파싱을 시도합니다. 만약 다른 content-type을 처리해야 한다면, 여기를 수정해주세요.
+        bodyParser.json()(req, res, next);
     }
 });
-
 
 app.use(cookieParser());
 

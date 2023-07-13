@@ -17,7 +17,7 @@ export const postUserCheck = async (req: Request, res: Response, next: NextFunct
     const {username} = req.body
     const check = await dataAccess.findOne(`gf_member`, `nick`, {column: "nick", condition: "=", data: username})
     
-    console.log(req.body)
+    console.log(username)
 
     if(check) {
         next()

@@ -55,7 +55,6 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     const origin: string | undefined = req.header('Origin');
     let corsOptions: CorsOptions;
 
-    console.log(origin)
     if (origin) {
         if (allowedOriginsWithCredentials.includes(origin)) {
             corsOptions = { origin: allowedOriginsWithCredentials, credentials: true };

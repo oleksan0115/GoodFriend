@@ -7,8 +7,6 @@ import * as response from "../config/response"
 import * as models from "../models/casino.models"
 
 export const responseBalance = async (req: Request, res: Response) => {
-    console.log(req.ip, req.ips)
-
     const {username} = req.query;
 
     const myInfo: MyInfo = await getMyInfo()
@@ -32,8 +30,6 @@ export const changeBalance = async (req: Request, res: Response) => {
         "gf_member",
         "*",
         { column: "nick", condition: "=", data: username })
-    
-    console.log(member)
 
     await models.casinoHistoryInsert(dataAccess, member.affiliate_code, member.member_idx, member.nick, transaction.id, transaction.type, transaction.referer_id, amount, transaction.details.game.id, transaction.details.game.title, transaction.details.game.round, transaction.details.game.type, transaction.details.game.vendor)
         .catch(res => console.log(res))

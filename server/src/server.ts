@@ -15,8 +15,32 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 
 const app: Application = express()
-app.use(bodyParser.json());
-app.use(express.json());
+
+const specificDomain: string[] = [
+    "45.76.148.155",
+    "45.77.174.118",
+    "45.76.185.1",
+    "45.77.248.182",
+    "45.76.179.104",
+    "45.76.179.39",
+    "45.76.160.35",
+    "52.74.15.8",
+    "139.180.209.126",
+    "https://backoffice.honorlink.org"];
+const customContentTypes: string[] = ['bet', 'win', 'cancel', 'charge', 'adjust', 'promo_win', 'exeed_credit'];
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+    const origin: string|undefined = req.header('Origin');
+    const contentType: string|undefined = req.headers['content-type'];
+
+    if (origin && contentType && specificDomain.includes(origin) && customContentTypes.includes(contentType)) {
+        bodyParser.json()(req, res, next); // body-parser 미들웨어를 사용하여 JSON으로 파싱
+    } else {
+        bodyParser.json()(req, res, next); // 이 경우에도 JSON 파싱을 시도합니다. 만약 다른 content-type을 처리해야 한다면, 여기를 수정해주세요.
+    }
+});
+
+
 app.use(cookieParser());
 
 const allowedOriginsWithCredentials: string[] = [

@@ -27,8 +27,6 @@ export const responseBalance = async (req: Request, res: Response) => {
 }
 
 export const changeBalance = async (req: Request, res: Response) => {
-    console.log(req.ip)
-    
     const { username, amount, transaction } = req.body
     const member: Member = await dataAccess.findOne(
         "gf_member",

@@ -16,30 +16,31 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 
 const app: Application = express()
+app.use(express.json());
 app.use(cookieParser());
 
-app.use((req: Request, res: Response, next: NextFunction) => {
-    const contentTypes = ['bet', 'win', 'cancel', 'charge', 'adjust', 'promo_win', 'exceed_credit'];
-    const contentType = req.get('Content-Type') || '';
+app.use((req, res, next) => {
+  const contentTypes = ['bet', 'win', 'cancel', 'charge', 'adjust', 'promo_win', 'exceed_credit'];
+  const contentType = req.get('Content-Type') || '';
 
-    if (contentTypes.includes(contentType)) {
-        let data = '';
-    
-        req.on('data', chunk => {
-          data += chunk;
-        });
-    
-        req.on('end', () => {
-          try {
-            req.body = JSON.parse(data);
-            next();
-          } catch (err) {
-            res.status(400).send('Invalid JSON');
-          }
-        });
-      } else {
+  if (contentTypes.includes(contentType) && contentType !== 'application/json') {
+    let data = '';
+
+    req.on('data', chunk => {
+      data += chunk;
+    });
+
+    req.on('end', () => {
+      try {
+        req.body = JSON.parse(data);
         next();
+      } catch (err) {
+        res.status(400).send('Invalid JSON');
       }
+    });
+  } else {
+    next();
+  }
 });
 
 const allowedOriginsWithCredentials: string[] = [

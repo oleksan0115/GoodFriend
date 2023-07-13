@@ -14,7 +14,6 @@ export const queryUserCheck = async (req: Request, res: Response, next: NextFunc
 }
 
 export const postUserCheck = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    console.log(req.body)
     const {username} = req.body
     const check = await dataAccess.findOne(`gf_member`, `nick`, {column: "nick", condition: "=", data: username})
     

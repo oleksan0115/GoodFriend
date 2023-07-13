@@ -16,7 +16,7 @@ export const responseBalance = async (req: Request, res: Response) => {
         {column: "nick", condition: "=", data: username })
     
     if(myInfo?.balance >= member?.game_money) {
-        console.log({balance: member.game_money}, member.nick)
+
         res.status(200).json({balance: member.game_money})
     } else {
         // Write notification code.

@@ -16,7 +16,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 
 const app: Application = express()
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(cookieParser());
 
 const allowedOriginsWithCredentials: string[] = [

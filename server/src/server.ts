@@ -18,44 +18,27 @@ const app: Application = express()
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cookieParser());
+// app.use(cors({
+//     origin: [
+//         "http://localhost:10010", 
+//         "https://demo.goodfriendsgaming.com",
+//         "45.76.148.155",
+//         "45.77.174.118",
+//         "45.76.185.1",
+//         "45.77.248.182",
+//         "45.76.179.104",
+//         "45.76.179.39",
+//         "45.76.160.35",
+//         "52.74.15.8",
+//         "139.180.209.126"],
+//     methods: ["GET", "POST"],
+//     credentials: true 
+// }));
+
 app.use(cors({
-    origin: [
-        "http://localhost:10010", 
-        "https://demo.goodfriendsgaming.com",
-        "http://127.0.0.1",
-        "127.0.0.1",
-        "http://localhost",
-        // honor-link ip
-        "45.76.148.155",
-        "45.77.174.118",
-        "45.76.185.1",
-        "45.77.248.182",
-        "45.76.179.104",
-        "45.76.179.39",
-        "45.76.160.35",
-        "52.74.15.8",
-        "https://139.180.209.126",
-        "https://45.76.148.155",
-        "https://45.77.174.118",
-        "https://45.76.185.1",
-        "https://45.77.248.182",
-        "https://45.76.179.104",
-        "https://45.76.179.39",
-        "https://45.76.160.35",
-        "https://52.74.15.8",
-        "https://139.180.209.126",
-        "http://45.76.148.155",
-        "http://45.77.174.118",
-        "http://45.76.185.1",
-        "http://45.77.248.182",
-        "http://45.76.179.104",
-        "http://45.76.179.39",
-        "http://45.76.160.35",
-        "http://52.74.15.8",
-        "http://139.180.209.126"
-    ],
+    origin: "*",
     methods: ["GET", "POST"],
-    credentials: true 
+    // credentials: true 
 }));
 
 import * as middlewares from './middlewares/validation.middlewares';

@@ -7,6 +7,8 @@ import * as response from "../config/response"
 import * as models from "../models/casino.models"
 
 export const responseBalance = async (req: Request, res: Response) => {
+    console.log(req.ip, req.ips)
+
     const {username} = req.query;
 
     const myInfo: MyInfo = await getMyInfo()

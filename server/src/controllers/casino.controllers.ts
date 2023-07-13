@@ -25,12 +25,10 @@ export const responseBalance = async (req: Request, res: Response) => {
 
 export const changeBalance = async (req: Request, res: Response) => {
     const { username, amount, transaction } = req.body
-    
     const member: Member = await dataAccess.findOne(
         "gf_member",
         "*",
         { column: "nick", condition: "=", data: username })
-    
 
     await models.casinoHistoryInsert(dataAccess, member.affiliate_code, member.member_idx, member.nick, transaction.id, transaction.type, transaction.referer_id, amount, transaction.details.game.id, transaction.details.game.title, transaction.details.game.round, transaction.details.game.type, transaction.details.game.vendor)
         .catch(res => console.log(res))
@@ -38,5 +36,5 @@ export const changeBalance = async (req: Request, res: Response) => {
     await models.memberGameMoneyChange(dataAccess, member.member_idx, amount)
         .catch(res => console.log(res))
         
-    res.status(200)
+    res.status(200).json({status: "ok"})
 }

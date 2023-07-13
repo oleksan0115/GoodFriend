@@ -16,6 +16,7 @@ import cookieParser from 'cookie-parser';
 
 const app: Application = express()
 app.use(bodyParser.json());
+app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
     origin: ["http://localhost:10010", "https://demo.goodfriendsgaming.com"],

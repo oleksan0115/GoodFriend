@@ -8,6 +8,6 @@ const router: Router = express.Router();
 router.get("/honor-link/balance", middlewares.queryUserCheck, controllers.responseBalance);
 
 // changeBalance (Callback URL)
-router.post("/honor-link/changeBalance", controllers.changeBalance)
+router.post("/honor-link/changeBalance", middlewares.postUserCheck, controllers.changeBalance)
 
 export default router;

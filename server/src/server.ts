@@ -16,47 +16,12 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 
 const app: Application = express()
-
-const specificDomain: string[] = [
-    "45.76.148.155",
-    "45.77.174.118",
-    "45.76.185.1",
-    "45.77.248.182",
-    "45.76.179.104",
-    "45.76.179.39",
-    "45.76.160.35",
-    "52.74.15.8",
-    "139.180.209.126",
-    "https://backoffice.honorlink.org"];
-const customContentTypes: string[] = ['bet', 'win', 'cancel', 'charge', 'adjust', 'promo_win', 'exceed_credit'];
-
-app.use((req: Request, res: Response, next: NextFunction) => {
-    const origin: string | undefined = req.header('Origin');
-    const contentType: string | undefined = req.headers['content-type'];
-
-    console.log(typeof req.body, req.body); // 추가. 요청 본문의 타입과 내용 출력
-
-    if (origin && contentType && specificDomain.includes(origin) && customContentTypes.includes(contentType)) {
-        bodyParser.text()(req, res, (err) => {
-            if (err) {
-                return next(err);
-            }
-
-            // console.log(req.body);
-            console.log(11)
-            next();
-        });
-    } else {
-        bodyParser.json()(req, res, next);
-    }
-});
-
+app.use(bodyParser.json());
 app.use(cookieParser());
 
 const allowedOriginsWithCredentials: string[] = [
     "http://localhost:10010", 
     "https://demo.goodfriendsgaming.com"];
-
 const allowedOriginsWithoutCredentials: string[] = [
     "45.76.148.155",
     "45.77.174.118",
@@ -86,6 +51,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     cors(corsOptions)(req, res, next);
 });
 
+// header check
 import * as middlewares from './middlewares/validation.middlewares';
 app.use("/api/*", middlewares.checkHeaders);
 

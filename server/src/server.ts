@@ -22,6 +22,8 @@ app.use(cors({
     origin: [
         "http://localhost:10010", 
         "https://demo.goodfriendsgaming.com",
+        "http://127.0.0.1",
+        "http://localhost",
         // honor-link ip
         "45.76.148.155",
         "45.77.174.118",

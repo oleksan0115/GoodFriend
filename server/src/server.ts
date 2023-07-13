@@ -44,13 +44,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
             // console.log(req.body);
             console.log(11)
-
-            try {
-                req.body = JSON.parse(req.body);
-                next();
-            } catch (error) {
-                return next(error);
-            }
+            next();
         });
     } else {
         bodyParser.json()(req, res, next);

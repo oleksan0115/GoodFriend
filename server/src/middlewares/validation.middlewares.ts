@@ -7,7 +7,7 @@ export const checkHeaders = async (req: Request, res: Response, next:NextFunctio
     const affiliateCode: any|undefined = req.headers["gf-affiliate-code"];
 
     const check = await dataAccess.findOne(
-        "gf_member", 
+        "gf_affiliate", 
         "api_key, affilite_code", 
         {column: "api_key", condition: "=", data: apiKey},
         {column: "affiliate_code", condition: "=", data: affiliateCode})

@@ -28,13 +28,13 @@ const specificDomain: string[] = [
     "52.74.15.8",
     "139.180.209.126",
     "https://backoffice.honorlink.org"];
-const customContentTypes: string[] = ['bet', 'win', 'cancel', 'charge', 'adjust', 'promo_win', 'exeed_credit'];
+const customContentTypes: string[] = ['bet', 'win', 'cancel', 'charge', 'adjust', 'promo_win', 'exceed_credit'];
 
 app.use((req: Request, res: Response, next: NextFunction) => {
     const origin: string | undefined = req.header('Origin');
     const contentType: string | undefined = req.headers['content-type'];
 
-    console.log(contentType)
+    console.log(typeof req.body, req.body); // 추가. 요청 본문의 타입과 내용 출력
 
     if (origin && contentType && specificDomain.includes(origin) && customContentTypes.includes(contentType)) {
         bodyParser.text()(req, res, (err) => {

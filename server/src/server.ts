@@ -58,11 +58,9 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     console.log(origin)
     if (origin) {
         if (allowedOriginsWithCredentials.includes(origin)) {
-            corsOptions = { origin: true, credentials: true };
-        } else if (allowedOriginsWithoutCredentials.includes(origin)) {
-            corsOptions = { origin: true, credentials: false };
+            corsOptions = { origin: allowedOriginsWithCredentials, credentials: true };
         } else {
-            corsOptions = { origin: false, credentials: false };
+            corsOptions = { origin: allowedOriginsWithoutCredentials, credentials: false };
         }
     } else {
         corsOptions = { origin: false, credentials: false };

@@ -15,12 +15,12 @@ export const responseBalance = async (req: Request, res: Response) => {
         "*",  
         {column: "nick", condition: "=", data: username })
     
-    console.log(member)
-    
     if(myInfo?.balance >= member?.game_money) {
+        console.log({balance: member.game_money})
         res.status(200).json({balance: member.game_money})
     } else {
         // Write notification code.
+        console.log(response.insufficientBalanceFailed)
         res.status(400).json(response.insufficientBalanceFailed)
     }
 }

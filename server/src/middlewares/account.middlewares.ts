@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import * as response from '../config/response';
-import * as models from '../models/account.models'
 import * as dataAccess from "../utils/dataAccess.utils"
 import * as setting from "../config/setting.config"
 

@@ -5,8 +5,8 @@ import * as controllers from "../controllers/casino.controllers";
 const router: Router = express.Router();
 
 // balance (Callback URL)
-router.get("/honor-link/balance", middlewares.userCheck, controllers.responseBalance);
+router.get("/honor-link/balance", middlewares.queryUserCheck, controllers.responseBalance);
 // changeBalance (Callback URL)
-router.post("/honor-link/changeBalance", middlewares.userCheck, controllers.changeBalance)
+router.post("/honor-link/changeBalance",  controllers.changeBalance)
 
 export default router;

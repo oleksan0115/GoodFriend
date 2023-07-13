@@ -48,7 +48,8 @@ const allowedOriginsWithoutCredentials: string[] = [
     "45.76.179.39",
     "45.76.160.35",
     "52.74.15.8",
-    "139.180.209.126"];
+    "139.180.209.126",
+    "https://backoffice.honorlink.org"];
 
 app.use((req: Request, res: Response, next: NextFunction) => {
     const origin: string | undefined = req.header('Origin');

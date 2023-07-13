@@ -8,7 +8,7 @@ export const checkHeaders = async (req: Request, res: Response, next:NextFunctio
 
     const check = await dataAccess.findOne(
         "gf_affiliate", 
-        "api_key, affilite_code", 
+        "api_key, affiliate_code", 
         {column: "api_key", condition: "=", data: apiKey},
         {column: "affiliate_code", condition: "=", data: affiliateCode})
         

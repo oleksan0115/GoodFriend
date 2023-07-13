@@ -87,6 +87,8 @@ export const findOne = async (table:string, select: string, ...where: CheckObjec
         values.push(v.data)
     })
 
+    console.log(sql, values)
+
     return new Promise((resolve, reject) => {
         db.query(sql, values, (err: any, rows: any) => {
             if(err) { 

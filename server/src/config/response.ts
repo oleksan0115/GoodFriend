@@ -85,3 +85,8 @@ export const insufficientBalanceFailed: Result = {
     code: 4002,
     message: "The agent's balance is lower than the user's game money."
 }
+
+export const noneUserFailed: Result = {
+    code: 4003,
+    message: "This user does not exist."
+} 

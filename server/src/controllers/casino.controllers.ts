@@ -15,7 +15,9 @@ export const responseBalance = async (req: Request, res: Response) => {
         "*",  
         {column: "nick", condition: "=", data: username })
     
-    if(myInfo.balance >= member.game_money) {
+    console.log(member)
+    
+    if(myInfo?.balance >= member?.game_money) {
         res.status(200).json({balance: member.game_money})
     } else {
         // Write notification code.
@@ -32,6 +34,6 @@ export const changeBalance = async (req: Request, res: Response) => {
     
     await models.casinoHistoryInsert(dataAccess, member.affiliate_code, member.member_idx, member.nick, transaction.id, transaction.type, transaction.referer_id, amount, transaction.details.game.id, transaction.details.game.title, transaction.details.game.type, transaction.details.game.vendor)
     await models.memberGameMoneyChange(dataAccess, member.member_idx, amount)
-
+    
     res.status(200)
 }

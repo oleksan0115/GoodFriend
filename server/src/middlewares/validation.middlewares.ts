@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import * as models from "../models/validation.models"
 import * as response from "../config/response"
 import * as dataAccess from "../utils/dataAccess.utils"
 

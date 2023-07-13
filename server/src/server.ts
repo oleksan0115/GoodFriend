@@ -16,8 +16,28 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 
 const app: Application = express()
-app.use(express.json());
 app.use(cookieParser());
+
+app.use((req, res, next) => {
+    if (req.get('Content-Type') === 'bet') {
+      let data = '';
+  
+      req.on('data', chunk => {
+        data += chunk;
+      });
+  
+      req.on('end', () => {
+        try {
+          req.body = JSON.parse(data);
+          next();
+        } catch (err) {
+          res.status(400).send('Invalid JSON');
+        }
+      });
+    } else {
+      next();
+    }
+});
 
 const allowedOriginsWithCredentials: string[] = [
     "http://localhost:10010", 

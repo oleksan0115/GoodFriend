@@ -6,7 +6,8 @@ const router: Router = express.Router();
 
 // balance (Callback URL)
 router.get("/honor-link/balance", middlewares.queryUserCheck, controllers.responseBalance);
+
 // changeBalance (Callback URL)
-router.post("/honor-link/changeBalance",  controllers.changeBalance)
+router.post("/honor-link/changeBalance", controllers.changeBalance)
 
 export default router;

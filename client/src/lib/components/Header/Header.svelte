@@ -18,6 +18,7 @@
   import { signupSocial } from "../../../apis/account/SignupSocial";
   import firebase from '../../../apis/account/FirebaseConfig';
   import { OAuthProvider } from "firebase/auth";
+  import { changeNickname } from '../../../apis/account/ChangeNickname';
 
   const BOT_NAME = import.meta.env.VITE_TELEGRAM_BOT_NAME;
   const REDIRECT_URL = import.meta.env.VITE_TELEGRAM_REDIRECT_URL;
@@ -48,7 +49,7 @@
   };
 
   onMount(async () => {
-    // handleTokens();
+    handleTokens();
     // handleTelegram();
   });
 
@@ -63,6 +64,10 @@
     password: "",
   };
 
+  let myProfileData = {
+    photo: "",
+    nick: "",
+  }
   $: {
     if ($globalStore.registerModalOpen == 0)
       signUpUserData = {
@@ -253,6 +258,20 @@
       console.error(error);
     }
   }
+
+  async function handleMyProfile(event) {
+    const res = await changeNickname({
+      memberIdx: $globalStore.userInfo.member_idx,
+      nick: myProfileData.nick,
+    })
+
+    if (res.success) {
+      toast.success(res.data.message);
+      handleTokens();
+    } else {
+      toast.error(res.data.message);
+    }
+  }
 </script>
 
 <div class="topbar bg-color">
@@ -382,6 +401,7 @@
             const userInfo = $globalStore.userDetail;
             userInfo.owner = true;
             userInfo.editState = false;
+            myProfileData.nick = $globalStore.userDetail.nick;
             globalStore.toggleItem("userInfo", userInfo);
             globalStore.toggleItem("profileModalOpen", false)
           }}
@@ -528,35 +548,37 @@
           </div>
         </div>
       {:else}
-        <div class="heading mt-4">
-          <h5 class="statistic-widget-title">
-            Default Images
-          </h5>
-        </div>
-        <div class="row">
-          <div class="col-md-4 col-4 paddinglr0">
-            <img class="w-100" src="/img/Rectangle-41.svg" />
+        <form on:submit={handleMyProfile}>
+          <div class="heading mt-4">
+            <h5 class="statistic-widget-title">
+              Default Images
+            </h5>
           </div>
-          <div class="col-md-4 col-4 paddinglr0">
-            <img class="w-100" src="/img/Rectangle-40.svg" />
+          <div class="row">
+            <div class="col-md-4 col-4 paddinglr0">
+              <img class="w-100" src="/img/Rectangle-41.svg" />
+            </div>
+            <div class="col-md-4 col-4 paddinglr0">
+              <img class="w-100" src="/img/Rectangle-40.svg" />
+            </div>
+            <div class="col-md-4 col-4 paddinglr0">
+              <img class="w-100" src="/img/Rectangle-38.svg" />
+            </div>
           </div>
-          <div class="col-md-4 col-4 paddinglr0">
-            <img class="w-100" src="/img/Rectangle-38.svg" />
-          </div>
-        </div>
 
-        <div class="heading mt-4">
-          <h5 class="statistic-widget-title">
-            Edit Nickname
-          </h5>
-        </div>
-        <div class="row">
-          <div class="input-item input_nick">
-            <input type="text">
+          <div class="heading mt-4">
+            <h5 class="statistic-widget-title">
+              Edit Nickname
+            </h5>
           </div>
-        </div>
+          <div class="row">
+            <div class="input-item input_nick">
+              <input type="text" name="nick" required bind:value={myProfileData.nick}>
+            </div>
+          </div>
 
-        <button class="text-white profile_save">Save</button>
+          <button class="text-white profile_save">Save</button>
+        </form>
       {/if}
   </div>
 </div>

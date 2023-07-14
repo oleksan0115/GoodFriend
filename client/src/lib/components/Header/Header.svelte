@@ -1,6 +1,6 @@
 <svelte:head>
-	<link  href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/2.0.0-alpha.2/cropper.css" rel="stylesheet">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/2.0.0-alpha.2/cropper.min.js"></script>
+	<link  href="https://fengyuanchen.github.io/cropperjs/css/cropper.css" rel="stylesheet">
+	<script src="https://fengyuanchen.github.io/cropperjs/js/cropper.js"></script>
 </svelte:head>
 
 <script>
@@ -24,7 +24,60 @@
   import firebase from '../../../apis/account/FirebaseConfig';
   import { OAuthProvider } from "firebase/auth";
   import { changeNickname } from '../../../apis/account/ChangeNickname';
+  import { changeProfileImage } from "../../../apis/account/ChangeProfileImage";
   import Cropper from 'cropperjs';
+
+  let input;
+  let container;
+  let image;
+  let placeholder;
+	let showImage = false;
+  let cropper;
+
+  function getRoundedCanvas(sourceCanvas) {
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext('2d');
+    var width = sourceCanvas.width;
+    var height = sourceCanvas.height;
+
+    canvas.width = width;
+    canvas.height = height;
+    context.imageSmoothingEnabled = true;
+    context.drawImage(sourceCanvas, 0, 0, width, height);
+    context.globalCompositeOperation = 'destination-in';
+    context.beginPath();
+    context.arc(width / 2, height / 2, Math.min(width, height) / 2, 0, 2 * Math.PI, true);
+    context.fill();
+    return canvas;
+  }
+
+  function onChange() {
+    const file = input.files[0];
+		
+    if (file) {
+			showImage = true;
+
+      const reader = new FileReader();
+      reader.addEventListener("load", function () {
+        image.setAttribute("src", reader.result);
+
+        cropper = new Cropper(image, {
+          aspectRatio: 1,
+          viewMode: 1,
+          crop(event) {
+            
+          },
+        });
+
+      });
+      reader.readAsDataURL(file);
+			
+			return;
+    } 
+		showImage = false; 
+    
+    
+  }
 
   const BOT_NAME = import.meta.env.VITE_TELEGRAM_BOT_NAME;
   const REDIRECT_URL = import.meta.env.VITE_TELEGRAM_REDIRECT_URL;
@@ -289,16 +342,31 @@
   }
 
   async function handleMyProfile(event) {
-    const res = await changeNickname({
+    const canvas = cropper.getCroppedCanvas();
+    const roundedCanvas = getRoundedCanvas(canvas);
+    const imageData = roundedCanvas.toDataURL('image/jpeg');
+       
+    const res = await changeProfileImage({
       memberIdx: $globalStore.userInfo.member_idx,
-      nick: myProfileData.nick,
+      profileImage: imageData,
     })
 
     if (res.success) {
       toast.success(res.data.message);
-      handleTokens();
     } else {
       toast.error(res.data.message);
+    }
+    
+    const res1 = await changeNickname({
+      memberIdx: $globalStore.userInfo.member_idx,
+      nick: myProfileData.nick,
+    })
+
+    if (res1.success) {
+      toast.success(res1.data.message);
+      handleTokens();
+    } else {
+      toast.error(res1.data.message);
     }
   }
 </script>
@@ -578,9 +646,26 @@
       {:else}
 
         <form on:submit={handleMyProfile}>
-          <div>
-            <img id="image" src="/img/111.jpg">
+          <div class="preview">
+            <input
+              bind:this={input}
+              on:change={onChange}
+              type="file"
+              style="display: none;"
+              id="fileinput"
+            />
+            <div bind:this={container} style="height: 200px !important;">
+              {#if showImage}
+                <img bind:this={image} src="" alt="Preview" id="image"/>
+              {:else}
+                <span class="cursor-pointer" bind:this={placeholder} on:click={() => {
+                  document.getElementById("fileinput").click();
+                }}>Image Preview</span>
+              {/if}
+            </div>
           </div>
+
+          <div id="result"></div>
 
           <div on:click={onCrop}>Crop</div>
 
@@ -974,5 +1059,20 @@
     background-color: darkgray;
   }
 
-  
+  .preview div {
+    width: 100%;
+    min-height: 100px;
+    border: 2px solid #ddd;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #ccc;
+  }
+
+  .preview img {
+    width: 100%;
+  }
+
 </style>

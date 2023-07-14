@@ -1,3 +1,8 @@
+<svelte:head>
+	<link  href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/2.0.0-alpha.2/cropper.css" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/2.0.0-alpha.2/cropper.min.js"></script>
+</svelte:head>
+
 <script>
   import BetSlip from "$lib/components/BetSlip/BetSlip.svelte";
   import globalStore from "../../../stores/globalStore";
@@ -19,6 +24,7 @@
   import firebase from '../../../apis/account/FirebaseConfig';
   import { OAuthProvider } from "firebase/auth";
   import { changeNickname } from '../../../apis/account/ChangeNickname';
+  import Cropper from 'cropperjs';
 
   const BOT_NAME = import.meta.env.VITE_TELEGRAM_BOT_NAME;
   const REDIRECT_URL = import.meta.env.VITE_TELEGRAM_REDIRECT_URL;
@@ -48,9 +54,32 @@
     password: "",
   };
 
+  function onCrop() {
+    const image = document.getElementById('image');
+    const cropper = new Cropper(image, {
+      aspectRatio: 16 / 9,
+      crop(event) {
+        console.log(event.detail.x);
+        console.log(event.detail.y);
+        console.log(event.detail.width);
+        console.log(event.detail.height);
+        console.log(event.detail.rotate);
+        console.log(event.detail.scaleX);
+        console.log(event.detail.scaleY);
+      },
+    });
+
+    const canvas = cropper.getCroppedCanvas();
+    // const croppedImageData = canvas.toDataURL('image/jpeg');
+    console.log('aaaaaaaaaaa', canvas)
+  }
   onMount(async () => {
-    handleTokens();
+    // handleTokens();
     // handleTelegram();
+    if ($globalStore.telegramUserData) {
+      alert("got the telegramUserData");
+      console.log(`userData: ${JSON.stringify($globalStore.telegramUserData)}`);
+    }
   });
 
   let forgotUserData = {
@@ -275,6 +304,7 @@
 </script>
 
 <div class="topbar bg-color">
+
   <div class="row">
     <div class="telegram-login-widget"></div>
     <div class="col-md-5 col-2 align-self-center">
@@ -473,7 +503,7 @@
       </div>
     </div>
 
-    
+    {#if !$globalStore.userInfo.editState}
       <div class="row">
         <div class="col-md-12 text-center">
           <div class="position-relative">
@@ -482,7 +512,7 @@
             </div>
             <img class="icon1" src="/img/Group-1585.svg" />
           </div>
-          {#if !$globalStore.userInfo.editState}
+          
             <div class="position-relative">
               <h6 class="text-white mb-2 mt-3">{$globalStore.userInfo.nick}</h6>
               <p class="mt-0">User Id: {$globalStore.userInfo.email}</p>
@@ -497,72 +527,80 @@
                 </div>
               {/if}
             </div>
-          {/if}
         </div>
       </div>
 
-      {#if !$globalStore.userInfo.editState}
-        <div class="heading mt-3">
-          <h5 class="statistic-widget-title">
-            <svg><use href="/img/symbols.svg?lang.svg#icon_statistics" /></svg> Statistics
-          </h5>
-        </div>
-        <div class="row">
-          <div class="col-md-4 col-4 paddinglr0">
-            <div class="wins text-center bg2 box-style">
-              <img class="mb-2" src="/img/Icon_medal.svg" />
-              <p class="mb-2">Total wins</p>
-              <h6>23432</h6>
-            </div>
-          </div>
-          <div class="col-md-4 col-4 paddinglr0">
-            <div class="wins text-center bg2 box-style">
-              <img class="mb-2" src="/img/Icon_casino-roulette.svg" />
-              <p class="mb-2">Total Bets</p>
-              <h6>15</h6>
-            </div>
-          </div>
-          <div class="col-md-4 col-4 paddinglr0">
-            <div class="wins text-center bg2 box-style">
-              <img class="mb-2" src="/img/Icon_casino-chips.svg" />
-              <p class="mb-2">Total Wagered</p>
-              <h6>$ 2,750</h6>
-            </div>
+      <div class="heading mt-3">
+        <h5 class="statistic-widget-title">
+          <svg><use href="/img/symbols.svg?lang.svg#icon_statistics" /></svg> Statistics
+        </h5>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-4 paddinglr0">
+          <div class="wins text-center bg2 box-style">
+            <img class="mb-2" src="/img/Icon_medal.svg" />
+            <p class="mb-2">Total wins</p>
+            <h6>23432</h6>
           </div>
         </div>
-        <div class="heading mt-4">
-          <h5 class="statistic-widget-title">
-            <svg><use href="/img/symbols.svg?lang.svg#icon_favorite" /></svg> Top 3 Favorite
-            Games
-          </h5>
-        </div>
-        <div class="row">
-          <div class="col-md-4 col-4 paddinglr0">
-            <img class="w-100" src="/img/Rectangle-41.svg" />
-          </div>
-          <div class="col-md-4 col-4 paddinglr0">
-            <img class="w-100" src="/img/Rectangle-40.svg" />
-          </div>
-          <div class="col-md-4 col-4 paddinglr0">
-            <img class="w-100" src="/img/Rectangle-38.svg" />
+        <div class="col-md-4 col-4 paddinglr0">
+          <div class="wins text-center bg2 box-style">
+            <img class="mb-2" src="/img/Icon_casino-roulette.svg" />
+            <p class="mb-2">Total Bets</p>
+            <h6>15</h6>
           </div>
         </div>
+        <div class="col-md-4 col-4 paddinglr0">
+          <div class="wins text-center bg2 box-style">
+            <img class="mb-2" src="/img/Icon_casino-chips.svg" />
+            <p class="mb-2">Total Wagered</p>
+            <h6>$ 2,750</h6>
+          </div>
+        </div>
+      </div>
+      <div class="heading mt-4">
+        <h5 class="statistic-widget-title">
+          <svg><use href="/img/symbols.svg?lang.svg#icon_favorite" /></svg> Top 3 Favorite
+          Games
+        </h5>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-4 paddinglr0">
+          <img class="w-100" src="/img/Rectangle-41.svg" />
+        </div>
+        <div class="col-md-4 col-4 paddinglr0">
+          <img class="w-100" src="/img/Rectangle-40.svg" />
+        </div>
+        <div class="col-md-4 col-4 paddinglr0">
+          <img class="w-100" src="/img/Rectangle-38.svg" />
+        </div>
+      </div>
       {:else}
+
         <form on:submit={handleMyProfile}>
+          <div>
+            <img id="image" src="/img/111.jpg">
+          </div>
+
+          <div on:click={onCrop}>Crop</div>
+
           <div class="heading mt-4">
             <h5 class="statistic-widget-title">
               Default Images
             </h5>
           </div>
           <div class="row">
-            <div class="col-md-4 col-4 paddinglr0">
-              <img class="w-100" src="/img/Rectangle-41.svg" />
+            <div class="col-md-3 col-3 paddinglr0">
+              <img class="cursor-pointer" src="/img/default_user1.svg" />
             </div>
-            <div class="col-md-4 col-4 paddinglr0">
-              <img class="w-100" src="/img/Rectangle-40.svg" />
+            <div class="col-md-3 col-3 paddinglr0">
+              <img class="cursor-pointer" src="/img/default_user2.svg" />
             </div>
-            <div class="col-md-4 col-4 paddinglr0">
-              <img class="w-100" src="/img/Rectangle-38.svg" />
+            <div class="col-md-3 col-3 paddinglr0">
+              <img class="cursor-pointer" src="/img/default_user3.svg" />
+            </div>
+            <div class="col-md-3 col-3 paddinglr0">
+              <img class="cursor-pointer" src="/img/default_user4.svg" />
             </div>
           </div>
 

@@ -39,3 +39,7 @@ export const changeBalance = async (req: Request, res: Response) => {
         
     res.status(200).json({status: "ok"})
 }
+
+export const getList = async (req: Request, res: Response) => {
+    models.getList(dataAccess)
+}

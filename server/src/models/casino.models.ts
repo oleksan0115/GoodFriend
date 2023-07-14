@@ -1,3 +1,5 @@
+import * as setting from "../config/setting.config"
+
 // change balance
 export const casinoHistoryInsert = async (dataAccess: any, affiliateCode: string, memberIdx: number, nick: string, transactionId: number, transactionType: string, refererId: number, amount: number, gameId: number, gameTitle: string, round: string, gameType: string, gameVendor: string)  => {
     
@@ -26,4 +28,16 @@ export const memberGameMoneyChange = async (dataAccess: any, memberIdx: number, 
             WHERE member_idx = ?`
     const values: number[] = [amount, memberIdx]
     return dataAccess.update(sql, values)
+}
+
+export const getList = async (dataAccess: any, page?: number, search?: string) => {
+    let sql: string = `SELECT * FROM r1_casino_game_list`
+    
+    if(search && search.length >= 4) sql += `WHERE title LIKE "%${search}%"`
+    
+    if(page) sql += `LIMIT ${page}, ${setting.GAME_LIST_LIMIT}`
+    if(!page) sql += `LIMIT 0, ${setting.GAME_LIST_LIMIT}`
+
+
+    return dataAccess.selectAll(sql, [])
 }

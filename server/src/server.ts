@@ -1,6 +1,5 @@
 import dotenv from 'dotenv';
 import path from "path"
-import rawBodyBuffer from 'raw-body';
 
 if(process.env.NODE_ENV === "production") {
     console.log("start production mode")
@@ -12,7 +11,6 @@ if(process.env.NODE_ENV === "production") {
 
 import express, { Application, Request, Response, NextFunction } from 'express';
 import cors, { CorsOptions } from 'cors';
-import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 
 const app: Application = express()
@@ -20,27 +18,27 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use((req, res, next) => {
-  const contentTypes = ['bet', 'win', 'cancel', 'charge', 'adjust', 'promo_win', 'exceed_credit'];
-  const contentType = req.get('Content-Type') || '';
+    const contentTypes = ['bet', 'win', 'cancel', 'charge', 'adjust', 'promo_win', 'exceed_credit'];
+    const contentType = req.get('Content-Type') || '';
 
-  if (contentTypes.includes(contentType) && contentType !== 'application/json') {
-    let data = '';
+    if (contentTypes.includes(contentType) && contentType !== 'application/json') {
+        let data = '';
 
-    req.on('data', chunk => {
-      data += chunk;
-    });
+        req.on('data', chunk => {
+        data += chunk;
+        });
 
-    req.on('end', () => {
-      try {
-        req.body = JSON.parse(data);
+        req.on('end', () => {
+            try {
+                req.body = JSON.parse(data);
+                next();
+            } catch (err) {
+                res.status(400).send('Invalid JSON');
+            }
+        });
+    } else {
         next();
-      } catch (err) {
-        res.status(400).send('Invalid JSON');
-      }
-    });
-  } else {
-    next();
-  }
+    }
 });
 
 const allowedOriginsWithCredentials: string[] = [
@@ -89,6 +87,7 @@ app.use("/api/casino", casinoRouter)
 
 // callback url
 import callbackRouter from "./routes/callback.routes"
+
 app.use("/callback", callbackRouter)
 
 const port:number = 9001

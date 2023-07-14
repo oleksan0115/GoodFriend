@@ -6,5 +6,5 @@ export interface QueryResult {
 export interface CheckObject {
     column: string;
     condition: string
-    data: string;
+    data: any;
 }

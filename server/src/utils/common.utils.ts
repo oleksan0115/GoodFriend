@@ -22,6 +22,7 @@ export const generateRandomNumber = (length: number): string => {
     return result;
 }
 
+/** create random number /2023-07-01/jino */
 export const hashWithSHA256 = (password: string) => {
     const hash = crypto.createHash('sha256');
     hash.update(process.env.SALT + password);

@@ -16,9 +16,22 @@ import cookieParser from 'cookie-parser';
 
 const app: Application = express()
 app.use(bodyParser.json());
+app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: ["http://localhost:10010", "https://demo.goodfriendsgaming.com"],
+    origin: [
+        "http://localhost:10010", 
+        "https://demo.goodfriendsgaming.com",
+        // honor-link ip
+        "45.76.148.155",
+        "45.77.174.118",
+        "45.76.185.1",
+        "45.77.248.182",
+        "45.76.179.104",
+        "45.76.179.39",
+        "45.76.160.35",
+        "52.74.15.8",
+        "139.180.209.126"],
     methods: ["GET", "POST"],
     credentials: true 
 }));
@@ -29,6 +42,14 @@ app.use("/api/*", middlewares.checkHeaders);
 // account
 import accountRouter from "./routes/account.routes";
 app.use("/api/account", accountRouter);
+
+// casino
+import casinoRouter from "./routes/casino.routes"
+app.use("/api/casino", casinoRouter)
+
+// callback url
+import callbackRouter from "./routes/callback.routes"
+app.use("/callback", callbackRouter)
 
 const port:number = 9001
 app.listen(port, () => {

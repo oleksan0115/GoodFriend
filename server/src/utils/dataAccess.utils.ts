@@ -1,7 +1,7 @@
 import db from "../config/database.config"
 import { QueryResult, CheckObject } from "../types/database.types"
 
-const selectOne = (sql:string, values: any[]): Promise<any> => {
+export const selectOne = (sql:string, values: any[]): Promise<any> => {
     return new Promise((resolve, reject) => {       
         db.query(sql, values, (err: any, rows: any) => {
             if(err) { 
@@ -14,7 +14,7 @@ const selectOne = (sql:string, values: any[]): Promise<any> => {
     })
 }
 
-const selectAll = (sql:string, values: any[]): Promise<any> => {
+export const selectAll = (sql:string, values: any[]): Promise<any> => {
     return new Promise((resolve, reject) => {       
         db.query(sql, values, (err: any, rows: any) => {
             if(err) { 
@@ -27,7 +27,7 @@ const selectAll = (sql:string, values: any[]): Promise<any> => {
     })
 }
 
-const insert = (sql: string, values: any[]): Promise<QueryResult> => {
+export const insert = (sql: string, values: any[]): Promise<QueryResult> => {
     return new Promise<QueryResult>((resolve, reject) => {
         db.query(sql, values, (err: any) => {
             if (err) {
@@ -43,7 +43,7 @@ const insert = (sql: string, values: any[]): Promise<QueryResult> => {
     });
 }
 
-const update = (sql: string, values: any[]): Promise<QueryResult> => {
+export const update = (sql: string, values: any[]): Promise<QueryResult> => {
     return new Promise<QueryResult>((resolve, reject) => {
         db.query(sql, values, (err: any) => {
             if (err) {
@@ -59,7 +59,7 @@ const update = (sql: string, values: any[]): Promise<QueryResult> => {
     });
 }
 
-const remove = (sql: string, values: any[]): Promise<QueryResult> => {
+export const remove = (sql: string, values: any[]): Promise<QueryResult> => {
     return new Promise<QueryResult>((resolve, reject) => {
         db.query(sql, values, (err: any) => {
             if (err) {
@@ -75,35 +75,50 @@ const remove = (sql: string, values: any[]): Promise<QueryResult> => {
     });
 }
 
-const sql: string = `
-    SELECT email FROM gf_member WHERER gf_member.idx = ? `
-
-const check = async (dataAccess: any, table:string, select: string, ...where: CheckObject[]) => {
+export const findOne = async (table:string, select: string, ...where: CheckObject[]): Promise<any> => {
     let sql: string = `SELECT ${select} FROM ${table} WHERE `
     let values: any[] = []
 
     where.forEach((v, i, arr) => {
-        if(i+1 === arr.length) {
-            sql += `${v.column} ${v.condition} `
-            sql += `? `
-        } 
-
-        else {
-            sql += `${v.column} ${v.condition} `
-            sql += `? `
+        sql += `${v.column} ${v.condition} ? `
+        if(i+1 !== arr.length) {
             sql += `AND `
         }
-
         values.push(v.data)
     })
-    
-    const data:any = await dataAccess.selectOne(sql, values)
 
-    if(data) {
-        return true
-    } else {
-        return false
-    }
+    return new Promise((resolve, reject) => {
+        db.query(sql, values, (err: any, rows: any) => {
+            if(err) { 
+                reject(err)
+                console.log(err)
+            } else {
+                resolve(rows[0])
+            }
+        })
+    })
 }
 
-export {selectOne, selectAll, insert, update, remove, check}
+export const findAll = async (table:string, select: string, ...where: CheckObject[]): Promise<any> => {
+    let sql: string = `SELECT ${select} FROM ${table} WHERE `
+    let values: any[] = []
+
+    where.forEach((v, i, arr) => {
+        sql += `${v.column} ${v.condition} ? `
+        if(i+1 !== arr.length) {
+            sql += `AND `
+        }
+        values.push(v.data)
+    })
+
+    return new Promise((resolve, reject) => {
+        db.query(sql, values, (err: any, rows: any) => {
+            if(err) { 
+                reject(err)
+                console.log(err)
+            } else {
+                resolve(rows)
+            }
+        })
+    })
+}

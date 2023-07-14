@@ -1,38 +1,6 @@
 import * as types from "../types/check.types"
 import * as setting from "../config/setting.config"
 
-// sign-up
-export const emailCheck = async (dataAccess: any, email: string) : Promise<boolean> => {
-    const check:boolean = await dataAccess.check(dataAccess, `gf_member`, `email`, {column: "email", condition: "=", data: email})
-    if(!check) {
-        return true
-    } else {
-        return false
-    }
-}
-
-export const authCodeCheck = async (dataAccess: any, authCode: string): Promise<boolean> => {
-    const check:boolean = await dataAccess.check(dataAccess, 
-        "gf_auth_code", 
-        "auth_code", 
-        {column: "auth_code", condition: "=", data: authCode},
-        {column: "reg_date", condition: ">=", data: `DATE_ADD(NOW(), INTERVAL -${setting.EMAIL_VERIFICATION_TIME} MINUTE) AND is_used = 0`})
-    if(check) {
-        return true
-    } else {
-        return false
-    }
-}
-
-export const promoCodeCheck = async (dataAccess: any, promoCode: string): Promise<boolean> => {
-    const check:boolean = await dataAccess.check(dataAccess,"gf_admin","promo_code", {column: "promo_code", condition: "=", data: promoCode})
-    if(check) {
-        return true
-    } else {
-        return false
-    }
-}
-
 export const authCodeInsert = async (dataAccess: any, authCode: string): Promise<any> => {
     const sql: string = `
         INSERT INTO gf_auth_code

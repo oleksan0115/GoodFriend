@@ -5,7 +5,7 @@ const globalStore = writable({
   sidebarWide: false,
   chatOpen: true,
   profileModalOpen: false,
-  userModalOpen: false,
+  // userModalOpen: false,
   betSlipOpen: false,
   loginModalOpen: false,
   registerModalOpen: 0,
@@ -15,7 +15,28 @@ const globalStore = writable({
   alert: false,
   alertText: "default alert",
   alertDanger: false,
-  userDetail: null,
+  userDetail: {
+    "member_idx": 3,
+    "email": "g_115965063647480354431",
+    "nick": "user6474563937",
+    "level": 1,
+    "game_money": 0,
+    "profile_image": "/newbie.png",
+    "login_type": "google",
+    "affiliate_code": "abcde"
+  },
+  userInfo: {
+    "member_idx": 3,
+    "email": "g_115965063647480354431",
+    "nick": "user6474563937",
+    "level": 1,
+    "game_money": 0,
+    "profile_image": "/newbie.png",
+    "login_type": "google",
+    "affiliate_code": "abcde",
+    "owner": false,
+    "editState": false
+  }
 });
 
 const store = {

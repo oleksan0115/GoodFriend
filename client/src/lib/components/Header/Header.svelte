@@ -48,8 +48,8 @@
   };
 
   onMount(async () => {
-    handleTokens();
-    handleTelegram();
+    // handleTokens();
+    // handleTelegram();
   });
 
   let forgotUserData = {
@@ -348,7 +348,7 @@
       <div class="border mt-3 mb-4" />
       <h4>My Account</h4>
       <ul class="menu">
-        <li class="active">
+        <li>
           <a id="setting" href="#">
             <svg
               ><use href="/img/symbols.svg?lang.svg#icon_modal_settings" /></svg
@@ -370,6 +370,26 @@
             > Withdraw</a
           >
         </li>
+        <li>
+          <a href="#"
+            ><svg
+              ><use href="/img/symbols.svg?lang.svg#icon_modal_deposit" /></svg
+            > Transactions</a
+          >
+        </li>
+        <li>
+          <a href="#" on:click={() => {
+            const userInfo = $globalStore.userDetail;
+            userInfo.owner = true;
+            userInfo.editState = false;
+            globalStore.toggleItem("userInfo", userInfo);
+            globalStore.toggleItem("profileModalOpen", false)
+          }}
+            ><svg
+              ><use href="/img/symbols.svg?lang.svg#icon_modal_deposit" /></svg
+            > My profile</a
+          >
+        </li>
       </ul>
       <div class="border mb-3 mt-3" />
       <ul class="menu">
@@ -383,15 +403,31 @@
 
 <BetSlip />
 
-<div class="user-information" class:open={$globalStore.userModalOpen}>
+{#if $globalStore.userInfo}
+<div class="user-information" class:open={$globalStore.userInfo}>
   <div
     class="overlay"
-    on:click={() => globalStore.toggleItem("userModalOpen", false)}
+    on:click={() => globalStore.toggleItem("userInfo", null)}
   />
   <div class="userinformation">
     <div class="row">
       <div class="col-md-8 col-7 align-self-center">
+        {#if $globalStore.userInfo.owner}
+          {#if !$globalStore.userInfo.editState}
+            <h4 class="mb-0">My Profile</h4>
+          {:else}
+            <div class="profile_title">
+              <svg class="profile_back cursor-pointer" on:click={() => {
+                const userInfo = $globalStore.userInfo;
+                userInfo.editState = false;
+                globalStore.toggleItem("userInfo", userInfo);
+              }}><use href="/img/symbols.svg?lang.svg#icon_arrow_left"/></svg>
+              <h4 class="mb-0">Edit Profile</h4>
+            </div>
+          {/if}
+        {:else}
         <h4 class="mb-0">User Information</h4>
+        {/if}        
       </div>
       <div class="col-md-4 col-5 text-end">
         <img
@@ -399,7 +435,7 @@
           class="mobilenone cancel-light"
           src="/img/close.svg"
           on:click={() => {
-            globalStore.toggleItem("userModalOpen", false);
+            globalStore.toggleItem("userInfo", false);
           }}
         />
         <img
@@ -407,74 +443,125 @@
           style="display:none"
           src="/img/close.svg"
           on:click={() => {
-            globalStore.toggleItem("userModalOpen", false);
+            globalStore.toggleItem("userInfo", false);
           }}
         />
 
-        <button id="mcloseduser" class="btn btn-back desknone float-end">
+        <!-- <button id="mcloseduser" class="btn btn-back desknone float-end">
           <img class="me-1" src="/img/Arrow-Right-1.svg" /> Back
-        </button>
+        </button> -->
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <div class="position-relative">
-          <div class="userback">
-            <img class="userimg" src="/img/user-img.svg" />
+
+    
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <div class="position-relative">
+            <div class="userback">
+              <img class="userimg" src="/img/user-img.svg" />
+            </div>
+            <img class="icon1" src="/img/Group-1585.svg" />
           </div>
-          <img class="icon1" src="/img/Group-1585.svg" />
-        </div>
-        <h6 class="text-white mb-2 mt-3">Stacey Miller</h6>
-        <p class="mt-0">User Id: @toles9388944</p>
-      </div>
-    </div>
-    <div class="heading mt-3">
-      <h5 class="statistic-widget-title">
-        <svg><use href="/img/symbols.svg?lang.svg#icon_statistics" /></svg> Statistics
-      </h5>
-    </div>
-    <div class="row">
-      <div class="col-md-4 col-4 paddinglr0">
-        <div class="wins text-center bg2 box-style">
-          <img class="mb-2" src="/img/Icon_medal.svg" />
-          <p class="mb-2">Total wins</p>
-          <h6>23432</h6>
-        </div>
-      </div>
-      <div class="col-md-4 col-4 paddinglr0">
-        <div class="wins text-center bg2 box-style">
-          <img class="mb-2" src="/img/Icon_casino-roulette.svg" />
-          <p class="mb-2">Total Bets</p>
-          <h6>15</h6>
+          {#if !$globalStore.userInfo.editState}
+            <div class="position-relative">
+              <h6 class="text-white mb-2 mt-3">{$globalStore.userInfo.nick}</h6>
+              <p class="mt-0">User Id: {$globalStore.userInfo.email}</p>
+              
+              {#if $globalStore.userInfo.owner}
+                <div class="icon_edit" on:click={() => {
+                  const userInfo = $globalStore.userInfo;
+                  userInfo.editState = true;
+                  globalStore.toggleItem("userInfo", userInfo);
+                }}>
+                  <img class="ic_edit" src="/img/Edit.svg"/>
+                </div>
+              {/if}
+            </div>
+          {/if}
         </div>
       </div>
-      <div class="col-md-4 col-4 paddinglr0">
-        <div class="wins text-center bg2 box-style">
-          <img class="mb-2" src="/img/Icon_casino-chips.svg" />
-          <p class="mb-2">Total Wagered</p>
-          <h6>$ 2,750</h6>
+
+      {#if !$globalStore.userInfo.editState}
+        <div class="heading mt-3">
+          <h5 class="statistic-widget-title">
+            <svg><use href="/img/symbols.svg?lang.svg#icon_statistics" /></svg> Statistics
+          </h5>
         </div>
-      </div>
-    </div>
-    <div class="heading mt-4">
-      <h5 class="statistic-widget-title">
-        <svg><use href="/img/symbols.svg?lang.svg#icon_favorite" /></svg> Top 3 Favorite
-        Games
-      </h5>
-    </div>
-    <div class="row">
-      <div class="col-md-4 col-4 paddinglr0">
-        <img class="w-100" src="/img/Rectangle-41.svg" />
-      </div>
-      <div class="col-md-4 col-4 paddinglr0">
-        <img class="w-100" src="/img/Rectangle-40.svg" />
-      </div>
-      <div class="col-md-4 col-4 paddinglr0">
-        <img class="w-100" src="/img/Rectangle-38.svg" />
-      </div>
-    </div>
+        <div class="row">
+          <div class="col-md-4 col-4 paddinglr0">
+            <div class="wins text-center bg2 box-style">
+              <img class="mb-2" src="/img/Icon_medal.svg" />
+              <p class="mb-2">Total wins</p>
+              <h6>23432</h6>
+            </div>
+          </div>
+          <div class="col-md-4 col-4 paddinglr0">
+            <div class="wins text-center bg2 box-style">
+              <img class="mb-2" src="/img/Icon_casino-roulette.svg" />
+              <p class="mb-2">Total Bets</p>
+              <h6>15</h6>
+            </div>
+          </div>
+          <div class="col-md-4 col-4 paddinglr0">
+            <div class="wins text-center bg2 box-style">
+              <img class="mb-2" src="/img/Icon_casino-chips.svg" />
+              <p class="mb-2">Total Wagered</p>
+              <h6>$ 2,750</h6>
+            </div>
+          </div>
+        </div>
+        <div class="heading mt-4">
+          <h5 class="statistic-widget-title">
+            <svg><use href="/img/symbols.svg?lang.svg#icon_favorite" /></svg> Top 3 Favorite
+            Games
+          </h5>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-4 paddinglr0">
+            <img class="w-100" src="/img/Rectangle-41.svg" />
+          </div>
+          <div class="col-md-4 col-4 paddinglr0">
+            <img class="w-100" src="/img/Rectangle-40.svg" />
+          </div>
+          <div class="col-md-4 col-4 paddinglr0">
+            <img class="w-100" src="/img/Rectangle-38.svg" />
+          </div>
+        </div>
+      {:else}
+        <div class="heading mt-4">
+          <h5 class="statistic-widget-title">
+            Default Images
+          </h5>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-4 paddinglr0">
+            <img class="w-100" src="/img/Rectangle-41.svg" />
+          </div>
+          <div class="col-md-4 col-4 paddinglr0">
+            <img class="w-100" src="/img/Rectangle-40.svg" />
+          </div>
+          <div class="col-md-4 col-4 paddinglr0">
+            <img class="w-100" src="/img/Rectangle-38.svg" />
+          </div>
+        </div>
+
+        <div class="heading mt-4">
+          <h5 class="statistic-widget-title">
+            Edit Nickname
+          </h5>
+        </div>
+        <div class="row">
+          <div class="input-item input_nick">
+            <input type="text">
+          </div>
+        </div>
+
+        <button class="text-white profile_save">Save</button>
+      {/if}
   </div>
 </div>
+
+{/if}
 
 <div class="login-box" class:open={$globalStore.loginModalOpen}>
   <div
@@ -826,4 +913,6 @@
     background: unset;
     background-color: darkgray;
   }
+
+  
 </style>

@@ -1151,7 +1151,6 @@ height: 219px;
   top: 78px;
   right: 0px;
   width: 336px;
-  height: 459px;
   z-index: 999;
 }
 
@@ -4781,8 +4780,6 @@ body:not(.chat-open) .back-to-top {
   z-index: 1;
   cursor: pointer; 
   filter: drop-shadow(0 1px 3px #7E2CFF) drop-shadow(0 1px 8px #596BF7);    
-  
-
 }
 
 .userprofile .user-image {
@@ -5018,4 +5015,88 @@ body:not(.chat-open) .back-to-top {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+body:not(.light-mode) .icon_edit {
+  position: absolute;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.10);
+  justify-content: center;
+  display: flex;
+  width: 40px;
+  height: 40px;
+  top: 10px;
+  right: 0px;
+  cursor: pointer;
+}
+
+body.light-mode .icon_edit {
+  position: absolute;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.10);
+  justify-content: center;
+  display: flex;
+  width: 40px;
+  height: 40px;
+  top: 10px;
+  right: 0px;
+  cursor: pointer;
+  filter: brightness(0.5);
+}
+
+.ic_edit {
+  width: 16px;
+}
+
+body.light-mode .profile_back{ 
+  width: 24px;
+  height: 24px;
+  fill: #000000;
+}
+
+body:not(.light-mode) .profile_back{ 
+  width: 24px;
+  height: 24px;
+  fill: #fff; 
+}
+
+.profile_title {
+  display: flex;
+  gap: 15px;
+}
+
+.profile_title h4 {
+  margin-top: 3px;
+}
+
+body:not(.light-mode) .input_nick input{
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.03);
+  width: 100%;
+  color: white;
+  height: 43px;
+  padding: 0 10px !important;
+}
+
+body.light-mode .input_nick input{
+  border-radius: 7px;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  background: rgba(0, 0, 0, 0.03);
+  width: 100%;
+  color: black;
+  height: 43px;
+  padding: 0 10px !important;
+}
+
+.profile_save {
+  border-radius: 7px;
+  background: radial-gradient(50.00% 50% at 50.00% 50.00%, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.18) 6.25%, rgba(0, 0, 0, 0.00) 79.34%), linear-gradient(173deg, #7E2CFF 0%, #596BF7 100%);
+  backdrop-filter: blur(1.8939393758773804px);
+  display: flex;
+  padding: 15px 192px;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+  width: 100%;
 }

@@ -34,51 +34,6 @@
 	let showImage = false;
   let cropper;
 
-  function getRoundedCanvas(sourceCanvas) {
-    var canvas = document.createElement('canvas');
-    var context = canvas.getContext('2d');
-    var width = sourceCanvas.width;
-    var height = sourceCanvas.height;
-
-    canvas.width = width;
-    canvas.height = height;
-    context.imageSmoothingEnabled = true;
-    context.drawImage(sourceCanvas, 0, 0, width, height);
-    context.globalCompositeOperation = 'destination-in';
-    context.beginPath();
-    context.arc(width / 2, height / 2, Math.min(width, height) / 2, 0, 2 * Math.PI, true);
-    context.fill();
-    return canvas;
-  }
-
-  function onChange() {
-    const file = input.files[0];
-		
-    if (file) {
-			showImage = true;
-
-      const reader = new FileReader();
-      reader.addEventListener("load", function () {
-        image.setAttribute("src", reader.result);
-
-        cropper = new Cropper(image, {
-          aspectRatio: 1,
-          viewMode: 1,
-          crop(event) {
-            
-          },
-        });
-
-      });
-      reader.readAsDataURL(file);
-			
-			return;
-    } 
-		showImage = false; 
-    
-    
-  }
-
   const BOT_NAME = import.meta.env.VITE_TELEGRAM_BOT_NAME;
   const REDIRECT_URL = import.meta.env.VITE_TELEGRAM_REDIRECT_URL;
 
@@ -107,28 +62,9 @@
     password: "",
   };
 
-  function onCrop() {
-    const image = document.getElementById('image');
-    const cropper = new Cropper(image, {
-      aspectRatio: 16 / 9,
-      crop(event) {
-        console.log(event.detail.x);
-        console.log(event.detail.y);
-        console.log(event.detail.width);
-        console.log(event.detail.height);
-        console.log(event.detail.rotate);
-        console.log(event.detail.scaleX);
-        console.log(event.detail.scaleY);
-      },
-    });
-
-    const canvas = cropper.getCroppedCanvas();
-    // const croppedImageData = canvas.toDataURL('image/jpeg');
-    console.log('aaaaaaaaaaa', canvas)
-  }
   onMount(async () => {
-    // handleTokens();
-    // handleTelegram();
+    handleTokens();
+    handleTelegram();
     if ($globalStore.telegramUserData) {
       alert("got the telegramUserData");
       console.log(`userData: ${JSON.stringify($globalStore.telegramUserData)}`);
@@ -172,6 +108,49 @@
         password: "",
       };
     }
+  }
+
+  function getRoundedCanvas(sourceCanvas) {
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext('2d');
+    var width = sourceCanvas.width;
+    var height = sourceCanvas.height;
+
+    canvas.width = width;
+    canvas.height = height;
+    context.imageSmoothingEnabled = true;
+    context.drawImage(sourceCanvas, 0, 0, width, height);
+    context.globalCompositeOperation = 'destination-in';
+    context.beginPath();
+    context.arc(width / 2, height / 2, Math.min(width, height) / 2, 0, 2 * Math.PI, true);
+    context.fill();
+    return canvas;
+  }
+
+  function onChange() {
+    const file = input.files[0];
+		
+    if (file) {
+			showImage = true;
+
+      const reader = new FileReader();
+      reader.addEventListener("load", function () {
+        image.setAttribute("src", reader.result);
+
+        cropper = new Cropper(image, {
+          aspectRatio: 1,
+          viewMode: 1,
+          crop(event) {
+            
+          },
+        });
+
+      });
+      reader.readAsDataURL(file);
+			
+			return;
+    } 
+		showImage = false; 
   }
 
   async function handleSignIn(event) {
@@ -345,7 +324,7 @@
     const canvas = cropper.getCroppedCanvas();
     const roundedCanvas = getRoundedCanvas(canvas);
     const imageData = roundedCanvas.toDataURL('image/jpeg');
-       
+
     const res = await changeProfileImage({
       memberIdx: $globalStore.userInfo.member_idx,
       profileImage: imageData,
@@ -666,8 +645,6 @@
           </div>
 
           <div id="result"></div>
-
-          <div on:click={onCrop}>Crop</div>
 
           <div class="heading mt-4">
             <h5 class="statistic-widget-title">

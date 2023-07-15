@@ -1,11 +1,6 @@
 /********************** SIGN UP SETTING **********************/  
-const EMAIL_VERIFICATION_TIME: number = 15 
-const INITIAL_PROFILE_IMAGE: string = "/newbie.png"
+export const EMAIL_VERIFICATION_TIME: number = 15 
+export const INITIAL_PROFILE_IMAGE: string = "https://storage.goodfriendszone.com/uploads/permanent/newbie.webp"
 
-
-/*************************************************************/
-
-export {
-    EMAIL_VERIFICATION_TIME,
-    INITIAL_PROFILE_IMAGE 
-}
+/********************** CASINO SETTING ***********************/
+export const GAME_LIST_LIMIT: number = 30

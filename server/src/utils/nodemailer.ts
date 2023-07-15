@@ -20,15 +20,15 @@ const sendEmail = (email:string, message:string) => {
       html: message,    
     }
 
-    transporter.verify(function(error, success) { 
-      if (error) { 
-              console.log(error); 
+    transporter.verify(function(err, success) { 
+      if (err) { 
+              console.log(err); 
         }
     });
 
     return transporter.sendMail(mailOptions)  
-  } catch (error) {
-    console.log(error)  
+  } catch (err) {
+    console.log(err)  
   }
 }
 

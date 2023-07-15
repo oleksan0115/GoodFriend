@@ -1,10 +1,19 @@
 import express, { Router, Request, Response } from 'express';
-import * as middlewares from '../middlewares/casino.middlewares';
 import * as controllers from "../controllers/casino.controllers";
 
 const router: Router = express.Router();
 
-router.post("/game-list")
-router.post("/game-type")
+
+// casino-list
+router.post("/list", controllers.getList)
+
+// casino launch
+router.post("/launch", controllers.launch)
+
+// casino info
+router.post("/info", controllers.info)
+
+// bet-result
+router.post("/bet-result", controllers.betHistoryResult)
 
 export default router;

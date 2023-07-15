@@ -832,7 +832,9 @@
           <li>
             <img src="/img/facebook.svg" on:click="{signInWithFacebook}" style="cursor: pointer"/>
           </li>
-          <li id="telegram-login">
+          <li on:click={() => {
+            document.getElementById("telegram-login").click();
+          }}>
             <svg 
               role="img" 
               xmlns="http://www.w3.org/2000/svg" 
@@ -848,7 +850,7 @@
               </path>    
             </svg>
           </li>
-
+          <div id="telegram-login" style="display: none;"></div>
         </ul>
       </div>
     </div>

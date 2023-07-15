@@ -3,10 +3,10 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
     server: {
-        port: 10010
+        port: 80
     },
     preview: {
-        port: 10010
+        port: 80
     },	
 	plugins: [sveltekit()]
 });

@@ -2159,14 +2159,14 @@ margin-top: -8px;
 }
 
 .userinformation .userimg {
-  border-radius: 100px;
+  border-radius: 50%;
   width: 120px;
 }
 
 .userback .userimg {
-  /* background-image: url(../img/Ellipse-7.svg); */
-  /* background-repeat: no-repeat; */
-  /* padding: 5px; */
+  /* background-image: url(../img/Ellipse-7.svg);
+  background-repeat: no-repeat;
+  padding: 5px; */
 }
 
 .userinformation h6 {

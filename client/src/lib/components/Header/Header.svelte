@@ -832,25 +832,21 @@
           <li>
             <img src="/img/facebook.svg" on:click="{signInWithFacebook}" style="cursor: pointer"/>
           </li>
-          <li on:click={() => {
-            document.getElementById("telegram-login").click();
-          }}>
-            <svg 
-              role="img" 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="1000mm"
-              height="1000mm"
-              viewBox="0 0 1000 1000"
-              style="max-width:1.6em; height: auto;">
-              
-              <path 
-                  id="path" 
-                  style="opacity:1;vector-effect:none;fill:#FFFFFF;fill-opacity:1;"
-                  d="M 500 0C 224 0 0 224 0 500C 0 776 224 1000 500 1000C 776 1000 1000 776 1000 500C 1000 224 776 0 500 0C 500 0 500 0 500 0 M 185 525C 185 525 185 525 185 525C 244 492 309 465 370 438C 476 394 581 350 688 309C 709 302 746 296 750 326C 748 370 740 413 734 457C 720 552 703 647 687 742C 681 774 642 790 616 770C 555 729 494 688 434 646C 414 626 432 597 450 583C 500 533 553 491 601 439C 614 408 576 434 563 442C 495 490 428 540 355 581C 318 602 275 584 238 573C 205 559 156 546 185 525C 185 525 185 525 185 525">
-              </path>    
+
+          <li class="cursor-pointer" style="position: relative;">
+            <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="42" height="42" rx="21" fill="#242531"/>
+              <g clip-path="url(#clip0_417_38742)">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M26.6186 14.967C26.8122 14.8855 27.0242 14.8574 27.2324 14.8856C27.4406 14.9139 27.6374 14.9974 27.8024 15.1274C27.9674 15.2575 28.0945 15.4295 28.1704 15.6254C28.2464 15.8212 28.2685 16.0339 28.2344 16.2412L26.4571 27.0216C26.2847 28.0615 25.1438 28.6578 24.1901 28.1399C23.3924 27.7065 22.2075 27.0389 21.1418 26.3422C20.6089 25.9935 18.9766 24.8768 19.1772 24.0822C19.3496 23.4028 22.0923 20.8498 23.6596 19.3319C24.2747 18.7355 23.9942 18.3915 23.2678 18.9401C21.4631 20.302 18.5676 22.3731 17.61 22.9562C16.7652 23.4702 16.3248 23.558 15.7982 23.4702C14.8375 23.3104 13.9465 23.0627 13.2193 22.761C12.2366 22.3535 12.2844 21.0026 13.2185 20.6092L26.6186 14.967Z" fill="white"/>
+              </g>
+              <defs>
+              <clipPath id="clip0_417_38742">
+              <rect width="24" height="24" fill="white" transform="translate(8 9)"/>
+              </clipPath>
+              </defs>
             </svg>
+            <div id="telegram-login" style="width: 40px; position: absolute; top: 0px; z-index: 1; opacity: 0;"></div>
           </li>
-          <div id="telegram-login" style="display: none;"></div>
         </ul>
       </div>
     </div>

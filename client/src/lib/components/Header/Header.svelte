@@ -69,6 +69,8 @@
     handleTelegram();
     if ($globalStore.telegramUserData) {
       console.log(`userData: ${JSON.stringify($globalStore.telegramUserData)}`);
+      const userInfo = JSON.stringify($globalStore.telegramUserData);
+      signInWithTelegram(userInfo)
     }
   });
 
@@ -321,6 +323,30 @@
     }
   }
 
+  async function signInWithTelegram(userInfo) {
+    const res = await signupSocial({
+      email: 't_' + userInfo.id,
+      password: userInfo.id,
+      loginType: 'telegram'
+    })
+    try {
+      const res1 = await signIn({
+        email: 't_' + userInfo.id,
+        password: userInfo.id,
+      });
+
+      if (res1.success) {
+        toast.success(res1.data.message);
+        globalStore.toggleItem("loginModalOpen", false);
+        handleTokens();
+      } else {
+        toast.error(res1.data.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   function dataURItoBlob(dataURI) {
     const byteString = atob(dataURI.split(',')[1]);
     const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
@@ -423,6 +449,8 @@
       <LoginHeader />
     {/if}
   </div>
+
+  {#if $globalStore.userDetail}
   <div class="usershow" class:open={$globalStore.profileModalOpen}>
     <div
       class="overlay"
@@ -518,6 +546,7 @@
       </ul>
     </div>
   </div>
+  {/if}
 </div>
 
 <BetSlip />
@@ -577,7 +606,7 @@
         <div class="col-md-12 text-center">
           <div class="position-relative">
             <div class="userback">
-              <img class="userimg" src={$globalStore.userDetail.profile_image} />
+              <img class="userimg" src={$globalStore.userInfo.profile_image} />
             </div>
             <img class="icon1" src="/img/Group-1585.svg" />
           </div>
@@ -820,7 +849,6 @@
             </svg>
           </li>
 
-          <!-- <div id="telegram-login"></div> -->
         </ul>
       </div>
     </div>

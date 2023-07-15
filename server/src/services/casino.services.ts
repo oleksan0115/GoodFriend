@@ -12,9 +12,9 @@ export const getMyInfo = (): Promise<MyInfo> => {
     };
 
     return new Promise((resolve, reject) => {
-        axios.get(endpoint, {headers})
-            .then(response => {resolve(response.data)})
-            .catch(error => {reject(error)})
+        // axios.get(endpoint, {headers})
+        //     .then(response => {resolve(response.data)})
+        //     .catch(error => {reject(error)})
     })
 }
 

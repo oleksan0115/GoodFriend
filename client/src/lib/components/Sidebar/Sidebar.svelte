@@ -61,7 +61,6 @@ let mobileOptions=false;
         <svg id="smoll_menu"><use href="/img/symbols.svg?lang.svg#icon_arrow_left"/>
         </svg>
         <img id="closed_menu" src="/img/close.svg" />
-       
     </button>
     <div class="pe-4 pt-3 ps-4">
         <div class="logo">

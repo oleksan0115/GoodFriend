@@ -52,7 +52,7 @@
     }}>
       <div class="col-md-4">
         <div class="mobileuser">
-          <img width="40px" height="40px" src="/img/user.svg" />
+          <img width="40px" height="40px" src={$globalStore.userDetail.profile_image} />
           <img class="desknone icon_" src="/img/Group-1583.svg" />
         </div>
       </div>

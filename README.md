@@ -35,6 +35,7 @@ Please manage your affiliate code and API key through Sveltekit's env.
 }
 
 //400
+````
 
 > Casino Launch
 - endpoint: /api/casino/launch

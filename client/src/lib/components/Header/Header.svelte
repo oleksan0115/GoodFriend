@@ -431,7 +431,7 @@
     <div class="userprofile">
       <div class="row">
         <div class="col-md-3 col-3">
-          <img class="user-image" src="/img/user.svg" />
+          <img class="user-image" src={$globalStore.userDetail.profile_image} />
         </div>
         <div class="col-md-7 col-7 pe-0 ps-0">
           <h6 class="text-white mb-0">
@@ -577,7 +577,7 @@
         <div class="col-md-12 text-center">
           <div class="position-relative">
             <div class="userback">
-              <img class="userimg" src="/img/user-img.svg" />
+              <img class="userimg" src={$globalStore.userDetail.profile_image} />
             </div>
             <img class="icon1" src="/img/Group-1585.svg" />
           </div>

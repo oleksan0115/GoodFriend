@@ -1,7 +1,8 @@
-import { redirect } from "@sveltejs/kit";
-
-/** @type {import('./$types').PageServerLoad} */
 export async function load({ url }) {
-  return { url };
-  throw redirect(303, "/");
-};
+  const data = Object.fromEntries(
+    new URLSearchParams(url.toJSON().split("?")[1])
+  );
+  delete data.auth_date;
+  delete data.hash;
+  return data;
+}

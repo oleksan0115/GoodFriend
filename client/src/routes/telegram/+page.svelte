@@ -6,8 +6,9 @@
   /** @type {import('./$types').PageData} */
   export let data;
 
-  $: if (data.userData && browser) {
-    $globalStore.telegramUserData = data.userData;
+  
+  $: if (data && browser) {
+    globalStore.toggleItem('telegramUserData', data);
     goto("/");
   }
 </script>

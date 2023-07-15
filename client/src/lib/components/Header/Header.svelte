@@ -26,6 +26,8 @@
   import { changeNickname } from '../../../apis/account/ChangeNickname';
   import { changeProfileImage } from "../../../apis/account/ChangeProfileImage";
   import Cropper from 'cropperjs';
+  import { saveTempImage } from '../../../apis/Image/SaveTempImage';
+    import { saveImageWebp } from "../../../apis/Image/SaveImageWebp";
 
   let input;
   let container;
@@ -66,7 +68,6 @@
     handleTokens();
     handleTelegram();
     if ($globalStore.telegramUserData) {
-      alert("got the telegramUserData");
       console.log(`userData: ${JSON.stringify($globalStore.telegramUserData)}`);
     }
   });
@@ -320,14 +321,35 @@
     }
   }
 
+  function dataURItoBlob(dataURI) {
+    const byteString = atob(dataURI.split(',')[1]);
+    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ab], { type: mimeString });
+  }
+
   async function handleMyProfile(event) {
+
     const canvas = cropper.getCroppedCanvas();
     const roundedCanvas = getRoundedCanvas(canvas);
     const imageData = roundedCanvas.toDataURL('image/jpeg');
 
+    const formData = new FormData();
+    const blob = dataURItoBlob(imageData);
+    const fileInput = document.getElementById('fileinput');
+    const file = fileInput.files[0];
+    formData.append('image', file);
+
+    const tempFile = await saveTempImage({formData});
+    const permanentFile = await saveImageWebp({filename: tempFile.data.filename, ext: "webp"});
+
     const res = await changeProfileImage({
       memberIdx: $globalStore.userInfo.member_idx,
-      profileImage: imageData,
+      profileImage: permanentFile.data.Headerpath,
     })
 
     if (res.success) {
@@ -633,6 +655,7 @@
               style="display: none;"
               id="fileinput"
             />
+
             <div bind:this={container} style="height: 200px !important;">
               {#if showImage}
                 <img bind:this={image} src="" alt="Preview" id="image"/>

@@ -941,9 +941,10 @@ height: 219px;
   position: absolute;
   left: 0;
   right: 0;
-  top: 0;
+  top: 0px;
+  bottom: 0px;
   margin: 0 auto;
-  z-index: 11111;
+  z-index: 1111;
 }
 
 .boxfive .nav-tabs .nav-item.show .nav-link,
@@ -1355,9 +1356,20 @@ margin-top: -8px;
   fill: #fff;
 }
 
+.owl-minigames {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 1.5rem;
+}
+
 .owl-minigames .item {
   width: 100%;
   display: inline-block;
+}
+
+.owl-minigames .casino-item {
+  padding-right: calc(var(--bs-gutter-x) * .5);
+  padding-left: calc(var(--bs-gutter-x) * .5);
 }
 
 .owl-minigames .item {
@@ -2962,6 +2974,7 @@ ul.dropdown-menu li a.dropdown-item::after {
 .left-side-bar .menu-item-icon span {
   line-height: 16px;
   padding-top: 6px;
+  /* height: 32px; */
 }
 
 

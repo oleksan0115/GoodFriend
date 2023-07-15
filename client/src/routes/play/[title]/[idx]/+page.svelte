@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import globalStore from "../../stores/globalStore";
+
   import { Navigation, Pagination, Scrollbar, A11y, Grid } from "swiper";
 
   import { Swiper, SwiperSlide } from "swiper/svelte";
@@ -23,7 +23,6 @@
     });
   });
 
-  $: isLoggedIn = $globalStore.userDetail;
   let commentBoxOpen=false;
 </script>
 
@@ -39,7 +38,7 @@
   <div class="box">
     <div class="container">
       <div class="play_img text-center mobilenone">
-        <img class="w-100 main" src="img/image-39.svg" style={!isLoggedIn? "filter: blur(5px);": ""}/>
+        <img class="w-100 main" src="img/image-39.svg" />
         <div class="overlay" />
         <div class="text-content">
           <p class="mb-3">
@@ -66,7 +65,7 @@
       </div>
     </div>
     <div class="play_img text-center desknone">
-      <img class="main desknone" src="img/bg_img.svg" style={!isLoggedIn ? "filter: blur(5px);": ""}/>
+      <img class="main desknone" src="img/bg_img.svg" />
       <div class="overlay" />
       <div class="text-content">
         <div class="boxsix">
@@ -109,7 +108,7 @@
     </div>
   </div>
   <div class="container">
-    <!-- <div class="boxsix mt-4 mobilenone">
+    <div class="boxsix mt-4 mobilenone">
       <div class="row">
         <div class="col-md-2 col-4 ps-0">
           <img class="w-100" src="img/Rectangle-38.svg" />
@@ -136,10 +135,217 @@
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
+    <div class="boxsecond boxforth mobilenone">
+      <div class="row">
+        <div class="col-md-12 categories-swiper-top swiper-top">
+          <h2 class="title">Related Games</h2>
+
+          <div class="swiper-navigation">
+            <button class="swiper-prev-btn categories-prev">
+              <svg
+                style="transform:rotate(180deg)"
+                width="8"
+                height="14"
+                viewBox="0 0 8 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M0.46967 0.46967C0.762563 0.176777 1.23744 0.176777 1.53033 0.46967L7.53033 6.46967C7.82322 6.76256 7.82322 7.23744 7.53033 7.53033L1.53033 13.5303C1.23744 13.8232 0.762563 13.8232 0.46967 13.5303C0.176777 13.2374 0.176777 12.7626 0.46967 12.4697L5.93934 7L0.46967 1.53033C0.176777 1.23744 0.176777 0.762563 0.46967 0.46967Z"
+                  fill="url(#paint0_linear_615_16097)"
+                />
+                <defs>
+                  <linearGradient
+                    id="paint0_linear_615_16097"
+                    x1="1.66667"
+                    y1="-2.3"
+                    x2="8.01308"
+                    y2="-1.50789"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stop-color="#C6A3FF" />
+                    <stop offset="1" stop-color="#7E8BED" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </button>
+            <button class="swiper-next-btn categories-next">
+              <svg
+                width="8"
+                height="14"
+                viewBox="0 0 8 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M0.46967 0.46967C0.762563 0.176777 1.23744 0.176777 1.53033 0.46967L7.53033 6.46967C7.82322 6.76256 7.82322 7.23744 7.53033 7.53033L1.53033 13.5303C1.23744 13.8232 0.762563 13.8232 0.46967 13.5303C0.176777 13.2374 0.176777 12.7626 0.46967 12.4697L5.93934 7L0.46967 1.53033C0.176777 1.23744 0.176777 0.762563 0.46967 0.46967Z"
+                  fill="url(#paint0_linear_615_16097)"
+                />
+                <defs>
+                  <linearGradient
+                    id="paint0_linear_615_16097"
+                    x1="1.66667"
+                    y1="-2.3"
+                    x2="8.01308"
+                    y2="-1.50789"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stop-color="#C6A3FF" />
+                    <stop offset="1" stop-color="#7E8BED" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="owl-minigames">
+        <div class="row oc1">
+          <Swiper
+            spaceBetween={15}
+            slidesPerView={2}
+            modules={[Pagination]}
+            breakpoints={{
+              0: {
+                slidesPerView: 2,
+              },
+              768: {
+                slidesPerView: 4,
+              },
+              1024: {
+                slidesPerView: 4,
+              },
+              1400: {
+                slidesPerView: 5,
+              },
+            }}
+          >
+            <SwiperSlide>
+                <div class="item text-white">
+                  <div class="box">
+                    <img class="mainimg" src="img/Rectangle-38.svg" />
+                    <div class="hover">
+                      <img src="img/hover.svg" />
+                    </div>
+                    <div class="content">
+                      <p>
+                        Tiny Gods
+                        <span class="float-end"
+                          ><img src="img/info-circle.svg" /></span
+                        >
+                      </p>
+                    </div>
+                  </div>
+                </div>
+            </SwiperSlide>
+
+            <SwiperSlide>
+                <div class="item text-white">
+                  <div class="box">
+                    <img class="mainimg" src="img/Rectangle-39.svg" />
+                    <div class="hover">
+                      <img src="img/hover.svg" />
+                    </div>
+                    <div class="content">
+                      <p>
+                        Tiny Gods
+                        <span class="float-end"
+                          ><img src="img/info-circle.svg" /></span
+                        >
+                      </p>
+                    </div>
+                  </div>
+                </div>
+            </SwiperSlide>
+
+            <SwiperSlide>
+                <div class="item text-white">
+                  <div class="box">
+                    <img class="mainimg" src="img/Rectangle-40.svg" />
+                    <div class="hover">
+                      <img src="img/hover.svg" />
+                    </div>
+                    <div class="content">
+                      <p>
+                        Tiny Gods
+                        <span class="float-end"
+                          ><img src="img/info-circle.svg" /></span
+                        >
+                      </p>
+                    </div>
+                  </div>
+                </div>
+            </SwiperSlide>
+
+            <SwiperSlide>
+                <div class="item text-white">
+                  <div class="box">
+                    <img class="mainimg" src="img/Rectangle-41.svg" />
+                    <div class="hover">
+                      <img src="img/hover.svg" />
+                    </div>
+                    <div class="content">
+                      <p>
+                        Tiny Gods
+                        <span class="float-end"
+                          ><img src="img/info-circle.svg" /></span
+                        >
+                      </p>
+                    </div>
+                  </div>
+                </div>
+            </SwiperSlide>
+
+            <SwiperSlide>
+                <div class="item text-white">
+                  <div class="box">
+                    <img class="mainimg" src="img/Rectangle-42.svg" />
+                    <div class="hover">
+                      <img src="img/hover.svg" />
+                    </div>
+                    <div class="content">
+                      <p>
+                        Tiny Gods
+                        <span class="float-end"
+                          ><img src="img/info-circle.svg" /></span
+                        >
+                      </p>
+                    </div>
+                  </div>
+                </div>
+            </SwiperSlide>
+
+            <SwiperSlide>
+                <div class="item text-white">
+                  <div class="box">
+                    <img class="mainimg" src="img/game1.svg" />
+                    <div class="hover">
+                      <img src="img/hover.svg" />
+                    </div>
+                    <div class="content">
+                      <p>
+                        Tiny Gods
+                        <span class="float-end"
+                          ><img src="img/info-circle.svg" /></span
+                        >
+                      </p>
+                    </div>
+                  </div>
+                </div>
+            </SwiperSlide>
+          </Swiper>
+        </div>
+      </div>
+    </div>
     <div class="row">
       <div class="col-lg-7 col-sm-12" style="flex-grow: 1;">
-        <div class="boxsecond boxfive mt-xxl-40">
+        <div class="boxsecond boxfive mt-0 mt-xxl-40">
           <div class="row">
             <div class="col-md-12">
               <h2 class="mobilenone">Latest Bet & Race</h2>
@@ -163,7 +369,7 @@
                   LATEST BETS
                 </button>
               </li>
-              <!-- <li class="nav-item" role="presentation">
+              <li class="nav-item" role="presentation">
                 <button
                   class="nav-link"
                   id="deposits-tab"
@@ -192,7 +398,7 @@
                 >
                   Recent Withdrawals
                 </button>
-              </li> -->
+              </li>
             </ul>
             <div class="tab-content" id="myTabContent">
               <div
@@ -487,214 +693,6 @@
       </div>
       {/if}
 
-    </div>
-
-    <div class="boxsecond boxforth mobilenone">
-      <div class="row">
-        <div class="col-md-12 categories-swiper-top swiper-top">
-          <h2 class="title">Related Games</h2>
-
-          <div class="swiper-navigation">
-            <button class="swiper-prev-btn categories-prev">
-              <svg
-                style="transform:rotate(180deg)"
-                width="8"
-                height="14"
-                viewBox="0 0 8 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M0.46967 0.46967C0.762563 0.176777 1.23744 0.176777 1.53033 0.46967L7.53033 6.46967C7.82322 6.76256 7.82322 7.23744 7.53033 7.53033L1.53033 13.5303C1.23744 13.8232 0.762563 13.8232 0.46967 13.5303C0.176777 13.2374 0.176777 12.7626 0.46967 12.4697L5.93934 7L0.46967 1.53033C0.176777 1.23744 0.176777 0.762563 0.46967 0.46967Z"
-                  fill="url(#paint0_linear_615_16097)"
-                />
-                <defs>
-                  <linearGradient
-                    id="paint0_linear_615_16097"
-                    x1="1.66667"
-                    y1="-2.3"
-                    x2="8.01308"
-                    y2="-1.50789"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop stop-color="#C6A3FF" />
-                    <stop offset="1" stop-color="#7E8BED" />
-                  </linearGradient>
-                </defs>
-              </svg>
-            </button>
-            <button class="swiper-next-btn categories-next">
-              <svg
-                width="8"
-                height="14"
-                viewBox="0 0 8 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M0.46967 0.46967C0.762563 0.176777 1.23744 0.176777 1.53033 0.46967L7.53033 6.46967C7.82322 6.76256 7.82322 7.23744 7.53033 7.53033L1.53033 13.5303C1.23744 13.8232 0.762563 13.8232 0.46967 13.5303C0.176777 13.2374 0.176777 12.7626 0.46967 12.4697L5.93934 7L0.46967 1.53033C0.176777 1.23744 0.176777 0.762563 0.46967 0.46967Z"
-                  fill="url(#paint0_linear_615_16097)"
-                />
-                <defs>
-                  <linearGradient
-                    id="paint0_linear_615_16097"
-                    x1="1.66667"
-                    y1="-2.3"
-                    x2="8.01308"
-                    y2="-1.50789"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop stop-color="#C6A3FF" />
-                    <stop offset="1" stop-color="#7E8BED" />
-                  </linearGradient>
-                </defs>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="owl-minigames">
-        <div class="row oc1">
-          <Swiper
-            spaceBetween={15}
-            slidesPerView={2}
-            modules={[Pagination]}
-            breakpoints={{
-              0: {
-                slidesPerView: 2,
-              },
-              768: {
-                slidesPerView: 4,
-              },
-              1024: {
-                slidesPerView: 4,
-              },
-              1400: {
-                slidesPerView: 5,
-              },
-            }}
-          >
-            <SwiperSlide>
-                <div class="item text-white">
-                  <div class="box">
-                    <img class="mainimg" src="img/Rectangle-38.svg" />
-                    <div class="hover">
-                      <img src="img/hover.svg" />
-                    </div>
-                    <div class="content">
-                      <p>
-                        Tiny Gods
-                        <span class="float-end"
-                          ><img src="img/info-circle.svg" /></span
-                        >
-                      </p>
-                    </div>
-                  </div>
-                </div>
-            </SwiperSlide>
-
-            <SwiperSlide>
-                <div class="item text-white">
-                  <div class="box">
-                    <img class="mainimg" src="img/Rectangle-39.svg" />
-                    <div class="hover">
-                      <img src="img/hover.svg" />
-                    </div>
-                    <div class="content">
-                      <p>
-                        Tiny Gods
-                        <span class="float-end"
-                          ><img src="img/info-circle.svg" /></span
-                        >
-                      </p>
-                    </div>
-                  </div>
-                </div>
-            </SwiperSlide>
-
-            <SwiperSlide>
-                <div class="item text-white">
-                  <div class="box">
-                    <img class="mainimg" src="img/Rectangle-40.svg" />
-                    <div class="hover">
-                      <img src="img/hover.svg" />
-                    </div>
-                    <div class="content">
-                      <p>
-                        Tiny Gods
-                        <span class="float-end"
-                          ><img src="img/info-circle.svg" /></span
-                        >
-                      </p>
-                    </div>
-                  </div>
-                </div>
-            </SwiperSlide>
-
-            <SwiperSlide>
-                <div class="item text-white">
-                  <div class="box">
-                    <img class="mainimg" src="img/Rectangle-41.svg" />
-                    <div class="hover">
-                      <img src="img/hover.svg" />
-                    </div>
-                    <div class="content">
-                      <p>
-                        Tiny Gods
-                        <span class="float-end"
-                          ><img src="img/info-circle.svg" /></span
-                        >
-                      </p>
-                    </div>
-                  </div>
-                </div>
-            </SwiperSlide>
-
-            <SwiperSlide>
-                <div class="item text-white">
-                  <div class="box">
-                    <img class="mainimg" src="img/Rectangle-42.svg" />
-                    <div class="hover">
-                      <img src="img/hover.svg" />
-                    </div>
-                    <div class="content">
-                      <p>
-                        Tiny Gods
-                        <span class="float-end"
-                          ><img src="img/info-circle.svg" /></span
-                        >
-                      </p>
-                    </div>
-                  </div>
-                </div>
-            </SwiperSlide>
-
-            <SwiperSlide>
-                <div class="item text-white">
-                  <div class="box">
-                    <img class="mainimg" src="img/game1.svg" />
-                    <div class="hover">
-                      <img src="img/hover.svg" />
-                    </div>
-                    <div class="content">
-                      <p>
-                        Tiny Gods
-                        <span class="float-end"
-                          ><img src="img/info-circle.svg" /></span
-                        >
-                      </p>
-                    </div>
-                  </div>
-                </div>
-            </SwiperSlide>
-          </Swiper>
-        </div>
-      </div>
     </div>
   </div>
 </div>

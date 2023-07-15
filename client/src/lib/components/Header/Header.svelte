@@ -27,7 +27,7 @@
   import { changeProfileImage } from "../../../apis/account/ChangeProfileImage";
   import Cropper from 'cropperjs';
   import { saveTempImage } from '../../../apis/Image/SaveTempImage';
-    import { saveImageWebp } from "../../../apis/Image/SaveImageWebp";
+  import { saveImageWebp } from "../../../apis/Image/SaveImageWebp";
 
   let input;
   let container;

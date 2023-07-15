@@ -316,7 +316,7 @@
     const provider = new OAuthProvider('apple.com');
     try {
       const data = await firebase.auth().signInWithPopup(provider);
-      console.log(data.additionalUserInfo.profile);
+      // console.log(data.additionalUserInfo.profile);
       // User signed in successfully
     } catch (error) {
       console.error(error);

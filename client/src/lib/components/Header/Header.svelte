@@ -525,6 +525,7 @@
         </li>
         <li>
           <a href="#" on:click={() => {
+            showImage = false;
             const userInfo = $globalStore.userDetail;
             userInfo.owner = true;
             userInfo.editState = false;
@@ -568,6 +569,7 @@
               <svg class="profile_back cursor-pointer" on:click={() => {
                 const userInfo = $globalStore.userInfo;
                 userInfo.editState = false;
+                showImage = false;
                 globalStore.toggleItem("userInfo", userInfo);
               }}><use href="/img/symbols.svg?lang.svg#icon_arrow_left"/></svg>
               <h4 class="mb-0">Edit Profile</h4>

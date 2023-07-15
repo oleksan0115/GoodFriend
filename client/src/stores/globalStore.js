@@ -5,6 +5,7 @@ const globalStore = writable({
   sidebarWide: false,
   chatOpen: true,
   profileModalOpen: false,
+  // userModalOpen: false,
   betSlipOpen: false,
   withDrawModal: false,
   loginModalOpen: false,

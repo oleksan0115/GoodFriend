@@ -38,8 +38,8 @@ export const getList = async (dataAccess: any, page?: number, search?: string) =
     
     if(search && search.length >= 4) sql += `WHERE title LIKE "%${search}%"`
     
-    if(page) sql += `LIMIT ${page*setting.GAME_LIST_LIMIT}, ${setting.GAME_LIST_LIMIT}`
-    if(!page) sql += `LIMIT 0, ${setting.GAME_LIST_LIMIT}`
+    if(page) sql += ` LIMIT ${page*setting.GAME_LIST_LIMIT}, ${setting.GAME_LIST_LIMIT}`
+    if(!page) sql += ` LIMIT 0, ${setting.GAME_LIST_LIMIT}`
     
     return dataAccess.selectAll(sql, [])
 }

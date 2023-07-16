@@ -3,7 +3,7 @@ import { writable } from "svelte/store";
 const globalStore = writable({
   sidebar: true,
   sidebarWide: false,
-  chatOpen: true,
+  chatOpen: false,
   profileModalOpen: false,
   // userModalOpen: false,
   betSlipOpen: false,

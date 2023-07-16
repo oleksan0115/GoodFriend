@@ -1,4 +1,5 @@
 <script>
+	import toast from '../components/Toast';
 	import globalStore from "../../stores/globalStore";
 	import { signOut } from "../../apis/account/Signout";
 	import DarkModeButtons from "../components/DarkModeButtons.svelte";

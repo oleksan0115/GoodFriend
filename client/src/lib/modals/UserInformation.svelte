@@ -27,7 +27,7 @@
   }
 
 	$: {
-		if ($globalStore.userDetail) {
+		if (!$globalStore.userInfo && $globalStore.userDetail) {
 			myProfileData.nick = $globalStore.userDetail.nick;
 			showImage = false;
 		}
@@ -91,12 +91,10 @@
 		const canvas = cropper.getCroppedCanvas();
 		const roundedCanvas = getRoundedCanvas(canvas);
 		const imageData = roundedCanvas.toDataURL('image/jpeg');
-
+  
 		const formData = new FormData();
 		const blob = dataURItoBlob(imageData);
-		const fileInput = document.getElementById('fileinput');
-		const file = fileInput.files[0];
-		formData.append('image', file);
+		formData.append('image', blob, 'image/jpeg');
 
 		const tempFile = await saveTempImage({formData});
 		const permanentFile = await saveImageWebp({filename: tempFile.data.filename, ext: "webp"});

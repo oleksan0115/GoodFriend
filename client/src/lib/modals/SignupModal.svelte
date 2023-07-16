@@ -7,6 +7,8 @@
 	import { signUp } from "../../apis/account/Signup";
 	import firebase from '../../apis/account/FirebaseConfig';
 	import { signupSocial } from "../../apis/account/SignupSocial";
+	import { getAccessToken } from "../../apis/account/GetAccessToken";
+  import { getRefreshToken } from "../../apis/account/GetRefreshToken";
 
 	let signUpUserData = {
     email: "",

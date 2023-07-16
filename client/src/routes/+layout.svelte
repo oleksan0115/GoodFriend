@@ -8,6 +8,10 @@
   import Footer from "$lib/components/Footer.svelte";
   import globalStore from "../stores/globalStore";
 
+  import LoginModal from "../lib/modals/LoginModal.svelte";
+  import SignupModal from "../lib/modals/SignupModal.svelte";
+  import ForgotModal from "../lib/modals/ForgotModal.svelte";
+
   import { page } from '$app/stores'
 
   $: path = $page.url.pathname;
@@ -113,6 +117,9 @@
   <Header/>
   <Sidebar pageSidebar={path} />
   <Chat/>
+  <LoginModal/>
+  <SignupModal/>
+  <ForgotModal/>
 
   <div class="body-part {path}" class:affiliate={path === '/affiliate'} class:provably-fair={path.includes("/help-center", 0)}>
 

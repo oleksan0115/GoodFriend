@@ -34,9 +34,9 @@ export const memberGameMoneyChange = async (dataAccess: any, memberIdx: number, 
 
 // list
 export const getList = async (dataAccess: any, page?: number, search?: string) => {
-    let sql: string = `SELECT * FROM gf_casino_list`
+    let sql: string = `SELECT * FROM gf_casino_list WHERE is_open = 1`
     
-    if(search && search.length >= 4) sql += ` WHERE REPLACE(LOWER(title), ' ', '') LIKE REPLACE(LOWER("%${search}%"), ' ', '')`
+    if(search && search.length >= 4) sql += ` AND REPLACE(LOWER(title), ' ', '') LIKE REPLACE(LOWER("%${search}%"), ' ', '')`
 
     if(page) { 
         sql += ` LIMIT ${page*setting.GAME_LIST_LIMIT}, ${setting.GAME_LIST_LIMIT}`

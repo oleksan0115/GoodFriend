@@ -11,6 +11,7 @@
   import LoginModal from "../lib/modals/LoginModal.svelte";
   import SignupModal from "../lib/modals/SignupModal.svelte";
   import ForgotModal from "../lib/modals/ForgotModal.svelte";
+  import UserInformation from "../lib/modals/UserInformation.svelte";
 
   import { page } from '$app/stores'
 
@@ -120,6 +121,7 @@
   <LoginModal/>
   <SignupModal/>
   <ForgotModal/>
+  <UserInformation/>
 
   <div class="body-part {path}" class:affiliate={path === '/affiliate'} class:provably-fair={path.includes("/help-center", 0)}>
 

@@ -42,6 +42,11 @@ export interface Info {
     type: string 
 }
 
+export interface GameInfo {
+    game_id: string,
+    vendor: string
+}
+
 export interface BetHistory {
     title: string,
     nick: string,

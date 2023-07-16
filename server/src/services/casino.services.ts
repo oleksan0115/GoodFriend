@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { BetHistory, GameInfo, MyInfo } from '../types/casino.types';
 
-export const getMyInfo = (): Promise<MyInfo> => {
+export const getMyInfo = (): Promise<any> => {
     const endpoint: string = 'https://api.honorlink.org/api/my-info';
     const apiKey: string = process.env.HONORLINK_API_KEY!;
     
@@ -11,10 +11,15 @@ export const getMyInfo = (): Promise<MyInfo> => {
         'Content-Type': 'application/json'
     };
 
+    console.log(1)
+
     return new Promise((resolve, reject) => {
-        // axios.get(endpoint, {headers})
-        //     .then(response => {resolve(response.data)})
-        //     .catch(error => {reject(error)})
+        axios.get(endpoint, {headers})
+            .then(response => {
+                console.log(response)
+                resolve(response.data)
+            })
+            .catch(error => {reject(error)})
     })
 }
 
@@ -37,11 +42,10 @@ export const getGameList = (): Promise<any> => {
 
 export const gameLaunch = async (dataAccess: any, idx: number, nick: string): Promise<any> => {
     
-    const data: GameInfo = await dataAccess.findOne(
-        "gf_member", 
-        "game_id, vendor",  
-        {column: "idx", condition: "=", data: idx })
-    
+    const sql: string = `SELECT game_id, vendor FROM gf_casino_list WHERE idx = ?`
+    const values: number[] = [idx]
+    const data: GameInfo = await dataAccess.selectOne(sql, values)
+
     const endpoint: string = `https://api.honorlink.org/api/game-launch-link?username=${nick}&nickname=devel&game_id=${data.game_id}&vendor=${data.vendor}`;
     const apiKey: string = process.env.HONORLINK_API_KEY!;
 

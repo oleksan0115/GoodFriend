@@ -1,10 +1,7 @@
 <script>
   import { onMount } from "svelte";
-
   import { Navigation, Pagination, Scrollbar, A11y, Grid } from "swiper";
-
   import { Swiper, SwiperSlide } from "swiper/svelte";
-
   import "swiper/css";
   import "swiper/css/navigation";
   import "swiper/css/pagination";
@@ -24,6 +21,9 @@
   });
 
   let commentBoxOpen=false;
+
+  export let data
+  const link = data.link
 </script>
 
 <div class="container">
@@ -38,7 +38,8 @@
   <div class="box">
     <div class="container">
       <div class="play_img text-center mobilenone">
-        <img class="w-100 main" src="img/image-39.svg" />
+        <iframe src="{link}" width="100%" height="500px" frameborder="0">
+        </iframe>
         <div class="overlay" />
         <div class="text-content">
           <p class="mb-3">
@@ -47,31 +48,31 @@
             the will refresh and restart.
           </p>
           <button class="btn btn-play me-1">
-            <img class="me-1" src="img/icon_play.svg" /> Real Play
+            <img class="me-1" src="../../img/icon_play.svg" /> Real Play
           </button>
           <button class="btn btn-free me-1">Free Play</button>
         </div>
       </div>
       <div class="content btn-top mobilenone">
         <button class="btn btn-dark me-1">
-          <img class="me-1" src="img/icon_like.svg" /> 435
+          <img class="me-1" src="../../img/icon_like.svg" /> 435
         </button>
         <button class="btn btn-dark me-1">
-          <img class="me-1" src="img/icon_favorite1.svg" /> 435
+          <img class="me-1" src="../../img/icon_favorite1.svg" /> 435
         </button>
         <button class="btn btn-dark me-1">
-          <img class="me-1" src="img/icon_share.svg" /> Share
+          <img class="me-1" src="../../img/icon_share.svg" /> Share
         </button>
       </div>
     </div>
     <div class="play_img text-center desknone">
-      <img class="main desknone" src="img/bg_img.svg" />
+      <img class="main desknone" src="../../img/bg_img.svg" />
       <div class="overlay" />
       <div class="text-content">
         <div class="boxsix">
           <div class="row">
             <div class="col-md-2 col-5 ps-0 col-xs-6">
-              <img class="w-100" src="img/Rectangle-38.svg" />
+              <img class="w-100" src="../../img/Rectangle-38.svg" />
             </div>
             <div class="col-md-4 col-7 ps-0 text-start col-xs-6">
               <h1 class="pb-1">Epic Journey</h1>
@@ -81,9 +82,9 @@
                 <a class="ms-3" href="#">Read more</a>
               </p>
               <div class="mt-3 d-inline-block">
-                <img class="me-1" src="img/icon-1.svg" />
-                <img class="me-1" src="img/icon-2.svg" />
-                <img class="me-1" src="img/icon-3.svg" />
+                <img class="me-1" src="../../img/icon-1.svg" />
+                <img class="me-1" src="../../img/icon-2.svg" />
+                <img class="me-1" src="../../img/icon-3.svg" />
               </div>
             </div>
           </div>
@@ -91,7 +92,7 @@
           <div class="row mt-3">
             <div class="col-6 pl-0">
               <button class="btn btn-play me-1 w-100">
-                <img class="me-1" src="img/icon_play.svg" /> Real Play
+                <img class="me-1" src="../../img/icon_play.svg" /> Real Play
               </button>
             </div>
   
@@ -111,7 +112,7 @@
     <div class="boxsix mt-4 mobilenone">
       <div class="row">
         <div class="col-md-2 col-4 ps-0">
-          <img class="w-100" src="img/Rectangle-38.svg" />
+          <img class="w-100" src="../../img/Rectangle-38.svg" />
         </div>
         <div class="col-md-4 col-8 ps-0">
           <h1 class="pb-2">Epic Journey</h1>
@@ -137,7 +138,7 @@
       </div>
     </div>
     <div class="boxsecond boxforth mobilenone">
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-md-12 categories-swiper-top swiper-top">
           <h2 class="title">Related Games</h2>
 
@@ -203,9 +204,9 @@
             </button>
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <div class="owl-minigames">
+      <!-- <div class="owl-minigames">
         <div class="row oc1">
           <Swiper
             spaceBetween={15}
@@ -229,15 +230,15 @@
             <SwiperSlide>
                 <div class="item text-white">
                   <div class="box">
-                    <img class="mainimg" src="img/Rectangle-38.svg" />
+                    <img class="mainimg" src="../../img/Rectangle-38.svg" />
                     <div class="hover">
-                      <img src="img/hover.svg" />
+                      <img src="../../img/hover.svg" />
                     </div>
                     <div class="content">
                       <p>
                         Tiny Gods
                         <span class="float-end"
-                          ><img src="img/info-circle.svg" /></span
+                          ><img src="../../img/info-circle.svg" /></span
                         >
                       </p>
                     </div>
@@ -248,15 +249,15 @@
             <SwiperSlide>
                 <div class="item text-white">
                   <div class="box">
-                    <img class="mainimg" src="img/Rectangle-39.svg" />
+                    <img class="mainimg" src="../../img/Rectangle-39.svg" />
                     <div class="hover">
-                      <img src="img/hover.svg" />
+                      <img src="../../img/hover.svg" />
                     </div>
                     <div class="content">
                       <p>
                         Tiny Gods
                         <span class="float-end"
-                          ><img src="img/info-circle.svg" /></span
+                          ><img src="../../img/info-circle.svg" /></span
                         >
                       </p>
                     </div>
@@ -267,15 +268,15 @@
             <SwiperSlide>
                 <div class="item text-white">
                   <div class="box">
-                    <img class="mainimg" src="img/Rectangle-40.svg" />
+                    <img class="mainimg" src="../../img/Rectangle-40.svg" />
                     <div class="hover">
-                      <img src="img/hover.svg" />
+                      <img src="../../img/hover.svg" />
                     </div>
                     <div class="content">
                       <p>
                         Tiny Gods
                         <span class="float-end"
-                          ><img src="img/info-circle.svg" /></span
+                          ><img src="../../img/info-circle.svg" /></span
                         >
                       </p>
                     </div>
@@ -286,15 +287,15 @@
             <SwiperSlide>
                 <div class="item text-white">
                   <div class="box">
-                    <img class="mainimg" src="img/Rectangle-41.svg" />
+                    <img class="mainimg" src="../../img/Rectangle-41.svg" />
                     <div class="hover">
-                      <img src="img/hover.svg" />
+                      <img src="../../img/hover.svg" />
                     </div>
                     <div class="content">
                       <p>
                         Tiny Gods
                         <span class="float-end"
-                          ><img src="img/info-circle.svg" /></span
+                          ><img src="../../img/info-circle.svg" /></span
                         >
                       </p>
                     </div>
@@ -305,15 +306,15 @@
             <SwiperSlide>
                 <div class="item text-white">
                   <div class="box">
-                    <img class="mainimg" src="img/Rectangle-42.svg" />
+                    <img class="mainimg" src="../../img/Rectangle-42.svg" />
                     <div class="hover">
-                      <img src="img/hover.svg" />
+                      <img src="../../img/hover.svg" />
                     </div>
                     <div class="content">
                       <p>
                         Tiny Gods
                         <span class="float-end"
-                          ><img src="img/info-circle.svg" /></span
+                          ><img src="../../img/info-circle.svg" /></span
                         >
                       </p>
                     </div>
@@ -324,15 +325,15 @@
             <SwiperSlide>
                 <div class="item text-white">
                   <div class="box">
-                    <img class="mainimg" src="img/game1.svg" />
+                    <img class="mainimg" src="../../img/game1.svg" />
                     <div class="hover">
-                      <img src="img/hover.svg" />
+                      <img src="../../img/hover.svg" />
                     </div>
                     <div class="content">
                       <p>
                         Tiny Gods
                         <span class="float-end"
-                          ><img src="img/info-circle.svg" /></span
+                          ><img src="../../img/info-circle.svg" /></span
                         >
                       </p>
                     </div>
@@ -341,7 +342,7 @@
             </SwiperSlide>
           </Swiper>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="row">
       <div class="col-lg-7 col-sm-12" style="flex-grow: 1;">
@@ -421,70 +422,70 @@
                     <tbody>
                       <tr>
                         <td>
-                          <img class="me-1" src="img/table-avatar1.svg" />
+                          <img class="me-1" src="../../img/table-avatar1.svg" />
                           Ring of fortune
                         </td>
                         <td class="text-white">bountyhunter31</td>
                         <td class="text-white mobilenone">
-                          104.54 <img class="ms-1" src="img/btc.svg" />
+                          104.54 <img class="ms-1" src="../../img/btc.svg" />
                         </td>
                         <td>0.001x</td>
                         <td class="text-danger text-end">
-                          - 21.567 <img class="ms-1" src="img/btc.svg" />
+                          - 21.567 <img class="ms-1" src="../../img/btc.svg" />
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <img class="me-1" src="img/poker-chips.svg" />
+                          <img class="me-1" src="../../img/poker-chips.svg" />
                           Ring of fortune
                         </td>
                         <td class="text-white">unknown</td>
                         <td class="text-white mobilenone">
-                          104.54 <img class="ms-1" src="img/hot.svg" />
+                          104.54 <img class="ms-1" src="../../img/hot.svg" />
                         </td>
                         <td>0.001x</td>
                         <td class="text-success text-end">
-                          + 21.567 <img class="ms-1" src="img/hot.svg" />
+                          + 21.567 <img class="ms-1" src="../../img/hot.svg" />
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <img class="me-1" src="img/seven.svg" /> Ring of fortune
+                          <img class="me-1" src="../../img/seven.svg" /> Ring of fortune
                         </td>
                         <td class="text-white">sharlen12</td>
                         <td class="text-white mobilenone">
-                          104.54 <img class="ms-1" src="img/mft.svg" />
+                          104.54 <img class="ms-1" src="../../img/mft.svg" />
                         </td>
                         <td>0.001x</td>
                         <td class="text-danger text-end">
-                          - 21.567 <img class="ms-1" src="img/mft.svg" />
+                          - 21.567 <img class="ms-1" src="../../img/mft.svg" />
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <img class="me-1" src="img/table-avatar1.svg" /> Ring of
+                          <img class="me-1" src="../../img/table-avatar1.svg" /> Ring of
                           fortune
                         </td>
                         <td class="text-white">sharlen12</td>
                         <td class="text-white mobilenone">
-                          104.54 <img class="ms-1" src="img/eth.svg" />
+                          104.54 <img class="ms-1" src="../../img/eth.svg" />
                         </td>
                         <td>0.001x</td>
                         <td class="text-success text-end">
-                          + 21.567 <img class="ms-1" src="img/eth.svg" />
+                          + 21.567 <img class="ms-1" src="../../img/eth.svg" />
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <img class="me-1" src="img/dice.svg" /> Ring of fortune
+                          <img class="me-1" src="../../img/dice.svg" /> Ring of fortune
                         </td>
                         <td class="text-white">BranyW67</td>
                         <td class="text-white mobilenone">
-                          104.54 <img class="ms-1" src="img/trx.svg" />
+                          104.54 <img class="ms-1" src="../../img/trx.svg" />
                         </td>
                         <td>0.001x</td>
                         <td class="text-danger text-end">
-                          - 21.567 <img class="ms-1" src="img/trx.svg" />
+                          - 21.567 <img class="ms-1" src="../../img/trx.svg" />
                         </td>
                       </tr>
                     </tbody>
@@ -526,15 +527,15 @@
             <div class="owl-carousel oc3">
               <div class="item" data-slide-index="0">
                 <div class="box">
-                  <img class="mainimg" src="img/Rectangle-38.svg" />
+                  <img class="mainimg" src="../../img/Rectangle-38.svg" />
                   <div class="hover">
-                    <img src="img/hover.svg" />
+                    <img src="../../img/hover.svg" />
                   </div>
                   <div class="content">
                     <p>
                       Tiny Gods
                       <span class="float-end"
-                        ><img src="img/info-circle.svg" /></span
+                        ><img src="../../img/info-circle.svg" /></span
                       >
                     </p>
                   </div>
@@ -542,15 +543,15 @@
               </div>
               <div class="item text-white" data-slide-index="1">
                 <div class="box">
-                  <img class="mainimg" src="img/Rectangle-39.svg" />
+                  <img class="mainimg" src="../../img/Rectangle-39.svg" />
                   <div class="hover">
-                    <img src="img/hover.svg" />
+                    <img src="../../img/hover.svg" />
                   </div>
                   <div class="content">
                     <p>
                       Tiny Gods
                       <span class="float-end"
-                        ><img src="img/info-circle.svg" /></span
+                        ><img src="../../img/info-circle.svg" /></span
                       >
                     </p>
                   </div>
@@ -558,15 +559,15 @@
               </div>
               <div class="item text-white" data-slide-index="2">
                 <div class="box">
-                  <img class="mainimg" src="img/Rectangle-40.svg" />
+                  <img class="mainimg" src="../../img/Rectangle-40.svg" />
                   <div class="hover">
-                    <img src="img/hover.svg" />
+                    <img src="../../img/hover.svg" />
                   </div>
                   <div class="content">
                     <p>
                       Tiny Gods
                       <span class="float-end"
-                        ><img src="img/info-circle.svg" /></span
+                        ><img src="../../img/info-circle.svg" /></span
                       >
                     </p>
                   </div>
@@ -574,15 +575,15 @@
               </div>
               <div class="item text-white" data-slide-index="3">
                 <div class="box">
-                  <img class="mainimg" src="img/Rectangle-41.svg" />
+                  <img class="mainimg" src="../../img/Rectangle-41.svg" />
                   <div class="hover">
-                    <img src="img/hover.svg" />
+                    <img src="../../img/hover.svg" />
                   </div>
                   <div class="content">
                     <p>
                       Tiny Gods
                       <span class="float-end"
-                        ><img src="img/info-circle.svg" /></span
+                        ><img src="../../img/info-circle.svg" /></span
                       >
                     </p>
                   </div>
@@ -590,15 +591,15 @@
               </div>
               <div class="item text-white" data-slide-index="4">
                 <div class="box">
-                  <img class="mainimg" src="img/Rectangle-42.svg" />
+                  <img class="mainimg" src="../../img/Rectangle-42.svg" />
                   <div class="hover">
-                    <img src="img/hover.svg" />
+                    <img src="../../img/hover.svg" />
                   </div>
                   <div class="content">
                     <p>
                       Tiny Gods
                       <span class="float-end"
-                        ><img src="img/info-circle.svg" /></span
+                        ><img src="../../img/info-circle.svg" /></span
                       >
                     </p>
                   </div>
@@ -606,15 +607,15 @@
               </div>
               <div class="item" data-slide-index="5">
                 <div class="box">
-                  <img class="mainimg" src="img/Rectangle-38.svg" />
+                  <img class="mainimg" src="../../img/Rectangle-38.svg" />
                   <div class="hover">
-                    <img src="img/hover.svg" />
+                    <img src="../../img/hover.svg" />
                   </div>
                   <div class="content">
                     <p>
                       Tiny Gods
                       <span class="float-end"
-                        ><img src="img/info-circle.svg" /></span
+                        ><img src="../../img/info-circle.svg" /></span
                       >
                     </p>
                   </div>
@@ -637,7 +638,7 @@
         <div class="commentsbox bg-color1">
           <div class="row">
             <div class="col-md-3 col-3">
-              <img class="" src="img/Ellipse-21.svg" />
+              <img class="" src="../../img/Ellipse-21.svg" />
             </div>
             <div class="col-md-9 col-9 ps-0">
               <input
@@ -653,19 +654,19 @@
         <div class="comment bg-color1 mt-3">
           <div class="row">
             <div class="col-md-2 col-3">
-              <img class="w-100" src="img/user1.svg" />
+              <img class="w-100" src="../../img/user1.svg" />
             </div>
             <div class="col-md-10 col-9">
               <h6>
                 Ellis Schneider
-                <img class="ms-1" src="img/Group-1581.svg" />
+                <img class="ms-1" src="../../img/Group-1581.svg" />
                 <span class="time">12:03</span>
               </h6>
               <p>Lorem ipsum dolor sit amet consecte Feugiat accum.</p>
               <ul>
-                <li><img src="img/icon_like1.svg" /></li>
-                <li><img src="img/icon_message.svg" /></li>
-                <li><img src="img/dots.svg" /></li>
+                <li><img src="../../img/icon_like1.svg" /></li>
+                <li><img src="../../img/icon_message.svg" /></li>
+                <li><img src="../../img/dots.svg" /></li>
               </ul>
             </div>
           </div>
@@ -673,19 +674,19 @@
         <div class="comment bg-color1 mt-3">
           <div class="row">
             <div class="col-md-2 col-3">
-              <img class="w-100" src="img/user2.svg" />
+              <img class="w-100" src="../../img/user2.svg" />
             </div>
             <div class="col-md-10 col-9">
               <h6>
                 Ellis Schneider
-                <img class="ms-1" src="img/Group-1581.svg" />
+                <img class="ms-1" src="../../img/Group-1581.svg" />
                 <span class="time">12:03</span>
               </h6>
               <p>Lorem ipsum dolor sit amet consecte Feugiat accum.</p>
               <ul>
-                <li><img src="img/icon_like1.svg" /></li>
-                <li><img src="img/icon_message.svg" /></li>
-                <li><img src="img/dots.svg" /></li>
+                <li><img src="../../img/icon_like1.svg" /></li>
+                <li><img src="../../img/icon_message.svg" /></li>
+                <li><img src="../../img/dots.svg" /></li>
               </ul>
             </div>
           </div>

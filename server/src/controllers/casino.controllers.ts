@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import { gameLaunch, getMyInfo } from '../services/casino.services';
-import { CasinoList, MyInfo, Launch, Info, BetHistoryResult } from '../types/casino.types';
+import { CasinoList, MyInfo, Launch, Info, BetHistoryResult, TotalNumber } from '../types/casino.types';
 import { Member } from "../types/table.types";
 import * as dataAccess from '../utils/dataAccess.utils'
 import * as response from "../config/response"
 import * as models from "../models/casino.models"
+import * as setting from '../config/setting.config';
 
 // /balance (callback)
 export const responseBalance = async (req: Request, res: Response) => {
@@ -46,11 +47,12 @@ export const changeBalance = async (req: Request, res: Response) => {
 export const getList = async (req: Request, res: Response) => {
     const { page, search } = req.body
     const list: CasinoList[] = await models.getList(dataAccess, page, search)
-    const totalNumber: number = await models.getListTotalCount(dataAccess, search)
+    const totalNumber: TotalNumber = await models.getListTotalCount(dataAccess, search)
     
     res.status(200).json({
         list: list,
-        totalNumber: totalNumber
+        totalNumber: totalNumber.count,
+        limit: setting.GAME_LIST_LIMIT
     })
 }
 

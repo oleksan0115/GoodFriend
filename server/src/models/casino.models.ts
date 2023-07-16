@@ -2,7 +2,7 @@ import * as setting from "../config/setting.config"
 import { BetHistory, BetHistoryResult } from "../types/casino.types"
 
 // change balance (callback)
-export const casinoHistoryInsert = async (dataAccess: any, affiliateCode: string, memberIdx: number, nick: string, transactionId: number, transactionType: string, refererId: number, amount: number, gameId: number, gameTitle: string, round: string, gameType: string, gameVendor: string)  => {
+export const casinoHistoryInsert = async (dataAccess: any, affiliateCode: string, memberIdx: number, nick: string, transactionId: number, transactionType: string, refererId: number, amount: number, gameId: string, gameTitle: string, round: string, gameType: string, gameVendor: string)  => {
     
     const sql: string = `
         INSERT INTO gf_casino_betting
@@ -50,7 +50,7 @@ export const getList = async (dataAccess: any, page?: number, search?: string) =
 export const getListTotalCount = async (dataAccess:any, search?: string) => {
     let sql: string = `SELECT count(*) as count FROM gf_casino_list`
     if(search && search.length >= 2) sql += ` WHERE REPLACE(LOWER(title), ' ', '') LIKE REPLACE(LOWER("%${search}%"), ' ', '')`
-
+    
     return dataAccess.selectOne(sql, [])
 }
 

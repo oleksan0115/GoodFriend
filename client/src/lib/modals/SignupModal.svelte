@@ -45,7 +45,7 @@
 
       if (res1.success) {
         toast.success(res1.data.message);
-        globalStore.toggleItem("loginModalOpen", false);
+        globalStore.toggleItem("registerModalOpen", 0);
         handleTokens();
       } else {
         toast.error(res1.data.message);
@@ -73,7 +73,7 @@
 
       if (res1.success) {
         toast.success(res1.data.message);
-        globalStore.toggleItem("loginModalOpen", false);
+        globalStore.toggleItem("registerModalOpen", 0);
         handleTokens();
       } else {
         toast.error(res1.data.message);
@@ -108,7 +108,7 @@
 
       if (res1.success) {
         toast.success(res1.data.message);
-        globalStore.toggleItem("loginModalOpen", false);
+        globalStore.toggleItem("registerModalOpen", 0);
         handleTokens();
       } else {
         toast.error(res1.data.message);

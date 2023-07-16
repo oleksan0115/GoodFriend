@@ -375,7 +375,7 @@
 
     const res = await changeProfileImage({
       memberIdx: $globalStore.userInfo.member_idx,
-      profileImage: permanentFile.data.Headerpath,
+      profileImage: permanentFile.data.path,
     })
 
     if (res.success) {

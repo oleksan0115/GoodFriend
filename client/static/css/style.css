@@ -943,7 +943,7 @@ height: 219px;
   right: 0;
   top: 0;
   margin: 0 auto;
-  z-index: 11111;
+  z-index: 1111;
 }
 
 .boxfive .nav-tabs .nav-item.show .nav-link,
@@ -2962,6 +2962,7 @@ ul.dropdown-menu li a.dropdown-item::after {
 .left-side-bar .menu-item-icon span {
   line-height: 16px;
   padding-top: 6px;
+  /* height: 32px; */
 }
 
 

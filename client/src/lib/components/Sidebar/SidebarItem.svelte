@@ -25,7 +25,8 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown" transition:slide={{ duration: 300 }}>
                 {#each sidebar_item[3] as item}
                 <li><a class="dropdown-item menu-item-icon" href="{item[1]}">
-                    <div class="icon-bg"><svg ><use href="/img/symbols.svg?lang.svg#{item[2]}"/></svg></div>
+                    <!-- <div class="icon-bg"><svg ><use href="/img/symbols.svg?lang.svg#{item[2]}"/></svg></div> -->
+                    <div style="width: 0px; height: 32px;"></div>
                     <span class="none">{item[0]}</span></a>
                 </li>
                 {/each}     

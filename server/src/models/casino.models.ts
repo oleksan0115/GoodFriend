@@ -36,17 +36,21 @@ export const memberGameMoneyChange = async (dataAccess: any, memberIdx: number, 
 export const getList = async (dataAccess: any, page?: number, search?: string) => {
     let sql: string = `SELECT * FROM gf_casino_list`
     
-    if(search && search.length >= 4) sql += `WHERE title LIKE "%${search}%"`
-    
-    if(page) sql += ` LIMIT ${page*setting.GAME_LIST_LIMIT}, ${setting.GAME_LIST_LIMIT}`
-    if(!page) sql += ` LIMIT 0, ${setting.GAME_LIST_LIMIT}`
-    
+    if(search && search.length >= 4) sql += ` WHERE REPLACE(LOWER(title), ' ', '') LIKE REPLACE(LOWER("%${search}%"), ' ', '')`
+
+    if(page) { 
+        sql += ` LIMIT ${page*setting.GAME_LIST_LIMIT}, ${setting.GAME_LIST_LIMIT}`
+    } else {
+        sql += ` LIMIT 0, ${setting.GAME_LIST_LIMIT}`
+    }
+
     return dataAccess.selectAll(sql, [])
 }
 
-export const getListTotalCount = async (dataAccess:any) => {
+export const getListTotalCount = async (dataAccess:any, search?: string) => {
     let sql: string = `SELECT count(*) as count FROM gf_casino_list`
-    
+    if(search && search.length >= 2) sql += ` WHERE REPLACE(LOWER(title), ' ', '') LIKE REPLACE(LOWER("%${search}%"), ' ', '')`
+
     return dataAccess.selectOne(sql, [])
 }
 

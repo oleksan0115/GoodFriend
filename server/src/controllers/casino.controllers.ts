@@ -46,8 +46,8 @@ export const changeBalance = async (req: Request, res: Response) => {
 export const getList = async (req: Request, res: Response) => {
     const { page, search } = req.body
     const list: CasinoList[] = await models.getList(dataAccess, page, search)
-    const totalNumber: number = await models.getListTotalCount(dataAccess)
-
+    const totalNumber: number = await models.getListTotalCount(dataAccess, search)
+    
     res.status(200).json({
         list: list,
         totalNumber: totalNumber
@@ -57,7 +57,6 @@ export const getList = async (req: Request, res: Response) => {
 // /launch
 export const launch = async (req: Request, res: Response) => {
     const { idx, nick } = req.body
-
     const launch: Launch = await gameLaunch(dataAccess, idx, nick)
 
     res.status(200).json({

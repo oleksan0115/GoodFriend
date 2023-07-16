@@ -359,15 +359,13 @@
   }
 
   async function handleMyProfile(event) {
-
     const canvas = cropper.getCroppedCanvas();
     const roundedCanvas = getRoundedCanvas(canvas);
     const imageData = roundedCanvas.toDataURL('image/jpeg');
 
-    const formData = new FormData();
-    const blob = dataURItoBlob(imageData);
     const fileInput = document.getElementById('fileinput');
     const file = fileInput.files[0];
+    const formData = new FormData();
     formData.append('image', file);
 
     const tempFile = await saveTempImage({formData});
@@ -375,7 +373,7 @@
 
     const res = await changeProfileImage({
       memberIdx: $globalStore.userInfo.member_idx,
-      profileImage: permanentFile.data.Headerpath,
+      profileImage: permanentFile.data.path,
     })
 
     if (res.success) {
@@ -399,7 +397,6 @@
 </script>
 
 <div class="topbar bg-color">
-
   <div class="row">
     <div class="telegram-login-widget"></div>
     <div class="col-md-5 col-2 align-self-center">
@@ -551,6 +548,7 @@
 </div>
 
 <BetSlip />
+
 
 {#if $globalStore.userInfo}
 <div class="user-information" class:open={$globalStore.userInfo}>
@@ -736,7 +734,6 @@
       {/if}
   </div>
 </div>
-
 {/if}
 
 <div class="login-box" class:open={$globalStore.loginModalOpen}>

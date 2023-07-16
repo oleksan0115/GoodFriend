@@ -87,7 +87,6 @@ app.use("/api/casino", casinoRouter)
 
 // callback url
 import callbackRouter from "./routes/callback.routes"
-
 app.use("/callback", callbackRouter)
 
 const port:number = 9001

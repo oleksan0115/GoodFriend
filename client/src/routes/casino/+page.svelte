@@ -1,5 +1,8 @@
 <script>
   import {getCasinoList} from "../../apis/casino/GetCasinoList"
+  import { tooltip } from 'svooltip';
+  import 'svooltip/styles.css';
+  export let data
   import FaqItem from "$lib/components/FaqItem.svelte";
   
   let list = []
@@ -36,7 +39,7 @@
 <div class="container">
   <FaqItem>
     <h2 slot="head">  <form action="">
-      <div class="input-group mb-3 main-search-bar">
+      <div class="input-group main-search-bar">
         <input
           type="search"
           bind:value={searchKey}
@@ -80,11 +83,12 @@
         <img class="me-1" src="/img/icon_livtv-sportsve-sports.svg" /> Roulette
       </button>
     </div>
-    <div class="owl-minigames">
+
+    <div class="owl-minigames row" style="row-gap: 20px;">
     {#await load()}
       asdasdsad
     {:then data} 
-      {#each data.list as item}
+      {#each list as item}
       <div class="casino-item col-lg-2 col-sm-3 col-6">
         <div class="item text-white">
           <div class="box">
@@ -102,39 +106,19 @@
             <div class="content">
               <p>
                 <a href="/play/{item.title.toLowerCase().replaceAll(" ", "-")}/{item.idx}">{item.title}</a>
+                <span class="float-end"><img src="/img/info-circle.svg"
+                  use:tooltip={{
+                    content: `<strong>${item.vendor}</strong> : <strong>${item.title}</strong>`,
+                    html: true
+                  }}
+                /></span>
               </p>
-              <span class="float-end"><img src="/img/info-circle.svg" /></span>
             </div>
           </div>
         </div>
       </div>
       {/each}
     {/await}
-    {#each list as item}
-    <div class="casino-item col-lg-2 col-sm-3 col-6">
-      <div class="item text-white">
-        <div class="box">
-          <img 
-            class="mainimg" 
-            src={item.thumbnail} 
-            alt={item.title} 
-            onerror="event.target.parentNode.parentNode.parentNode.style.display = 'none';"
-          >
-          <div class="hover">
-            <a href="/play/{item.title.toLowerCase().replaceAll(" ", "-")}/{item.idx}">
-              <img src="/img/hover.svg" />
-            </a>
-          </div>
-          <div class="content">
-            <p>
-              <a href="/play/{item.title.toLowerCase().replaceAll(" ", "-")}/{item.idx}">{item.title}</a>
-            </p>
-            <span class="float-end"><img src="/img/info-circle.svg" /></span>
-          </div>
-        </div>
-      </div>
-    </div>
-    {/each}
     </div>
   </div> 
 

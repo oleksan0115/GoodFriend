@@ -38,15 +38,10 @@
   <div class="box">
     <div class="container">
       <div class="play_img text-center mobilenone">
-        <iframe src="{link}" width="100%" height="500px" frameborder="0">
+        <iframe src="{link}" width="100%" height="650px" frameborder="0">
         </iframe>
         <div class="overlay" />
         <div class="text-content">
-          <p class="mb-3">
-            Entering a third-party game. the balance of the selected currency
-            will be displayed in USD, and if you change currency while playing,
-            the will refresh and restart.
-          </p>
           <button class="btn btn-play me-1">
             <img class="me-1" src="../../img/icon_play.svg" /> Real Play
           </button>
@@ -138,7 +133,7 @@
       </div>
     </div>
     <div class="boxsecond boxforth mobilenone">
-      <!-- <div class="row">
+      <div class="row">
         <div class="col-md-12 categories-swiper-top swiper-top">
           <h2 class="title">Related Games</h2>
 
@@ -204,9 +199,9 @@
             </button>
           </div>
         </div>
-      </div> -->
+      </div>
 
-      <!-- <div class="owl-minigames">
+      <div class="owl-minigames">
         <div class="row oc1">
           <Swiper
             spaceBetween={15}
@@ -342,7 +337,7 @@
             </SwiperSlide>
           </Swiper>
         </div>
-      </div> -->
+      </div>
     </div>
     <div class="row">
       <div class="col-lg-7 col-sm-12" style="flex-grow: 1;">

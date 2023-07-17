@@ -58,7 +58,7 @@ export interface BetHistoryResult {
     title: string,
     nick: string,
     betAmount: number|undefined,
-    profitAmount: number,
+    profitAmount: number
 }
 
 export interface TotalNumber {

@@ -12,7 +12,8 @@ Please manage your affiliate code and API key through Sveltekit's env.
 > Get casino list
 - endpoint: /api/casino/list
 - method: post
-- data: , page/(number)(optional), search/(string)(optional) <- Searches from 4 characters or more.
+- data: page/(number), search/(string)(optional) <- Searches from 2 characters or more.
+- description: Search for title, vendor, and type together.
 
 #### response
 ````
@@ -40,7 +41,7 @@ Please manage your affiliate code and API key through Sveltekit's env.
 > Casino Launch
 - endpoint: /api/casino/launch
 - method: post
-- data: idx(number), nick (string)
+- data: idx(number)/, nick (string)
 
 #### response
 ````
@@ -53,21 +54,36 @@ Please manage your affiliate code and API key through Sveltekit's env.
 ````
 
 > Get info
-- endpoint: /api/casino/launch
-- methdo: post
+- endpoint: /api/casino/info
+- method: post
 - data: idx
 
 #### response
 ````
 //200
 {
-    title: info.title, 
-    thumbnail: info.thumbnail, 
-    vendor: info.vendor, 
-    type: info.type 
+  title: 'Korean Speed Baccarat B',
+  thumbnail: 'path/to/image.png',
+  vendor: 'evolution',
+  type: 'baccarat'
 }
 
 //400
 ````
 
+> Get bet result list
+- endpoint: /api/casino/bet-result
+- method: post
 
+#### response
+````
+//200
+[
+    {
+        title: '5 Lions Megaways', 
+        nick: 'user5931960781', 
+        betAmount: -250, 
+        profitAmount: -250
+    }
+]
+````

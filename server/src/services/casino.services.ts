@@ -11,12 +11,9 @@ export const getMyInfo = (): Promise<any> => {
         'Content-Type': 'application/json'
     };
 
-    console.log(1)
-
     return new Promise((resolve, reject) => {
         axios.get(endpoint, {headers})
             .then(response => {
-                console.log(response)
                 resolve(response.data)
             })
             .catch(error => {reject(error)})

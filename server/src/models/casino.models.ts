@@ -59,6 +59,17 @@ export const getListTotalCount = async (dataAccess:any, search?: string) => {
     return dataAccess.selectOne(sql, [])
 }
 
+// filter menu
+export const getVendor = async (dataAccess: any) => {
+    let sql: string = `SELECT gcl.vendor as name, count(gcl.vendor) AS count FROM gf_casino_list gcl WHERE is_open = 1 GROUP BY gcl.vendor`
+    return dataAccess.selectAll(sql, [])
+}
+
+export const getType = async (dataAccess: any) => {
+    let sql: string = `SELECT gcl.type as name, count(gcl.type) AS count FROM gf_casino_list gcl WHERE is_open = 1 GROUP BY gcl.type;`
+    return dataAccess.selectAll(sql, [])
+}
+
 // info
 export const getInfo = (dataAccess: any, idx: number) => {
     let sql: string = `SELECT title, thumbnail, vendor, type FROM gf_casino_list WHERE idx = ?`

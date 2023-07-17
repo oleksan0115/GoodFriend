@@ -56,6 +56,17 @@ export const getList = async (req: Request, res: Response) => {
     })
 }
 
+// /filter menu
+export const getFilterMenu = async(req: Request, res: Response) => {
+    const vendor = await models.getVendor(dataAccess)
+    const type = await models.getType(dataAccess)
+
+    res.status(200).json({
+        "vendor": vendor,
+        "type": type
+    })
+}
+
 // /launch
 export const launch = async (req: Request, res: Response) => {
     const { idx, nick } = req.body

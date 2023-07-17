@@ -1,7 +1,7 @@
 <script>
   import {getCasinoList} from "../../apis/casino/GetCasinoList"
-  import { tooltip } from 'svooltip';
-  import 'svooltip/styles.css';
+  // import { tooltip } from 'svooltip';
+  // import 'svooltip/styles.css';
   export let data
   import FaqItem from "$lib/components/FaqItem.svelte";
   
@@ -106,12 +106,12 @@
             <div class="content">
               <p>
                 <a href="/play/{item.title.toLowerCase().replaceAll(" ", "-")}/{item.idx}">{item.title}</a>
-                <span class="float-end"><img src="/img/info-circle.svg"
+                <!-- <span class="float-end"><img src="/img/info-circle.svg"
                   use:tooltip={{
                     content: `<strong>${item.vendor}</strong> : <strong>${item.title}</strong>`,
                     html: true
                   }}
-                /></span>
+                /></span> -->
               </p>
             </div>
           </div>

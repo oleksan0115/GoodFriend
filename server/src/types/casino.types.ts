@@ -60,3 +60,7 @@ export interface BetHistoryResult {
     betAmount: number|undefined,
     profitAmount: number,
 }
+
+export interface TotalNumber {
+    count: number
+}

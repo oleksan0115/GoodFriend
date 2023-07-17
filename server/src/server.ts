@@ -87,8 +87,10 @@ app.use("/api/casino", casinoRouter)
 
 // callback url
 import callbackRouter from "./routes/callback.routes"
-
 app.use("/callback", callbackRouter)
+
+import * as casino from "../src/services/casino.services"
+import * as dataAccess from "../src/utils/dataAccess.utils"
 
 const port:number = 9001
 app.listen(port, () => {

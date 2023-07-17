@@ -1,17 +1,28 @@
 <script>
-  import { onMount } from "svelte";
-  import { getCasinoList } from '../../apis/casino/GetCasinoList';
-  let casinoList = [];
+  import {getCasinoList} from "../../apis/casino/GetCasinoList"
+  export let data
+  
+  let list = data.casino.list
+  let totalNumber = data.casino.totalNumber
+  let limit = data.casino.limit
+  let currentLimit = limit
+  let searchKey = ""
+  let page = 0
 
-  onMount(async () => {
-    const res =  await getCasinoList({});
-    casinoList = res.data.list;
-  });
-  let searchKey = "";
-
-  async function searchCasino() {
-    const res =  await getCasinoList({search: searchKey});
-    casinoList = res.data.list;
+  const search = async () => {   // Removed argument from function signature
+    
+    page = 0
+    const res = await getCasinoList(page, searchKey)
+    totalNumber = res.totalNumber
+    currentLimit = list.length
+    list = res.list   // Assign the new data to the list
+  }
+  
+  const moreLoad = async () => {
+    page++
+    currentLimit += limit
+    const res = await getCasinoList(page, searchKey)
+    list = [...list, ...res.list]
   }
 </script>
 
@@ -19,16 +30,17 @@
   <form action="">
     <div class="input-group mb-3 main-search-bar">
       <input
-        type="search"
-        bind:value={searchKey}
-        class="form-control"
-        placeholder="Search here..."
-        aria-label="Username"
-        aria-describedby="basic-addon1"
-      />
-      <button type="submit" class="input-group-text" id="basic-addon1" on:click={searchCasino}
-        ><img src="/img/Search.svg" /></button
-      >
+      type="search"
+      bind:value={searchKey}
+      class="form-control"
+      placeholder="Search here..."
+      aria-label="Username"
+      aria-describedby="basic-addon1"
+      on:keyup={search}
+    >
+      <button type="submit" class="input-group-text" id="basic-addon1">
+        <img src="/img/Search.svg" />
+      </button>
     </div>
   </form>
 
@@ -52,362 +64,39 @@
       </button>
     </div>
     <div class="owl-minigames">
-
-      <!-- <div class="casino-item col-lg-2 col-sm-3 col-6">
-        <div class="item text-white">
-          <div class="box">
-            <img class="mainimg" src="/img/Rectangle-38.svg" />
-            <div class="hover">
-              <a href="#"><img src="/img/hover.svg" /></a>
-            </div>
-            <div class="content">
-              <p>
-                <a href="#">Tiny Gods</a>
-                <span class="float-end"
-                  ><img src="/img/info-circle.svg" /></span
-                >
-              </p>
-            </div>
-          </div>
-        </div>
-      </div> -->
-      
-      {#each casinoList as casinoItem}
+           
+      {#each list as item}
       <div class="casino-item col-lg-2 col-sm-3 col-6">
         <div class="item text-white">
           <div class="box">
-            <img class="mainimg" src={casinoItem.thumbnail} />
+            <img 
+              class="mainimg" 
+              src={item.thumbnail} 
+              alt={item.title} 
+              onerror="event.target.parentNode.parentNode.parentNode.style.display = 'none';"
+            >
             <div class="hover">
-              <a href="#">
+              <a href="/play/{item.title.toLowerCase().replaceAll(" ", "-")}/{item.idx}">
                 <img src="/img/hover.svg" />
               </a>
             </div>
             <div class="content">
               <p>
-                <a href="#">{casinoItem.title}</a>
-                
+                <a href="/play/{item.title.toLowerCase().replaceAll(" ", "-")}/{item.idx}">{item.title}</a>
               </p>
-              <span class="float-end"
-                ><img src="/img/info-circle.svg" /></span
-              >
+              <span class="float-end"><img src="/img/info-circle.svg" /></span>
             </div>
           </div>
         </div>
       </div>
       {/each}
-
-      <!-- <div class="row">     
-        <div class="casino-item col-lg-2 col-sm-3 col-6">
-          <div class="item text-white">
-            <div class="box">
-              <img class="mainimg" src="/img/Rectangle-38.svg" />
-              <div class="hover">
-                <a href="#"><img src="/img/hover.svg" /></a>
-              </div>
-              <div class="content">
-                <p>
-                  <a href="#">Tiny Gods</a>
-                  <span class="float-end"
-                    ><img src="/img/info-circle.svg" /></span
-                  >
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="casino-item col-lg-2 col-sm-3 col-6">
-          <div class="item text-white">
-            <div class="box">
-              <img class="mainimg" src="/img/game1.svg" />
-              <div class="hover">
-                <a href="#"><img src="/img/hover.svg" /></a>
-              </div>
-              <div class="content">
-                <p>
-                  <a href="#">Tiny Gods</a>
-                  <span class="float-end"
-                    ><img src="/img/info-circle.svg" /></span
-                  >
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="casino-item col-lg-2 col-sm-3 col-6">
-          <div class="item text-white">
-            <div class="box">
-              <img class="mainimg" src="/img/Rectangle-40.svg" />
-              <div class="hover">
-                <a href="#"><img src="/img/hover.svg" /></a>
-              </div>
-              <div class="content">
-                <p>
-                  <a href="#">Tiny Gods</a>
-                  <span class="float-end"
-                    ><img src="/img/info-circle.svg" /></span
-                  >
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="casino-item col-lg-2 col-sm-3 col-6">
-          <div class="item text-white">
-            <div class="box">
-              <img class="mainimg" src="/img/Rectangle-42.svg" />
-              <div class="hover">
-                <a href="#"><img src="/img/hover.svg" /></a>
-              </div>
-              <div class="content">
-                <p>
-                  <a href="#">Tiny Gods</a>
-                  <span class="float-end"
-                    ><img src="/img/info-circle.svg" /></span
-                  >
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="casino-item col-lg-2 col-sm-3 col-6">
-          <div class="item">
-            <div class="box">
-              <img class="mainimg" src="/img/game2.svg" />
-              <div class="hover">
-                <a href="#"><img src="/img/hover.svg" /></a>
-              </div>
-              <div class="content">
-                <p>
-                  <a href="#">Tiny Gods</a>
-                  <span class="float-end"
-                    ><img src="/img/info-circle.svg" /></span
-                  >
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <!-- <div class="row mt-4">
-        <div class="casino-item col-lg-2 col-sm-3 col-6">
-          <div class="item text-white">
-            <div class="box">
-              <img class="mainimg" src="/img/Rectangle-38.svg" />
-              <div class="hover">
-                <a href="#"><img src="/img/hover.svg" /></a>
-              </div>
-              <div class="content">
-                <p>
-                  <a href="#">Tiny Gods</a>
-                  <span class="float-end"
-                    ><img src="/img/info-circle.svg" /></span
-                  >
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="casino-item col-lg-2 col-sm-3 col-6">
-          <div class="item text-white">
-            <div class="box">
-              <img class="mainimg" src="/img/Rectangle-39.svg" />
-              <div class="hover">
-                <a href="#"><img src="/img/hover.svg" /></a>
-              </div>
-              <div class="content">
-                <p>
-                  <a href="#">Tiny Gods</a>
-                  <span class="float-end"
-                    ><img src="/img/info-circle.svg" /></span
-                  >
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="casino-item col-lg-2 col-sm-3 col-6">
-          <div class="item text-white">
-            <div class="box">
-              <img class="mainimg" src="/img/Rectangle-40.svg" />
-              <div class="hover">
-                <a href="#"><img src="/img/hover.svg" /></a>
-              </div>
-              <div class="content">
-                <p>
-                  <a href="#">Tiny Gods</a>
-                  <span class="float-end"
-                    ><img src="/img/info-circle.svg" /></span
-                  >
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="casino-item col-lg-2 col-sm-3 col-6">
-          <div class="item text-white">
-            <div class="box">
-              <img class="mainimg" src="/img/Rectangle-41.svg" />
-              <div class="hover">
-                <a href="#"><img src="/img/hover.svg" /></a>
-              </div>
-              <div class="content">
-                <p>
-                  <a href="#">Tiny Gods</a>
-                  <span class="float-end"
-                    ><img src="/img/info-circle.svg" /></span
-                  >
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="casino-item col-lg-2 col-sm-3 col-6">
-          <div class="item text-white">
-            <div class="box">
-              <img class="mainimg" src="/img/Rectangle-42.svg" />
-              <div class="hover">
-                <a href="#"><img src="/img/hover.svg" /></a>
-              </div>
-              <div class="content">
-                <p>
-                  <a href="#">Tiny Gods</a>
-                  <span class="float-end"
-                    ><img src="/img/info-circle.svg" /></span
-                  >
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="casino-item col-lg-2 col-sm-3 col-6">
-          <div class="item">
-            <div class="box">
-              <img class="mainimg" src="/img/game1.svg" />
-              <div class="hover">
-                <a href="#"><img src="/img/hover.svg" /></a>
-              </div>
-              <div class="content">
-                <p>
-                  <a href="#">Tiny Gods</a>
-                  <span class="float-end"
-                    ><img src="/img/info-circle.svg" /></span
-                  >
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <!-- <div class="row mt-4">
-        <div class="col-lg-2 col-sm-3 col-6">
-          <div class="item text-white">
-            <div class="box">
-              <img class="mainimg" src="/img/Rectangle-39.svg" />
-              <div class="hover">
-                <a href="#"><img src="/img/hover.svg" /></a>
-              </div>
-              <div class="content">
-                <p>
-                  <a href="#">Tiny Gods</a>
-                  <span class="float-end"
-                    ><img src="/img/info-circle.svg" /></span
-                  >
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-2 col-sm-3 col-6">
-          <div class="item text-white">
-            <div class="box">
-              <img class="mainimg" src="/img/Rectangle-41.svg" />
-              <div class="hover">
-                <a href="#"><img src="/img/hover.svg" /></a>
-              </div>
-              <div class="content">
-                <p>
-                  <a href="#">Tiny Gods</a>
-                  <span class="float-end"
-                    ><img src="/img/info-circle.svg" /></span
-                  >
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-2 col-sm-3 col-6">
-          <div class="item text-white">
-            <div class="box">
-              <img class="mainimg" src="/img/Rectangle-38.svg" />
-              <div class="hover">
-                <a href="#"><img src="/img/hover.svg" /></a>
-              </div>
-              <div class="content">
-                <p>
-                  <a href="#">Tiny Gods</a>
-                  <span class="float-end"
-                    ><img src="/img/info-circle.svg" /></span
-                  >
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-2 col-sm-3 col-6">
-          <div class="item text-white">
-            <div class="box">
-              <img class="mainimg" src="/img/Rectangle-42.svg" />
-              <div class="hover">
-                <a href="#"><img src="/img/hover.svg" /></a>
-              </div>
-              <div class="content">
-                <p>
-                  <a href="#">Tiny Gods</a>
-                  <span class="float-end"
-                    ><img src="/img/info-circle.svg" /></span
-                  >
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-2 col-sm-3 col-6">
-          <div class="item text-white">
-            <div class="box">
-              <img class="mainimg" src="/img/Rectangle-40.svg" />
-              <div class="hover">
-                <a href="#"><img src="/img/hover.svg" /></a>
-              </div>
-              <div class="content">
-                <p>
-                  <a href="#">Tiny Gods</a>
-                  <span class="float-end"
-                    ><img src="/img/info-circle.svg" /></span
-                  >
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-2 col-sm-3 col-6">
-          <div class="item">
-            <div class="box">
-              <img class="mainimg" src="/img/game2.svg" />
-              <div class="hover">
-                <a href="#"><img src="/img/hover.svg" /></a>
-              </div>
-              <div class="content">
-                <p>
-                  <a href="#">Tiny Gods</a>
-                  <span class="float-end"
-                    ><img src="/img/info-circle.svg" /></span
-                  >
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
     </div>
+  </div> 
+
+  {#if totalNumber > limit && totalNumber > currentLimit}
+  <div style="text-align: center">
+    <div style="color:white">{currentLimit} / {totalNumber}</div>
+    <button class="btn-play" on:click={moreLoad}>Load More</button>
   </div>
+  {/if}
 </div>

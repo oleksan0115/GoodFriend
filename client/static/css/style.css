@@ -1378,7 +1378,9 @@ margin-top: -8px;
 }
 
 .owl-minigames .item img.mainimg {
+  min-height: 192px;
   width: 100%;
+  border-radius: 18px;
 }
 
 .owl-minigames .item .hover img {
@@ -2873,6 +2875,7 @@ ul.dropdown-menu li a.dropdown-item::after {
 
 
 .swiper img {
+  min-height: 192px;
   width: 100%;
 }
 

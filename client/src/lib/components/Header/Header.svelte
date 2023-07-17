@@ -12,7 +12,6 @@
 </script>
 
 <div class="topbar bg-color">
-
   <div class="row">
     <div class="telegram-login-widget"></div>
     <div class="col-md-5 col-2 align-self-center">
@@ -69,7 +68,3 @@
 </div>
 
 <BetSlip />
-
-
-
-

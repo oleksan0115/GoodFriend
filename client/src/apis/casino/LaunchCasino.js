@@ -4,11 +4,11 @@ const GF_API_KEY = import.meta.env.VITE_GF_API_KEY;
 const GF_AFFILIATE_CODE = import.meta.env.VITE_GF_AFFILIATE_CODE;
 const SEVER_URL = import.meta.env.VITE_SEVER_URL;
 
-export async function getCasinoList(page, search) {
-  const endPoint = SEVER_URL + '/api/casino/list'
+export async function LaunchCasino(idx, nick) {
+  const endPoint = SEVER_URL + '/api/casino/launch'
   const data = {
-    "page": page, 
-    "search": search
+    "idx": idx, 
+    "nick": nick
   }
   const headers = {
     'GF-API-KEY': GF_API_KEY,

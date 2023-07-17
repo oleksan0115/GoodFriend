@@ -59,13 +59,13 @@
     <div class="container">
       <div class="boxthird mt-4 mt-50">
         <div class="sports-exapanded text-content mb-5">
-          <a href="#" class="hightlight me-5">All</a>
+          <a href="#" class="hightlight gradient-text gradient-text-grad3 me-5">All</a>
           <a href="#" class="me-5">Match</a>
           <a href="#" class="me-5">1st Half</a>
         </div>
         <div class="row">
           <div class="col-md-6 col-8 align-self-center">
-            <h2 class="mb-0 header1">Money Line • Match</h2>
+            <h2 class="mb-0 header1 gradient-text gradient-text-light">Money Line • Match</h2>
           </div>
           <div class="col-md-6 col-4 text-end">
             <button class="btn-color2">
@@ -98,7 +98,7 @@
         </div>
         <div class="row mt-3">
           <div class="col-md-6 col-8 align-self-center">
-            <h2 class="mb-0 header1">Handicap • Match</h2>
+            <h2 class="mb-0 header1 gradient-text gradient-text-light">Handicap • Match</h2>
           </div>
           <div class="col-md-6 col-4 text-end">
             <button class="btn-color2">
@@ -133,7 +133,7 @@
         </div>
         <div class="row mt-3">
           <div class="col-md-6 col-8 align-self-center">
-            <h2 class="mb-0 header1">Total • Match</h2>
+            <h2 class="mb-0 header1 gradient-text gradient-text-light">Total • Match</h2>
           </div>
           <div class="col-md-6 col-4 text-end">
             <button class="btn-color2">
@@ -172,7 +172,7 @@
         </div>
         <div class="row mt-3">
           <div class="col-md-6 col-8 align-self-center">
-            <h2 class="mb-0 header1">Team Total • Match</h2>
+            <h2 class="mb-0 header1 gradient-text gradient-text-light">Team Total • Match</h2>
           </div>
           <div class="col-md-6 col-4 text-end">
             <button class="btn-color2">
@@ -225,7 +225,7 @@
         </div>
         <div class="row mt-3">
           <div class="col-md-6 col-8 align-self-center">
-            <h2 class="mb-0 header1">Money Line • 1st Half</h2>
+            <h2 class="mb-0 header1 gradient-text gradient-text-light">Money Line • 1st Half</h2>
           </div>
           <div class="col-md-6 col-4 text-end">
             <button class="btn-color2">
@@ -260,7 +260,7 @@
         </div>
         <div class="row mt-3">
           <div class="col-md-6 col-8 align-self-center">
-            <h2 class="mb-0 header1">Handicap • 1st Half</h2>
+            <h2 class="mb-0 header1 gradient-text gradient-text-light">Handicap • 1st Half</h2>
           </div>
           <div class="col-md-6 col-4 text-end">
             <button class="btn-color2">
@@ -295,7 +295,7 @@
         </div>
         <div class="row mt-3">
           <div class="col-md-6 col-8 align-self-center">
-            <h2 class="mb-0 header1">Team Total • 1st Half</h2>
+            <h2 class="mb-0 header1 gradient-text gradient-text-light">Team Total • 1st Half</h2>
           </div>
           <div class="col-md-6 col-4 text-end">
             <button class="btn-color2">

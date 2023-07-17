@@ -79,7 +79,7 @@
               <h5 class="mt-2 mb-2"><span>By</span> Tol Es</h5>
               <p class="pt-1 mb-0">
                 <span>Release:---</span>
-                <a class="ms-3" href="#">Read more</a>
+                <a class="ms-3 gradient-text gradient-text-purple1" href="#">Read more</a>
               </p>
               <div class="mt-3 d-inline-block">
                 <img class="me-1" src="../../img/icon-1.svg" />
@@ -140,7 +140,7 @@
     <div class="boxsecond boxforth mobilenone">
       <!-- <div class="row">
         <div class="col-md-12 categories-swiper-top swiper-top">
-          <h2 class="title">Related Games</h2>
+          <h2 class="title gradient-text gradient-text-light">Related Games</h2>
 
           <div class="swiper-navigation">
             <button class="swiper-prev-btn categories-prev">
@@ -349,8 +349,8 @@
         <div class="boxsecond boxfive mt-0 mt-xxl-40">
           <div class="row">
             <div class="col-md-12">
-              <h2 class="mobilenone">Latest Bet & Race</h2>
-              <h2 class="desknone">Latest Best & Withdrawals</h2>
+              <h2 class="mobilenone gradient-text gradient-text-light">Latest Bet & Race</h2>
+              <h2 class="desknone gradient-text gradient-text-light">Latest Best & Withdrawals</h2>
             </div>
           </div>
           <div class="tab">
@@ -521,7 +521,7 @@
           <div class="boxsecond boxforth mt-0">
             <div class="row">
               <div class="col-md-12">
-                <h2>Related Games</h2>
+                <h2 class="gradient-text gradient-text-light">Related Games</h2>
               </div>
             </div>
             <div class="owl-carousel oc3">
@@ -631,7 +631,7 @@
         <div class="boxsecond mt-0 mt-xxl-40">
           <div class="row">
             <div class="col-md-12 col-12">
-              <h2 class="mb-0">Comments</h2>
+              <h2 class="mb-0 gradient-text gradient-text-light">Comments</h2>
             </div>
           </div>
         </div>

@@ -47,7 +47,7 @@
     </button>
 
     <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div class="row user" on:click={() => {
+    <div class="row user position-relative cursor-pointer" on:click={() => {
       globalStore.toggleItem("profileModalOpen", true);
     }}>
       <div class="col-md-4">
@@ -57,11 +57,26 @@
         </div>
       </div>
       <div class="col-md-8 mobilenone">
-        <h6 class="text-white mb-0">{$globalStore.userDetail.nick}</h6>
-        <p class="mb-0 mt-0">
+        <h6 class="gradient-text gradient-text-light text-white mb-0">{$globalStore.userDetail.nick}</h6>
+        <p class="mb-0 mt-0 gf-text-color-1">
           <img style="margin-bottom: 6px;" src="/img/Group-1583.svg" /> level {$globalStore.userDetail.level}
         </p>
       </div>
     </div>
   </div>
 </div>
+
+<style>
+  .user::before {
+    content: "";
+    background-image: url(../img/Arrow-Down.svg);
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    color: #fff;
+    right: -12px;
+    top: 14px;
+    z-index: -1;
+  }
+</style>
+

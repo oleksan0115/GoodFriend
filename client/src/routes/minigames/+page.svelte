@@ -8,7 +8,7 @@
     <div class="boxsecond boxforth">
       <div class="row">
         <div class="col-md-12">
-          <h2>Mini Games</h2>
+          <h2 class="gradient-text gradient-text-light">Mini Games</h2>
         </div>
       </div>
       <div class="minigames-btn">

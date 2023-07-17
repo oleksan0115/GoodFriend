@@ -92,7 +92,7 @@
 		<div class="boxsecond boxforth">
 			<div class="row">
 					<div class="col-md-12 categories-swiper-top swiper-top">
-							<h2 class="title">All Categories</h2>
+							<h2 class="title gradient-text gradient-text-light">All Categories</h2>
 							<div class="swiper-navigation">
 									<button class="swiper-prev-btn categories_oc1-prev">
 											<svg
@@ -179,7 +179,7 @@
 										<div class="box1 sbox text-center">
 											<img src="/img/casino-category.png" />
 											<div class="title-wrapper">
-													<h2 class="category-title">Casino</h2>
+													<h2 class="category-title gradient-text gradient-text-light">Casino</h2>
 											</div>
 										</div>
 									</div>
@@ -190,7 +190,7 @@
 									<div class="box2 sbox text-center">
 											<img src="/img/slot-category.png" />
 											<div class="title-wrapper">
-													<h2 class="category-title">Slot</h2>
+													<h2 class="category-title gradient-text gradient-text-light">Slot</h2>
 											</div>
 									</div>
 								</div>
@@ -201,7 +201,7 @@
 										<div class="box3 sbox text-center">
 												<img src="/img/sports-category.png" />
 												<div class="title-wrapper">
-														<h2 class="category-title">Sports</h2>
+														<h2 class="category-title gradient-text gradient-text-light">Sports</h2>
 												</div>
 										</div>
 								</div>
@@ -212,7 +212,7 @@
 									<div class="box4 sbox text-center">
 											<img src="/img/v-game-category.png" />
 											<div class="title-wrapper">
-													<h2 class="category-title">V-Game</h2>
+													<h2 class="category-title gradient-text gradient-text-light">V-Game</h2>
 											</div>
 									</div>
 								</div>
@@ -223,7 +223,7 @@
 									<div class="box5 sbox text-center">
 											<img src="/img/minigames-category.png" />
 											<div class="title-wrapper">
-													<h2 class="category-title">Mini Games</h2>
+												<h2 class="category-title gradient-text gradient-text-light">Mini Games</h2>
 											</div>
 									</div>
 								</div>
@@ -234,7 +234,7 @@
 									<div class="box6 sbox text-center">
 											<img src="/img/live-sports-category.png" />
 											<div class="title-wrapper">
-													<h2 class="category-title">Live Sports</h2>
+													<h2 class="category-title gradient-text gradient-text-light">Live Sports</h2>
 											</div>
 									</div>
 								</div>    
@@ -246,7 +246,7 @@
     <div class="boxthird">
         <div class="row">
             <div class="col-md-12">
-                <h2>Live Sports</h2>
+                <h2 class="gradient-text gradient-text-light">Live Sports</h2>
             </div>
         </div>
         <div>
@@ -669,7 +669,7 @@
         <div class="boxthird mt-4">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Main Sports</h2>
+                    <h2 class="gradient-text gradient-text-light">Main Sports</h2>
                 </div>
             </div>
 
@@ -1113,7 +1113,7 @@
         <div class="boxsecond boxforth">
             <div class="row">
                 <div class="col-md-12 categories-swiper-top swiper-top">
-                    <h2 class="title">Best Slot</h2>
+                    <h2 class="title gradient-text gradient-text-light">Best Slot</h2>
                     <div class="swiper-navigation">
                         <button class="swiper-prev-btn categories_oc1-prev">
                             <svg
@@ -1368,7 +1368,7 @@
         <div class="boxsecond boxforth">
             <div class="row">
                 <div class="col-md-12 categories-swiper-top swiper-top">
-                    <h2 class="title">Best Slot</h2>
+                    <h2 class="title gradient-text gradient-text-light">Best Slot</h2>
                     <div class="swiper-navigation">
                         <button class="swiper-prev-btn categories_oc2-prev">
                             <svg
@@ -1601,10 +1601,10 @@
         <div class="boxsecond boxfive">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="mobilenone">
+                    <h2 class="mobilenone gradient-text gradient-text-light">
                         Recent Bet Deposits & Withdrawal History
                     </h2>
-                    <h2 class="desknone">Latest Bets & Withdrawals</h2>
+                    <h2 class="desknone gradient-text gradient-text-light">Latest Bets & Withdrawals</h2>
                 </div>
             </div>
             <div class="tab">

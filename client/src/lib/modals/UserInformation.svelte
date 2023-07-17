@@ -153,7 +153,7 @@
       <div class="col-md-8 col-7 align-self-center">
         {#if $globalStore.userInfo.owner}
           {#if !$globalStore.userInfo.editState}
-            <h4 class="mb-0">My Profile</h4>
+            <h4 class="mb-0 gradient-text gradient-text-light2">My Profile</h4>
           {:else}
             <div class="profile_title">
               <svg class="profile_back cursor-pointer" on:click={() => {
@@ -162,11 +162,11 @@
                 showImage = false;
                 globalStore.toggleItem("userInfo", userInfo);
               }}><use href="/img/symbols.svg?lang.svg#icon_arrow_left"/></svg>
-              <h4 class="mb-0">Edit Profile</h4>
+              <h4 class="mb-0 gradient-text gradient-text-light2">Edit Profile</h4>
             </div>
           {/if}
         {:else}
-        <h4 class="mb-0">User Information</h4>
+        <h4 class="mb-0 gradient-text gradient-text-light2">User Information</h4>
         {/if}        
       </div>
       <div class="col-md-4 col-5 text-end">
@@ -204,7 +204,7 @@
           </div>
           
             <div class="position-relative">
-              <h6 class="text-white mb-2 mt-3">{$globalStore.userInfo.nick}</h6>
+              <h6 class="text-white mb-2 mt-3 gradient-text gradient-text-light2">{$globalStore.userInfo.nick}</h6>
               <p class="mt-0">User Id: {$globalStore.userInfo.email}</p>
               
               {#if $globalStore.userInfo.owner}

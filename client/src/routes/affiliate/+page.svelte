@@ -15,7 +15,7 @@
         <div class="container">
           <div class="head1">
             <h6 class="pb-2">LEARN MORE ABOUT</h6>
-            <h1>AFFILIATE PROGRAM</h1>
+            <h1 class="gradient-text gradient-text-grad4">AFFILIATE PROGRAM</h1>
           </div>
 
           <button class="btn-contact mb-5">Contact us</button>
@@ -30,7 +30,7 @@
         <div class="col-md-7 mobile_center">
           <div class="pd3060">
             <h6 class="mb-3">LEARN MORE ABOUT</h6>
-            <h1 class="mb-1">AFFILIATE PROGRAM</h1>
+            <h1 class="mb-1 gradient-text gradient-text-grad4">AFFILIATE PROGRAM</h1>
             <p class="mt-0">
               We have special conditions for you to customize your referral
               program!
@@ -46,7 +46,7 @@
       <div class="title">
         <div class="row">
           <div class="col-md-12">
-            <h2>Frequently Asked Questions</h2>
+            <h2 class="gradient-text gradient-text-light">Frequently Asked Questions</h2>
           </div>
         </div>
       </div>

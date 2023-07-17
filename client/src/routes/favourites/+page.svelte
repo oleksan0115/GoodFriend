@@ -95,7 +95,7 @@
     <div class="boxsecond boxforth">
       <div class="row">
         <div class="col-md-12 categories-swiper-top swiper-top">
-          <h2 class="title">Casino/Slot</h2>
+          <h2 class="title gradient-text gradient-text-light">Casino/Slot</h2>
 
           <div class="swiper-navigation">
             <button class="swiper-prev-btn categories-prev">
@@ -300,7 +300,7 @@
     <div class="boxsecond boxforth navnone">
       <div class="row">
         <div class="col-md-12 categories-swiper-top swiper-top">
-          <h2 class="title">Team/League</h2>
+          <h2 class="title gradient-text gradient-text-light">Team/League</h2>
 
           <div class="swiper-navigation">
             <button class="swiper-prev-btn categories_tl-prev">
@@ -430,7 +430,7 @@
     <div class="boxsecond boxforth">
       <div class="row">
         <div class="col-md-12 categories-swiper-top swiper-top">
-          <h2 class="title">Minigames</h2>
+          <h2 class="title gradient-text gradient-text-light">Minigames</h2>
           <div class="swiper-navigation">
             <button class="swiper-prev-btn categories_oc2-prev">
               <svg

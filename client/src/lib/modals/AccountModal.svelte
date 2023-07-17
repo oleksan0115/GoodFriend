@@ -30,7 +30,7 @@
 				<h6 class="text-white mb-0">
 					{$globalStore.userDetail ? $globalStore.userDetail.nick : ""}
 				</h6>
-				<p class="mb-0 mt-0">
+				<p class="mb-0 mt-0 gf-text-color-1">
 					<img style="margin-bottom: 4px;" src="/img/Group-1583.svg" /> level {$globalStore.userDetail
 						? $globalStore.userDetail.level
 						: "0"}

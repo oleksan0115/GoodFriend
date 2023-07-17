@@ -47,7 +47,7 @@
   <div class="boxsecond boxforth">
     <div class="row">
       <div class="col-md-12">
-        <h2>Casino</h2>
+        <h2 class="gradient-text gradient-text-light">Casino</h2>
       </div>
     </div>
     <div class="minigames-btn">

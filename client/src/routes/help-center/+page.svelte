@@ -33,7 +33,7 @@
     <div class="row">
       <div class="col-md-3 mobilenone">
         <div class="title">
-          <h1>Help Center</h1>
+          <h1 class="gradient-text gradient-text-light">Help Center</h1>
         </div>
         <div class="tab mt-4">
           <ul>
@@ -119,7 +119,7 @@
           </p>
           <h5 class="pt-3">
             Will The Game Be Manipulated By The Platform?
-            <a href="#">GitHub Verify</a>
+            <a class="gradient-text gradient-text-purple2" href="#">GitHub Verify</a>
           </h5>
           <p>
             The integrity check value is key to verifying whether there is

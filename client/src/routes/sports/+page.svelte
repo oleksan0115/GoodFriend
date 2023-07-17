@@ -58,8 +58,8 @@
         <img class="w-100 desknone" src="/img/Banner_Football-1.svg" />
         <!-- <div class="overlay"></div> -->
         <div class="text-content">
-          <h1>Soccer Order</h1>
-          <a href="#" class="hightlight me-5">Hightlights</a>
+          <h1 class="gradient-text gradient-text-grad2">Soccer Order</h1>
+          <a href="#" class="hightlight me-5 gradient-text gradient-text-grad3">Hightlights</a>
           <a href="#" class="me-5">Live</a>
           <a href="sports/soccer/leagues" class="me-5">Leagues</a>
         </div>
@@ -69,7 +69,7 @@
     <div class="boxthird mt-4 mt-50">
       <div class="row">
         <div class="col-md-12">
-          <h2>Hightlights</h2>
+          <h2 class="gradient-text gradient-text-light">Hightlights</h2>
         </div>
       </div>
 

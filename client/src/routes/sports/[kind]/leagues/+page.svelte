@@ -39,10 +39,10 @@
           <img class="w-100 main desknone" src="/img/sports-mobile.svg" />
           <!-- <div class="overlay"></div> -->
           <div class="text-content">
-            <h1>Soccer Odds</h1>
+            <h1 class="gradient-text gradient-text-grad2">Soccer Odds</h1>
             <a href="/sports" class="me-5">Hightlights</a>
             <a href="#" class="me-5">Live</a>
-            <a href="#" class="hightlight me-5">Leagues</a>
+            <a href="#" class="hightlight gradient-text gradient-text-grad3 me-5">Leagues</a>
           </div>
         </div>
         <div class="content pt-1"></div>

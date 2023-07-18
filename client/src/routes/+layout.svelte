@@ -63,7 +63,8 @@
     }
 
     if(screenSize < 1601 ) {
-      window.document.body.classList.add('chat-closed')
+      // window.document.body.classList.add('chat-closed')
+      window.document.body.classList.add('chat-opened')
     } else {
       window.document.body.classList.add('chat-opened')
     }

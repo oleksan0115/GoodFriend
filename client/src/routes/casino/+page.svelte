@@ -3,35 +3,39 @@
   import { tooltip } from 'svooltip';
   import 'svooltip/styles.css';
   export let data
+  const type = data.type ? data.type : ""
   import FaqItem from "$lib/components/FaqItem.svelte";
   
   let list = []
   let totalNumber = 0
   let limit
   let currentLimit = 0
-  let searchKey = ""
-  let page = 1
+  let page = 0
+  let searchKey = "";
 
   const search = async () => {   // Removed argument from function signature
+    page = 0;
+    currentLimit = 0;
     const res = await getCasinoList(page, searchKey)
     totalNumber = res.totalNumber
-    currentLimit += list.length
+    limit = res.limit
     list = res.list   // Assign the new data to the list
+    currentLimit = list.length
   }
   
   const moreLoad = async () => {
     page++
-    currentLimit += limit
     const res = await getCasinoList(page, searchKey)
+    currentLimit += res.list.length
     list = [...list, ...res.list]
   }
 
   const load = async () => {
-    const data = await getCasinoList(0, "")
-    totalNumber += data.totalNumber
+    const data = await getCasinoList(0, type)
+    totalNumber = data.totalNumber
     limit = data.limit
     list = data.list
-    currentLimit += list.length
+    currentLimit = list.length
     return data
   }
 </script>
@@ -43,7 +47,7 @@
         <input
           type="search"
           bind:value={searchKey}
-          class="form-control"
+          class="form-control text-white"
           placeholder="Search here..."
           aria-label="Username"
           aria-describedby="basic-addon1"
@@ -63,14 +67,14 @@
 
   <div class="boxsecond boxforth">
     <div class="minigames-btn">
-      <button class="btn active me-2">All</button>
+      <button class={`btn me-2 ${type == "" ? "active": ""}`}>All</button>
       <button class="btn me-2">
         Hot
       </button>
-      <button class="btn me-2">
+      <button class="btn me-2" on:click={() => {}}>
         <img class="me-1" src="/img/icon_pokericon_poker.svg" /> Best Casino
       </button>
-      <button class="btn">
+      <button class={`btn ${type == "slot" ? "active": ""}`}>
         <img class="me-1" src="/img/icon_livtv-sportsve-sports.svg" /> Slot
       </button>
       <button class="btn">
@@ -86,7 +90,6 @@
 
     <div class="owl-minigames row" style="row-gap: 20px;">
     {#await load()}
-      asdasdsad
     {:then data} 
       {#each list as item}
       <div class="casino-item col-lg-2 col-sm-3 col-6">

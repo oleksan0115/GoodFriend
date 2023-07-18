@@ -1,10 +1,9 @@
 /** @type {import('./$types').PageLoad} */
-import { getCasinoList } from '../../apis/casino/GetCasinoList';
 
-export async function load() {
-    // const casino = await getCasinoList(0, "");
-
-    // return {
-    //     "casino": casino
-    // }
+export async function load({url}) {
+    const data = Object.fromEntries(
+    	new URLSearchParams(url.toJSON().split("?")[1])
+    );
+		console.log('@@@@@@@@', data)
+		return data;
 }

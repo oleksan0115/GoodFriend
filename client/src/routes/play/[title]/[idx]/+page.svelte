@@ -138,7 +138,7 @@
       </div>
     </div>
     <div class="boxsecond boxforth mobilenone">
-      <!-- <div class="row">
+      <div class="row">
         <div class="col-md-12 categories-swiper-top swiper-top">
           <h2 class="title">Related Games</h2>
 
@@ -204,9 +204,9 @@
             </button>
           </div>
         </div>
-      </div> -->
+      </div>
 
-      <!-- <div class="owl-minigames">
+      <div class="owl-minigames">
         <div class="row oc1">
           <Swiper
             spaceBetween={15}
@@ -342,7 +342,7 @@
             </SwiperSlide>
           </Swiper>
         </div>
-      </div> -->
+      </div>
     </div>
     <div class="row">
       <div class="col-lg-7 col-sm-12" style="flex-grow: 1;">
@@ -370,7 +370,7 @@
                   LATEST BETS
                 </button>
               </li>
-              <li class="nav-item" role="presentation">
+              <!-- <li class="nav-item" role="presentation">
                 <button
                   class="nav-link"
                   id="deposits-tab"
@@ -399,7 +399,7 @@
                 >
                   Recent Withdrawals
                 </button>
-              </li>
+              </li> -->
             </ul>
             <div class="tab-content" id="myTabContent">
               <div

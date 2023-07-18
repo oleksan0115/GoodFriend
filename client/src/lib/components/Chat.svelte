@@ -6,7 +6,6 @@
         function closeChat() {
             window.document.body.classList.add('chat-closed')
             window.document.body.classList.remove('chat-opened')
-
         }
 </script>
 <div class="position-relative">

@@ -83,8 +83,8 @@
             <div class="content">
               <p>
                 <a href="/play/{item.title.toLowerCase().replaceAll(" ", "-")}/{item.idx}">{item.title}</a>
+                <span class="float-end"><img src="/img/info-circle.svg" /></span>
               </p>
-              <span class="float-end"><img src="/img/info-circle.svg" /></span>
             </div>
           </div>
         </div>

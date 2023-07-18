@@ -39,7 +39,7 @@
 <div class="container">
   <FaqItem>
     <h2 slot="head">  <form action="">
-      <div class="input-group mb-3 main-search-bar">
+      <div class="input-group main-search-bar">
         <input
           type="search"
           bind:value={searchKey}
@@ -88,7 +88,7 @@
     {#await load()}
       asdasdsad
     {:then data} 
-      {#each data.list as item}
+      {#each list as item}
       <div class="casino-item col-lg-2 col-sm-3 col-6">
         <div class="item text-white">
           <div class="box">

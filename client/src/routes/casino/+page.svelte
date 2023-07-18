@@ -1,5 +1,7 @@
 <script>
   import {getCasinoList} from "../../apis/casino/GetCasinoList"
+  import { tooltip } from 'svooltip';
+  import 'svooltip/styles.css';
   export let data
   
   let list = data.casino.list
@@ -63,10 +65,9 @@
         Games
       </button>
     </div>
-    <div class="owl-minigames">
-           
+    <div class="owl-minigames row" style="row-gap: 20px;">
       {#each list as item}
-      <div class="casino-item col-lg-2 col-sm-3 col-6">
+      <div class="col-lg-2 col-sm-3 col-6">
         <div class="item text-white">
           <div class="box">
             <img 
@@ -83,7 +84,12 @@
             <div class="content">
               <p>
                 <a href="/play/{item.title.toLowerCase().replaceAll(" ", "-")}/{item.idx}">{item.title}</a>
-                <span class="float-end"><img src="/img/info-circle.svg" /></span>
+                <span class="float-end"><img src="/img/info-circle.svg"
+                  use:tooltip={{
+                    content: `<strong>${item.vendor}</strong> : <strong>${item.title}</strong>`,
+                    html: true
+                  }}
+                /></span>
               </p>
             </div>
           </div>

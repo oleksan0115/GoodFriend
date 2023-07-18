@@ -110,8 +110,6 @@
 
   }
 
-
-
 </script>
 <svelte:window on:scroll={handleOnScroll}  bind:innerWidth={screenSize}/>
 <div class="{device_width}" class:right-chat="{!$globalStore.chatOpen}">

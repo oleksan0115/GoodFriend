@@ -82,7 +82,7 @@ let mobileOptions=false;
         
         <div class="padding pt-0 spin-wrapper">
             <button class="btn lebtn w-100">
-              <img src="img/spin-now.png" /> SPIN NOW <span>Unlocked</span>
+              <img src="/img/spin-now.png" /> SPIN NOW <span>Unlocked</span>
             </button>
         </div>
 
@@ -186,7 +186,7 @@ let mobileOptions=false;
         <div class="spin-wrapper py-30">
 
             <button class="btn lebtn w-100">
-              <img src="img/spin-now.png" />
+              <img src="/img/spin-now.png" />
             </button>
         </div>
 

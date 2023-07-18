@@ -38,15 +38,10 @@
   <div class="box">
     <div class="container">
       <div class="play_img text-center mobilenone">
-        <iframe src="{link}" width="100%" height="500px" frameborder="0">
+        <iframe src="{link}" width="100%" height="650px" frameborder="0">
         </iframe>
         <div class="overlay" />
         <div class="text-content">
-          <p class="mb-3">
-            Entering a third-party game. the balance of the selected currency
-            will be displayed in USD, and if you change currency while playing,
-            the will refresh and restart.
-          </p>
           <button class="btn btn-play me-1">
             <img class="me-1" src="../../img/icon_play.svg" /> Real Play
           </button>

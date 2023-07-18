@@ -36,7 +36,12 @@ export const memberGameMoneyChange = async (dataAccess: any, memberIdx: number, 
 export const getList = async (dataAccess: any, page?: number, search?: string) => {
     let sql: string = `SELECT * FROM gf_casino_list WHERE is_open = 1`
     
-    if(search && search.length >= 4) sql += ` AND REPLACE(LOWER(title), ' ', '') LIKE REPLACE(LOWER("%${search}%"), ' ', '')`
+    if(search && search.length >= 2) sql += `
+        AND (
+            REPLACE(LOWER(title), ' ', '') LIKE REPLACE(LOWER("%${search}%"), ' ', '') OR 
+            REPLACE(LOWER(vendor), ' ', '') LIKE REPLACE(LOWER("%${search}%"), ' ', '') OR 
+            REPLACE(LOWER(type), ' ', '') LIKE REPLACE(LOWER("%${search}%"), ' ', '')
+        )`
 
     if(page) { 
         sql += ` LIMIT ${page*setting.GAME_LIST_LIMIT}, ${setting.GAME_LIST_LIMIT}`
@@ -58,7 +63,7 @@ export const getListTotalCount = async (dataAccess:any, search?: string) => {
 export const getInfo = (dataAccess: any, idx: number) => {
     let sql: string = `SELECT title, thumbnail, vendor, type FROM gf_casino_list WHERE idx = ?`
     let values: number[] = [idx]
-    
+
     return dataAccess.selectOne(sql, values)
 }
 
@@ -88,7 +93,7 @@ export const betHistoryResult = async(dataAccess: any, list: string[])=> {
                 "title": title,
                 "nick": nick,
                 "betAmount": betAmount,
-                "profitAmount": profitAmount
+                "profitAmount": profitAmount,
             }
         
             return betHistoryResult;

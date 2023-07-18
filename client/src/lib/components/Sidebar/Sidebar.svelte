@@ -25,22 +25,23 @@ import SidebarItem from './SidebarItem.svelte'
 const sidebar_data = [
     ['Casino', '/casino', 'icon_side_casino',
         [
-            ['Dropdown 1', '/sports', 'icon_side_casino'], 
-            ['Dropdown 2', '/casino', 'icon_side_casino'], 
-            ['Dropdown 3', '/sports', 'icon_side_casino'], 
-            ['Dropdown 4', '/casino', 'icon_side_casino'], 
-            ['Dropdown 5', '/casino', 'icon_side_casino'], 
+            ['All', '/casino', 'icon_side_casino'], 
+            ['Best Casino', '/casino', 'icon_side_casino'], 
+            ['Slot', '/casino', 'icon_side_casino'], 
+            ['Blackjack', '/casino', 'icon_side_casino'], 
+            ['Baccarat', '/casino', 'icon_side_casino'],
+            ['Roulette', '/casino', 'icon_side_casino'], 
         ]
     ],
-    ['Slots', '/slot', 'icon_side_slot',
-        [
-            ['Dropdown 1', '/sports', 'icon_side_casino'], 
-            ['Dropdown 2', '/casino', 'icon_side_casino'], 
-            ['Dropdown 3', '/sports', 'icon_side_casino'], 
-            ['Dropdown 4', '/casino', 'icon_side_casino'], 
-            ['Dropdown 5', '/casino', 'icon_side_casino'], 
-        ]
-    ],    
+    // ['Slots', '/slot', 'icon_side_slot',
+    //     [
+    //         ['Dropdown 1', '/sports', 'icon_side_casino'], 
+    //         ['Dropdown 2', '/casino', 'icon_side_casino'], 
+    //         ['Dropdown 3', '/sports', 'icon_side_casino'], 
+    //         ['Dropdown 4', '/casino', 'icon_side_casino'], 
+    //         ['Dropdown 5', '/casino', 'icon_side_casino'], 
+    //     ]
+    // ],
     ['Sports','/sports', 'icon_side_sports'],
     ['Live Sports','/live-sports', 'icon_side_live_sports'],
     ['E-Sports','/esports', 'icon_side_e_sports'],

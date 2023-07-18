@@ -78,7 +78,7 @@
             >
             <div class="hover">
               <a href="/play/{item.title.toLowerCase().replaceAll(" ", "-")}/{item.idx}">
-                <img src="/img/hover.svg" />
+                <img src="/img/hover1.svg" />
               </a>
             </div>
             <div class="content">

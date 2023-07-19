@@ -37,6 +37,18 @@ Please manage your affiliate code and API key through Sveltekit's env.
 
 //400
 ````
+> Get filter menu
+- endpoint: /api/casino/filter-menu
+- method: post
+- description: Brings up the Filters menu data.
+````
+//200
+{
+    type: [{name:"abc", count:100}],
+    vendor: [{name:"abc", count:100}]
+}
+
+````
 
 > Casino Launch
 - endpoint: /api/casino/launch

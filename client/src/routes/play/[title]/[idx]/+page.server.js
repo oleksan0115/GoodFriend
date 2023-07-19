@@ -1,4 +1,5 @@
 import { LaunchCasino } from '../../../../apis/casino/LaunchCasino'
+import globalStore from "../../../../stores/globalStore";
 
 /** @type {import('./$types').PageLoad} */
 

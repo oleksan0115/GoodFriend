@@ -45,8 +45,8 @@ export const changeBalance = async (req: Request, res: Response) => {
 
 // /list
 export const getList = async (req: Request, res: Response) => {
-    const { page, search } = req.body
-    const list: CasinoList[] = await models.getList(dataAccess, page, search)
+    const { search } = req.body
+    const list: CasinoList[] = await models.getList(dataAccess, search)
     const totalNumber: TotalNumber = await models.getListTotalCount(dataAccess, search)
     
     res.status(200).json({
@@ -58,8 +58,8 @@ export const getList = async (req: Request, res: Response) => {
 
 // /filter menu
 export const getFilterMenu = async(req: Request, res: Response) => {
-    const vendor = await models.getVendor(dataAccess)
-    const type = await models.getType(dataAccess)
+    const   vendor = await models.getVendor(dataAccess);
+    const type = await models.getType(dataAccess);
 
     res.status(200).json({
         "vendor": vendor,

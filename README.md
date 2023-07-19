@@ -1,4 +1,4 @@
-# Gaming Solution Server APi.
+# Gaming Solution Server API.
 ## Required headers
 HTTP Headers
 1. 'GF-API-KEY': 'abcedef'
@@ -12,8 +12,13 @@ Please manage your affiliate code and API key through Sveltekit's env.
 > Get casino list
 - endpoint: /api/casino/list
 - method: post
-- data: page/(number), search/(string)(optional) <- Searches from 2 characters or more.
-- description: Search for title, vendor, and type together.
+- data: search: {
+    title: string,
+    vendor: string[],
+    type: string[],
+    page: number
+  }
+- description : page starts at 0, and no object should have undefined.
 
 #### response
 ````
@@ -44,8 +49,8 @@ Please manage your affiliate code and API key through Sveltekit's env.
 ````
 //200
 {
-    type: [{name:"abc", count:100}],
-    vendor: [{name:"abc", count:100}]
+    type: [{name: string}],
+    vendor: [{name: string}]
 }
 
 ````
@@ -74,10 +79,10 @@ Please manage your affiliate code and API key through Sveltekit's env.
 ````
 //200
 {
-  title: 'Korean Speed Baccarat B',
-  thumbnail: 'path/to/image.png',
-  vendor: 'evolution',
-  type: 'baccarat'
+  title: string,
+  thumbnail: string,
+  vendor: string,
+  type: string
 }
 
 //400
@@ -92,10 +97,10 @@ Please manage your affiliate code and API key through Sveltekit's env.
 //200
 [
     {
-        title: '5 Lions Megaways', 
-        nick: 'user5931960781', 
-        betAmount: -250, 
-        profitAmount: -250
+        title: string, 
+        nick: string, 
+        betAmount: number, 
+        profitAmount: number
     }
 ]
 ````

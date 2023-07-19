@@ -316,7 +316,7 @@
             </h5>
           </div>
           <div class="row">
-            <div class="input-item input_nick">
+            <div class="input-item input_item">
               <input type="text" name="nick" required bind:value={myProfileData.nick}>
             </div>
           </div>

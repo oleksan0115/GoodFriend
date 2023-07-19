@@ -4,6 +4,5 @@ export async function load({url}) {
     const data = Object.fromEntries(
     	new URLSearchParams(url.toJSON().split("?")[1])
     );
-		console.log('@@@@@@@@', data)
-		return data;
+	return data;
 }

@@ -67,7 +67,9 @@
 					Settings</a
 				>
 			</li>
-			<li>
+			<li on:click={() => {
+				globalStore.toggleItem("depositModal", true)
+			}}>
 				<a href="#"
 					><svg
 						><use href="/img/symbols.svg?lang.svg#icon_modal_deposit" /></svg
@@ -88,14 +90,14 @@
 					> Transactions</a
 				>
 			</li>
-			<li>
-				<a href="#" on:click={() => {
-					const userInfo = $globalStore.userDetail;
-					userInfo.owner = true;
-					userInfo.editState = false;
-					globalStore.toggleItem("userInfo", userInfo);
-					globalStore.toggleItem("profileModalOpen", false)
-				}}
+			<li on:click={() => {
+				const userInfo = $globalStore.userDetail;
+				userInfo.owner = true;
+				userInfo.editState = false;
+				globalStore.toggleItem("userInfo", userInfo);
+				globalStore.toggleItem("profileModalOpen", false)
+			}}>
+				<a href="#" 
 					><svg
 						><use href="/img/symbols.svg?lang.svg#icon_modal_deposit" /></svg
 					> My profile</a

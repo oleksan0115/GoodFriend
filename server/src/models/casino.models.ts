@@ -1,5 +1,5 @@
 import * as setting from "../config/setting.config"
-import { BetHistory, BetHistoryResult } from "../types/casino.types"
+import { BetHistory, BetHistoryResult, CasinoSearch } from "../types/casino.types"
 
 // change balance (callback)
 export const casinoHistoryInsert = async (dataAccess: any, affiliateCode: string, memberIdx: number, nick: string, transactionId: number, transactionType: string, refererId: number, amount: number, gameId: string, gameTitle: string, round: string, gameType: string, gameVendor: string)  => {
@@ -33,40 +33,55 @@ export const memberGameMoneyChange = async (dataAccess: any, memberIdx: number, 
 }
 
 // list
-export const getList = async (dataAccess: any, page?: number, search?: string) => {
+export const getList = async (dataAccess: any, search: CasinoSearch) => {
     let sql: string = `SELECT * FROM gf_casino_list WHERE is_open = 1`
-    
-    if(search && search.length >= 2) sql += `
-        AND (
-            REPLACE(LOWER(title), ' ', '') LIKE REPLACE(LOWER("%${search}%"), ' ', '') OR 
-            REPLACE(LOWER(vendor), ' ', '') LIKE REPLACE(LOWER("%${search}%"), ' ', '') OR 
-            REPLACE(LOWER(type), ' ', '') LIKE REPLACE(LOWER("%${search}%"), ' ', '')
-        )`
 
-    if(page) { 
-        sql += ` LIMIT ${page*setting.GAME_LIST_LIMIT}, ${setting.GAME_LIST_LIMIT}`
-    } else {
-        sql += ` LIMIT 0, ${setting.GAME_LIST_LIMIT}`
+    if(search.title) {
+        sql += ` AND REPLACE(LOWER(title), ' ', '') LIKE REPLACE(LOWER("%${search.title}%"), ' ', '')`
     }
-
+    if(search.vendor.length !== 0) {
+        search.vendor.forEach((v) => {
+            sql += ` AND REPLACE(LOWER(vendor), ' ', '') LIKE REPLACE(LOWER("%${v}%"), ' ', '')`
+        })
+    }
+    if(search.type.length !== 0) {
+        search.type.forEach((v) => {
+            sql += ` AND REPLACE(LOWER(type), ' ', '') LIKE REPLACE(LOWER("%${v}%"), ' ', '')`
+        })      
+    }    
+ 
+    sql += ` LIMIT ${search.page*setting.GAME_LIST_LIMIT}, ${setting.GAME_LIST_LIMIT}`
     return dataAccess.selectAll(sql, [])
 }
 
-export const getListTotalCount = async (dataAccess:any, search?: string) => {
-    let sql: string = `SELECT count(*) as count FROM gf_casino_list`
-    if(search && search.length >= 2) sql += ` WHERE REPLACE(LOWER(title), ' ', '') LIKE REPLACE(LOWER("%${search}%"), ' ', '')`
-    
+export const getListTotalCount = async (dataAccess:any, search: CasinoSearch) => {
+
+    let sql: string = `SELECT count(*) as count FROM gf_casino_list WHERE is_open = 1`
+    if(search.title) {
+        sql += ` AND REPLACE(LOWER(title), ' ', '') LIKE REPLACE(LOWER("%${search.title}%"), ' ', '')`
+    }
+    if(search.vendor.length !== 0) {
+        search.vendor.forEach((v) => {
+            sql += ` AND REPLACE(LOWER(vendor), ' ', '') LIKE REPLACE(LOWER("%${v}%"), ' ', '')`
+        })
+    }
+    if(search.type.length !== 0) {
+        search.type.forEach((v) => {
+            sql += ` AND REPLACE(LOWER(type), ' ', '') LIKE REPLACE(LOWER("%${v}%"), ' ', '')`
+        })      
+    }    
+
     return dataAccess.selectOne(sql, [])
 }
 
 // filter menu
 export const getVendor = async (dataAccess: any) => {
-    let sql: string = `SELECT gcl.vendor as name, count(gcl.vendor) AS count FROM gf_casino_list gcl WHERE is_open = 1 GROUP BY gcl.vendor`
+    let sql: string = `SELECT gcl.vendor as name FROM gf_casino_list gcl WHERE is_open = 1 GROUP BY gcl.vendor`
     return dataAccess.selectAll(sql, [])
 }
 
 export const getType = async (dataAccess: any) => {
-    let sql: string = `SELECT gcl.type as name, count(gcl.type) AS count FROM gf_casino_list gcl WHERE is_open = 1 GROUP BY gcl.type;`
+    let sql: string = `SELECT gcl.type as name FROM gf_casino_list gcl WHERE is_open = 1 GROUP BY gcl.type;`
     return dataAccess.selectAll(sql, [])
 }
 

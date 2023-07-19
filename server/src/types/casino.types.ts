@@ -64,3 +64,10 @@ export interface BetHistoryResult {
 export interface TotalNumber {
     count: number
 }
+
+export interface CasinoSearch {
+    title: string,
+    vendor: string[],
+    type: string[],
+    page: number
+}

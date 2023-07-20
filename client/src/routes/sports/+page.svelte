@@ -1,5 +1,5 @@
 <script>
-	import HighLightsItem from "../../lib/components/Sports/HighLightsItem.svelte";
+  import HighLightsItem from "../../lib/components/Sports/HighLightsItem.svelte";
 </script>
 
 <div class="container">
@@ -15,7 +15,7 @@
   <div class="sportb desknone favourites">
     <div class="row mb-3 mt-3">
       <div class="col-2 pe-0">
-        <button type="button" class="btn btn-search w-100">
+        <button type="button" class="btn btn-search px-15 w-100">
           <img src="/img/Group-48.svg" />
         </button>
       </div>
@@ -31,35 +31,36 @@
       </div>
     </div>
     <div class="boxthird desknone table-drag tabledrag1">
-        <div class="sportb-btn-wrapper">
-            <button class="btn">
-                <img class="me-1" src="/img/soccer-ball.svg" /> Sports A-Z
-            </button>
-            <button class="btn">
-                <img class="me-1" src="/img/esports.svg" /> Favorites
-            </button>
-            <button class="btn">
-                <img class="me-1" src="/img/esports.svg" /> Payback
-            </button>
-            <button class="btn">
-                <img class="me-1" src="/img/esports.svg" /> Payback
-            </button>
-            <button class="btn">
-                <img class="me-1" src="/img/esports.svg" /> Payback
-            </button> 
-        </div>
-           
+      <div class="sportb-btn-wrapper">
+        <button class="btn">
+          <img class="me-1" src="/img/soccer-ball.svg" /> Sports A-Z
+        </button>
+        <button class="btn">
+          <img class="me-1" src="/img/esports.svg" /> Favorites
+        </button>
+        <button class="btn">
+          <img class="me-1" src="/img/esports.svg" /> Payback
+        </button>
+        <button class="btn">
+          <img class="me-1" src="/img/esports.svg" /> Payback
+        </button>
+        <button class="btn">
+          <img class="me-1" src="/img/esports.svg" /> Payback
+        </button>
+      </div>
     </div>
   </div>
   <div class="sports">
     <div class="box">
-      <div class="sports_img">
+      <div class="sports_img position-relative">
         <img class="w-100 main mobilenone" src="/img/Banner_Football.svg" />
         <img class="w-100 desknone" src="/img/Banner_Football-1.svg" />
         <!-- <div class="overlay"></div> -->
         <div class="text-content">
-          <h1>Soccer Order</h1>
-          <a href="#" class="hightlight me-5">Hightlights</a>
+          <h1 class="gradient-text gradient-text-grad2">Soccer Order</h1>
+          <a href="#" class="hightlight me-5 gradient-text gradient-text-grad3"
+            >Hightlights</a
+          >
           <a href="#" class="me-5">Live</a>
           <a href="sports/soccer/leagues" class="me-5">Leagues</a>
         </div>
@@ -69,16 +70,15 @@
     <div class="boxthird mt-4 mt-50">
       <div class="row">
         <div class="col-md-12">
-          <h2>Hightlights</h2>
+          <h2 class="gradient-text gradient-text-light">Hightlights</h2>
         </div>
       </div>
 
+      <HighLightsItem />
 
-    <HighLightsItem></HighLightsItem>
+      <HighLightsItem />
 
-    <HighLightsItem></HighLightsItem>
-    
-    <HighLightsItem></HighLightsItem>
+      <HighLightsItem />
     </div>
   </div>
 </div>

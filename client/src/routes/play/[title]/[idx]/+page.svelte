@@ -20,10 +20,10 @@
     });
   });
 
-  let commentBoxOpen=false;
+  let commentBoxOpen = false;
 
-  export let data
-  const link = data.link
+  export let data;
+  const link = data.link;
 </script>
 
 <div class="container">
@@ -35,11 +35,10 @@
   </nav>
 </div>
 <div class="play">
-  <div class="box">
+  <div class="box p-30">
     <div class="container">
-      <div class="play_img text-center mobilenone">
-        <iframe src="{link}" width="100%" height="650px" frameborder="0">
-        </iframe>
+      <div class="play_img position-relative text-center mobilenone">
+        <iframe src={link} width="100%" height="650px" frameborder="0" />
         <div class="overlay" />
         <div class="text-content">
           <button class="btn btn-play me-1">
@@ -60,7 +59,7 @@
         </button>
       </div>
     </div>
-    <div class="play_img text-center desknone">
+    <div class="play_img position-relative text-center desknone">
       <img class="main desknone" src="../../img/bg_img.svg" />
       <div class="overlay" />
       <div class="text-content">
@@ -74,7 +73,9 @@
               <h5 class="mt-2 mb-2"><span>By</span> Tol Es</h5>
               <p class="pt-1 mb-0">
                 <span>Release:---</span>
-                <a class="ms-3" href="#">Read more</a>
+                <a class="ms-3 gradient-text gradient-text-purple1" href="#"
+                  >Read more</a
+                >
               </p>
               <div class="mt-3 d-inline-block">
                 <img class="me-1" src="../../img/icon-1.svg" />
@@ -90,16 +91,15 @@
                 <img class="me-1" src="../../img/icon_play.svg" /> Real Play
               </button>
             </div>
-  
+
             <div class="col-6 pr-0">
               <button class="btn w-100 btn-free me-1">Free Play</button>
             </div>
             <div class="col-12 mt-3 p-0">
               <button class="btn w-100 btn-moreinfo me-1">More Info</button>
             </div>
-          </div>          
+          </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -118,11 +118,12 @@
           </p>
         </div>
         <div class="col-md-6 text-end">
-          <div class="form-check form-switch">
+          <div class="form-check form-switch pl-10">
             <label class="form-check-label" for="flexSwitchCheckDefault"
               >Comments</label
             >
-            <input on:change={ () => commentBoxOpen=!commentBoxOpen }
+            <input
+              on:change={() => (commentBoxOpen = !commentBoxOpen)}
               class="form-check-input"
               type="checkbox"
               role="switch"
@@ -135,7 +136,7 @@
     <div class="boxsecond boxforth mobilenone">
       <div class="row">
         <div class="col-md-12 categories-swiper-top swiper-top">
-          <h2 class="title">Related Games</h2>
+          <h2 class="title gradient-text gradient-text-light">Related Games</h2>
 
           <div class="swiper-navigation">
             <button class="swiper-prev-btn categories-prev">
@@ -223,117 +224,117 @@
             }}
           >
             <SwiperSlide>
-                <div class="item text-white">
-                  <div class="box">
-                    <img class="mainimg" src="../../img/Rectangle-38.svg" />
-                    <div class="hover">
-                      <img src="../../img/hover.svg" />
-                    </div>
-                    <div class="content">
-                      <p>
-                        Tiny Gods
-                        <span class="float-end"
-                          ><img src="../../img/info-circle.svg" /></span
-                        >
-                      </p>
-                    </div>
+              <div class="item text-white">
+                <div class="box">
+                  <img class="mainimg" src="../../img/Rectangle-38.svg" />
+                  <div class="hover">
+                    <img src="../../img/hover.svg" />
+                  </div>
+                  <div class="content">
+                    <p>
+                      Tiny Gods
+                      <span class="float-end"
+                        ><img src="../../img/info-circle.svg" /></span
+                      >
+                    </p>
                   </div>
                 </div>
+              </div>
             </SwiperSlide>
 
             <SwiperSlide>
-                <div class="item text-white">
-                  <div class="box">
-                    <img class="mainimg" src="../../img/Rectangle-39.svg" />
-                    <div class="hover">
-                      <img src="../../img/hover.svg" />
-                    </div>
-                    <div class="content">
-                      <p>
-                        Tiny Gods
-                        <span class="float-end"
-                          ><img src="../../img/info-circle.svg" /></span
-                        >
-                      </p>
-                    </div>
+              <div class="item text-white">
+                <div class="box">
+                  <img class="mainimg" src="../../img/Rectangle-39.svg" />
+                  <div class="hover">
+                    <img src="../../img/hover.svg" />
+                  </div>
+                  <div class="content">
+                    <p>
+                      Tiny Gods
+                      <span class="float-end"
+                        ><img src="../../img/info-circle.svg" /></span
+                      >
+                    </p>
                   </div>
                 </div>
+              </div>
             </SwiperSlide>
 
             <SwiperSlide>
-                <div class="item text-white">
-                  <div class="box">
-                    <img class="mainimg" src="../../img/Rectangle-40.svg" />
-                    <div class="hover">
-                      <img src="../../img/hover.svg" />
-                    </div>
-                    <div class="content">
-                      <p>
-                        Tiny Gods
-                        <span class="float-end"
-                          ><img src="../../img/info-circle.svg" /></span
-                        >
-                      </p>
-                    </div>
+              <div class="item text-white">
+                <div class="box">
+                  <img class="mainimg" src="../../img/Rectangle-40.svg" />
+                  <div class="hover">
+                    <img src="../../img/hover.svg" />
+                  </div>
+                  <div class="content">
+                    <p>
+                      Tiny Gods
+                      <span class="float-end"
+                        ><img src="../../img/info-circle.svg" /></span
+                      >
+                    </p>
                   </div>
                 </div>
+              </div>
             </SwiperSlide>
 
             <SwiperSlide>
-                <div class="item text-white">
-                  <div class="box">
-                    <img class="mainimg" src="../../img/Rectangle-41.svg" />
-                    <div class="hover">
-                      <img src="../../img/hover.svg" />
-                    </div>
-                    <div class="content">
-                      <p>
-                        Tiny Gods
-                        <span class="float-end"
-                          ><img src="../../img/info-circle.svg" /></span
-                        >
-                      </p>
-                    </div>
+              <div class="item text-white">
+                <div class="box">
+                  <img class="mainimg" src="../../img/Rectangle-41.svg" />
+                  <div class="hover">
+                    <img src="../../img/hover.svg" />
+                  </div>
+                  <div class="content">
+                    <p>
+                      Tiny Gods
+                      <span class="float-end"
+                        ><img src="../../img/info-circle.svg" /></span
+                      >
+                    </p>
                   </div>
                 </div>
+              </div>
             </SwiperSlide>
 
             <SwiperSlide>
-                <div class="item text-white">
-                  <div class="box">
-                    <img class="mainimg" src="../../img/Rectangle-42.svg" />
-                    <div class="hover">
-                      <img src="../../img/hover.svg" />
-                    </div>
-                    <div class="content">
-                      <p>
-                        Tiny Gods
-                        <span class="float-end"
-                          ><img src="../../img/info-circle.svg" /></span
-                        >
-                      </p>
-                    </div>
+              <div class="item text-white">
+                <div class="box">
+                  <img class="mainimg" src="../../img/Rectangle-42.svg" />
+                  <div class="hover">
+                    <img src="../../img/hover.svg" />
+                  </div>
+                  <div class="content">
+                    <p>
+                      Tiny Gods
+                      <span class="float-end"
+                        ><img src="../../img/info-circle.svg" /></span
+                      >
+                    </p>
                   </div>
                 </div>
+              </div>
             </SwiperSlide>
 
             <SwiperSlide>
-                <div class="item text-white">
-                  <div class="box">
-                    <img class="mainimg" src="../../img/game1.svg" />
-                    <div class="hover">
-                      <img src="../../img/hover.svg" />
-                    </div>
-                    <div class="content">
-                      <p>
-                        Tiny Gods
-                        <span class="float-end"
-                          ><img src="../../img/info-circle.svg" /></span
-                        >
-                      </p>
-                    </div>
+              <div class="item text-white">
+                <div class="box">
+                  <img class="mainimg" src="../../img/game1.svg" />
+                  <div class="hover">
+                    <img src="../../img/hover.svg" />
+                  </div>
+                  <div class="content">
+                    <p>
+                      Tiny Gods
+                      <span class="float-end"
+                        ><img src="../../img/info-circle.svg" /></span
+                      >
+                    </p>
                   </div>
                 </div>
+              </div>
             </SwiperSlide>
           </Swiper>
         </div>
@@ -344,15 +345,19 @@
         <div class="boxsecond boxfive mt-0 mt-xxl-40">
           <div class="row">
             <div class="col-md-12">
-              <h2 class="mobilenone">Latest Bet & Race</h2>
-              <h2 class="desknone">Latest Best & Withdrawals</h2>
+              <h2 class="mobilenone gradient-text gradient-text-light">
+                Latest Bet & Race
+              </h2>
+              <h2 class="desknone gradient-text gradient-text-light">
+                Latest Best & Withdrawals
+              </h2>
             </div>
           </div>
           <div class="tab">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
                 <button
-                  class="nav-link active"
+                  class="nav-link px-0 active"
                   id="bets-tab"
                   data-bs-toggle="tab"
                   data-bs-target="#bets"
@@ -367,7 +372,7 @@
               </li>
               <!-- <li class="nav-item" role="presentation">
                 <button
-                  class="nav-link"
+                  class="nav-link px-0"
                   id="deposits-tab"
                   data-bs-toggle="tab"
                   data-bs-target="#deposits"
@@ -382,7 +387,7 @@
               </li>
               <li class="nav-item" role="presentation">
                 <button
-                  class="nav-link"
+                  class="nav-link px-0"
                   id="withdrawals-tab"
                   data-bs-toggle="tab"
                   data-bs-target="#withdrawals"
@@ -404,88 +409,117 @@
                 aria-labelledby="bets-tab"
               >
                 <div class="latest-table-wrapper">
-                  <table class="table font-size latest-bets-table">
+                  <table class="table latest-bets-table">
                     <thead class="table-head">
                       <tr>
-                        <th width="25%">Game</th>
-                        <th width="20%">Player</th>
-                        <th width="20%" class="mobilenone">Bet Amount</th>
-                        <th width="15%">Multiplier</th>
-                        <th width="20%" class="text-end">Profit Amount</th>
+                        <th class="py-20 pl-20" width="25%">Game</th>
+                        <th class="py-20" width="25%">Player</th>
+                        <th class="py-20 mobilenone" width="20%">Bet Amount</th>
+                        <th class="py-20" width="15%">Multiplier</th>
+                        <th class="py-20 text-end" width="15%">Profit Amount</th
+                        >
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td>
-                          <img class="me-1" src="../../img/table-avatar1.svg" />
-                          Ring of fortune
+                        <td class="pl-20 py-20">
+                          <img class="me-1" src="/img/table-avatar1.svg" /> Ring
+                          of fortune
                         </td>
-                        <td class="text-white">bountyhunter31</td>
-                        <td class="text-white mobilenone">
-                          104.54 <img class="ms-1" src="../../img/btc.svg" />
+                        <td class="text-white py-20">bountyhunter31</td>
+                        <td class="text-white mobilenone py-20">
+                          104.54 <img class="ms-1" src="/img/btc.svg" />
                         </td>
-                        <td>0.001x</td>
-                        <td class="text-danger text-end">
-                          - 21.567 <img class="ms-1" src="../../img/btc.svg" />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <img class="me-1" src="../../img/poker-chips.svg" />
-                          Ring of fortune
-                        </td>
-                        <td class="text-white">unknown</td>
-                        <td class="text-white mobilenone">
-                          104.54 <img class="ms-1" src="../../img/hot.svg" />
-                        </td>
-                        <td>0.001x</td>
-                        <td class="text-success text-end">
-                          + 21.567 <img class="ms-1" src="../../img/hot.svg" />
+                        <td class="py-20">0.001x</td>
+                        <td class="pr-20 py-20 text-danger text-end">
+                          - 21.567 <img class="ms-1" src="/img/btc.svg" />
                         </td>
                       </tr>
                       <tr>
-                        <td>
-                          <img class="me-1" src="../../img/seven.svg" /> Ring of fortune
-                        </td>
-                        <td class="text-white">sharlen12</td>
-                        <td class="text-white mobilenone">
-                          104.54 <img class="ms-1" src="../../img/mft.svg" />
-                        </td>
-                        <td>0.001x</td>
-                        <td class="text-danger text-end">
-                          - 21.567 <img class="ms-1" src="../../img/mft.svg" />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <img class="me-1" src="../../img/table-avatar1.svg" /> Ring of
+                        <td class="pl-20 py-20">
+                          <img class="me-1" src="/img/poker-chips.svg" /> Ring of
                           fortune
                         </td>
-                        <td class="text-white">sharlen12</td>
-                        <td class="text-white mobilenone">
-                          104.54 <img class="ms-1" src="../../img/eth.svg" />
+                        <td class="text-white py-20">unknown</td>
+                        <td class="text-white mobilenone py-20">
+                          104.54 <img class="ms-1" src="/img/hot.svg" />
                         </td>
-                        <td>0.001x</td>
-                        <td class="text-success text-end">
-                          + 21.567 <img class="ms-1" src="../../img/eth.svg" />
+                        <td class="py-20">0.001x</td>
+                        <td class="pr-20 py-20 text-success text-end">
+                          + 21.567 <img class="ms-1" src="/img/hot.svg" />
                         </td>
                       </tr>
                       <tr>
-                        <td>
-                          <img class="me-1" src="../../img/dice.svg" /> Ring of fortune
+                        <td class="pl-20 py-20">
+                          <img class="me-1" src="/img/seven.svg" /> Ring of fortune
                         </td>
-                        <td class="text-white">BranyW67</td>
-                        <td class="text-white mobilenone">
-                          104.54 <img class="ms-1" src="../../img/trx.svg" />
+                        <td class="text-white py-20">wdwdw21</td>
+                        <td class="text-white mobilenone py-20">
+                          104.54 <img class="ms-1" src="/img/mft.svg" />
                         </td>
-                        <td>0.001x</td>
-                        <td class="text-danger text-end">
-                          - 21.567 <img class="ms-1" src="../../img/trx.svg" />
+                        <td class="py-20">0.001x</td>
+                        <td class="pr-20 py-20 text-danger text-end">
+                          - 21.567 <img class="ms-1" src="/img/mft.svg" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="pl-20 py-20">
+                          <img class="me-1" src="/img/table-avatar1.svg" /> Ring
+                          of fortune
+                        </td>
+                        <td class="text-white py-20">sharlen12</td>
+                        <td class="text-white mobilenone py-20">
+                          104.54 <img class="ms-1" src="/img/eth.svg" />
+                        </td>
+                        <td class="py-20">0.001x</td>
+                        <td class="pr-20 py-20 text-success text-end">
+                          + 21.567 <img class="ms-1" src="/img/eth.svg" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="pl-20 py-20">
+                          <img class="me-1" src="/img/dice.svg" />
+                          Ring of fortune
+                        </td>
+                        <td class="text-white py-20">BranyW67</td>
+                        <td class="text-white mobilenone py-20">
+                          104.54 <img class="ms-1" src="/img/trx.svg" />
+                        </td>
+                        <td class="py-20">0.001x</td>
+                        <td class="pr-20 text-danger text-end py-20">
+                          - 21.567 <img class="ms-1" src="/img/trx.svg" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="pl-20 py-20">
+                          <img class="me-1" src="/img/poker-chips.svg" /> Ring of
+                          fortune
+                        </td>
+                        <td class="text-white py-20">unknown</td>
+                        <td class="text-white mobilenone py-20">
+                          104.54 <img class="ms-1" src="/img/hot.svg" />
+                        </td>
+                        <td class="py-20">0.001x</td>
+                        <td class="pr-20 text-danger text-end py-20">
+                          - 21.567 <img class="ms-1" src="/img/hot.svg" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="pl-20 py-20">
+                          <img class="me-1" src="/img/seven.svg" /> Ring of fortune
+                        </td>
+                        <td class="text-white py-20">wdwdw21</td>
+                        <td class="text-white mobilenone py-20">
+                          104.54 <img class="ms-1" src="/img/mft.svg" />
+                        </td>
+                        <td class="py-20">0.001x</td>
+                        <td class="pr-20 text-success text-end py-20">
+                          - 21.567 <img class="ms-1" src="/img/mft.svg" />
                         </td>
                       </tr>
                     </tbody>
                   </table>
-                </div> 
+                </div>
                 <div class="text-center desknone">
                   <button class="btn btn-showmore">Show More</button>
                 </div>
@@ -516,15 +550,15 @@
           <div class="boxsecond boxforth mt-0">
             <div class="row">
               <div class="col-md-12">
-                <h2>Related Games</h2>
+                <h2 class="gradient-text gradient-text-light">Related Games</h2>
               </div>
             </div>
             <div class="owl-carousel oc3">
               <div class="item" data-slide-index="0">
-                <div class="box">
+                <div class="box p-30">
                   <img class="mainimg" src="../../img/Rectangle-38.svg" />
                   <div class="hover">
-                    <img src="../../img/hover.svg" />
+                    <img class="w-100" src="../../img/hover.svg" />
                   </div>
                   <div class="content">
                     <p>
@@ -537,10 +571,10 @@
                 </div>
               </div>
               <div class="item text-white" data-slide-index="1">
-                <div class="box">
+                <div class="box p-30">
                   <img class="mainimg" src="../../img/Rectangle-39.svg" />
                   <div class="hover">
-                    <img src="../../img/hover.svg" />
+                    <img class="w-100" src="../../img/hover.svg" />
                   </div>
                   <div class="content">
                     <p>
@@ -553,10 +587,10 @@
                 </div>
               </div>
               <div class="item text-white" data-slide-index="2">
-                <div class="box">
+                <div class="box p-30">
                   <img class="mainimg" src="../../img/Rectangle-40.svg" />
                   <div class="hover">
-                    <img src="../../img/hover.svg" />
+                    <img class="w-100" src="../../img/hover.svg" />
                   </div>
                   <div class="content">
                     <p>
@@ -569,10 +603,10 @@
                 </div>
               </div>
               <div class="item text-white" data-slide-index="3">
-                <div class="box">
+                <div class="box p-30">
                   <img class="mainimg" src="../../img/Rectangle-41.svg" />
                   <div class="hover">
-                    <img src="../../img/hover.svg" />
+                    <img class="w-100" src="../../img/hover.svg" />
                   </div>
                   <div class="content">
                     <p>
@@ -585,10 +619,10 @@
                 </div>
               </div>
               <div class="item text-white" data-slide-index="4">
-                <div class="box">
+                <div class="box p-30">
                   <img class="mainimg" src="../../img/Rectangle-42.svg" />
                   <div class="hover">
-                    <img src="../../img/hover.svg" />
+                    <img class="w-100" src="../../img/hover.svg" />
                   </div>
                   <div class="content">
                     <p>
@@ -601,10 +635,10 @@
                 </div>
               </div>
               <div class="item" data-slide-index="5">
-                <div class="box">
+                <div class="box p-30">
                   <img class="mainimg" src="../../img/Rectangle-38.svg" />
                   <div class="hover">
-                    <img src="../../img/hover.svg" />
+                    <img class="w-100" src="../../img/hover.svg" />
                   </div>
                   <div class="content">
                     <p>
@@ -622,73 +656,72 @@
       </div>
 
       {#if commentBoxOpen}
-      <div class="col-md-5 col-sm-12">
-        <div class="boxsecond mt-0 mt-xxl-40">
-          <div class="row">
-            <div class="col-md-12 col-12">
-              <h2 class="mb-0">Comments</h2>
+        <div class="col-md-5 col-sm-12">
+          <div class="boxsecond mt-0 mt-xxl-40">
+            <div class="row">
+              <div class="col-md-12 col-12">
+                <h2 class="mb-0 gradient-text gradient-text-light">Comments</h2>
+              </div>
+            </div>
+          </div>
+          <div class="commentsbox bg-color1">
+            <div class="row">
+              <div class="col-md-3 col-3">
+                <img class="" src="../../img/Ellipse-21.svg" />
+              </div>
+              <div class="col-md-9 col-9 ps-0">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Leave Your Comment"
+                  aria-label="Username"
+                  fdprocessedid="ks3lwc"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="comment bg-color1 mt-3">
+            <div class="row">
+              <div class="col-md-2 col-3">
+                <img class="w-100" src="../../img/user1.svg" />
+              </div>
+              <div class="col-md-10 col-9">
+                <h6>
+                  Ellis Schneider
+                  <img class="ms-1" src="../../img/Group-1581.svg" />
+                  <span class="time">12:03</span>
+                </h6>
+                <p>Lorem ipsum dolor sit amet consecte Feugiat accum.</p>
+                <ul>
+                  <li><img src="../../img/icon_like1.svg" /></li>
+                  <li><img src="../../img/icon_message.svg" /></li>
+                  <li><img src="../../img/dots.svg" /></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="comment bg-color1 mt-3">
+            <div class="row">
+              <div class="col-md-2 col-3">
+                <img class="w-100" src="../../img/user2.svg" />
+              </div>
+              <div class="col-md-10 col-9">
+                <h6>
+                  Ellis Schneider
+                  <img class="ms-1" src="../../img/Group-1581.svg" />
+                  <span class="time">12:03</span>
+                </h6>
+                <p>Lorem ipsum dolor sit amet consecte Feugiat accum.</p>
+                <ul>
+                  <li><img src="../../img/icon_like1.svg" /></li>
+                  <li><img src="../../img/icon_message.svg" /></li>
+                  <li><img src="../../img/dots.svg" /></li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
-        <div class="commentsbox bg-color1">
-          <div class="row">
-            <div class="col-md-3 col-3">
-              <img class="" src="../../img/Ellipse-21.svg" />
-            </div>
-            <div class="col-md-9 col-9 ps-0">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Leave Your Comment"
-                aria-label="Username"
-                fdprocessedid="ks3lwc"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="comment bg-color1 mt-3">
-          <div class="row">
-            <div class="col-md-2 col-3">
-              <img class="w-100" src="../../img/user1.svg" />
-            </div>
-            <div class="col-md-10 col-9">
-              <h6>
-                Ellis Schneider
-                <img class="ms-1" src="../../img/Group-1581.svg" />
-                <span class="time">12:03</span>
-              </h6>
-              <p>Lorem ipsum dolor sit amet consecte Feugiat accum.</p>
-              <ul>
-                <li><img src="../../img/icon_like1.svg" /></li>
-                <li><img src="../../img/icon_message.svg" /></li>
-                <li><img src="../../img/dots.svg" /></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="comment bg-color1 mt-3">
-          <div class="row">
-            <div class="col-md-2 col-3">
-              <img class="w-100" src="../../img/user2.svg" />
-            </div>
-            <div class="col-md-10 col-9">
-              <h6>
-                Ellis Schneider
-                <img class="ms-1" src="../../img/Group-1581.svg" />
-                <span class="time">12:03</span>
-              </h6>
-              <p>Lorem ipsum dolor sit amet consecte Feugiat accum.</p>
-              <ul>
-                <li><img src="../../img/icon_like1.svg" /></li>
-                <li><img src="../../img/icon_message.svg" /></li>
-                <li><img src="../../img/dots.svg" /></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
       {/if}
-
     </div>
   </div>
 </div>

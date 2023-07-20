@@ -4,20 +4,22 @@
   import {getCasinoList} from "../../apis/casino/GetCasinoList"
   import { getFilterMenu } from "../../apis/casino/GetFilterMenu"
   import FaqItem from "$lib/components/FaqItem.svelte";
-    import filter from "svelte-select/filter";
-  // import { tooltip } from 'svooltip';
+  // import filter from "svelte-select/filter";
+  import { tooltip } from 'svooltip';
   // import 'svooltip/styles.css';
   
   export let data
   const type = data.type ? data.type : ""
-  let filterMenu = [];
-  let vendorList = [];
+  let vendorList = [], typeList = [];
   onMount(async () => {
     const res = await getFilterMenu();
     vendorList = res.vendor.map((item) => {
       return { value: item.name, label: item.name }
     })
-    console.log('@@@@@@@@@@@@@@@@', vendorList)
+
+    typeList = res.type.map((item) => {
+      return { value: item.name, label: item.name }
+    })
   })
 
   let list = []
@@ -87,11 +89,11 @@
     </h2>
     <div slot="details" class="faq-answer">
       <div class="input-group main-search-bar">
-        <Select items={vendorList} multiple />
+        <Select items={typeList} multiple />
       </div>
 
       <div class="input-group main-search-bar mt-2">
-        <Select items={vendorList} vendorList multiple />
+        <Select items={vendorList} multiple />
       </div>
     </div>
   </FaqItem>
@@ -121,39 +123,50 @@
     </div>
 
     <div class="owl-minigames row" style="row-gap: 20px;">
-    {#await load()}
-    {:then data} 
-      {#each list as item}
-      <div class="casino-item col-lg-2 col-sm-3 col-6">
-        <div class="item text-white">
-          <div class="box">
-            <img 
-              class="mainimg" 
-              src={item.thumbnail} 
-              alt={item.title} 
-              onerror="event.target.parentNode.parentNode.parentNode.style.display = 'none';"
-            >
-            <div class="hover">
-              <a href="/play/{item.title.toLowerCase().replaceAll(" ", "-")}/{item.idx}">
-                <img src="/img/hover.svg" />
-              </a>
-            </div>
-            <div class="content">
-              <p>
-                <a href="/play/{item.title.toLowerCase().replaceAll(" ", "-")}/{item.idx}">{item.title}</a>
-                <!-- <span class="float-end"><img src="/img/info-circle.svg"
+      {#await load() then data}
+        {#each list as item}
+          <div class="casino-item col-lg-2 col-sm-3 col-6">
+            <div class="item text-white">
+              <div class="box">
+                <div class="relative">
+                  <img
+                    class="mainimg"
+                    src={item.thumbnail}
+                    alt={item.title}
+                    onerror="event.target.parentNode.parentNode.parentNode.style.display = 'none';"
+                  />
+                  <div class="hover overlay">
+                    <a
+                      href="/play/{item.title
+                        .toLowerCase()
+                        .replaceAll(' ', '-')}/{item.idx}"
+                    >
+                      <div class="flex flex-col gap-6">
+                        <img src="/img/play.svg" />
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="content">
+                  <p>
+                    <a
+                      href="/play/{item.title
+                        .toLowerCase()
+                        .replaceAll(' ', '-')}/{item.idx}">{item.title}</a
+                    >
+                    <!-- <span class="float-end"><img src="/img/info-circle.svg"
                   use:tooltip={{
                     content: `<strong>${item.vendor}</strong> : <strong>${item.title}</strong>`,
                     html: true
                   }}
                 /></span> -->
-              </p>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      {/each}
-    {/await}
+        {/each}
+      {/await}
     </div>
   </div> 
 
@@ -164,3 +177,36 @@
   </div>
   <!-- {/if} -->
 </div>
+
+<style>
+  .hover.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0c0e1ba6;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .relative {
+    position: relative;
+  }
+
+  .box:hover .hover.overlay {
+    opacity: 1;
+    transition: all 0.3s ease;
+  }
+
+  .flex{
+    display: flex;
+  } .flex-col {
+    flex-direction: column;
+  } .gap-6 {
+    gap: 6px;
+  }
+</style>

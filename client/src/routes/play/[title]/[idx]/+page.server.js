@@ -1,8 +1,8 @@
 import { LaunchCasino } from '../../../../apis/casino/LaunchCasino'
 import globalStore from "../../../../stores/globalStore";
 import { getCasinoInfo } from "../../../../apis/casino/GetCasinoInfo";
-/** @type {import('./$types').PageLoad} */
 
+/** @type {import('./$types').PageLoad} */
 export const load = async ({params}) => {
     const {title, idx} = params
     // const nick = "user5931960781"

@@ -26,7 +26,6 @@
 
 			const res = await getBestResult();
 			bestResult = res.betHistoryResult;
-			console.log(bestResult)
 			/*Best slots carousel*/
 
 			// const swiper_oc2 = document.querySelector(".oc2 .swiper").swiper;

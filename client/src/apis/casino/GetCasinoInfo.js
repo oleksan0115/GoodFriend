@@ -28,7 +28,7 @@ export async function getCasinoInfo(idx) {
     if(err.response && err.response.request.status == 400) {
       return err.response.data
     }
-  } catch (_) {
+  } catch (err) {
     return {
       data: {
         'message': "Bad Internet Connection"

@@ -3,11 +3,14 @@
   import { Navigation, Pagination, Scrollbar, A11y, Grid } from "swiper";
   import { Swiper, SwiperSlide } from "swiper/svelte";
   import { getCasinoList } from "../../../../apis/casino/GetCasinoList.js";
+  import { getBestResult } from "../../../../apis/casino/GetBestResult";
+  import { getCasinoInfo } from "../../../../apis/casino/GetCasinoInfo";
   import "swiper/css";
   import "swiper/css/navigation";
   import "swiper/css/pagination";
   import "swiper/css/scrollbar";
   import "swiper/css/grid";
+  import { each } from "svelte/internal";
 
   let commentBoxOpen=false;
 
@@ -16,6 +19,9 @@
   const title =data.title
   const type = data.type
   let relatedList = []
+  let bestResult = [];
+	let cntBestResult = 5;
+
   onMount(async () => {
     const swiper = document.querySelector(".oc1 .swiper").swiper;
     const buttonPrev = document.querySelector(".categories-prev");
@@ -27,8 +33,16 @@
       swiper.slideNext();
     });
 
-    const res = await getCasinoList(0, type);
+    const res = await getCasinoList({
+      title: "",
+      vendor: [],
+      type: [],
+      page: 0
+    });
     relatedList = res.list.slice(0, 6);
+
+    const res1 = await getBestResult();
+    bestResult = res1.betHistoryResult.slice(0, cntBestResult);
   });
 
   
@@ -425,21 +439,23 @@
                       </tr>
                     </thead>
                     <tbody>
+                      {#each bestResult as item}
                       <tr>
                         <td>
                           <img class="me-1" src="../../img/table-avatar1.svg" />
-                          Ring of fortune
+                          {item.title}
                         </td>
-                        <td class="text-white">bountyhunter31</td>
+                        <td class="text-white">{item.nick}</td>
                         <td class="text-white mobilenone">
-                          104.54 <img class="ms-1" src="../../img/btc.svg" />
+                          {item.betAmount} <img class="ms-1" src="../../img/btc.svg" />
                         </td>
                         <td>0.001x</td>
-                        <td class="text-danger text-end">
-                          - 21.567 <img class="ms-1" src="../../img/btc.svg" />
+                        <td class={`text-end ${item.profitAmount >= 0 ? "text-success": "text-danger"}`}>
+                          {item.profitAmount} <img class="ms-1" src="../../img/btc.svg" />
                         </td>
                       </tr>
-                      <tr>
+                      {/each}
+                      <!-- <tr>
                         <td>
                           <img class="me-1" src="../../img/poker-chips.svg" />
                           Ring of fortune
@@ -492,7 +508,7 @@
                         <td class="text-danger text-end">
                           - 21.567 <img class="ms-1" src="../../img/trx.svg" />
                         </td>
-                      </tr>
+                      </tr> -->
                     </tbody>
                   </table>
                 </div> 

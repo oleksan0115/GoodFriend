@@ -535,7 +535,22 @@ $(document).ready(function () {
   //init
   carousel = el.owlCarousel(carouselOptions);
 });
-
+// Get the button
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function () {
+  scrollFunction();
+};
+function scrollFunction() {
+  if (
+    document.body.scrollTop > 150 ||
+    document.documentElement.scrollTop > 150
+  ) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
 /*FAQs*/
 var coll = document.getElementsByClassName(" btn-accoding");
 var i;

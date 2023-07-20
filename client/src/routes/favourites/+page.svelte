@@ -75,7 +75,7 @@
     <div class="desknone">
       <div class="row">
         <div class="col-2 pe-0">
-          <button type="button" class="btn btn-search px-15 w-100">
+          <button type="button" class="btn btn-search w-100">
             <img src="/img/Group-48.svg" />
           </button>
         </div>
@@ -95,7 +95,7 @@
     <div class="boxsecond boxforth">
       <div class="row">
         <div class="col-md-12 categories-swiper-top swiper-top">
-          <h2 class="title gradient-text gradient-text-light">Casino/Slot</h2>
+          <h2 class="title">Casino/Slot</h2>
 
           <div class="swiper-navigation">
             <button class="swiper-prev-btn categories-prev">
@@ -183,10 +183,7 @@
           <SwiperSlide>
             <div class="item">
               <div class="box">
-                <img
-                  class="mainimg position-relative"
-                  src="/img/Rectangle-38.svg"
-                />
+                <img class="mainimg" src="/img/Rectangle-38.svg" />
                 <div class="hover">
                   <a href="#"><img src="/img/hover.svg" /></a>
                 </div>
@@ -205,10 +202,7 @@
           <SwiperSlide>
             <div class="item text-white">
               <div class="box">
-                <img
-                  class="mainimg position-relative"
-                  src="/img/Rectangle-39.svg"
-                />
+                <img class="mainimg" src="/img/Rectangle-39.svg" />
                 <div class="hover">
                   <a href="#"><img src="/img/hover.svg" /></a>
                 </div>
@@ -227,10 +221,7 @@
           <SwiperSlide>
             <div class="item text-white">
               <div class="box">
-                <img
-                  class="mainimg position-relative"
-                  src="/img/Rectangle-40.svg"
-                />
+                <img class="mainimg" src="/img/Rectangle-40.svg" />
                 <div class="hover">
                   <a href="#"><img src="/img/hover.svg" /></a>
                 </div>
@@ -249,10 +240,7 @@
           <SwiperSlide>
             <div class="item text-white">
               <div class="box">
-                <img
-                  class="mainimg position-relative"
-                  src="/img/Rectangle-41.svg"
-                />
+                <img class="mainimg" src="/img/Rectangle-41.svg" />
                 <div class="hover">
                   <a href="#"><img src="/img/hover.svg" /></a>
                 </div>
@@ -271,10 +259,7 @@
           <SwiperSlide>
             <div class="item text-white">
               <div class="box">
-                <img
-                  class="mainimg position-relative"
-                  src="/img/Rectangle-42.svg"
-                />
+                <img class="mainimg" src="/img/Rectangle-42.svg" />
                 <div class="hover">
                   <a href="#"><img src="/img/hover.svg" /></a>
                 </div>
@@ -293,10 +278,7 @@
           <SwiperSlide>
             <div class="item">
               <div class="box">
-                <img
-                  class="mainimg position-relative"
-                  src="/img/Rectangle-38.svg"
-                />
+                <img class="mainimg" src="/img/Rectangle-38.svg" />
                 <div class="hover">
                   <a href="#"><img src="/img/hover.svg" /></a>
                 </div>
@@ -318,7 +300,7 @@
     <div class="boxsecond boxforth navnone">
       <div class="row">
         <div class="col-md-12 categories-swiper-top swiper-top">
-          <h2 class="title gradient-text gradient-text-light">Team/League</h2>
+          <h2 class="title">Team/League</h2>
 
           <div class="swiper-navigation">
             <button class="swiper-prev-btn categories_tl-prev">
@@ -407,16 +389,12 @@
           <SwiperSlide>
             <div class="item">
               <ul>
-                <li class="d-inline-block">
-                  <img class="me-3 img" src="/img/Group-37006.svg" />
-                </li>
-                <li class="d-inline-block">
+                <li><img class="me-3 img" src="/img/Group-37006.svg" /></li>
+                <li>
                   <p class="mb-0">K-League</p>
                   <p class="mb-0"><span>Sports</span></p>
                 </li>
-                <li class="float-end mt-4 d-inline-block">
-                  <img src="/img/Frame-64.svg" />
-                </li>
+                <li class="float-end mt-4"><img src="/img/Frame-64.svg" /></li>
               </ul>
             </div>
           </SwiperSlide>
@@ -424,16 +402,12 @@
           <SwiperSlide>
             <div class="item">
               <ul>
-                <li class="d-inline-block">
-                  <img class="me-3 img" src="/img/Group-37007.svg" />
-                </li>
-                <li class="d-inline-block">
+                <li><img class="me-3 img" src="/img/Group-37007.svg" /></li>
+                <li>
                   <p class="mb-0">CBLOL</p>
                   <p class="mb-0"><span>E-Sports</span></p>
                 </li>
-                <li class="float-end mt-4 d-inline-block">
-                  <img src="/img/Frame-64.svg" />
-                </li>
+                <li class="float-end mt-4"><img src="/img/Frame-64.svg" /></li>
               </ul>
             </div>
           </SwiperSlide>
@@ -441,16 +415,12 @@
           <SwiperSlide>
             <div class="item">
               <ul>
-                <li class="d-inline-block">
-                  <img class="me-3 img" src="/img/Group-37006.svg" />
-                </li>
-                <li class="d-inline-block">
+                <li><img class="me-3 img" src="/img/Group-37006.svg" /></li>
+                <li>
                   <p class="mb-0">K-League</p>
                   <p class="mb-0"><span>Sports</span></p>
                 </li>
-                <li class="float-end mt-4 d-inline-block">
-                  <img src="/img/Frame-64.svg" />
-                </li>
+                <li class="float-end mt-4"><img src="/img/Frame-64.svg" /></li>
               </ul>
             </div>
           </SwiperSlide>
@@ -460,7 +430,7 @@
     <div class="boxsecond boxforth">
       <div class="row">
         <div class="col-md-12 categories-swiper-top swiper-top">
-          <h2 class="title gradient-text gradient-text-light">Minigames</h2>
+          <h2 class="title">Minigames</h2>
           <div class="swiper-navigation">
             <button class="swiper-prev-btn categories_oc2-prev">
               <svg
@@ -547,10 +517,7 @@
           <SwiperSlide>
             <div class="item">
               <div class="box">
-                <img
-                  class="mainimg position-relative"
-                  src="/img/Rectangle-38.svg"
-                />
+                <img class="mainimg" src="/img/Rectangle-38.svg" />
                 <div class="hover">
                   <a href="#"><img src="/img/hover.svg" /></a>
                 </div>
@@ -569,10 +536,7 @@
           <SwiperSlide>
             <div class="item text-white">
               <div class="box">
-                <img
-                  class="mainimg position-relative"
-                  src="/img/Rectangle-39.svg"
-                />
+                <img class="mainimg" src="/img/Rectangle-39.svg" />
                 <div class="hover">
                   <a href="#"><img src="/img/hover.svg" /></a>
                 </div>
@@ -591,10 +555,7 @@
           <SwiperSlide>
             <div class="item text-white">
               <div class="box">
-                <img
-                  class="mainimg position-relative"
-                  src="/img/Rectangle-40.svg"
-                />
+                <img class="mainimg" src="/img/Rectangle-40.svg" />
                 <div class="hover">
                   <a href="#"><img src="/img/hover.svg" /></a>
                 </div>
@@ -613,10 +574,7 @@
           <SwiperSlide>
             <div class="item text-white">
               <div class="box">
-                <img
-                  class="mainimg position-relative"
-                  src="/img/Rectangle-41.svg"
-                />
+                <img class="mainimg" src="/img/Rectangle-41.svg" />
                 <div class="hover">
                   <a href="#"><img src="/img/hover.svg" /></a>
                 </div>
@@ -635,10 +593,7 @@
           <SwiperSlide>
             <div class="item text-white">
               <div class="box">
-                <img
-                  class="mainimg position-relative"
-                  src="/img/Rectangle-42.svg"
-                />
+                <img class="mainimg" src="/img/Rectangle-42.svg" />
                 <div class="hover">
                   <a href="#"><img src="/img/hover.svg" /></a>
                 </div>
@@ -657,10 +612,7 @@
           <SwiperSlide>
             <div class="item">
               <div class="box">
-                <img
-                  class="mainimg position-relative"
-                  src="/img/Rectangle-38.svg"
-                />
+                <img class="mainimg" src="/img/Rectangle-38.svg" />
                 <div class="hover">
                   <a href="#"><img src="/img/hover.svg" /></a>
                 </div>

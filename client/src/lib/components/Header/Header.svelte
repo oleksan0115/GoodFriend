@@ -8,13 +8,14 @@
 
   $: isLoggedIn = $globalStore.userDetail;
   $: path = $page.url.pathname;
+
 </script>
 
-<div class="topbar py-15 bg-color">
+<div class="topbar bg-color">
   <div class="row">
-    <div class="telegram-login-widget" />
+    <div class="telegram-login-widget"></div>
     <div class="col-md-5 col-2 align-self-center">
-      <div class="main-menu d-flex">
+      <div class="main-menu">
         <ul>
           <li
             class="main-menu-item menu-item-casino gf-border-right-active"
@@ -53,16 +54,16 @@
 
       <a href="/"><img class="mlogo" src="/img/Union.svg" /></a>
     </div>
-    <LoggedinHeader />
-    <!--     {#if isLoggedIn}
+
+    {#if isLoggedIn}
       <LoggedinHeader />
     {:else}
       <LoginHeader />
-    {/if} -->
+    {/if}
   </div>
 
   {#if $globalStore.userDetail}
-    <AccountModal />
+    <AccountModal/>
   {/if}
 </div>
 

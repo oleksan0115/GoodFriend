@@ -1,39 +1,65 @@
 <script>
+  import { onMount } from "svelte";
+  import Select from 'svelte-select';
   import {getCasinoList} from "../../apis/casino/GetCasinoList"
+  import { getFilterMenu } from "../../apis/casino/GetFilterMenu"
+  import FaqItem from "$lib/components/FaqItem.svelte";
+    import filter from "svelte-select/filter";
   // import { tooltip } from 'svooltip';
   // import 'svooltip/styles.css';
+  
   export let data
   const type = data.type ? data.type : ""
-  import FaqItem from "$lib/components/FaqItem.svelte";
-  
+  let filterMenu = [];
+  let vendorList = [];
+  onMount(async () => {
+    const res = await getFilterMenu();
+    vendorList = res.vendor.map((item) => {
+      return { value: item.name, label: item.name }
+    })
+    console.log('@@@@@@@@@@@@@@@@', vendorList)
+  })
+
   let list = []
   let totalNumber = 0
-  let limit
   let currentLimit = 0
   let page = 0
   let searchKey = "";
 
-  const search = async () => {   // Removed argument from function signature
+  const search = async () => {
     page = 0;
     currentLimit = 0;
-    const res = await getCasinoList(page, searchKey)
+    const res = await getCasinoList({
+      title: searchKey,
+      vendor: [],
+      type: type,
+      page: page
+    })
     totalNumber = res.totalNumber
-    limit = res.limit
-    list = res.list   // Assign the new data to the list
+    list = res.list
     currentLimit = list.length
   }
   
   const moreLoad = async () => {
     page++
-    const res = await getCasinoList(page, searchKey)
+    const res = await getCasinoList({
+      title: searchKey,
+      vendor: [],
+      type: type,
+      page: page
+    })
     currentLimit += res.list.length
     list = [...list, ...res.list]
   }
 
   const load = async () => {
-    const data = await getCasinoList(0, type)
+    const data = await getCasinoList({
+      title: "",
+      vendor: [],
+      type: type,
+      page: 0
+    })
     totalNumber = data.totalNumber
-    limit = data.limit
     list = data.list
     currentLimit = list.length
     return data
@@ -60,7 +86,13 @@
     </form>
     </h2>
     <div slot="details" class="faq-answer">
-      <p>Lorem ipsum dolor sit amet consectetur. Quis rhoncus cursus magna nunc nam aliquet pretium varius et. Pellentesque vel ipsum purus lectus at enim.</p>
+      <div class="input-group main-search-bar">
+        <Select items={vendorList} multiple />
+      </div>
+
+      <div class="input-group main-search-bar mt-2">
+        <Select items={vendorList} vendorList multiple />
+      </div>
     </div>
   </FaqItem>
 

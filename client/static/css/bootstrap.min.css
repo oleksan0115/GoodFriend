@@ -1054,9 +1054,17 @@ button:not(:disabled) {
 }
 
 .nav-link {
+    font-family: initial;
+    display: block;
     padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+    font-size: var(--bs-nav-link-font-size);
+    font-weight: var(--bs-nav-link-font-weight);
+    color: #000;
+    text-decoration: none;
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+    text-transform: uppercase;
 }
+
 
 .nav-tabs {
     --bs-nav-tabs-border-width: 1px;

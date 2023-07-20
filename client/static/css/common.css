@@ -44,12 +44,7 @@
     font-style: italic;
   }
 
-  
-body {
-    font-family: "Acumin Pro" !important;
-    background-color: #111320;
-   -ms-overflow-style: none;
-  }
+
   
    
   ::-webkit-scrollbar {
@@ -61,22 +56,118 @@ body {
   }
   
   a {
-    text-decoration: none;
+    text-decoration: none !important;
   }
-  
-  .p-0 {
+  ul {
+    list-style: none;
+    list-style-type: none;
     padding: 0;
+    margin: 0;
   }
-  
+  table {
+    border-collapse: collapse;
+  }
+  .p-0 {
+    padding: 0 !important;
+  }
+  .p-5 {
+    padding: 5px !important;
+  }
+  .p-10 {
+    padding: 10px !important;
+  }
+  .p-30 {
+    padding: 30px !important;
+  }
+  .px-0 {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+  .px-10 {
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+  }
+  .px-15 {
+    padding-right: 15px !important;
+    padding-left: 15px !important;
+  }    
+  .px-20 {
+    padding-right: 20px !important;
+    padding-left: 20px !important;
+  }
+  .py-0 {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .py-5 {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+  } 
+  .py-10 {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+  }   
+  .py-15 {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+  }
+  .py-20 {
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+  }
+  .py-30 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .pt-5 {
+    padding-top: 5px !important;
+  }
+  .pt-10 {
+    padding-top: 10px !important;
+  }
+  .pb-5 {
+    padding-bottom: 5px !important;
+  }  
+  .pb-30 {
+    padding-bottom: 30px !important;
+  }
   .pr-0 {
-    padding-right: 0;
+    padding-right: 0 !important;
+  }
+  .pr-20 {
+    padding-right: 20px !important;
   }
   .pl-0 {
-    padding-left: 0;
+    padding-left: 0 !important;
   }
-  
-  .pr-0 {
-    padding-right: 0;
+  .pl-20 {
+    padding-left: 20px !important;
+  }
+  .m-10 {
+    margin: 10px !important;
+  }
+  .my-5 {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+  }  
+  .my-15 {
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
+  }
+  .mr-10 {
+    margin-right: 10px !important;
+  }  
+  .mr-15 {
+    margin-right: 15px !important;
+  } 
+  .mb-20 {
+    margin-bottom:20px;
+  }  
+  .mb-30 {
+    margin-bottom:30px;
+  } 
+  .gap-15 {
+    gap: 15px;
   }
   .me-4 {
     margin-right: 1.5rem!important;
@@ -88,19 +179,63 @@ body {
     background: #1a1c29;
   }
 
-  
+    
+  .display-flex {
+    display: flex;
+    position: absolute;
+    right: 40px;
+  }
+.position-relative {
+  position: relative !important;
+}
+.position-absolute {
+  position: absolute !important;
+}
+
+.d-block {
+  display: block !important;
+}
+.d-inline-block {
+  display: inline-block !important;
+}
+.d-flex {
+  display: flex !important;
+}
+
+.flex-wrap {
+  flex-wrap: wrap !important;
+}
+.justify-content-center {
+  justify-content:center;
+}
+
+.justify-content-between {
+  justify-content:space-between;
+}
+.align-items-center {
+  align-items:center;
+}
+.d-none {
+  display: none !important;
+}
+.w-100 {
+  width: 100% !important;
+}
+.float-left {
+  float: left;
+}
+
+.fw-medium {
+  font-weight: 600;
+} 
 .topbar .btn-dark {
-    background-image: url(../img/btn-bg.svg);
-    background-repeat: no-repeat;
-    background-size: cover;
+    background: url(../img/btn-bg.svg) no-repeat center/cover;
     background-color: #1a1c29;
   }
   
   .topbar .btn.btn-sports:hover {
-    background-image: url(../img/btn-bg.svg);
-    background-repeat: no-repeat;
+    background: url(../img/btn-bg.svg) no-repeat center/cover;
     background-color: #1a1c29;
-    background-size: cover;
   }
   
   .topbar .btn {
@@ -164,13 +299,18 @@ body {
     top: -7px;
     bottom: 0;
   }
+
   
-  .display-flex {
-    display: flex;
-    position: absolute;
-    right: 40px;
+  .gf-text-color-1 {
+    color: #9590a9;
   }
-  
+  .position-relative {
+    position: relative;
+  }
+  .cursor-pointer {
+    cursor: pointer;
+  }
+
   .gf-text-color-1 {
     color: #9590a9;
   }
@@ -210,10 +350,19 @@ body {
 .gradient-text-grad4 {
     background: linear-gradient(90.47deg, #ffffff 0.17%, rgba(255, 255, 255, 0) 260.86%);
 }
+/*LM - Gradient Text*/
+body.light-mode .gradient-text-light {
+  background: linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0) 222.09%);
+}
+
 
 .gradient-text {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-fill-color: transparent;
-  }
+ }
+
+ .hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}

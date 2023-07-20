@@ -7,6 +7,9 @@ const router: Router = express.Router();
 // casino-list
 router.post("/list", controllers.getList)
 
+// get vendor and type
+router.post("/filter-menu", controllers.getFilterMenu)
+
 // casino launch
 router.post("/launch", controllers.launch)
 

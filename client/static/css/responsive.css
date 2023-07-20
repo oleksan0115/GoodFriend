@@ -619,7 +619,7 @@
 
     .right-bar .message {
         bottom: 0px;
-        width: 360px;
+        width: 297px;
         right: 0;
         z-index: 3;
     }
@@ -2293,7 +2293,7 @@
         position: fixed;
         bottom: 0;
         width: 100%;
-        z-index: 1;
+        z-index: 999999;
     }
     .mobile-footer .col-3 {
         flex: 0 0 auto;

@@ -1,4 +1,4 @@
-# Gaming Solution Server APi.
+# Gaming Solution Server API.
 ## Required headers
 HTTP Headers
 1. 'GF-API-KEY': 'abcedef'
@@ -12,7 +12,13 @@ Please manage your affiliate code and API key through Sveltekit's env.
 > Get casino list
 - endpoint: /api/casino/list
 - method: post
-- data: , page/(number)(optional), search/(string)(optional) <- Searches from 4 characters or more.
+- data: search: {
+    title: string,
+    vendor: string[],
+    type: string[],
+    page: number
+  }
+- description : page starts at 0, and no object should have undefined.
 
 #### response
 ````
@@ -36,11 +42,23 @@ Please manage your affiliate code and API key through Sveltekit's env.
 
 //400
 ````
+> Get filter menu
+- endpoint: /api/casino/filter-menu
+- method: post
+- description: Brings up the Filters menu data.
+````
+//200
+{
+    type: [{name: string}],
+    vendor: [{name: string}]
+}
+
+````
 
 > Casino Launch
 - endpoint: /api/casino/launch
 - method: post
-- data: idx(number), nick (string)
+- data: idx(number)/, nick (string)
 
 #### response
 ````
@@ -53,21 +71,36 @@ Please manage your affiliate code and API key through Sveltekit's env.
 ````
 
 > Get info
-- endpoint: /api/casino/launch
-- methdo: post
+- endpoint: /api/casino/info
+- method: post
 - data: idx
 
 #### response
 ````
 //200
 {
-    title: info.title, 
-    thumbnail: info.thumbnail, 
-    vendor: info.vendor, 
-    type: info.type 
+  title: string,
+  thumbnail: string,
+  vendor: string,
+  type: string
 }
 
 //400
 ````
 
+> Get bet result list
+- endpoint: /api/casino/bet-result
+- method: post
 
+#### response
+````
+//200
+[
+    {
+        title: string, 
+        nick: string, 
+        betAmount: number, 
+        profitAmount: number
+    }
+]
+````

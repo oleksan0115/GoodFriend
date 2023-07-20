@@ -38,14 +38,9 @@
   <div class="box p-30">
     <div class="container">
       <div class="play_img position-relative text-center mobilenone">
-        <iframe src={link} width="100%" height="500px" frameborder="0" />
+        <iframe src={link} width="100%" height="650px" frameborder="0" />
         <div class="overlay" />
         <div class="text-content">
-          <p class="mb-3">
-            Entering a third-party game. the balance of the selected currency
-            will be displayed in USD, and if you change currency while playing,
-            the will refresh and restart.
-          </p>
           <button class="btn btn-play me-1">
             <img class="me-1" src="../../img/icon_play.svg" /> Real Play
           </button>
@@ -139,7 +134,7 @@
       </div>
     </div>
     <div class="boxsecond boxforth mobilenone">
-      <!-- <div class="row">
+      <div class="row">
         <div class="col-md-12 categories-swiper-top swiper-top">
           <h2 class="title gradient-text gradient-text-light">Related Games</h2>
 
@@ -205,9 +200,9 @@
             </button>
           </div>
         </div>
-      </div> -->
+      </div>
 
-      <!-- <div class="owl-minigames">
+      <div class="owl-minigames">
         <div class="row oc1">
           <Swiper
             spaceBetween={15}
@@ -229,121 +224,121 @@
             }}
           >
             <SwiperSlide>
-                <div class="item text-white">
-                  <div class="box">
-                    <img class="mainimg" src="../../img/Rectangle-38.svg" />
-                    <div class="hover">
-                      <img src="../../img/hover.svg" />
-                    </div>
-                    <div class="content">
-                      <p>
-                        Tiny Gods
-                        <span class="float-end"
-                          ><img src="../../img/info-circle.svg" /></span
-                        >
-                      </p>
-                    </div>
+              <div class="item text-white">
+                <div class="box">
+                  <img class="mainimg" src="../../img/Rectangle-38.svg" />
+                  <div class="hover">
+                    <img src="../../img/hover.svg" />
+                  </div>
+                  <div class="content">
+                    <p>
+                      Tiny Gods
+                      <span class="float-end"
+                        ><img src="../../img/info-circle.svg" /></span
+                      >
+                    </p>
                   </div>
                 </div>
+              </div>
             </SwiperSlide>
 
             <SwiperSlide>
-                <div class="item text-white">
-                  <div class="box">
-                    <img class="mainimg" src="../../img/Rectangle-39.svg" />
-                    <div class="hover">
-                      <img src="../../img/hover.svg" />
-                    </div>
-                    <div class="content">
-                      <p>
-                        Tiny Gods
-                        <span class="float-end"
-                          ><img src="../../img/info-circle.svg" /></span
-                        >
-                      </p>
-                    </div>
+              <div class="item text-white">
+                <div class="box">
+                  <img class="mainimg" src="../../img/Rectangle-39.svg" />
+                  <div class="hover">
+                    <img src="../../img/hover.svg" />
+                  </div>
+                  <div class="content">
+                    <p>
+                      Tiny Gods
+                      <span class="float-end"
+                        ><img src="../../img/info-circle.svg" /></span
+                      >
+                    </p>
                   </div>
                 </div>
+              </div>
             </SwiperSlide>
 
             <SwiperSlide>
-                <div class="item text-white">
-                  <div class="box">
-                    <img class="mainimg" src="../../img/Rectangle-40.svg" />
-                    <div class="hover">
-                      <img src="../../img/hover.svg" />
-                    </div>
-                    <div class="content">
-                      <p>
-                        Tiny Gods
-                        <span class="float-end"
-                          ><img src="../../img/info-circle.svg" /></span
-                        >
-                      </p>
-                    </div>
+              <div class="item text-white">
+                <div class="box">
+                  <img class="mainimg" src="../../img/Rectangle-40.svg" />
+                  <div class="hover">
+                    <img src="../../img/hover.svg" />
+                  </div>
+                  <div class="content">
+                    <p>
+                      Tiny Gods
+                      <span class="float-end"
+                        ><img src="../../img/info-circle.svg" /></span
+                      >
+                    </p>
                   </div>
                 </div>
+              </div>
             </SwiperSlide>
 
             <SwiperSlide>
-                <div class="item text-white">
-                  <div class="box">
-                    <img class="mainimg" src="../../img/Rectangle-41.svg" />
-                    <div class="hover">
-                      <img src="../../img/hover.svg" />
-                    </div>
-                    <div class="content">
-                      <p>
-                        Tiny Gods
-                        <span class="float-end"
-                          ><img src="../../img/info-circle.svg" /></span
-                        >
-                      </p>
-                    </div>
+              <div class="item text-white">
+                <div class="box">
+                  <img class="mainimg" src="../../img/Rectangle-41.svg" />
+                  <div class="hover">
+                    <img src="../../img/hover.svg" />
+                  </div>
+                  <div class="content">
+                    <p>
+                      Tiny Gods
+                      <span class="float-end"
+                        ><img src="../../img/info-circle.svg" /></span
+                      >
+                    </p>
                   </div>
                 </div>
+              </div>
             </SwiperSlide>
 
             <SwiperSlide>
-                <div class="item text-white">
-                  <div class="box">
-                    <img class="mainimg" src="../../img/Rectangle-42.svg" />
-                    <div class="hover">
-                      <img src="../../img/hover.svg" />
-                    </div>
-                    <div class="content">
-                      <p>
-                        Tiny Gods
-                        <span class="float-end"
-                          ><img src="../../img/info-circle.svg" /></span
-                        >
-                      </p>
-                    </div>
+              <div class="item text-white">
+                <div class="box">
+                  <img class="mainimg" src="../../img/Rectangle-42.svg" />
+                  <div class="hover">
+                    <img src="../../img/hover.svg" />
+                  </div>
+                  <div class="content">
+                    <p>
+                      Tiny Gods
+                      <span class="float-end"
+                        ><img src="../../img/info-circle.svg" /></span
+                      >
+                    </p>
                   </div>
                 </div>
+              </div>
             </SwiperSlide>
 
             <SwiperSlide>
-                <div class="item text-white">
-                  <div class="box">
-                    <img class="mainimg" src="../../img/game1.svg" />
-                    <div class="hover">
-                      <img src="../../img/hover.svg" />
-                    </div>
-                    <div class="content">
-                      <p>
-                        Tiny Gods
-                        <span class="float-end"
-                          ><img src="../../img/info-circle.svg" /></span
-                        >
-                      </p>
-                    </div>
+              <div class="item text-white">
+                <div class="box">
+                  <img class="mainimg" src="../../img/game1.svg" />
+                  <div class="hover">
+                    <img src="../../img/hover.svg" />
+                  </div>
+                  <div class="content">
+                    <p>
+                      Tiny Gods
+                      <span class="float-end"
+                        ><img src="../../img/info-circle.svg" /></span
+                      >
+                    </p>
                   </div>
                 </div>
+              </div>
             </SwiperSlide>
           </Swiper>
         </div>
-      </div> -->
+      </div>
     </div>
     <div class="row">
       <div class="col-lg-7 col-sm-12" style="flex-grow: 1;">
@@ -375,7 +370,7 @@
                   LATEST BETS
                 </button>
               </li>
-              <li class="nav-item" role="presentation">
+              <!-- <li class="nav-item" role="presentation">
                 <button
                   class="nav-link px-0"
                   id="deposits-tab"
@@ -404,7 +399,7 @@
                 >
                   Recent Withdrawals
                 </button>
-              </li>
+              </li> -->
             </ul>
             <div class="tab-content" id="myTabContent">
               <div

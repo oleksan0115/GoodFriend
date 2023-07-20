@@ -30,7 +30,7 @@
     handleTokens();
     handleTelegram();
     if ($globalStore.telegramUserData) {
-      console.log(`userData: ${JSON.stringify($globalStore.telegramUserData)}`);
+      // console.log(`userData: ${JSON.stringify($globalStore.telegramUserData)}`);
       const userInfo = JSON.stringify($globalStore.telegramUserData);
       signInWithTelegram(userInfo)
     }

@@ -444,10 +444,9 @@ ul.menu li a.active .icon {
   position: absolute;
   left: 0;
   right: 0;
-  top: 0px;
-  bottom: 0px;
+  top: 0;
   margin: 0 auto;
-  z-index: 1111;
+  z-index: 11111;
 }
 
 .boxfive .nav-tabs .nav-item.show .nav-link,
@@ -782,14 +781,27 @@ ul.menu li a.active .icon {
   fill: #fff;
 }
 
-.owl-minigames {
-  row-gap: 1.5rem;
+.owl-minigames .item {
+  width: 100%;
+  display: inline-block;
+}
+
+.owl-minigames .item {
+  position: relative;
+  margin-right: 10px;
 }
 
 .owl-minigames .item img.mainimg {
-  min-height: 192px;
   width: 100%;
   border-radius: 18px;
+}
+
+.owl-minigames .item .hover img {
+  width: 100%;
+}
+
+.owl-minigames .item:last-child {
+  margin-right: 0px;
 }
 
 .owl-minigames .content {
@@ -800,18 +812,9 @@ ul.menu li a.active .icon {
   padding: 5px 10px 10px 10px;
   background: rgba(255, 255, 255, 0.04);
   border-bottom: 4px solid rgba(255, 255, 255, 0.04);
-  
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 80px;
 }
 
-.owl-minigames .item .box .content  span {
-  margin-top: 20px;
-}
-
-.favourites .item .box .content span {
+.favourites .item .box .content p span {
   margin-top: -4px;
 }
 
@@ -1503,8 +1506,14 @@ ul.menu li a.active .icon {
 }
 
 .userinformation .userimg {
-  border-radius: 50%;
+  border-radius: 100px;
   width: 120px;
+}
+
+.userback .userimg {
+  /* background-image: url(../img/Ellipse-7.svg); */
+  /* background-repeat: no-repeat; */
+  /* padding: 5px; */
 }
 
 .userinformation h6 {
@@ -2117,7 +2126,6 @@ ul.dropdown-menu li a.dropdown-item::after {
 
 
 .swiper img {
-  min-height: 192px;
   width: 100%;
 }
 
@@ -2224,7 +2232,6 @@ ul.dropdown-menu li a.dropdown-item::after {
 .left-side-bar .menu-item-icon span {
   line-height: 16px;
   padding-top: 6px;
-  /* height: 32px; */
 }
 
 
@@ -4206,20 +4213,4 @@ body.light-mode .input_nick input{
   border-radius: 50% !important;
   outline: 0px !important;
   box-shadow: 0 0 0 1px #39f !important;
-}
-
-button:disabled {
-  background: unset;
-  background-color: darkgray;
-}
-
-.preview > div {
-  min-height: 100px;
-  border: 2px solid #ddd;
-  margin-top: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  color: #ccc;
 }

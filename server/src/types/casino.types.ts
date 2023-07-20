@@ -58,9 +58,16 @@ export interface BetHistoryResult {
     title: string,
     nick: string,
     betAmount: number|undefined,
-    profitAmount: number,
+    profitAmount: number
 }
 
 export interface TotalNumber {
     count: number
+}
+
+export interface CasinoSearch {
+    title: string,
+    vendor: string[],
+    type: string[],
+    page: number
 }

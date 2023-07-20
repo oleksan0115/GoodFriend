@@ -26,25 +26,23 @@
       "/casino",
       "icon_side_casino",
       [
-        ["Dropdown 1", "/sports", "icon_side_casino"],
-        ["Dropdown 2", "/casino", "icon_side_casino"],
-        ["Dropdown 3", "/sports", "icon_side_casino"],
-        ["Dropdown 4", "/casino", "icon_side_casino"],
-        ["Dropdown 5", "/casino", "icon_side_casino"],
+        ["All", "/casino", "icon_side_casino"],
+        ["Best Casino", "/casino", "icon_side_casino"],
+        ["Slot", "/casino", "icon_side_casino"],
+        ["Blackjack", "/casino", "icon_side_casino"],
+        ["Baccarat", "/casino", "icon_side_casino"],
+        ["Roulette", "/casino", "icon_side_casino"],
       ],
     ],
-    [
-      "Slots",
-      "/slot",
-      "icon_side_slot",
-      [
-        ["Dropdown 1", "/sports", "icon_side_casino"],
-        ["Dropdown 2", "/casino", "icon_side_casino"],
-        ["Dropdown 3", "/sports", "icon_side_casino"],
-        ["Dropdown 4", "/casino", "icon_side_casino"],
-        ["Dropdown 5", "/casino", "icon_side_casino"],
-      ],
-    ],
+    // ['Slots', '/slot', 'icon_side_slot',
+    //     [
+    //         ['Dropdown 1', '/sports', 'icon_side_casino'],
+    //         ['Dropdown 2', '/casino', 'icon_side_casino'],
+    //         ['Dropdown 3', '/sports', 'icon_side_casino'],
+    //         ['Dropdown 4', '/casino', 'icon_side_casino'],
+    //         ['Dropdown 5', '/casino', 'icon_side_casino'],
+    //     ]
+    // ],
     ["Sports", "/sports", "icon_side_sports"],
     ["Live Sports", "/live-sports", "icon_side_live_sports"],
     ["E-Sports", "/esports", "icon_side_e_sports"],
@@ -83,7 +81,7 @@
   </div>
   <div class="scroll">
     {#if !isSportsPage}
-      <div class="py-20 perk-full">
+      <div class="padding perk-full">
         <p>
           <span class="my-perks">MY VIP PERKS</span><span class="all-perks"
             >VIEW ALL</span
@@ -91,10 +89,9 @@
         </p>
       </div>
 
-      <div class="py-20 pt-0 spin-wrapper">
-        <button class="btn lebtn w-100 pt-10 pb-5 px-20">
-          <img class="mr-15 float-left" src="img/spin-now.png" /> SPIN NOW
-          <span>Unlocked</span>
+      <div class="padding pt-0 spin-wrapper">
+        <button class="btn lebtn w-100">
+          <img src="/img/spin-now.png" /> SPIN NOW <span>Unlocked</span>
         </button>
       </div>
 
@@ -229,7 +226,7 @@
     {#if !isSportsPage}
       <div class="spin-wrapper py-30">
         <button class="btn lebtn w-100 py-5 px-10">
-          <img class="mr-15 float-left" src="img/spin-now.png" />
+          <img class="mr-15 float-left" src="/img/spin-now.png" />
         </button>
       </div>
 

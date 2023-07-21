@@ -17,18 +17,18 @@ const globalStore = writable({
   alertText: "default alert",
   alertDanger: false,
   telegramUserData: null,
-  userDetail: null,
+  // userDetail: null,
   userInfo: null,
-  // userDetail: {
-  //   "member_idx": 3,
-  //   "email": "g_115965063647480354431",
-  //   "nick": "user6474563937",
-  //   "level": 1,
-  //   "game_money": 0,
-  //   "profile_image": "/img/user.svg",
-  //   "login_type": "google",
-  //   "affiliate_code": "abcde"
-  // },
+  userDetail: {
+    "member_idx": 3,
+    "email": "g_115965063647480354431",
+    "nick": "user6474563937",
+    "level": 1,
+    "game_money": 0,
+    "profile_image": "/img/user.svg",
+    "login_type": "google",
+    "affiliate_code": "abcde"
+  },
   // userInfo: {
   //   "member_idx": 3,
   //   "email": "g_115965063647480354431",

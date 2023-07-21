@@ -25,6 +25,7 @@
   let relatedList = []
   let bestResult = [];
 	let cntBestResult = 5;
+  let isPlay = false;
 
   onMount(async () => {
     const swiper = document.querySelector(".oc1 .swiper").swiper;
@@ -73,16 +74,18 @@
       <div class="play_img text-center mobilenone">
         <iframe src="{link}" width="100%" height="650px" frameborder="0">
         </iframe>
-        <div class="overlay" />
+        <div class="overlay" style={isPlay ? "display: none;": ""}/>
         {#if $globalStore.userDetail}
-        <div class="text-content">
-          <button class="btn btn-play me-1">
-            <img class="me-1" src="../../img/icon_play.svg" /> Real Play
+        <div class="text-content" style={isPlay ? "display: none;": ""}>
+          <button class="btn btn-play me-1" on:click={() => {
+              isPlay = true;
+          }}>
+            <img class="me-1" src="../../img/icon_play.svg" /> Play
           </button>
-          <button class="btn btn-free me-1">Free Play</button>
+          <!-- <button class="btn btn-free me-1">Free Play</button> -->
         </div>
         {:else}
-        <div class="text-content">
+        <div class="text-content" style={isPlay ? "display: none;": ""}>
           <button class="btn btn-play me-1" on:click={loginAndStart}>
             <img class="me-1" src="../../img/icon_play.svg" /> Login and Get started
           </button>

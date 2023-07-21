@@ -23,15 +23,16 @@ $: isSportsPage = pageSidebar.includes("/sports", 0);
 import SidebarItem from './SidebarItem.svelte'
 
 const sidebar_data = [
-    ['Casino', '/casino', 'icon_side_casino',
-        [
-            ['All', '/casino', 'icon_side_casino'], 
-            ['Best Casino', '/casino', 'icon_side_casino'], 
-            ['Slot', '/casino', 'icon_side_casino'], 
-            ['Blackjack', '/casino', 'icon_side_casino'], 
-            ['Baccarat', '/casino', 'icon_side_casino'],
-            ['Roulette', '/casino', 'icon_side_casino'], 
-        ]
+    ['Casino', '/casino', 'icon_side_casino'
+    // ,
+    //     [
+    //         ['All', '/casino', 'icon_side_casino'], 
+    //         ['Best Casino', '/casino', 'icon_side_casino'], 
+    //         ['Slot', '/casino', 'icon_side_casino'], 
+    //         ['Blackjack', '/casino', 'icon_side_casino'], 
+    //         ['Baccarat', '/casino', 'icon_side_casino'],
+    //         ['Roulette', '/casino', 'icon_side_casino'], 
+    //     ]
     ],
     // ['Slots', '/slot', 'icon_side_slot',
     //     [
@@ -42,10 +43,10 @@ const sidebar_data = [
     //         ['Dropdown 5', '/casino', 'icon_side_casino'], 
     //     ]
     // ],
-    ['Sports','/sports', 'icon_side_sports'],
-    ['Live Sports','/live-sports', 'icon_side_live_sports'],
-    ['E-Sports','/esports', 'icon_side_e_sports'],
-    ['Virtual Games','/virtual-games', 'icon_side_virtual_games'],
+    // ['Sports','/sports', 'icon_side_sports'],
+    // ['Live Sports','/live-sports', 'icon_side_live_sports'],
+    // ['E-Sports','/esports', 'icon_side_e_sports'],
+    // ['Virtual Games','/virtual-games', 'icon_side_virtual_games'],
     ['Affiliate','/affiliate', 'icon_side_affiliate'],
     ['Promotions','/promotions', 'icon_side_promotions'],
     ['Provably Fair','/help-center', 'icon_side_provably_fair'],

@@ -38,7 +38,7 @@
       swiper.slideNext();
     });
 
-    const nick = $globalStore.userDetail ? $globalStore.userDetail.nick: null;
+    const nick = $globalStore.userDetail ? $globalStore.userDetail.nick: `demo1`;
     const res_link = await LaunchCasino(idx, nick);
     link = res_link.link;
 
@@ -57,6 +57,8 @@
   const loginAndStart = () => {
     globalStore.toggleItem("loginModalOpen", true);
   }
+
+  
   
 </script>
 
@@ -72,7 +74,7 @@
   <div class="box">
     <div class="container">
       <div class="play_img text-center mobilenone">
-        <iframe src="{link}" width="100%" height="650px" frameborder="0">
+        <iframe src="{link}" width="100%" height="650px" frameborder="0" scrolling="no">
         </iframe>
         <div class="overlay" style={isPlay ? "display: none;": ""}/>
         {#if $globalStore.userDetail}
@@ -286,6 +288,7 @@
                           href="/play/{item.title
                             .toLowerCase()
                             .replaceAll(' ', '-')}/{item.idx}"
+                          target="_top"
                         >
                           <div class="flex flex-col gap-6">
                             <img src="/img/play.svg" />
@@ -299,9 +302,9 @@
                           href="/play/{item.title
                             .toLowerCase()
                             .replaceAll(' ', '-')}/{item.idx}">{item.title}</a>
-                        <span class="float-end"
-                          ><img src="../../img/info-circle.svg" /></span
-                        >
+                        <span class="float-end">
+                          <img src="../../img/info-circle.svg" />
+                        </span>
                       </p>
                     </div>
                   </div>

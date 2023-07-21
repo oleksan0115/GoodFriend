@@ -2,6 +2,8 @@
   import { onMount } from "svelte";
   import { Navigation, Pagination, Scrollbar, A11y, Grid } from "swiper";
   import { Swiper, SwiperSlide } from "swiper/svelte";
+
+  import globalStore from "../../../../stores/globalStore";
   import { getCasinoList } from "../../../../apis/casino/GetCasinoList.js";
   import { getBestResult } from "../../../../apis/casino/GetBestResult";
   import { getCasinoInfo } from "../../../../apis/casino/GetCasinoInfo";
@@ -45,6 +47,9 @@
     bestResult = res1.betHistoryResult.slice(0, cntBestResult);
   });
 
+  const loginAndStart = () => {
+    globalStore.toggleItem("loginModalOpen", true);
+  }
   
 </script>
 
@@ -63,12 +68,20 @@
         <iframe src="{link}" width="100%" height="650px" frameborder="0">
         </iframe>
         <div class="overlay" />
+        {#if $globalStore.userDetail}
         <div class="text-content">
           <button class="btn btn-play me-1">
             <img class="me-1" src="../../img/icon_play.svg" /> Real Play
           </button>
           <button class="btn btn-free me-1">Free Play</button>
         </div>
+        {:else}
+        <div class="text-content">
+          <button class="btn btn-play me-1" on:click={loginAndStart}>
+            <img class="me-1" src="../../img/icon_play.svg" /> Login and Get started
+          </button>
+        </div>
+        {/if}
       </div>
       <div class="content btn-top mobilenone">
         <button class="btn btn-dark me-1">
@@ -121,7 +134,6 @@
             </div>
           </div>          
         </div>
-
       </div>
     </div>
   </div>

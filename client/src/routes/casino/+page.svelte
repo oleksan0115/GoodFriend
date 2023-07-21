@@ -9,335 +9,335 @@
   // import 'svooltip/styles.css';
   
   export let data
-  const type = data.type ? data.type : ""
+  const type = data.type ? [data.type] : ""
   let vendorList = [], typeList = [];
   let vendorSelectedList = [], typeSelectedList = [];
   onMount(async () => {
-    // const res = await getFilterMenu();
-    const res = {
-      "vendor": [
-          {
-              "name": "1X2 Gaming"
-          },
-          {
-              "name": "7-mojos"
-          },
-          {
-              "name": "7-mojos-slots"
-          },
-          {
-              "name": "7777"
-          },
-          {
-              "name": "absolute"
-          },
-          {
-              "name": "amatic"
-          },
-          {
-              "name": "Asia Gaming"
-          },
-          {
-              "name": "Asia Gaming Slot"
-          },
-          {
-              "name": "Betgames.tv"
-          },
-          {
-              "name": "bfgames"
-          },
-          {
-              "name": "BigTimeGaming"
-          },
-          {
-              "name": "bitville"
-          },
-          {
-              "name": "Blueprint Gaming"
-          },
-          {
-              "name": "booming"
-          },
-          {
-              "name": "Booongo"
-          },
-          {
-              "name": "bota"
-          },
-          {
-              "name": "caletagaming"
-          },
-          {
-              "name": "CQ9"
-          },
-          {
-              "name": "Dowin"
-          },
-          {
-              "name": "Dragoon Soft"
-          },
-          {
-              "name": "DreamGame"
-          },
-          {
-              "name": "dreamtech"
-          },
-          {
-              "name": "eagaming"
-          },
-          {
-              "name": "egtjackpot"
-          },
-          {
-              "name": "Elk Studios"
-          },
-          {
-              "name": "EVOPLAY"
-          },
-          {
-              "name": "fils"
-          },
-          {
-              "name": "galaxsys"
-          },
-          {
-              "name": "GameArt"
-          },
-          {
-              "name": "gamedaddy"
-          },
-          {
-              "name": "globalbet"
-          },
-          {
-              "name": "greentube"
-          },
-          {
-              "name": "Habanero"
-          },
-          {
-              "name": "iconixviator"
-          },
-          {
-              "name": "inrace"
-          },
-          {
-              "name": "intouch-games"
-          },
-          {
-              "name": "kagaming"
-          },
-          {
-              "name": "liw"
-          },
-          {
-              "name": "macaw"
-          },
-          {
-              "name": "mancala"
-          },
-          {
-              "name": "merkur"
-          },
-          {
-              "name": "MicroGaming Plus"
-          },
-          {
-              "name": "MicroGaming Plus Slo"
-          },
-          {
-              "name": "Mobilots"
-          },
-          {
-              "name": "netent"
-          },
-          {
-              "name": "netgame"
-          },
-          {
-              "name": "Nolimit City"
-          },
-          {
-              "name": "onetouch"
-          },
-          {
-              "name": "onetouch-live"
-          },
-          {
-              "name": "PG Soft"
-          },
-          {
-              "name": "platingaming"
-          },
-          {
-              "name": "platipus"
-          },
-          {
-              "name": "playngo"
-          },
-          {
-              "name": "PlayPearls"
-          },
-          {
-              "name": "Playson"
-          },
-          {
-              "name": "PlayStar"
-          },
-          {
-              "name": "popok"
-          },
-          {
-              "name": "PragmaticPlay"
-          },
-          {
-              "name": "PragmaticPlay Live"
-          },
-          {
-              "name": "quickspin"
-          },
-          {
-              "name": "redtiger"
-          },
-          {
-              "name": "Relax Gaming"
-          },
-          {
-              "name": "retrogames"
-          },
-          {
-              "name": "rocketman"
-          },
-          {
-              "name": "Skywind Live"
-          },
-          {
-              "name": "smartsoft"
-          },
-          {
-              "name": "spinomenal"
-          },
-          {
-              "name": "spribe"
-          },
-          {
-              "name": "Thunderkick"
-          },
-          {
-              "name": "Triple Profit Gaming"
-          },
-          {
-              "name": "tvbet"
-          },
-          {
-              "name": "vir2al"
-          },
-          {
-              "name": "vivo"
-          },
-          {
-              "name": "Wazdan"
-          },
-          {
-              "name": "WM Live"
-          }
-      ],
-      "type": [
-          {
-              "name": "andarbahar"
-          },
-          {
-              "name": "baccarat"
-          },
-          {
-              "name": "bingo"
-          },
-          {
-              "name": "blackjack"
-          },
-          {
-              "name": "bullbull"
-          },
-          {
-              "name": "catchall"
-          },
-          {
-              "name": "crashgame"
-          },
-          {
-              "name": "dice"
-          },
-          {
-              "name": "dragontiger"
-          },
-          {
-              "name": "fishing"
-          },
-          {
-              "name": "gameshow"
-          },
-          {
-              "name": "highlow"
-          },
-          {
-              "name": "instantgame"
-          },
-          {
-              "name": "interactivegame"
-          },
-          {
-              "name": "keno"
-          },
-          {
-              "name": "live"
-          },
-          {
-              "name": "lobby"
-          },
-          {
-              "name": "lottery"
-          },
-          {
-              "name": "other"
-          },
-          {
-              "name": "poker"
-          },
-          {
-              "name": "rocketon"
-          },
-          {
-              "name": "roulette"
-          },
-          {
-              "name": "scratchcards"
-          },
-          {
-              "name": "shooting"
-          },
-          {
-              "name": "sicbo"
-          },
-          {
-              "name": "slot"
-          },
-          {
-              "name": "table games"
-          },
-          {
-              "name": "teenpatti"
-          },
-          {
-              "name": "threeface"
-          },
-          {
-              "name": "virtual"
-          },
-          {
-              "name": "war"
-          }
-      ]
-    }
+    const res = await getFilterMenu();
+    // const res = {
+    //   "vendor": [
+    //       {
+    //           "name": "1X2 Gaming"
+    //       },
+    //       {
+    //           "name": "7-mojos"
+    //       },
+    //       {
+    //           "name": "7-mojos-slots"
+    //       },
+    //       {
+    //           "name": "7777"
+    //       },
+    //       {
+    //           "name": "absolute"
+    //       },
+    //       {
+    //           "name": "amatic"
+    //       },
+    //       {
+    //           "name": "Asia Gaming"
+    //       },
+    //       {
+    //           "name": "Asia Gaming Slot"
+    //       },
+    //       {
+    //           "name": "Betgames.tv"
+    //       },
+    //       {
+    //           "name": "bfgames"
+    //       },
+    //       {
+    //           "name": "BigTimeGaming"
+    //       },
+    //       {
+    //           "name": "bitville"
+    //       },
+    //       {
+    //           "name": "Blueprint Gaming"
+    //       },
+    //       {
+    //           "name": "booming"
+    //       },
+    //       {
+    //           "name": "Booongo"
+    //       },
+    //       {
+    //           "name": "bota"
+    //       },
+    //       {
+    //           "name": "caletagaming"
+    //       },
+    //       {
+    //           "name": "CQ9"
+    //       },
+    //       {
+    //           "name": "Dowin"
+    //       },
+    //       {
+    //           "name": "Dragoon Soft"
+    //       },
+    //       {
+    //           "name": "DreamGame"
+    //       },
+    //       {
+    //           "name": "dreamtech"
+    //       },
+    //       {
+    //           "name": "eagaming"
+    //       },
+    //       {
+    //           "name": "egtjackpot"
+    //       },
+    //       {
+    //           "name": "Elk Studios"
+    //       },
+    //       {
+    //           "name": "EVOPLAY"
+    //       },
+    //       {
+    //           "name": "fils"
+    //       },
+    //       {
+    //           "name": "galaxsys"
+    //       },
+    //       {
+    //           "name": "GameArt"
+    //       },
+    //       {
+    //           "name": "gamedaddy"
+    //       },
+    //       {
+    //           "name": "globalbet"
+    //       },
+    //       {
+    //           "name": "greentube"
+    //       },
+    //       {
+    //           "name": "Habanero"
+    //       },
+    //       {
+    //           "name": "iconixviator"
+    //       },
+    //       {
+    //           "name": "inrace"
+    //       },
+    //       {
+    //           "name": "intouch-games"
+    //       },
+    //       {
+    //           "name": "kagaming"
+    //       },
+    //       {
+    //           "name": "liw"
+    //       },
+    //       {
+    //           "name": "macaw"
+    //       },
+    //       {
+    //           "name": "mancala"
+    //       },
+    //       {
+    //           "name": "merkur"
+    //       },
+    //       {
+    //           "name": "MicroGaming Plus"
+    //       },
+    //       {
+    //           "name": "MicroGaming Plus Slo"
+    //       },
+    //       {
+    //           "name": "Mobilots"
+    //       },
+    //       {
+    //           "name": "netent"
+    //       },
+    //       {
+    //           "name": "netgame"
+    //       },
+    //       {
+    //           "name": "Nolimit City"
+    //       },
+    //       {
+    //           "name": "onetouch"
+    //       },
+    //       {
+    //           "name": "onetouch-live"
+    //       },
+    //       {
+    //           "name": "PG Soft"
+    //       },
+    //       {
+    //           "name": "platingaming"
+    //       },
+    //       {
+    //           "name": "platipus"
+    //       },
+    //       {
+    //           "name": "playngo"
+    //       },
+    //       {
+    //           "name": "PlayPearls"
+    //       },
+    //       {
+    //           "name": "Playson"
+    //       },
+    //       {
+    //           "name": "PlayStar"
+    //       },
+    //       {
+    //           "name": "popok"
+    //       },
+    //       {
+    //           "name": "PragmaticPlay"
+    //       },
+    //       {
+    //           "name": "PragmaticPlay Live"
+    //       },
+    //       {
+    //           "name": "quickspin"
+    //       },
+    //       {
+    //           "name": "redtiger"
+    //       },
+    //       {
+    //           "name": "Relax Gaming"
+    //       },
+    //       {
+    //           "name": "retrogames"
+    //       },
+    //       {
+    //           "name": "rocketman"
+    //       },
+    //       {
+    //           "name": "Skywind Live"
+    //       },
+    //       {
+    //           "name": "smartsoft"
+    //       },
+    //       {
+    //           "name": "spinomenal"
+    //       },
+    //       {
+    //           "name": "spribe"
+    //       },
+    //       {
+    //           "name": "Thunderkick"
+    //       },
+    //       {
+    //           "name": "Triple Profit Gaming"
+    //       },
+    //       {
+    //           "name": "tvbet"
+    //       },
+    //       {
+    //           "name": "vir2al"
+    //       },
+    //       {
+    //           "name": "vivo"
+    //       },
+    //       {
+    //           "name": "Wazdan"
+    //       },
+    //       {
+    //           "name": "WM Live"
+    //       }
+    //   ],
+    //   "type": [
+    //       {
+    //           "name": "andarbahar"
+    //       },
+    //       {
+    //           "name": "baccarat"
+    //       },
+    //       {
+    //           "name": "bingo"
+    //       },
+    //       {
+    //           "name": "blackjack"
+    //       },
+    //       {
+    //           "name": "bullbull"
+    //       },
+    //       {
+    //           "name": "catchall"
+    //       },
+    //       {
+    //           "name": "crashgame"
+    //       },
+    //       {
+    //           "name": "dice"
+    //       },
+    //       {
+    //           "name": "dragontiger"
+    //       },
+    //       {
+    //           "name": "fishing"
+    //       },
+    //       {
+    //           "name": "gameshow"
+    //       },
+    //       {
+    //           "name": "highlow"
+    //       },
+    //       {
+    //           "name": "instantgame"
+    //       },
+    //       {
+    //           "name": "interactivegame"
+    //       },
+    //       {
+    //           "name": "keno"
+    //       },
+    //       {
+    //           "name": "live"
+    //       },
+    //       {
+    //           "name": "lobby"
+    //       },
+    //       {
+    //           "name": "lottery"
+    //       },
+    //       {
+    //           "name": "other"
+    //       },
+    //       {
+    //           "name": "poker"
+    //       },
+    //       {
+    //           "name": "rocketon"
+    //       },
+    //       {
+    //           "name": "roulette"
+    //       },
+    //       {
+    //           "name": "scratchcards"
+    //       },
+    //       {
+    //           "name": "shooting"
+    //       },
+    //       {
+    //           "name": "sicbo"
+    //       },
+    //       {
+    //           "name": "slot"
+    //       },
+    //       {
+    //           "name": "table games"
+    //       },
+    //       {
+    //           "name": "teenpatti"
+    //       },
+    //       {
+    //           "name": "threeface"
+    //       },
+    //       {
+    //           "name": "virtual"
+    //       },
+    //       {
+    //           "name": "war"
+    //       }
+    //   ]
+    // }
     vendorList = res.vendor;
     typeList = res.type;
   })
@@ -366,7 +366,7 @@
     page++
     const res = await getCasinoList({
       title: searchKey,
-      vendor: [],
+      vendor: vendorSelectedList,
       type: type,
       page: page
     })
@@ -403,13 +403,13 @@
         <input
           type="search"
           bind:value={searchKey}
-          class="form-control text-white"
+          class="form-control"
           placeholder="Search here..."
           aria-label="Username"
           aria-describedby="basic-addon1"
           on:keyup={search}
         >
-        <button type="submit" class="input-group-text" id="basic-addon1">
+        <button type="submit" class="input-group-text" id="basic-addon1" on:click={search}>
           <img src="/img/Search.svg" />
         </button>
       </div>
@@ -422,8 +422,8 @@
       <div class="btn-group mt-2" style="display: flex; flex-wrap: wrap;">
         {#each vendorList as item}
         <div class="select">
-            <input type="checkbox" id={item.name} on:click={(e) => selectVendor(e, item)}>
-            <label class="btn btn-warning button_select text-white" for={item.name}>{item.name}</label>
+            <input type="checkbox" id={item.name} on:click={(e) => selectVendor(e, item)} checked={vendorSelectedList.includes(item.name)}>
+            <label class="btn btn-warning button_select" for={item.name}>{item.name}</label>
         </div>
         {/each}
       </div>
@@ -433,8 +433,8 @@
       <div class="btn-group mt-2" style="display: flex; flex-wrap: wrap;">
         {#each typeList as item}
         <div class="select">
-            <input type="checkbox" id={item.name} on:click={(e) => selectType(e, item)}>
-            <label class="btn btn-warning button_select text-white" for={item.name}>{item.name}</label>
+            <input type="checkbox" id={item.name} on:click={(e) => selectType(e, item)} checked={typeSelectedList.includes(item.name)}>
+            <label class="btn btn-warning button_select" for={item.name}>{item.name}</label>
         </div>
         {/each}
       </div>
@@ -523,6 +523,7 @@
 </div>
 
 <style>
+
   .hover.overlay {
     position: absolute;
     top: 0;
@@ -553,29 +554,28 @@
   } .gap-6 {
     gap: 6px;
   }
-  
 
+  
   .btn-group .select {
     position: relative;
   }
 
   .btn-group .select input:checked + label {
     background: radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.184245) 6.25%, rgba(0, 0, 0, 0) 79.34%), linear-gradient(112.14deg, #7e2cff 35.54%, #596bf7 90.78%);
-    /* background-color: #ffc107; */
+    color: #ffffff;
   }
 
   .btn-group .select input:checked + label:hover,
   .btn-group .select input:checked + label:focus,
   .btn-group .select input:checked + label:active {
     background: radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.184245) 6.25%, rgba(0, 0, 0, 0) 79.34%), linear-gradient(112.14deg, #7e2cff 35.54%, #596bf7 90.78%);
+    color: #ffffff;
     /* background-color: #ffc107; */
   }
 
   .btn-group input {
     opacity: 0;
     position: absolute;
-
-    
   }
 
   .btn-group .button_select {
@@ -590,18 +590,28 @@
     color: #656e79;
     padding: 12px 12px 10px 12px;
     position: relative;
-    background: rgba(255, 255, 255, 0.04);
+    /* background: rgba(255, 255, 255, 0.04); */
     backdrop-filter: blur(1.89394px);
 
-    background: linear-gradient(152.93deg, rgba(255, 255, 255, 0.11) 16.71%, rgba(255, 255, 255, 0) 78.65%);
     
+  }
+
+  body.light-mode .btn-group .button_select {
+    background: #ECECF1;
+    color: #656E79;
+    border: solid 1px #dcdcdc;
+  }
+
+
+  body:not(.light-mode) .btn-group .button_select {
+    background: linear-gradient(152.93deg, rgba(255, 255, 255, 0.11) 16.71%, rgba(255, 255, 255, 0) 78.65%);
   }
 
   .btn-group .button_select:hover,
   .btn-group .button_select:focus,
   .btn-group .button_select:active {
-
-    background: radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.184245) 6.25%, rgba(0, 0, 0, 0) 79.34%), linear-gradient(112.14deg, #7e2cff 35.54%, #596bf7 90.78%);
+    background: radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.184245) 6.25%, rgba(0, 0, 0, 0) 79.34%), linear-gradient(112.14deg, #7e2cff 35.54%, #596bf7 90.78%) !important;
+    color: #ffffff !important;
   }
 
   .option {
@@ -637,7 +647,7 @@
     color: #656e79;
     padding: 12px 12px 10px 12px;
     position: relative;
-    background: rgba(255, 255, 255, 0.04);
+    /* background: rgba(255, 255, 255, 0.04); */
     backdrop-filter: blur(1.89394px);
   }
 

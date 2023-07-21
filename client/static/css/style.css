@@ -5127,3 +5127,8 @@ body.light-mode .select-container{
   background: rgba(0, 0, 0, 0.03) !important;
   width: 100% !important;
 }
+
+body.light-mode .main-search-bar {
+  border: solid 1px #dcdcdc;
+  border-radius: 0.375rem;
+}

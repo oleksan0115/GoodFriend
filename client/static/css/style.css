@@ -1396,7 +1396,7 @@ margin-top: -8px;
 }
 
 .play .box .content {
-  border-bottom: 4px solid #7e2cff;
+  /* border-bottom: 4px solid #7e2cff; */
   border-radius: 0;
   border-bottom-left-radius: 14px;
   border-bottom-right-radius: 14px;

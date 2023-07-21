@@ -14,330 +14,6 @@
   let vendorSelectedList = [], typeSelectedList = [];
   onMount(async () => {
     const res = await getFilterMenu();
-    // const res = {
-    //   "vendor": [
-    //       {
-    //           "name": "1X2 Gaming"
-    //       },
-    //       {
-    //           "name": "7-mojos"
-    //       },
-    //       {
-    //           "name": "7-mojos-slots"
-    //       },
-    //       {
-    //           "name": "7777"
-    //       },
-    //       {
-    //           "name": "absolute"
-    //       },
-    //       {
-    //           "name": "amatic"
-    //       },
-    //       {
-    //           "name": "Asia Gaming"
-    //       },
-    //       {
-    //           "name": "Asia Gaming Slot"
-    //       },
-    //       {
-    //           "name": "Betgames.tv"
-    //       },
-    //       {
-    //           "name": "bfgames"
-    //       },
-    //       {
-    //           "name": "BigTimeGaming"
-    //       },
-    //       {
-    //           "name": "bitville"
-    //       },
-    //       {
-    //           "name": "Blueprint Gaming"
-    //       },
-    //       {
-    //           "name": "booming"
-    //       },
-    //       {
-    //           "name": "Booongo"
-    //       },
-    //       {
-    //           "name": "bota"
-    //       },
-    //       {
-    //           "name": "caletagaming"
-    //       },
-    //       {
-    //           "name": "CQ9"
-    //       },
-    //       {
-    //           "name": "Dowin"
-    //       },
-    //       {
-    //           "name": "Dragoon Soft"
-    //       },
-    //       {
-    //           "name": "DreamGame"
-    //       },
-    //       {
-    //           "name": "dreamtech"
-    //       },
-    //       {
-    //           "name": "eagaming"
-    //       },
-    //       {
-    //           "name": "egtjackpot"
-    //       },
-    //       {
-    //           "name": "Elk Studios"
-    //       },
-    //       {
-    //           "name": "EVOPLAY"
-    //       },
-    //       {
-    //           "name": "fils"
-    //       },
-    //       {
-    //           "name": "galaxsys"
-    //       },
-    //       {
-    //           "name": "GameArt"
-    //       },
-    //       {
-    //           "name": "gamedaddy"
-    //       },
-    //       {
-    //           "name": "globalbet"
-    //       },
-    //       {
-    //           "name": "greentube"
-    //       },
-    //       {
-    //           "name": "Habanero"
-    //       },
-    //       {
-    //           "name": "iconixviator"
-    //       },
-    //       {
-    //           "name": "inrace"
-    //       },
-    //       {
-    //           "name": "intouch-games"
-    //       },
-    //       {
-    //           "name": "kagaming"
-    //       },
-    //       {
-    //           "name": "liw"
-    //       },
-    //       {
-    //           "name": "macaw"
-    //       },
-    //       {
-    //           "name": "mancala"
-    //       },
-    //       {
-    //           "name": "merkur"
-    //       },
-    //       {
-    //           "name": "MicroGaming Plus"
-    //       },
-    //       {
-    //           "name": "MicroGaming Plus Slo"
-    //       },
-    //       {
-    //           "name": "Mobilots"
-    //       },
-    //       {
-    //           "name": "netent"
-    //       },
-    //       {
-    //           "name": "netgame"
-    //       },
-    //       {
-    //           "name": "Nolimit City"
-    //       },
-    //       {
-    //           "name": "onetouch"
-    //       },
-    //       {
-    //           "name": "onetouch-live"
-    //       },
-    //       {
-    //           "name": "PG Soft"
-    //       },
-    //       {
-    //           "name": "platingaming"
-    //       },
-    //       {
-    //           "name": "platipus"
-    //       },
-    //       {
-    //           "name": "playngo"
-    //       },
-    //       {
-    //           "name": "PlayPearls"
-    //       },
-    //       {
-    //           "name": "Playson"
-    //       },
-    //       {
-    //           "name": "PlayStar"
-    //       },
-    //       {
-    //           "name": "popok"
-    //       },
-    //       {
-    //           "name": "PragmaticPlay"
-    //       },
-    //       {
-    //           "name": "PragmaticPlay Live"
-    //       },
-    //       {
-    //           "name": "quickspin"
-    //       },
-    //       {
-    //           "name": "redtiger"
-    //       },
-    //       {
-    //           "name": "Relax Gaming"
-    //       },
-    //       {
-    //           "name": "retrogames"
-    //       },
-    //       {
-    //           "name": "rocketman"
-    //       },
-    //       {
-    //           "name": "Skywind Live"
-    //       },
-    //       {
-    //           "name": "smartsoft"
-    //       },
-    //       {
-    //           "name": "spinomenal"
-    //       },
-    //       {
-    //           "name": "spribe"
-    //       },
-    //       {
-    //           "name": "Thunderkick"
-    //       },
-    //       {
-    //           "name": "Triple Profit Gaming"
-    //       },
-    //       {
-    //           "name": "tvbet"
-    //       },
-    //       {
-    //           "name": "vir2al"
-    //       },
-    //       {
-    //           "name": "vivo"
-    //       },
-    //       {
-    //           "name": "Wazdan"
-    //       },
-    //       {
-    //           "name": "WM Live"
-    //       }
-    //   ],
-    //   "type": [
-    //       {
-    //           "name": "andarbahar"
-    //       },
-    //       {
-    //           "name": "baccarat"
-    //       },
-    //       {
-    //           "name": "bingo"
-    //       },
-    //       {
-    //           "name": "blackjack"
-    //       },
-    //       {
-    //           "name": "bullbull"
-    //       },
-    //       {
-    //           "name": "catchall"
-    //       },
-    //       {
-    //           "name": "crashgame"
-    //       },
-    //       {
-    //           "name": "dice"
-    //       },
-    //       {
-    //           "name": "dragontiger"
-    //       },
-    //       {
-    //           "name": "fishing"
-    //       },
-    //       {
-    //           "name": "gameshow"
-    //       },
-    //       {
-    //           "name": "highlow"
-    //       },
-    //       {
-    //           "name": "instantgame"
-    //       },
-    //       {
-    //           "name": "interactivegame"
-    //       },
-    //       {
-    //           "name": "keno"
-    //       },
-    //       {
-    //           "name": "live"
-    //       },
-    //       {
-    //           "name": "lobby"
-    //       },
-    //       {
-    //           "name": "lottery"
-    //       },
-    //       {
-    //           "name": "other"
-    //       },
-    //       {
-    //           "name": "poker"
-    //       },
-    //       {
-    //           "name": "rocketon"
-    //       },
-    //       {
-    //           "name": "roulette"
-    //       },
-    //       {
-    //           "name": "scratchcards"
-    //       },
-    //       {
-    //           "name": "shooting"
-    //       },
-    //       {
-    //           "name": "sicbo"
-    //       },
-    //       {
-    //           "name": "slot"
-    //       },
-    //       {
-    //           "name": "table games"
-    //       },
-    //       {
-    //           "name": "teenpatti"
-    //       },
-    //       {
-    //           "name": "threeface"
-    //       },
-    //       {
-    //           "name": "virtual"
-    //       },
-    //       {
-    //           "name": "war"
-    //       }
-    //   ]
-    // }
     vendorList = res.vendor;
     typeList = res.type;
   })
@@ -389,10 +65,12 @@
 
   const selectVendor = (e, item) => {
     vendorSelectedList = e.target.checked ? [...vendorSelectedList, item.name] : vendorSelectedList.filter(it => it !== item.name);
+    search();
   }
 
   const selectType = (e, item) => {
     typeSelectedList = e.target.checked ? [...typeSelectedList, item.name] : typeSelectedList.filter(it => it !== item.name);
+    search();
   }
 </script>
 
@@ -407,7 +85,7 @@
           placeholder="Search here..."
           aria-label="Username"
           aria-describedby="basic-addon1"
-          on:keyup={search}
+          on:input={search}
         >
         <button type="submit" class="input-group-text" id="basic-addon1" on:click={search}>
           <img src="/img/Search.svg" />
@@ -514,12 +192,10 @@
     </div>
   </div> 
 
-  <!-- {#if totalNumber > limit && totalNumber > currentLimit} -->
   <div style="text-align: center">
     <div style="color:white">{currentLimit} / {totalNumber}</div>
     <button class="btn-play" on:click={moreLoad}>Load More</button>
   </div>
-  <!-- {/if} -->
 </div>
 
 <style>

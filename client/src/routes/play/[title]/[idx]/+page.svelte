@@ -6,20 +6,22 @@
   import globalStore from "../../../../stores/globalStore";
   import { getCasinoList } from "../../../../apis/casino/GetCasinoList.js";
   import { getBestResult } from "../../../../apis/casino/GetBestResult";
-  import { getCasinoInfo } from "../../../../apis/casino/GetCasinoInfo";
+  import { LaunchCasino } from '../../../../apis/casino/LaunchCasino';
+
   import "swiper/css";
   import "swiper/css/navigation";
   import "swiper/css/pagination";
   import "swiper/css/scrollbar";
   import "swiper/css/grid";
-  import { each } from "svelte/internal";
 
   let commentBoxOpen=false;
 
   export let data
-  const link = data.link
-  const title =data.title
+  let link = "";
+  // const link = data.link
+  const title = data.title
   const type = data.type
+  const idx = data.idx
   let relatedList = []
   let bestResult = [];
 	let cntBestResult = 5;
@@ -34,6 +36,10 @@
     buttonNext.addEventListener("click", () => {
       swiper.slideNext();
     });
+
+    const nick = $globalStore.userDetail ? $globalStore.userDetail.nick: null;
+    const res_link = await LaunchCasino(idx, nick);
+    link = res_link.link;
 
     const res = await getCasinoList({
       title: "",

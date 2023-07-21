@@ -4,16 +4,8 @@ const GF_API_KEY = import.meta.env.VITE_GF_API_KEY;
 const GF_AFFILIATE_CODE = import.meta.env.VITE_GF_AFFILIATE_CODE;
 const SEVER_URL = import.meta.env.VITE_SEVER_URL;
 
-export async function getCasinoList({title, vendor, type, page}) {
-  const endPoint = SEVER_URL + '/api/casino/list'
-  const data = {
-    search: {
-      title,
-      vendor,
-      type,
-      page
-    }
-  }
+export async function getFilterMenu() {
+  const endPoint = SEVER_URL + '/api/casino/filter-menu'
   const headers = {
     'GF-API-KEY': GF_API_KEY,
     'GF-AFFILIATE-CODE': GF_AFFILIATE_CODE,
@@ -25,7 +17,7 @@ export async function getCasinoList({title, vendor, type, page}) {
   }
   
   try {
-    const res = await axios.post(endPoint, data, options);
+    const res = await axios.post(endPoint,{}, options);
     if(res.status == 200) {
       return res.data
     }

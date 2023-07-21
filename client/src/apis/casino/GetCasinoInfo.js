@@ -4,15 +4,10 @@ const GF_API_KEY = import.meta.env.VITE_GF_API_KEY;
 const GF_AFFILIATE_CODE = import.meta.env.VITE_GF_AFFILIATE_CODE;
 const SEVER_URL = import.meta.env.VITE_SEVER_URL;
 
-export async function getCasinoList({title, vendor, type, page}) {
-  const endPoint = SEVER_URL + '/api/casino/list'
+export async function getCasinoInfo(idx) {
+  const endPoint = SEVER_URL + '/api/casino/info'
   const data = {
-    search: {
-      title,
-      vendor,
-      type,
-      page
-    }
+    idx
   }
   const headers = {
     'GF-API-KEY': GF_API_KEY,
@@ -33,7 +28,7 @@ export async function getCasinoList({title, vendor, type, page}) {
     if(err.response && err.response.request.status == 400) {
       return err.response.data
     }
-  } catch (_) {
+  } catch (err) {
     return {
       data: {
         'message': "Bad Internet Connection"

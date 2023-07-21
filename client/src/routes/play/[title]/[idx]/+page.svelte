@@ -2,13 +2,31 @@
   import { onMount } from "svelte";
   import { Navigation, Pagination, Scrollbar, A11y, Grid } from "swiper";
   import { Swiper, SwiperSlide } from "swiper/svelte";
+
+  import globalStore from "../../../../stores/globalStore";
+  import { getCasinoList } from "../../../../apis/casino/GetCasinoList.js";
+  import { getBestResult } from "../../../../apis/casino/GetBestResult";
+  import { LaunchCasino } from '../../../../apis/casino/LaunchCasino';
+
   import "swiper/css";
   import "swiper/css/navigation";
   import "swiper/css/pagination";
   import "swiper/css/scrollbar";
   import "swiper/css/grid";
 
-  onMount(() => {
+  let commentBoxOpen=false;
+
+  export let data
+  let link = "";
+  // const link = data.link
+  const title = data.title
+  const type = data.type
+  const idx = data.idx
+  let relatedList = []
+  let bestResult = [];
+	let cntBestResult = 5;
+
+  onMount(async () => {
     const swiper = document.querySelector(".oc1 .swiper").swiper;
     const buttonPrev = document.querySelector(".categories-prev");
     const buttonNext = document.querySelector(".categories-next");
@@ -18,19 +36,34 @@
     buttonNext.addEventListener("click", () => {
       swiper.slideNext();
     });
+
+    const nick = $globalStore.userDetail ? $globalStore.userDetail.nick: null;
+    const res_link = await LaunchCasino(idx, nick);
+    link = res_link.link;
+
+    const res = await getCasinoList({
+      title: "",
+      vendor: [],
+      type: [],
+      page: 0
+    });
+    relatedList = res.list.slice(0, 6);
+
+    const res1 = await getBestResult();
+    bestResult = res1.betHistoryResult.slice(0, cntBestResult);
   });
 
-  let commentBoxOpen=false;
-
-  export let data
-  const link = data.link
+  const loginAndStart = () => {
+    globalStore.toggleItem("loginModalOpen", true);
+  }
+  
 </script>
 
 <div class="container">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Slots</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Epic Journey</li>
+      <li class="breadcrumb-item"><a href={`/casino?type=${type}`}>{type}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{title}</li>
     </ol>
   </nav>
 </div>
@@ -41,12 +74,20 @@
         <iframe src="{link}" width="100%" height="650px" frameborder="0">
         </iframe>
         <div class="overlay" />
+        {#if $globalStore.userDetail}
         <div class="text-content">
           <button class="btn btn-play me-1">
             <img class="me-1" src="../../img/icon_play.svg" /> Real Play
           </button>
           <button class="btn btn-free me-1">Free Play</button>
         </div>
+        {:else}
+        <div class="text-content">
+          <button class="btn btn-play me-1" on:click={loginAndStart}>
+            <img class="me-1" src="../../img/icon_play.svg" /> Login and Get started
+          </button>
+        </div>
+        {/if}
       </div>
       <div class="content btn-top mobilenone">
         <button class="btn btn-dark me-1">
@@ -99,7 +140,6 @@
             </div>
           </div>          
         </div>
-
       </div>
     </div>
   </div>
@@ -222,16 +262,17 @@
               },
             }}
           >
+          {#each relatedList as item}
             <SwiperSlide>
                 <div class="item text-white">
                   <div class="box">
-                    <img class="mainimg" src="../../img/Rectangle-38.svg" />
+                    <img class="mainimg" src={item.thumbnail} />
                     <div class="hover">
                       <img src="../../img/hover.svg" />
                     </div>
                     <div class="content">
                       <p>
-                        Tiny Gods
+                        {item.title}
                         <span class="float-end"
                           ><img src="../../img/info-circle.svg" /></span
                         >
@@ -240,8 +281,9 @@
                   </div>
                 </div>
             </SwiperSlide>
+          {/each}
 
-            <SwiperSlide>
+            <!-- <SwiperSlide>
                 <div class="item text-white">
                   <div class="box">
                     <img class="mainimg" src="../../img/Rectangle-39.svg" />
@@ -334,7 +376,7 @@
                     </div>
                   </div>
                 </div>
-            </SwiperSlide>
+            </SwiperSlide> -->
           </Swiper>
         </div>
       </div>
@@ -415,21 +457,23 @@
                       </tr>
                     </thead>
                     <tbody>
+                      {#each bestResult as item}
                       <tr>
                         <td>
                           <img class="me-1" src="../../img/table-avatar1.svg" />
-                          Ring of fortune
+                          {item.title}
                         </td>
-                        <td class="text-white">bountyhunter31</td>
+                        <td class="text-white">{item.nick}</td>
                         <td class="text-white mobilenone">
-                          104.54 <img class="ms-1" src="../../img/btc.svg" />
+                          {item.betAmount} <img class="ms-1" src="../../img/btc.svg" />
                         </td>
                         <td>0.001x</td>
-                        <td class="text-danger text-end">
-                          - 21.567 <img class="ms-1" src="../../img/btc.svg" />
+                        <td class={`text-end ${item.profitAmount >= 0 ? "text-success": "text-danger"}`}>
+                          {item.profitAmount} <img class="ms-1" src="../../img/btc.svg" />
                         </td>
                       </tr>
-                      <tr>
+                      {/each}
+                      <!-- <tr>
                         <td>
                           <img class="me-1" src="../../img/poker-chips.svg" />
                           Ring of fortune
@@ -482,7 +526,7 @@
                         <td class="text-danger text-end">
                           - 21.567 <img class="ms-1" src="../../img/trx.svg" />
                         </td>
-                      </tr>
+                      </tr> -->
                     </tbody>
                   </table>
                 </div> 
@@ -505,116 +549,6 @@
                 aria-labelledby="withdrawals-tab"
               >
                 Coming Soon...
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="desknone tabnone">
-        <div class="col-12">
-          <div class="boxsecond boxforth mt-0">
-            <div class="row">
-              <div class="col-md-12">
-                <h2>Related Games</h2>
-              </div>
-            </div>
-            <div class="owl-carousel oc3">
-              <div class="item" data-slide-index="0">
-                <div class="box">
-                  <img class="mainimg" src="../../img/Rectangle-38.svg" />
-                  <div class="hover">
-                    <img src="../../img/hover.svg" />
-                  </div>
-                  <div class="content">
-                    <p>
-                      Tiny Gods
-                      <span class="float-end"
-                        ><img src="../../img/info-circle.svg" /></span
-                      >
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="item text-white" data-slide-index="1">
-                <div class="box">
-                  <img class="mainimg" src="../../img/Rectangle-39.svg" />
-                  <div class="hover">
-                    <img src="../../img/hover.svg" />
-                  </div>
-                  <div class="content">
-                    <p>
-                      Tiny Gods
-                      <span class="float-end"
-                        ><img src="../../img/info-circle.svg" /></span
-                      >
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="item text-white" data-slide-index="2">
-                <div class="box">
-                  <img class="mainimg" src="../../img/Rectangle-40.svg" />
-                  <div class="hover">
-                    <img src="../../img/hover.svg" />
-                  </div>
-                  <div class="content">
-                    <p>
-                      Tiny Gods
-                      <span class="float-end"
-                        ><img src="../../img/info-circle.svg" /></span
-                      >
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="item text-white" data-slide-index="3">
-                <div class="box">
-                  <img class="mainimg" src="../../img/Rectangle-41.svg" />
-                  <div class="hover">
-                    <img src="../../img/hover.svg" />
-                  </div>
-                  <div class="content">
-                    <p>
-                      Tiny Gods
-                      <span class="float-end"
-                        ><img src="../../img/info-circle.svg" /></span
-                      >
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="item text-white" data-slide-index="4">
-                <div class="box">
-                  <img class="mainimg" src="../../img/Rectangle-42.svg" />
-                  <div class="hover">
-                    <img src="../../img/hover.svg" />
-                  </div>
-                  <div class="content">
-                    <p>
-                      Tiny Gods
-                      <span class="float-end"
-                        ><img src="../../img/info-circle.svg" /></span
-                      >
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="item" data-slide-index="5">
-                <div class="box">
-                  <img class="mainimg" src="../../img/Rectangle-38.svg" />
-                  <div class="hover">
-                    <img src="../../img/hover.svg" />
-                  </div>
-                  <div class="content">
-                    <p>
-                      Tiny Gods
-                      <span class="float-end"
-                        ><img src="../../img/info-circle.svg" /></span
-                      >
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

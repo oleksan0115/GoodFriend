@@ -105,11 +105,13 @@
       </div>
     </div>
     <div class="play_img text-center desknone">
-      <img class="main desknone" src="../../img/bg_img.svg" />
-      <div class="overlay" />
-      <div class="text-content">
+      <!-- <img class="main desknone" src="../../img/bg_img.svg" /> -->
+      <iframe src="{link}" width="100%" height="650px" frameborder="0">
+      </iframe>
+      <div class="overlay" style={isPlay ? "display: none;": ""}/>
+      <div class="text-content" style={isPlay ? "display: none;": ""}>
         <div class="boxsix">
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-md-2 col-5 ps-0 col-xs-6">
               <img class="w-100" src="../../img/Rectangle-38.svg" />
             </div>
@@ -126,28 +128,36 @@
                 <img class="me-1" src="../../img/icon-3.svg" />
               </div>
             </div>
-          </div>
+          </div> -->
 
-          <div class="row mt-3">
-            <div class="col-6 pl-0">
-              <button class="btn btn-play me-1 w-100">
-                <img class="me-1" src="../../img/icon_play.svg" /> Real Play
+          <div class="row">
+            <div class=" pl-0">
+              {#if $globalStore.userDetail}
+              <button class="btn btn-play me-1" on:click={() => {
+                isPlay = true;
+              }}>
+                <img class="me-1" src="../../img/icon_play.svg" /> Play
               </button>
+              {:else}
+              <button class="btn btn-play me-1" on:click={loginAndStart}>
+                <img class="me-1" src="../../img/icon_play.svg" /> Login and Get started
+              </button>
+              {/if}
             </div>
   
-            <div class="col-6 pr-0">
+            <!-- <div class="col-6 pr-0">
               <button class="btn w-100 btn-free me-1">Free Play</button>
-            </div>
-            <div class="col-12 mt-3 p-0">
+            </div> -->
+            <!-- <div class="col-12 mt-3 p-0">
               <button class="btn w-100 btn-moreinfo me-1">More Info</button>
-            </div>
+            </div> -->
           </div>          
         </div>
       </div>
     </div>
   </div>
   <div class="container">
-    <div class="boxsix mt-4 mobilenone">
+    <!-- <div class="boxsix mt-4 mobilenone">
       <div class="row">
         <div class="col-md-2 col-4 ps-0">
           <img class="w-100" src="../../img/Rectangle-38.svg" />
@@ -174,7 +184,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="boxsecond boxforth mobilenone">
       <div class="row">
         <div class="col-md-12 categories-swiper-top swiper-top">
@@ -269,13 +279,26 @@
             <SwiperSlide>
                 <div class="item text-white">
                   <div class="box">
-                    <img class="mainimg" src={item.thumbnail} />
-                    <div class="hover">
-                      <img src="../../img/hover.svg" />
+                    <div class="relative">
+                      <img class="mainimg" src={item.thumbnail} />
+                      <div class="hover overlay">
+                        <a
+                          href="/play/{item.title
+                            .toLowerCase()
+                            .replaceAll(' ', '-')}/{item.idx}"
+                        >
+                          <div class="flex flex-col gap-6">
+                            <img src="/img/play.svg" />
+                          </div>
+                        </a>
+                      </div>
                     </div>
                     <div class="content">
                       <p>
-                        {item.title}
+                        <a
+                          href="/play/{item.title
+                            .toLowerCase()
+                            .replaceAll(' ', '-')}/{item.idx}">{item.title}</a>
                         <span class="float-end"
                           ><img src="../../img/info-circle.svg" /></span
                         >
@@ -629,3 +652,36 @@
     </div>
   </div>
 </div>
+
+<style>
+  .hover.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0c0e1ba6;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .relative {
+    position: relative;
+  }
+
+  .box:hover .hover.overlay {
+    opacity: 1;
+    transition: all 0.3s ease;
+  }
+
+  .flex{
+    display: flex;
+  } .flex-col {
+    flex-direction: column;
+  } .gap-6 {
+    gap: 6px;
+  }
+</style>

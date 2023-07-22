@@ -26,6 +26,11 @@
   let bestResult = [];
 	let cntBestResult = 5;
   let isPlay = false;
+  $: nick = $globalStore.userDetail ? $globalStore.userDetail.nick: null;
+
+  $: {
+    updateLink();
+  }
 
   onMount(async () => {
     const swiper = document.querySelector(".oc1 .swiper").swiper;
@@ -38,27 +43,28 @@
       swiper.slideNext();
     });
 
-    const nick = $globalStore.userDetail ? $globalStore.userDetail.nick: `demo1`;
-    const res_link = await LaunchCasino(idx, nick);
-    link = res_link.link;
+  await updateLink();
 
-    const res = await getCasinoList({
-      title: "",
-      vendor: [],
-      type: [],
-      page: 0
-    });
-    relatedList = res.list.slice(0, 6);
-
-    const res1 = await getBestResult();
-    bestResult = res1.betHistoryResult.slice(0, cntBestResult);
+  const res = await getCasinoList({
+    title: "",
+    vendor: [],
+    type: [],
+    page: 0
   });
+  relatedList = res.list.slice(0, 6);
 
-  const loginAndStart = () => {
-    globalStore.toggleItem("loginModalOpen", true);
-  }
+  const res1 = await getBestResult();
+  bestResult = res1.betHistoryResult.slice(0, cntBestResult);
+});
 
-  
+const loginAndStart = () => {
+  globalStore.toggleItem("loginModalOpen", true);
+}
+
+async function updateLink() {
+  const res_link = await LaunchCasino(idx, nick);
+  link = res_link.link;
+}
   
 </script>
 

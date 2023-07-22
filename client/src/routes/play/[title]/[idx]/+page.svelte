@@ -26,7 +26,7 @@
   let bestResult = [];
 	let cntBestResult = 5;
   let isPlay = false;
-  let nick = $globalStore.userDetail ? $globalStore.userDetail.nick: null;
+  $: nick = $globalStore.userDetail ? $globalStore.userDetail.nick: null;
 
   $: {
     updateLink();
@@ -44,7 +44,7 @@
     });
 
     await updateLink();
-    
+
     const res = await getCasinoList({
       title: "",
       vendor: [],

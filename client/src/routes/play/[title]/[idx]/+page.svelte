@@ -43,28 +43,28 @@
       swiper.slideNext();
     });
 
-    await updateLink();
+  await updateLink();
 
-    const res = await getCasinoList({
-      title: "",
-      vendor: [],
-      type: [],
-      page: 0
-    });
-    relatedList = res.list.slice(0, 6);
-
-    const res1 = await getBestResult();
-    bestResult = res1.betHistoryResult.slice(0, cntBestResult);
+  const res = await getCasinoList({
+    title: "",
+    vendor: [],
+    type: [],
+    page: 0
   });
+  relatedList = res.list.slice(0, 6);
 
-  const loginAndStart = () => {
-    globalStore.toggleItem("loginModalOpen", true);
-  }
+  const res1 = await getBestResult();
+  bestResult = res1.betHistoryResult.slice(0, cntBestResult);
+});
 
-  async function updateLink() {
-    const res_link = await LaunchCasino(idx, nick);
-    link = res_link.link;
-  }
+const loginAndStart = () => {
+  globalStore.toggleItem("loginModalOpen", true);
+}
+
+async function updateLink() {
+  const res_link = await LaunchCasino(idx, nick);
+  link = res_link.link;
+}
   
 </script>
 
@@ -80,7 +80,7 @@
   <div class="box">
     <div class="container">
       <div class="play_img text-center mobilenone">
-        <iframe src="{link}" width="100%" height="650px" frameborder="0">
+        <iframe src="{link}" width="100%" height="650px" frameborder="0" scrolling="no">
         </iframe>
         <div class="overlay" style={isPlay ? "display: none;": ""}/>
         {#if $globalStore.userDetail}
@@ -294,6 +294,7 @@
                           href="/play/{item.title
                             .toLowerCase()
                             .replaceAll(' ', '-')}/{item.idx}"
+                          target="_top"
                         >
                           <div class="flex flex-col gap-6">
                             <img src="/img/play.svg" />
@@ -307,9 +308,9 @@
                           href="/play/{item.title
                             .toLowerCase()
                             .replaceAll(' ', '-')}/{item.idx}">{item.title}</a>
-                        <span class="float-end"
-                          ><img src="../../img/info-circle.svg" /></span
-                        >
+                        <span class="float-end">
+                          <img src="../../img/info-circle.svg" />
+                        </span>
                       </p>
                     </div>
                   </div>
